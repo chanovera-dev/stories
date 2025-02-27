@@ -23,7 +23,7 @@
         <section class="section">
             <?php 
             comments_template();
-            if ( is_active_sidebar( 'sidebar-2' ) ) {
+                if ( is_active_sidebar( 'sidebar-2' ) ) {
                     echo '
                     <aside class="post-footer--sidebar">';
                     

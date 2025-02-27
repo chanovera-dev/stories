@@ -34,12 +34,10 @@ get_header(); ?>
                 endif;
 
                 if ( is_active_sidebar( 'sidebar-1' ) ) {
-                    
                     echo '
-                    <aside>';
+                    <aside class="container--posts--sidebar">';
                     dynamic_sidebar( 'sidebar-1' ); echo '
                     </aside>';
-
                 }
             ?>
         </section>
