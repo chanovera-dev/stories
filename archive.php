@@ -10,7 +10,7 @@ get_header(); ?>
 <main id="main" class="site-main" role="main">
     <header class="container container--title">
         <section class="section">
-            <?php the_archive_title( '<h1 class="main-title', '</h1>' ); ?>
+            <?php the_archive_title( '<h1 class="main-title">', '</h1>' ); ?>
         </section>
     </header><!-- .container--title -->
     <div class="container container--posts">
