@@ -1,4 +1,8 @@
 #main .container--title .section {
+    padding-top: 50px;
+}
+
+#main .container--posts .section {
     padding: 50px 0;
 }
 
@@ -33,6 +37,8 @@
     padding:5px 10px;
     border-radius:4px;
     display:flex;
+    align-items: center;
+    gap:7px;
     flex-wrap:nowrap;
 }
 
@@ -62,4 +68,29 @@
     font-size: var(--wp--preset--font-size--small);
     display: flex;
     flex-wrap: nowrap;
+}
+
+/* pagination */
+#main .container--posts .section .posts .navigation.pagination {
+    grid-column: 1 / -1;
+    margin-inline: auto;
+}
+
+#main .container--posts .section .posts .navigation.pagination .nav-links {
+    display: flex;
+    align-items:center;
+    gap:20px;
+}
+#main .container--posts .section .posts .navigation.pagination .nav-links .page-numbers {
+    display: grid;
+    place-content: center;
+    width: 43px;
+    height: 43px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    transition: all .3s ease;
+}
+
+#main .container--posts .section .posts .navigation.pagination .nav-links .page-numbers.current {
+    border-color: var(--wp--preset--color--accent-6);
 }

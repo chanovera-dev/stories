@@ -193,8 +193,8 @@
 		"spacing": {
 			"blockGap": "1.2rem",
 			"padding": {
-				"left": "var:preset|spacing|50",
-				"right": "var:preset|spacing|50"
+				"left": "var:preset|spacing|0",
+				"right": "var:preset|spacing|0"
 			}
 		},
 		"typography": {
@@ -506,19 +506,20 @@
 				}
 			},
 			"core/search": {
-				"css": "& .wp-block-search__input{border-radius:3.125rem;padding-left:1.5625rem;padding-right:1.5625rem;border-color:var(--wp--preset--color--accent-6);}",
+				"css": "& .wp-block-search__input{border-radius:0.4rem;border-color:var(--wp--preset--color--accent-6);padding-right:50px;}",
 				"typography": {
 					"fontSize": "var:preset|font-size|medium",
 					"lineHeight": "1.6"
 				},
 				"elements": {
 					"button": {
+						"css": "&{position:absolute;top:5px;right:5px;padding:4px 7px;transition:all .3s ease;background-color:transparent;color:currentColor;}",
 						"border": {
-							"radius": "3.125rem"
+							"radius": "0.4rem"
 						},
 						"spacing": {
 							"margin": {
-								"left": "1.125rem"
+								"left": "0"
 							}
 						},
 						":hover" : {
@@ -616,10 +617,10 @@
 				},
 				"spacing": {
 					"padding": {
-						"bottom": "1rem",
-						"left": "2.25rem",
-						"right": "2.25rem",
-						"top": "1rem"
+						"bottom": "0",
+						"left": "1rem",
+						"right": "1rem",
+						"top": "0"
 					}
 				},
 				"typography": {
@@ -674,6 +675,9 @@
 				}
 			},
 			"link": {
+				"typography": {
+					"textDecoration": "none"
+				},
 				"color": {
 					"text": "currentColor"
 				},

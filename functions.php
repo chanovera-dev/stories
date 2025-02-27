@@ -20,5 +20,6 @@ $stories = (object) array(
      */
     'core'              => require_once 'inc/core.php',
     'extended'          => require_once 'inc/extended.php',
+    'custom-widgets'    => require_once 'inc/custom-widgets.php',
     'templates'         => require_once 'inc/templates.php',
 );

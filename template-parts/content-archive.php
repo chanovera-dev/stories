@@ -1,7 +1,10 @@
 <article class="archive-post">
     <header class="archive-post--header">
         <?php
-            the_category();
+            if ( ! is_active_sidebar( 'sidebar-posts' ) ) {
+                the_category();
+            }
+            
             if ( ! has_post_thumbnail() == false ) {
                 echo '<img class="thumbnail" src="'; the_post_thumbnail_url( 'media' ); echo '" alt="Picture post" loading="lazy" width="300" height="200">';
             }

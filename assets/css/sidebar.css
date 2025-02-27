@@ -1,0 +1,32 @@
+#main .container--posts .section aside > *:not(:last-child) {
+    margin-bottom:50px;
+}
+
+aside ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+aside ul li:not(:last-child) {
+    border-bottom: 1px solid var(--wp--preset--color--accent-6);
+}
+
+aside ul li a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding:9px 0;
+}
+
+aside .wp-block-search .wp-block-search__inside-wrapper {
+    position:relative;
+}
+
+@media(min-width:1096px) {
+    #main .container--posts .section{
+        display: grid;
+        grid-template-columns: 1fr 290px;
+        gap: 0 90px;
+    }
+}
