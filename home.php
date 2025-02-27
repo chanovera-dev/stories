@@ -16,7 +16,7 @@ get_header(); ?>
     <div class="container container--posts">
         <section class="section">
             <?php
-                if ( have_posts() ) :
+                if ( have_posts() ) {
 
                     echo '<div class="posts">';
                     while ( have_posts() ) {
@@ -27,17 +27,19 @@ get_header(); ?>
 
                     the_post_pagination();
 
-                else :
+                } else {
 
                     echo '<p>' . esc_html_e( 'No posts found', 'stories' ) . '</p>';
 
-                endif;
+                }
 
                 if ( is_active_sidebar( 'sidebar-1' ) ) {
+                    
                     echo '
-                    <aside class="container--posts--sidebar">';
+                    <aside>';
                     dynamic_sidebar( 'sidebar-1' ); echo '
                     </aside>';
+
                 }
             ?>
         </section>
