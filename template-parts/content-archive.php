@@ -9,7 +9,7 @@
     </header><!-- .archive-post--header -->
     <div class="archive-post--content">
         <a href="<?php the_permalink(); ?>" class="archive-post--permalink">
-            <?php the_title( '<h3 class="archive-post--title">', '</h3>' ); ?>
+            <?php the_title( '<h2 class="archive-post--title">', '</h2>' ); ?>
         </a>
         <?php
             the_excerpt();

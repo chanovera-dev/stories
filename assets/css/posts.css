@@ -1,5 +1,5 @@
 #main .container--title .section {
-    padding: 30px 0;
+    padding: 50px 0;
 }
 
 #main .container--posts .section .posts {
@@ -59,6 +59,7 @@
 }
 
 #main .container--posts .section .posts .archive-post .archive-post--content .tags a {
+    font-size: var(--wp--preset--font-size--small);
     display: flex;
     flex-wrap: nowrap;
 }
