@@ -15,25 +15,25 @@ get_header(); ?>
     </header><!-- .container--title -->
     <div class="container container--posts">
         <section class="section">
-            <?php
+            <div class="posts">
+                <?php
 
-                echo '<div class="posts">';
+                    if ( have_posts() ) {
+                        
+                        while ( have_posts() ) {
+                            the_post();
+                            get_template_part( 'template-parts/content', 'archive' );
+                        }
+                        the_post_pagination();
 
-                if ( have_posts() ) {
-                    
-                    while ( have_posts() ) {
-                        the_post();
-                        get_template_part( 'template-parts/content', 'archive' );
+                    } else {
+
+                        echo '<p>' . esc_html_e( 'No posts found', 'stories' ) . '</p>';
+
                     }
-                    the_post_pagination();
-
-                } else {
-
-                    echo '<p>' . esc_html_e( 'No posts found', 'stories' ) . '</p>';
-
-                }
-                echo '</div>';
-
+                ?>
+            </div>
+            <?php
                 if ( is_active_sidebar( 'sidebar-1' ) ) {
                     
                     echo '
