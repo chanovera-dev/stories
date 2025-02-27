@@ -1,3 +1,7 @@
+#main .container--title .section {
+    padding: 30px 0;
+}
+
 #main .container--posts .section .posts {
     display: grid;
     gap: 50px;
