@@ -4,8 +4,8 @@
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
-#main .container--posts .section .posts .archive-post {
-
+#main .container--posts .section .posts .archive-post > *:not(:last-child) {
+    margin-bottom:10px;
 }
 
 #main .container--posts .section .posts .archive-post .archive-post--header {
@@ -32,4 +32,7 @@
 
 #main .container--posts .section .posts .archive-post .archive-post--header .thumbnail {
     width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: 10px;
 }

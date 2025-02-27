@@ -18,3 +18,4 @@ html{scroll-behavior:smooth;}
 body{position:relative;overflow-y:scroll;}
 .container{width:100%;}
 .container .section{width:min(100% - 40px, 1096px);margin-inline:auto;}
+img{height:auto;}
