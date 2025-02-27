@@ -1,0 +1,20 @@
+/*
+Theme Name: Stories
+Theme URI: 
+Author: Cristian Vera
+Author URI: 
+Description: Blog for readers and writers
+Tags: 
+Version: 1.0.0
+Requires at least: 5.0
+Tested up to: 5.4
+Requires PHP: 7.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+*,:before,:after{box-sizing:border-box;margin:0;}
+html{scroll-behavior:smooth;}
+body{position:relative;overflow-y:scroll;}
+.container{width:100%;}
+.container .section{width:min(100% - 40px, 1096px);margin-inline:auto;}
