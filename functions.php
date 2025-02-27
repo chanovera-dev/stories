@@ -20,4 +20,5 @@ $stories = (object) array(
      */
     'core'              => require_once 'inc/core.php',
     'extended'          => require_once 'inc/extended.php',
+    'templates'         => require_once 'inc/templates.php';
 );
