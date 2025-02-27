@@ -19,4 +19,5 @@ $stories = (object) array(
      * Initialize all the things
      */
     'core'              => require_once 'inc/core.php',
+    'extended'          => require_once 'inc/extended.php',
 );
