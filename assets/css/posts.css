@@ -43,6 +43,11 @@
     margin-bottom:10px;
 }
 
+#main .container--posts .section .posts .archive-post .archive-post--content .archive-post--permalink {
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+
 #main .container--posts .section .posts .archive-post .archive-post--content .tags {
     display: inline-flex;
     flex-wrap: wrap;
