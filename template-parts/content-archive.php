@@ -13,7 +13,7 @@
         </a>
         <?php
             the_excerpt();
-            if ( ! is_active_sidebar( 'sidebar-1' ) ) {
+            if ( ! is_active_sidebar( 'sidebar-posts' ) ) {
                 echo '<div class="tags">' . get_the_tag_list() . '</div>';
             }
         ?>

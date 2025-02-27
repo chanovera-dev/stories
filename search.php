@@ -34,11 +34,11 @@ get_header(); ?>
                 ?>
             </div>
             <?php
-                if ( is_active_sidebar( 'sidebar-1' ) ) {
+                if ( is_active_sidebar( 'sidebar-posts' ) ) {
                     
                     echo '
                     <aside>';
-                    dynamic_sidebar( 'sidebar-1' ); echo '
+                    dynamic_sidebar( 'sidebar-posts' ); echo '
                     </aside>';
 
                 }

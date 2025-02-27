@@ -84,7 +84,7 @@ function widgets_areas() {
     register_sidebar(
         array(
             'name'          => __( 'Blog Posts sidebar', 'chanovera' ),
-            'id'            => 'sidebar-1',
+            'id'            => 'sidebar-posts',
             'before_widget' => '',
             'after_widget'  => '',
         )
