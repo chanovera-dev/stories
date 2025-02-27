@@ -1,5 +1,35 @@
-#main .container--posts .section .posts{
+#main .container--posts .section .posts {
     display: grid;
     gap: 50px;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+#main .container--posts .section .posts .archive-post {
+
+}
+
+#main .container--posts .section .posts .archive-post .archive-post--header {
+    position: relative;
+}
+
+#main .container--posts .section .posts .archive-post .archive-post--header .post-categories {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position:absolute;
+    top:20px;
+    left:20px;
+    display:inline-flex;
+    flex-wrap: wrap;
+}
+
+#main .container--posts .section .posts .archive-post .archive-post--header .post-categories li a {
+    color: #fff;
+    background-color: green;
+    padding:5px 10px;
+    border-radius:4px;
+}
+
+#main .container--posts .section .posts .archive-post .archive-post--header .thumbnail {
+    width: 100%;
 }
