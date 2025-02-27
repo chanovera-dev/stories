@@ -83,7 +83,7 @@ function widgets_areas() {
 
     register_sidebar(
         array(
-            'name'          => __( 'Blog Posts sidebar', 'chanovera' ),
+            'name'          => __( 'Blog Posts sidebar', 'stories' ),
             'id'            => 'sidebar-posts',
             'before_widget' => '',
             'after_widget'  => '',
@@ -92,7 +92,7 @@ function widgets_areas() {
 
     register_sidebar(
         array(
-            'name'          => __( 'Single Post sidebar', 'chanovera' ),
+            'name'          => __( 'Single Post sidebar', 'stories' ),
             'id'            => 'sidebar-2',
             'before_widget' => '',
             'after_widget'  => '',
@@ -101,7 +101,7 @@ function widgets_areas() {
 
     register_sidebar(
         array(
-            'name'          => __( 'Single Page sidebar', 'chanovera' ),
+            'name'          => __( 'Single Page sidebar', 'stories' ),
             'id'            => 'sidebar-3',
             'before_widget' => '',
             'after_widget'  => '',
