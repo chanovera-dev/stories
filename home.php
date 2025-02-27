@@ -10,7 +10,7 @@ get_header(); ?>
 <main id="main" class="site-main" role="main">
     <header class="container container--title">
         <section class="section">
-            <h1 class="main-title"><?php echo esc_html_e( 'Blog', 'stories' ); ?></h1>
+            <h1 class="main-title"><?php esc_html_e( 'Blog', 'stories' ); ?></h1>
         </section>
     </header><!-- .container--title -->
     <div class="container container--posts">
