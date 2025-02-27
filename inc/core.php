@@ -81,16 +81,15 @@ add_action( 'wp_footer', 'footer_components' );
  */
 function widgets_areas() {
 
-    register_sidebar( array(
-        'name'          => __( 'Sidebar Posts', 'stories' ),
-        'id'            => 'sidebar-posts',
-        'description'   => __( 'Widgets for the blog sidebar.', 'stories' ),
-        'before_widget' => '<div class="widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<h3 class="widget-title">',
-        'after_title'   => '</h3>',
-    ) );
-    
+    register_sidebar(
+        array(
+            'name'          => __( 'Blog Posts sidebar', 'stories' ),
+            'id'            => 'sidebar-posts',
+            'before_widget' => '',
+            'after_widget'  => '',
+        )
+    );
+
     register_sidebar(
         array(
             'name'          => __( 'Single Post sidebar', 'stories' ),
