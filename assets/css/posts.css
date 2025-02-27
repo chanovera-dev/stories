@@ -17,8 +17,8 @@
     padding: 0;
     list-style: none;
     position:absolute;
-    top:20px;
-    left:20px;
+    top:10px;
+    left:10px;
     display:inline-flex;
     flex-wrap: wrap;
 }
@@ -28,11 +28,13 @@
     background-color: green;
     padding:5px 10px;
     border-radius:4px;
+    display:flex;
+    flex-wrap:nowrap;
 }
 
 #main .container--posts .section .posts .archive-post .archive-post--header .thumbnail {
     width: 100%;
     aspect-ratio: 3 / 2;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 8px;
 }
