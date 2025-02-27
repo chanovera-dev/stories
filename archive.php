@@ -16,15 +16,15 @@ get_header(); ?>
     <div class="container container--posts">
         <section class="section">
             <?php
-                if ( have_posts() ) {
 
-                    echo '<div class="posts">';
+                echo '<div class="posts">';
+
+                if ( have_posts() ) {
+                    
                     while ( have_posts() ) {
                         the_post();
                         get_template_part( 'template-parts/content', 'archive' );
                     }
-                    echo '</div>';
-
                     the_post_pagination();
 
                 } else {
@@ -32,6 +32,7 @@ get_header(); ?>
                     echo '<p>' . esc_html_e( 'No posts found', 'stories' ) . '</p>';
 
                 }
+                echo '</div>';
 
                 if ( is_active_sidebar( 'sidebar-1' ) ) {
                     
