@@ -10,7 +10,7 @@ get_header(); ?>
 <main id="main" class="site-main" role="main">
     <header class="container container--title">
         <section class="section">
-            <h1 class="main-title"><?php echo esc_html__('Search for "', 'stories'); echo the_search_query(); echo esc_html__('"', 'stories') ?></h1>
+            <h1 class="main-title"><?php echo esc_html__('Búsqueda de "', 'stories'); echo the_search_query(); echo esc_html__('"', 'stories') ?></h1>
         </section>
     </header><!-- .container--title -->
     <div class="container container--posts">

@@ -90,7 +90,7 @@
 }
 
 #main .container--posts .section .posts .archive-post .archive-post--content .tags a:hover {
-    background-color: #e5eaee;
+    background-color: var(--wp--preset--color--accent-5);
 }
 
 #main .container--posts .section .posts .archive-post .archive-post--content .tags a svg {

@@ -76,7 +76,11 @@ add_action( 'after_setup_theme', 'setup_stories' );
 /**
  * Add components to footer
  */
-function footer_components() {}
+function footer_components() {
+    /* js for header */
+    wp_enqueue_script('global-js', get_template_directory_uri() . '/assets/js/global.js', array(), '1.0', true);
+    wp_enqueue_style( 'custom-forms', get_template_directory_uri() . '/assets/css/forms.css', array(), '1.0.0', 'all' );
+}
 add_action( 'wp_footer', 'footer_components' );
 
 /**

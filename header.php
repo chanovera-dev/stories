@@ -10,5 +10,23 @@
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
     <header id="main-header" class="container">
-        <section class="section header-content"></section><!-- .header-content -->
+        <section class="section header-content">
+            <?php
+                if ( file_exists( get_template_directory() . '/templates/header/brand.php' ) ) :
+                    include_once( TEMPLATEPATH . '/templates/header/brand.php' );
+                endif;
+
+                if ( file_exists( get_template_directory() . '/templates/header/main-menu.php' ) ) :
+                    include_once( TEMPLATEPATH . '/templates/header/main-menu.php' );
+                endif;
+
+                if ( file_exists( get_template_directory() . '/templates/header/search-button.php' ) ) :
+                    include_once( TEMPLATEPATH . '/templates/header/search-button.php' );
+                endif;
+
+                if ( file_exists( get_template_directory() . '/templates/header/menu-mobile-button.php' ) ) :
+                    include_once( TEMPLATEPATH . '/templates/header/menu-mobile-button.php' );
+                endif;
+            ?>
+        </section><!-- .header-content -->
     </header><!-- #main-header -->
