@@ -27,6 +27,18 @@ img{height:auto;}
 
 .header-content #menu-mobile__button{display:var(--display-mobile-button)}
 
+#main-header {
+    position: sticky;
+    background-color: var(--wp--preset--color--base);
+    top: 0;
+    z-index:99;
+    transition: all .3s ease;
+}
+
+.scroll-down #main-header {
+    top: -100px;
+}
+
 @media(max-width:767px){
     #main-header{position:relative;}
 
