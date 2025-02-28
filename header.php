@@ -8,6 +8,7 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+    <?php wp_body_open(); ?>
     <header id="main-header" class="container">
         <section class="section header-content"></section><!-- .header-content -->
     </header><!-- #main-header -->

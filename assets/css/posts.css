@@ -34,7 +34,7 @@
 #main .container--posts .section .posts .archive-post .archive-post--header .post-categories li a {
     font-size: var(--wp--preset--font-size--small);
     font-weight: 500;
-    color: #fff;
+    color: var(--wp--preset--color--green-3);
     background-color: var(--wp--preset--color--green-1);
     padding:5px 10px;
     border-radius:4px;

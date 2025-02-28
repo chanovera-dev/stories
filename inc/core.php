@@ -67,6 +67,9 @@ function setup_stories() {
         array( 'post', 'page' )
     );
     set_post_thumbnail_size( 350, 200, true );
+
+    add_theme_support( 'wp-block-styles' );
+    add_theme_support( 'align-wide' );
 }
 add_action( 'after_setup_theme', 'setup_stories' );
 

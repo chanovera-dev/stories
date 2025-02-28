@@ -57,6 +57,11 @@
 					"color": "#59c668",
 					"name": "Green2",
 					"slug": "green2"
+				},
+				{
+					"color": "#194a20",
+					"name": "Green3",
+					"slug": "green3"
 				}
 			]
 		},

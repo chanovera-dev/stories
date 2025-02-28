@@ -24,9 +24,16 @@ aside .wp-block-search .wp-block-search__inside-wrapper {
 }
 
 @media(min-width:1096px) {
-    #main .container--posts .section{
+
+    .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){
+        max-width: 100%;
+    }
+
+    #main .container--posts .section,
+    .site-main .post-body .section{
         display: grid;
         grid-template-columns: 1fr 290px;
         gap: 0 90px;
     }
+    
 }
