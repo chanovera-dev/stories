@@ -25,7 +25,7 @@ body{position:relative;overflow-y:scroll;}
 .container .section{width:min(100% - 40px, 1096px);margin-inline:auto;}
 img{height:auto;}
 
-@media(max-width:1023px){
+@media(max-width:767px){
     #main-header{position:relative;}
 
     #main-header .header-content{display:flex;gap:10px;padding:26px 0;align-items:center;justify-content:space-between;}
@@ -76,4 +76,49 @@ img{height:auto;}
     #primary .menu li .sub-menu li .sub-menu li:last-child a{box-shadow:inset 0px -17px 6px -17px rgb(0 0 0 / 30%);}
     #primary.show{transform:translateX(0);}
     
+}
+
+@media(min-width:768px){
+    :root{
+        --display-mobile-button:none;
+    }
+
+    #main-header .header-content{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;}
+    #main-header .header-content .main-menu{display:flex;align-items:center;height:100px;animation:tilt-in-top-1 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) .3s both;}
+
+    #primary .menu{max-width:1000px;padding-left:0;list-style:none;display:flex;align-items:center;gap:30px;transition:max-width .3s ease;}
+    #primary .menu.hide{max-width:0;}
+    #primary .menu li{position:relative;}
+    #primary .menu li .sub-menu{position:absolute;top:40px;width:max-content;background-color:var(--solid);left:0;max-height:0;overflow:hidden;padding-left:0;list-style:none;border-radius:6px;box-shadow:var(--wp--preset--shadow--floating-bar);transition:max-height .3s ease;}
+    #primary .menu li .sub-menu.open{max-height:1000px;}
+    #primary .menu li .sub-menu li:first-child a{padding-top:20px;}
+    #primary .menu li .sub-menu li a{padding:6.65px 20px;display:block;transition:background-color .3s ease;}
+    #primary .menu li .sub-menu li a:hover{background-color:var(--bg-input);}
+    #primary .menu li .sub-menu li:last-child a{padding-bottom:20px;}
+    #primary .menu li .sub-menu li .sub-menu{max-height:0;position:relative;top:0;width:auto;box-shadow:none;background-color:var(--bg-input);border-radius:0;}
+    #primary .menu li .sub-menu li .sub-menu li:first-child a{box-shadow:inset 0px 17px 10px -17px rgb(0 0 0 / 15%);padding-top:6.65px;}
+    #primary .menu li .sub-menu li .sub-menu li a{padding-left:40px;transition:background-color .3s ease;}
+    #primary .menu li .sub-menu li .sub-menu li a:hover{background-color:var(--bg-l1);}
+    #primary .menu li .sub-menu li .sub-menu li:last-child a{box-shadow:inset 0px -17px 6px -17px rgb(0 0 0 / 15%);padding-bottom:6.65px;}
+    #primary .menu li .sub-menu li .sub-menu.open{max-height:1000px;}
+    #primary .menu li a{transition:color .3s ease;}
+    #primary .menu li a:hover{color:var(--color-emphasis);}
+    #primary .menu li .mobile-links__item-toggle{font-family:var(--wp--preset--font-family--manrope);font-size:var(--wp--preset--font-size--medium);color:var(--color-body);padding:0;border:none;background-color:transparent;display:inline-flex;align-items:center;gap:7px;transition:color .3s ease;}
+    #primary .menu li .mobile-links__item-toggle:hover{color:var(--color-emphasis);}
+    #primary .menu li .mobile-links__item-toggle svg{transition:transform .3s ease;}
+    #primary .menu li .mobile-links__item-toggle.rotate svg{transform:rotate(180deg);}
+
+    #custom-searchform{max-width:0;overflow:hidden;transition:max-width .3s ease;}
+    #custom-searchform .section{position:relative;display:grid;align-items:center;width:100%;}
+    #custom-searchform .section input[type=text]{width:400px;}
+    #custom-searchform .section .buttons-container #searchsubmit{position:absolute;top:3px;right:3px;width:36px;height:36px;border:1px solid transparent;border-radius:2px;background-color:transparent;color:var(--color-body);transition:color .3s ease;}
+    #custom-searchform .section .buttons-container #searchsubmit:hover{color:var(--color-emphasis);}
+    #custom-searchform .section .buttons-container .close-custom-searchform{display:none;}
+    #custom-searchform.show{max-width:500px;}
+
+    #search-mobile__button{margin-left:auto;display:grid;place-content:center;width:38px;height:38px;border:1px solid transparent;background-color:transparent;color:var(--wp--preset--color--contrast);opacity:.65;border-radius:4px;transition:all .3s ease;}
+    #search-mobile__button:hover{border-color:var(--wp--preset--color--accent-6);opacity:1;}
+    #search-mobile__button .bi-x-circle{display:none;}
+    #search-mobile__button svg.hide{display:none;}
+    #search-mobile__button svg.show{display:inherit;}
 }
