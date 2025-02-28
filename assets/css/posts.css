@@ -32,14 +32,26 @@
 }
 
 #main .container--posts .section .posts .archive-post .archive-post--header .post-categories li a {
+    font-size: var(--wp--preset--font-size--small);
+    font-weight: 500;
     color: #fff;
-    background-color: green;
+    background-color: var(--wp--preset--color--green-1);
     padding:5px 10px;
     border-radius:4px;
     display:flex;
     align-items: center;
     gap:7px;
     flex-wrap:nowrap;
+    transition: background-color .3s ease;
+}
+
+#main .container--posts .section .posts .archive-post .archive-post--header .post-categories li a:hover {
+    background-color: var(--wp--preset--color--green-2);
+}
+
+#main .container--posts .section .posts .archive-post .archive-post--header .post-categories li a svg {
+    width: 13px;
+    height: 13px;
 }
 
 #main .container--posts .section .posts .archive-post .archive-post--header .thumbnail {
@@ -61,13 +73,29 @@
 #main .container--posts .section .posts .archive-post .archive-post--content .tags {
     display: inline-flex;
     flex-wrap: wrap;
-    gap: 0 10px;
+    gap: 7px 10px;
 }
 
 #main .container--posts .section .posts .archive-post .archive-post--content .tags a {
     font-size: var(--wp--preset--font-size--small);
     display: flex;
+    align-items:center;
+    gap: 7px;
     flex-wrap: nowrap;
+    padding: 3px 7px;
+    background-color: #dbe1e8;
+    color: #4d5f71;
+    border-radius: 4px;
+    transition: background-color .3s ease;
+}
+
+#main .container--posts .section .posts .archive-post .archive-post--content .tags a:hover {
+    background-color: #e5eaee;
+}
+
+#main .container--posts .section .posts .archive-post .archive-post--content .tags a svg {
+    width: 13px;
+    height: 13px;
 }
 
 /* pagination */
@@ -92,5 +120,10 @@
 }
 
 #main .container--posts .section .posts .navigation.pagination .nav-links .page-numbers.current {
+    border-color: var(--wp--preset--color--accent-6);
+}
+
+#main .container--posts .section .posts .navigation.pagination .nav-links .page-numbers:hover:not(.current) {
+    background-color: var(--wp--preset--color--accent-5);
     border-color: var(--wp--preset--color--accent-6);
 }

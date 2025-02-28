@@ -47,6 +47,16 @@
 					"color": "color-mix(in srgb, currentColor 20%, transparent)",
 					"name": "Accent 6",
 					"slug": "accent-6"
+				},
+				{
+					"color": "#3fb950",
+					"name": "Green1",
+					"slug": "green1"
+				},
+				{
+					"color": "#59c668",
+					"name": "Green2",
+					"slug": "green2"
 				}
 			]
 		},
