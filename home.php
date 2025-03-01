@@ -8,6 +8,25 @@
 get_header(); ?>
 
 <main id="main" class="site-main" role="main">
+    <header class="container container--header">
+        <section class="section">
+            <div class="message">
+                <h2 class="main-title"><?php esc_html_e( '"Espero curarme de ti en unos días. Debo dejar de fumarte, de beberte, de pensarte. Es posible. Siguiendo las prescripciones de la moral en turno. Me receto tiempo, abstinencia, soledad."', 'stories' ); ?></h2>
+                <h3 class="reference"><?php esc_html_e( '—Jaime Sabines.', 'stories' ); ?></h3>
+            </div>
+            <img  class="tree" src="<?php echo get_theme_mod('bg_welcome', get_bloginfo('template_url') . '/assets/img/tree.png'); ?>" alt="" srcset="">
+            <div class="clouds">
+                <div class="c1 one"></div>
+                <div class="c1 two"></div>
+                <div class="c1 three"></div>
+                <div class="c1 four"></div>
+                <div class="c2 one"></div>
+                <div class="c2 two"></div>
+                <div class="c2 three"></div>
+                <div class="c2 four"></div>
+            </div>
+        </section>
+    </header>
     <div class="container container--posts">
         <section class="section">
             <div class="posts">

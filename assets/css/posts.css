@@ -2,6 +2,77 @@
     padding-top: 50px;
 }
 
+#main .container--header .section {
+    width: 100%;
+    padding:20px;
+    background: linear-gradient(#B7B0E3, #FFD3D6);
+    overflow:hidden;
+}
+
+#main .container--header .section .message {
+    position:relative;
+    z-index: 1;
+}
+
+#main .container--header .section .message > *:not(:last-child) {
+    margin-bottom:20px;
+}
+
+#main .container--header .section .message .main-title {
+    line-height: 1.5;
+    text-align: right;
+}
+
+#main .container--header .section .message .reference {
+    text-align: right;
+}
+
+#main .container--header .section .clouds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.c1, .c2 {
+    width: 400px;
+    height: 350px;
+    position: absolute;
+    background: transparent url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/131045/clouds.png") 0 0 no-repeat;
+    background-size: 100%;
+    z-index:999;
+  }
+  .c1.one, .c2.one {
+    top: -260px;
+    left: 0px;
+  }
+  .c1.two, .c2.two {
+    top: -200px;
+    left: 100px;
+  }
+  .c1.three, .c2.three {
+    top: -240px;
+    right: 100px;
+  }
+  .c1.four, .c22.four {
+    top: -180px;
+    right: 0px;
+  }
+  
+  .c2 .one {
+    top: -209px;
+  }
+  @media (max-width: 1023px) {
+    .c2.one {left: -80px;}
+    .c2.two {left: -120px;}
+    .c2.three {right: 220px;}
+    .c2.four {right: 220px;}
+  }
+
+/* posts */
 #main .container--posts .section {
     padding: 50px 0;
 }
@@ -126,4 +197,37 @@
 #main .container--posts .section .posts .navigation.pagination .nav-links .page-numbers:hover:not(.current) {
     background-color: var(--wp--preset--color--accent-5);
     border-color: var(--wp--preset--color--accent-6);
+}
+
+@media(max-width:767px) {
+
+    #main .container--header .section .tree {
+        display:none;
+    }
+}
+
+@media(min-width:768px) {
+
+    #main .container--header .section {
+        position: relative;
+        display: grid;
+        gap:50px;
+        grid-template-columns:1fr 150px;
+    }
+
+    #main .container--header .section .tree {
+        width:330px;
+        height:auto;
+        position:relative;
+        transform: translateY(30px);
+        z-index: 1;
+    }
+}
+
+@media(min-width:1024px) {
+    #main .container--header .section {
+        width: min(100% - 40px, 1096px);
+        grid-template-columns:1fr 330px;
+        border-radius: 8px;
+    }
 }
