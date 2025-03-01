@@ -65,16 +65,12 @@
   .c2 .one {
     top: -209px;
   }
-  @media (max-width: 1023px) {
-    .c2.one {left: -80px;}
-    .c2.two {left: -120px;}
-    .c2.three {right: 220px;}
-    .c2.four {right: 220px;}
-  }
 
 /* posts */
 #main .container--posts .section {
     padding: 50px 0;
+    position: relative;
+    z-index:1;
 }
 
 #main .container--posts .section .posts {
