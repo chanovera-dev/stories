@@ -14,7 +14,7 @@ get_header(); ?>
                 <h2 class="main-title"><?php esc_html_e( '"Espero curarme de ti en unos días. Debo dejar de fumarte, de beberte, de pensarte. Es posible. Siguiendo las prescripciones de la moral en turno. Me receto tiempo, abstinencia, soledad."', 'stories' ); ?></h2>
                 <h3 class="reference"><?php esc_html_e( '—Jaime Sabines.', 'stories' ); ?></h3>
             </div>
-            <img  class="tree" src="<?php echo get_theme_mod('bg_welcome', get_bloginfo('template_url') . '/assets/img/tree.png'); ?>" alt="" srcset="">
+            <img  class="tree" src="<?php echo get_theme_mod('bg_welcome', get_bloginfo('template_url') . '/assets/img/tree.webp'); ?>" alt="" srcset="">
             <div class="clouds">
                 <div class="c1 one"></div>
                 <div class="c1 two"></div>
