@@ -6,6 +6,7 @@
     width: 100%;
     padding:20px;
     background: linear-gradient(#B7B0E3, #FFD3D6);
+    position:relative;
     overflow:hidden;
 }
 
