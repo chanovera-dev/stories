@@ -80,8 +80,77 @@
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
-#main .container--posts .section .posts .archive-post > *:not(:last-child) {
+/* micro posts */
+#main .container--posts .section .posts .micro-post > *:not(:last-child) {
     margin-bottom:10px;
+}
+
+#main .container--posts .section .posts .micro-post .micro-post--header .post-categories {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display:inline-flex;
+    flex-wrap: wrap;
+}
+
+#main .container--posts .section .posts .micro-post .micro-post--header .post-categories li a {
+    font-size: var(--wp--preset--font-size--small);
+    font-weight: 500;
+    color: var(--wp--preset--color--green-3);
+    background-color: var(--wp--preset--color--green-1);
+    padding:5px 10px;
+    border-radius:4px;
+    display:flex;
+    align-items: center;
+    gap:7px;
+    flex-wrap:nowrap;
+    transition: background-color .3s ease;
+}
+
+#main .container--posts .section .posts .micro-post .micro-post--content > *:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+#main .container--posts .section .posts .micro-post .micro-post--content > p {
+    font-size: var(--wp--preset--font-size--x-large);
+}
+
+#main .container--posts .section .posts .micro-post .micro-post--content .date {
+    font-size: var(--wp--preset--font-size--small);
+    color: #4d5f71;
+}
+
+#main .container--posts .section .posts .micro-post .micro-post--content .tags {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 7px 10px;
+}
+
+#main .container--posts .section .posts .micro-post .micro-post--content .tags a {
+    font-size: var(--wp--preset--font-size--small);
+    display: flex;
+    align-items:center;
+    gap: 7px;
+    flex-wrap: nowrap;
+    padding: 3px 7px;
+    background-color: #dbe1e8;
+    color: #4d5f71;
+    border-radius: 4px;
+    transition: background-color .3s ease;
+}
+
+#main .container--posts .section .posts .micro-post .micro-post--content .tags a:hover {
+    background-color: var(--wp--preset--color--accent-5);
+}
+
+#main .container--posts .section .posts .micro-post .micro-post--content .tags a svg {
+    width: 13px;
+    height: 13px;
+}
+
+/* archive posts */
+#main .container--posts .section .posts .archive-post > *:not(:last-child) {
+    margin-bottom: 10px;
 }
 
 #main .container--posts .section .posts .archive-post .archive-post--header {
