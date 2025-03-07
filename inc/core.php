@@ -14,6 +14,7 @@ function setup_stories() {
     register_nav_menus(
         array(
             'primary' => __( 'Primary menu', 'stories' ),
+            'pages'   => __( 'Pages menu', 'stories' ),
             'social'  => __( 'Social menu', 'stories' ),
         )
     );
