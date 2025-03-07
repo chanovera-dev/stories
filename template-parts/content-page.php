@@ -1,4 +1,4 @@
-<article id="main" class="site-main post" role="main">
+<article id="post-<?php the_ID(); ?>" <?php post_class('site-main'); ?> role="main">
     <header class="container post-header">
         <section class="section">
             <?php the_title( '<h1 class="post-header--title">', '</h1>' ); ?>
@@ -6,7 +6,7 @@
     </header><!-- .post-header -->
     <div class="container post-body">
         <section class="section">
-            <div class="post-body--content">
+            <div class="post-body--content is-layout-constrained">
                 <?php the_content(); ?>
             </div>
             <?php
