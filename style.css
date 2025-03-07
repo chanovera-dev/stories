@@ -43,6 +43,15 @@ img{height:auto;}
     padding: 28.4px 0;
 }
 
+#main-footer .end-footer {
+    border-top: 1px solid var(--wp--preset--color--accent-5);
+}
+
+#main-footer .end-footer .section {
+    text-align: center;
+    padding:15px 0;
+}
+
 @media(max-width:767px){
     #main-header{position:relative;}
 
