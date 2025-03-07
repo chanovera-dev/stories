@@ -16,7 +16,7 @@
                                             array(
                                                 'container' => 'nav',
                                                 'container_class' => 'pages',
-                                                'theme_location' = 'pages',
+                                                'theme_location' => 'pages',
                                             )
                                         );
                                     echo '
