@@ -43,8 +43,31 @@ img{height:auto;}
     padding: 28.4px 0;
 }
 
-#main-footer .end-footer {
+#main-footer :is(.middle-footer,.end-footer) {
     border-top: 1px solid var(--wp--preset--color--accent-5);
+}
+
+#main-footer .middle-footer .section {
+    padding:50px 0;
+}
+
+#main-footer .middle-footer .section .group-links {
+    margin-left: auto;
+}
+
+#main-footer .middle-footer .section .group-links .title-menu {
+    margin-bottom: 20px;
+}
+
+#main-footer .middle-footer .section .group-links ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#main-footer .middle-footer .section .group-links ul li a {
+    display:block;
+    padding: 9px 0;
 }
 
 #main-footer .end-footer .section {
