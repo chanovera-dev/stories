@@ -10,17 +10,14 @@
 
                                 if ( ! empty($items_pages) ) {
                                     echo '
-                                    <div>
-                                        <h3 class="title-menu">' . $menu_pages->name . '</h3>';
-                                        wp_nav_menu(
-                                            array(
-                                                'container' => 'nav',
-                                                'container_class' => 'pages',
-                                                'theme_location' => 'pages',
-                                            )
-                                        );
-                                    echo '
-                                    </div>';
+                                    <h3 class="title-menu">' . $menu_pages->name . '</h3>';
+                                    wp_nav_menu(
+                                        array(
+                                            'container' => 'nav',
+                                            'container_class' => 'pages',
+                                            'theme_location' => 'pages',
+                                        )
+                                    );
                                 }
                             ?>
                         </div>
