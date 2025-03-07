@@ -1,6 +1,10 @@
         <footer id="main-footer">
             <div class="container middle-footer">
                 <section class="section">
+                    <div class="about">
+                        <h3 class="title-section">Sobre Relatos y Cartas</h3>
+                        <p>Relatos y Cartas es un espacio dedicado a la creatividad y la expresión a través de las palabras. Aquí encontrarás cuentos, microcuentos, poemas e historias que buscan inspirar, emocionar y conectar con los lectores.</p>
+                    </div>
                     <div class="other-links">
                         <div class="group-links">
                             <?php
