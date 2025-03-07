@@ -265,6 +265,10 @@
     border-color: var(--wp--preset--color--accent-6);
 }
 
+#main .container--posts .section .posts .navigation.pagination .nav-links :is(.page-numbers.prev,.page-numbers.next) {
+    font-size: 0;
+}
+
 @media(max-width:767px) {
 
     #main .container--header .section .tree {
