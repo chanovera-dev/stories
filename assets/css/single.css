@@ -1,3 +1,7 @@
 .site-main .post-body .section {
     padding:50px 0;
 }
+
+.site-main .post-body .section .post-body--content.is-layout-constrained > .wp-block-heading {
+    margin-block-start: 2.5rem;
+}
