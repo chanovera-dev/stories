@@ -94,17 +94,18 @@
 }
 
 #main .container--posts .section .posts .micro-post .micro-post--header .post-categories li a {
-    font-size: var(--wp--preset--font-size--small);
+    font-size: var(--wp--preset--font-size--medium);
     font-weight: 500;
-    color: var(--wp--preset--color--green-3);
-    background-color: var(--wp--preset--color--green-1);
-    padding:5px 10px;
-    border-radius:4px;
+    color: #998cef;
     display:flex;
     align-items: center;
     gap:7px;
     flex-wrap:nowrap;
-    transition: background-color .3s ease;
+    transition: color .3s ease;
+}
+
+#main .container--posts .section .posts .micro-post .micro-post--header .post-categories li a:hover {
+    color: #B7B0E3;
 }
 
 #main .container--posts .section .posts .micro-post .micro-post--content > *:not(:last-child) {
@@ -167,14 +168,14 @@
 }
 
 #main .container--posts .section .posts .archive-post .archive-post--header .post-categories li a {
-    font-size: var(--wp--preset--font-size--small);
+    font-size: var(--wp--preset--font-size--medium);
     font-weight: 500;
     color: #998cef;
     display:flex;
     align-items: center;
     gap:7px;
     flex-wrap:nowrap;
-    transition: background-color .3s ease;
+    transition: color .3s ease;
 }
 
 #main .container--posts .section .posts .archive-post .archive-post--header .post-categories li a:hover {
