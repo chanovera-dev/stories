@@ -114,7 +114,7 @@
 }
 
 #main .container--posts .section .posts .micro-post .micro-post--content > *:not(:last-child) {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 #main .container--posts .section .posts .micro-post .micro-post--content > p {
