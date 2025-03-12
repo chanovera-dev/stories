@@ -108,6 +108,11 @@
     color: #B7B0E3;
 }
 
+#main .container--posts .section .posts .micro-post .micro-post--header .post-categories li a svg {
+    width: 13px;
+    height: 13px;   
+}
+
 #main .container--posts .section .posts .micro-post .micro-post--content > *:not(:last-child) {
     margin-bottom: 10px;
 }
