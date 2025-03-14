@@ -1,5 +1,12 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class('site-main'); ?> role="main">
     <header class="container post-header">
+        <section class="section breadcrumbs">
+            <?php
+                if ( function_exists('wp_breadcrumb') ) {
+                    wp_breadcrumb( '<p id="breadcrumbs">','</p>' );
+                }
+            ?>
+        </section>
         <section class="section">
             <?php the_title( '<h1 class="post-header--title">', '</h1>' ); ?>
         </section>

@@ -78,3 +78,52 @@ function custom_modify_tag_links($links) {
     return $links;
 }
 add_filter('term_links-post_tag', 'custom_modify_tag_links');
+
+function wp_breadcrumbs() {
+    $separator = ' / ';
+    $home = 'Home';
+    $showCurrent = 1;
+    $showOnHome = 0;
+    $current = 'You are here';
+
+    global $post;
+    $homeLink = get_bloginfo('url');
+    echo '<a href="' . $homeLink . '">' . $home . '</a>' . $separator;
+
+    if (is_category()) {
+        $thisCat = get_category(get_query_var('cat'), false);
+        if ($thisCat->parent != 0) {
+            $cats = get_category_parents($thisCat->parent, TRUE, $separator);
+            if ($showCurrent == 0) $cats = preg_replace("#^(.+)$separator$#", "$1", $cats);
+            echo $cats;
+        }
+        if ($showCurrent == 1) echo $current . ' ' . single_cat_title('', false);
+    } elseif (is_search()) {
+        echo $current . ' ' . get_search_query();
+    } elseif (is_day()) {
+        echo '<a href="' . get_year_link(get_the_time('Y')) . '">' . get_the_time('Y') . '</a>' . $separator;
+        echo '<a href="' . get_month_link(get_the_time('Y'), get_the_time('m')) . '">' . get_the_time('F') . '</a>' . $separator;
+        echo get_the_time('d') . $separator;
+        echo $current . ' ' . get_the_time('l');
+    } elseif (is_month()) {
+        echo '<a href="' . get_year_link(get_the_time('Y')) . '">' . get_the_time('Y') . '</a>' . $separator;
+        echo $current . ' ' . get_the_time('F');
+    } elseif (is_year()) {
+        echo $current . ' ' . get_the_time('Y');
+    } elseif (is_single() && !is_attachment()) {
+        if (get_post_type() != 'post') {
+            $post_type = get_post_type_object(get_post_type());
+            $slug = $post_type->rewrite;
+            echo '<a href="' . $homeLink . '/' . $slug['slug'] . '/">' . $post_type->labels->singular_name . '</a>' . $separator;
+            if ($showCurrent == 1) echo $current . ' ' . get_the_title();
+        } else
+        {
+            $cat = get_the_category();
+            $cat = $cat[0];
+            $cats = get_category_parents($cat, TRUE, $separator);
+            if ($showCurrent == 0) $cats = preg_replace("#^(.+)$separator$#", "$1", $cats);
+            echo $cats;
+            echo $current . ' ' . get_the_title();
+        }
+    } elseif (!is_single() && !is_page() && get_post_type() != 'post' && !is_404()) {}
+}
