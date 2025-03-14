@@ -1,3 +1,16 @@
+.site-main .pos-header .section.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.site-main .pos-header .section.top .breadcrumbs {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .site-main .post-body .section {
     padding:50px 0;
 }
