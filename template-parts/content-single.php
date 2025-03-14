@@ -10,7 +10,7 @@
             </div>
             <?php echo the_category(); ?>
         </section>
-        <section class="section">
+        <section class="section middle">
             <?php the_title( '<h1 class="post-header--title">', '</h1>' ); ?>
         </section>
     </header><!-- .post-header -->
