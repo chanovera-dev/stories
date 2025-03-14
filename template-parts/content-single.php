@@ -2,8 +2,8 @@
     <header class="container post-header">
         <section class="section breadcrumbs">
             <?php
-                if ( function_exists('wp_breadcrumb') ) {
-                    wp_breadcrumb( '<p id="breadcrumbs">','</p>' );
+                if ( function_exists('wp_breadcrumbs') ) {
+                    wp_breadcrumbs( '<p id="breadcrumbs">','</p>' );
                 }
             ?>
         </section>
