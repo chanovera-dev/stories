@@ -19,6 +19,19 @@
     margin-right: 7px;
 }
 
+.site-main .post-header .section.top .post-categories {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: inline-flex;
+}
+
+.site-main .post-header .section.top .post-categories li a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
 .site-main .post-header .section.middle .post-header--title {
     text-align: center;
     padding: 50px 0;
