@@ -1,18 +1,22 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class('site-main'); ?> role="main">
-    <header class="container post-header">
-        <section class="section top">
-            <div class="breadcrumbs">
-                <?php
-                    if ( function_exists('wp_breadcrumbs') ) {
-                        wp_breadcrumbs( '<p id="breadcrumbs">','</p>' );
-                    }
-                ?>
-            </div>
-            <?php echo the_category(); ?>
-        </section>
-        <section class="section middle">
-            <?php the_title( '<h1 class="post-header--title">', '</h1>' ); ?>
-        </section>
+    <header class="post-header">
+        <div class="container">
+            <section class="section top">
+                <div class="breadcrumbs">
+                    <?php
+                        if ( function_exists('wp_breadcrumbs') ) {
+                            wp_breadcrumbs( '<p id="breadcrumbs">','</p>' );
+                        }
+                    ?>
+                </div>
+                <?php echo the_category(); ?>
+            </section>
+        </div>
+        <div class="container">
+            <section class="section middle">
+                <?php the_title( '<h1 class="post-header--title">', '</h1>' ); ?>
+            </section>
+        </div>
     </header><!-- .post-header -->
     <div class="container post-body">
         <section class="section">
