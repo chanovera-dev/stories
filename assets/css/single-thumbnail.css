@@ -6,14 +6,14 @@
 }
 
 @media(min-width:768px) {
-    :is(.post-template-default) #main-header .header-content { /* styles for home */
+    :is(.post-template-default) #main-header .header-content { /* styles for single */
         background-color: var(--wp--preset--color--bg-main-navigation);
         width: fit-content;
         grid-template-columns: repeat(3, auto);
         border-radius: 6px;
     }
     
-    :is(.post-template-default) #main-header .header-content > *:not(:nth-child(1), :last-child):after { /* styles for home */
+    :is(.post-template-default) #main-header .header-content > *:not(:nth-child(1), :last-child):after { /* styles for single */
         position: absolute;
         top: 0;
         left: 0;
@@ -23,7 +23,7 @@
         background: linear-gradient(to bottom, transparent 10%, var(--wp--preset--color--cyan-bluish-gray) 40%, var(--wp--preset--color--cyan-bluish-gray) 60%, transparent 90%);
     }
     
-    :is(.post-template-default) #main-header .header-content .site-brand a { /* styles for home */
+    :is(.post-template-default) #main-header .header-content .site-brand a { /* styles for single */
         padding: 9.31px 20px;
     }
     
@@ -39,5 +39,10 @@
     
     :is(.post-template-default):is(.scroll-down,.scroll-up) #main-header .header-content > *:not(:nth-child(1), :last-child):after { /* scroll styles on single */
         content: none;
+    }
+
+    :is(.post-template-default) #search-mobile__button { /* styles for single */
+        width: 60px;
+        border-radius: 0 6px 6px 0;
     }
 }
