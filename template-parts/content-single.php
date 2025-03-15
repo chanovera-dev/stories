@@ -15,6 +15,13 @@
         <div class="container">
             <section class="section middle">
                 <?php the_title( '<h1 class="post-header--title">', '</h1>' ); ?>
+                <div class="author">
+                    <?php
+                        echo get_avatar( get_the_author_meta('email'), '43' ) . '
+                        <p class="author-name">'; the_author(); echo '</p>' . '
+                        <span class="author-position">'; the_author_meta('description'); echo '</span>';
+                    ?>
+                </div>
             </section>
         </div>
     </header><!-- .post-header -->

@@ -45,6 +45,27 @@
 
 }
 
+.site-main .post-header .section.middle .author{
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 13px;
+    max-width: 140px;
+    text-align: left;
+    margin-inline: auto;
+}
+
+.site-main .post-header .section.middle .author .author-name {}
+
+.site-main .post-header .section.middle .author .avatar {
+    grid-row: 1 / 3;
+    border-radius: 50%;
+}
+
+.site-main .post-header .section.middle .author .author-position {
+    font-size:var(--wp--preset--font-size--small);
+    opacity: .5;
+}
+
 .site-main .post-body .section {
     padding:50px 0;
 }
