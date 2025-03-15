@@ -104,7 +104,7 @@
 #main .container--posts .section .posts .micro-post .micro-post--header .post-categories li a {
     font-size: var(--wp--preset--font-size--medium);
     font-weight: 500;
-    color: #998cef;
+    color: var(--wp--preset--color--category);
     display:flex;
     align-items: center;
     gap:7px;
@@ -113,7 +113,7 @@
 }
 
 #main .container--posts .section .posts .micro-post .micro-post--header .post-categories li a:hover {
-    color: #B7B0E3;
+    color: var(--wp--preset--color--category-hover);
 }
 
 #main .container--posts .section .posts .micro-post .micro-post--header .post-categories li a svg {
