@@ -75,12 +75,23 @@ function setup_stories() {
 add_action( 'after_setup_theme', 'setup_stories' );
 
 /**
+ * Load parts in header
+ */
+function load_parts_header() {
+    
+    wp_register_style( 'global', get_template_directory_uri() . '/style.css', array(), get_asset_version('/style.css'), 'all' ); 
+    wp_enqueue_style( 'global' );
+     
+}
+add_action( 'wp_enqueue_scripts', 'load_parts_header' );
+
+/**
  * Add components to footer
  */
 function footer_components() {
     /* js for header */
-    wp_enqueue_script('global-js', get_template_directory_uri() . '/assets/js/global.js', array(), '1.0', true);
-    wp_enqueue_style( 'custom-forms', get_template_directory_uri() . '/assets/css/forms.css', array(), '1.0.0', 'all' );
+    wp_enqueue_script('global-js', get_template_directory_uri() . '/assets/js/global.js', array(), get_asset_version('/assets/js/global.js'), true);
+    wp_enqueue_style( 'custom-forms', get_template_directory_uri() . '/assets/css/forms.css', array(), get_asset_version('/assets/css/forms.css'), 'all' );
 }
 add_action( 'wp_footer', 'footer_components' );
 
