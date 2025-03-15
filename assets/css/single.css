@@ -39,17 +39,20 @@
     gap: 7px;
 }
 
+.site-main .post-header .section.middle {
+    padding: 100px 0;
+}
+
 .site-main .post-header .section.middle .post-header--title {
     text-align: center;
-    padding: 100px 0;
-
+    margin-bottom: 20px;
 }
 
 .site-main .post-header .section.middle .author{
     display: grid;
     grid-template-columns: auto auto;
     column-gap: 13px;
-    max-width: 140px;
+    width: fit-content;
     text-align: left;
     margin-inline: auto;
 }
