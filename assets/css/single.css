@@ -73,6 +73,7 @@
 
 /* header - bottom */
 .site-main .post-header .section.bottom {
+    padding: 13px 0;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
