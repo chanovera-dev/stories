@@ -14,15 +14,15 @@ function openCustomSearchform() {
     const iconSearchBtn = document.querySelector( '#search-mobile__button .bi-search' );
     const iconCloseBtn = document.querySelector( '#search-mobile__button .bi-x-circle' );
 
-    if ( window.innerWidth <= 767 ) {
-        customSearchform.classList.add( 'show' );
+    if (window.innerWidth <= 767) {
+        if (customSearchform) customSearchform.classList.add('show');
     }
 
-    if ( window.innerWidth >=767 ) {
-        customSearchform.classList.toggle( 'show' );
-        primaryMenu.classList.toggle( 'hide' );
-        iconSearchBtn.classList.toggle( 'hide' );
-        iconCloseBtn.classList.toggle( 'show' );
+    if (window.innerWidth >= 768) {
+        if (customSearchform) customSearchform.classList.toggle('show');
+        if (primaryMenu) primaryMenu.classList.toggle('hide');
+        if (iconSearchBtn) iconSearchBtn.classList.toggle('hide');
+        if (iconCloseBtn) iconCloseBtn.classList.toggle('show');
     }
 }
 
