@@ -1,11 +1,29 @@
+.site-main .post-header {
+    position: relative;
+    overflow: hidden;
+}
+
+.site-main .post-header > .thumbnail {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 120%;
+    object-fit: cover;
+    filter: blur(20px) brightness(.5);
+    z-index: 0;
+}
+
 /* header - top */
-.site-main .post-header > :nth-child(1) {
+.site-main .post-header > .container:has(.section.top) {
     background-color: var(--wp--preset--color--bg-breadcrumbs);
     border-top: 1px solid var(--wp--preset--color--border-breadcrumbs);
     border-bottom: 1px solid var(--wp--preset--color--border-breadcrumbs);
 }
 
 .site-main .post-header .section.top {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -42,6 +60,7 @@
 
 /* header - middle */
 .site-main .post-header .section.middle {
+    position: relative;
     padding: 100px 0;
 }
 
@@ -73,6 +92,7 @@
 
 /* header - bottom */
 .site-main .post-header .section.bottom {
+    position: relative;
     padding: 13px 0;
     display: flex;
     align-items: center;

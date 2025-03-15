@@ -22,6 +22,11 @@ function post_styles() {
     if ( is_single() or is_page() ) {
         wp_enqueue_style( 'single', get_template_directory_uri() . '/assets/css/single.css', array(), '1.0.0', 'all' );
 
+        
+        if ( has_post_thumbnail() == true ) {
+            wp_enqueue_style( 'single-thumbnail', get_template_directory_uri() . '/assets/css/single-thumbnail.css', array(), '1.0.0', 'all' );
+        }
+        
         if ( is_active_sidebar( 'sidebar-2' ) ) {
             wp_enqueue_style( 'sidebar', get_template_directory_uri() . '/assets/css/sidebar.css', array(), '1.0.0', 'all' );
         }
