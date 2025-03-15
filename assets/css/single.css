@@ -98,8 +98,8 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 50px;
-    justify-content: space-between;
+    gap: 10px 50px;
+    justify-content: center;
 }
 
 .site-main .post-header .section.bottom .date {
@@ -127,4 +127,10 @@
 
 .site-main .post-body .section .post-body--content.is-layout-constrained > .wp-block-heading {
     margin-block-start: 3rem;
+}
+
+@media(min-width:768px) {
+    .site-main .post-header .section.bottom {
+        justify-content: space-between;
+    }
 }
