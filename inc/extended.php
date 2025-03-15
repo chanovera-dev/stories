@@ -116,6 +116,7 @@ function wp_breadcrumbs() {
             $post_type = get_post_type_object(get_post_type());
             $slug = $post_type->rewrite;
             echo '<a href="' . $homeLink . '/' . $slug['slug'] . '/">' . $post_type->labels->singular_name . '</a>' . $separator;
+            if ($showCurrent == 1) echo $current . ' ' . get_the_title();
         } else
         {
             $cat = get_the_category();
