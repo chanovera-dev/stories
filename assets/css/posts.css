@@ -45,7 +45,15 @@
     background: transparent url("/wp-content/themes/stories/assets/img/clouds.webp") 0 0 no-repeat;
     background-size: 100%;
     z-index:999;
+    animation: moving-clouds 120s linear infinite;
   }
+
+  @keyframes moving-clouds {
+    0%  {transform: translateX(-100%);}
+    50% {transform: translateX(100%);}
+    100%{transform: translateX(-100%);}
+  }
+
   .c1.one, .c2.one {
     top: -260px;
     left: 0px;
