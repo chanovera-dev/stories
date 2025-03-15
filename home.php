@@ -1,6 +1,7 @@
 <?php 
 /**
  * The template for displaying the blog page.
+ * Template name: Blog
  * 
  * @package Stories
  * @since 1.0.0
