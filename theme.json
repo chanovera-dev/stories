@@ -59,9 +59,9 @@
 					"slug": "border-breadcrumbs"
 				},
 				{
-					"color": "#274417",
-					"name": "Green3",
-					"slug": "green3"
+					"color": "#e6ebef",
+					"name": "Background main navigation",
+					"slug": "bg-main-navigation"
 				}
 			]
 		},
