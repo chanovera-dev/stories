@@ -208,7 +208,7 @@
 }
 
 #main .container--posts .section .posts .archive-post .archive-post--content > *:not(:last-child) {
-    margin-bottom:10px;
+    margin-bottom:20px;
 }
 
 #main .container--posts .section .posts .archive-post .archive-post--content .archive-post--permalink {
