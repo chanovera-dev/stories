@@ -49,14 +49,14 @@
 					"slug": "accent-6"
 				},
 				{
-					"color": "#8bcb67",
-					"name": "Green1",
-					"slug": "green1"
+					"color": "#e6ebef",
+					"name": "Background Breadcrumbs",
+					"slug": "bg-breadcrumbs"
 				},
 				{
-					"color": "#a2d585",
-					"name": "Green2",
-					"slug": "green2"
+					"color": "#DBE1F3",
+					"name": "Border Breadcrumbs",
+					"slug": "border-breadcrumbs"
 				},
 				{
 					"color": "#274417",

@@ -1,8 +1,15 @@
+.site-main .post-header > :nth-child(1) {
+    background-color: var(--wp--preset--color--bg-breadcrumbs);
+    border-top: 1px solid var(--wp--preset--color-border-breadcrumbs);
+    border-bottom: 1px solid var(--wp--preset--color-border-breadcrumbs);
+}
+
 .site-main .post-header .section.top {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 50px;
+    padding: 13px 0;
 }
 
 .site-main .post-header .section.top .breadcrumbs {
