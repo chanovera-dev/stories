@@ -45,4 +45,9 @@
         width: 60px;
         border-radius: 0 6px 6px 0;
     }
+
+    :is(.post-template-default):is(.scroll-down,.scroll-up) #search-mobile__button { /* styles for scroll on single */
+        width: 43.8px;
+        border-radius: 0;
+    }
 }
