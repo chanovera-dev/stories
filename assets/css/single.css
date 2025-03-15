@@ -130,6 +130,14 @@
     gap: 20px;
 }
 
+.site-main .post-header .section.bottom .share a{
+    transition: color .3s ease;
+}
+
+.site-main .post-header .section.bottom .share a:hover {
+    color: var(--wp--preset--color--category-hover);
+}
+
 /* Body */
 .site-main .post-body .section {
     padding:50px 0;
