@@ -179,7 +179,7 @@ img{height:auto;}
         border-radius: 6px;
     }
 
-    #main-header .header-content > *:not(:last-child):after {
+    #main-header .header-content > *:not(:nth-child(1), :last-child):after {
         position: absolute;
         top: 0;
         left: 0;
@@ -190,6 +190,7 @@ img{height:auto;}
     }
 
     #main-header .header-content .main-menu {
+        position:relative;
         display: flex;
         align-items: center;
     }
