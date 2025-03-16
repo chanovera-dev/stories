@@ -19,7 +19,9 @@
                 <?php the_title( '<h1 class="post-header--title">', '</h1>' ); ?>
                 <div class="author">
                     <?php
-                        echo 'Última actualización';
+                        if ( get_the_modified_time('d/m/Y') ) {
+                            echo '<p>' . esc_html__( 'Última modificación vez el', 'stories' ) . get_the_modified_time('d/m/Y') . '</p>';
+                        }
                     ?>
                 </div>
             </section>
