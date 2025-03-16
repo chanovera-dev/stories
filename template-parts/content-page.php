@@ -19,8 +19,8 @@
                 <?php the_title( '<h1 class="post-header--title">', '</h1>' ); ?>
                 <div class="author">
                     <?php
-                        if ( get_the_modified_time() ) {
-                            echo '<p>' . esc_html__( 'Última modificación vez en ', 'stories' ) . get_the_modified_time() . '</p>';
+                        if ( get_the_modified_time('d/m/Y') ) {
+                            echo '<p>' . esc_html__( 'Última modificación vez el ', 'stories' ) . get_the_modified_time('d/m/Y') . '</p>';
                         }
                     ?>
                 </div>
