@@ -77,6 +77,7 @@
             ?>
         </section>
     </div><!-- .post-body -->
+    <!--
     <div class="container post-footer">
         <section class="section">
             <?php 
@@ -90,5 +91,5 @@
                 }
             ?>
         </section>
-    </div><!-- .post-footer -->
+    </div>--><!-- .post-footer -->
 </article><!-- #main -->
