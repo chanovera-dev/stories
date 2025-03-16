@@ -161,7 +161,7 @@ img{height:auto;}
     }
 
     
-    .home:is(.scroll-down,.scroll-up) #main-header .header-content, /* scroll styles on home */
+    :is(.scroll-down,.scroll-up) #main-header .header-content, /* scroll styles */
     #main-header .header-content {
         width: min(100% - 30px, 1096px);
         display: grid;
@@ -172,22 +172,14 @@ img{height:auto;}
         transition: all .3s ease;
     }
 
-    .home #main-header .header-content { /* styles for home */
+    #main-header .header-content {
         background-color: var(--wp--preset--color--bg-main-navigation);
         width: fit-content;
         grid-template-columns: repeat(3, auto);
         border-radius: 6px;
     }
 
-    #main-header .header-content > * {
-        position: relative;
-    }
-
-    .home:is(.scroll-down,.scroll-up) #main-header .header-content > *:not(:nth-child(1), :last-child):after { /* scroll styles on home */
-        content: none;
-    }
-
-    .home #main-header .header-content > *:not(:nth-child(1), :last-child):after { /* styles for home */
+    #main-header .header-content > *:not(:nth-child(1), :last-child):after {
         position: absolute;
         top: 0;
         left: 0;
@@ -202,14 +194,10 @@ img{height:auto;}
         align-items: center;
     }
 
-    .home:is(.scroll-down,.scroll-up) #main-header .header-content .site-brand a, /* scroll styles on home */
+    :is(.scroll-down,.scroll-up) #main-header .header-content .site-brand a, /* scroll styles */
     #main-header .header-content .site-brand a {
-        padding: 9.31px 0;
-        display: block;
-    }
-
-    .home #main-header .header-content .site-brand a { /* styles for home */
         padding: 9.31px 20px;
+        display: block;
     }
 
     #primary .menu {
@@ -272,7 +260,7 @@ img{height:auto;}
     }
 
     :is(.scroll.down,.scroll-up) #primary .menu > li a, /* styles for scroll */
-    .home #primary .menu > li a { /* styles for home */
+    #primary .menu > li a {
         border-radius: 0;
     }
 
@@ -297,7 +285,7 @@ img{height:auto;}
     }
 
     :is(.scroll-down,.scroll-up) #custom-searchform .section input[type=text], /* styles for scroll */
-    .home #custom-searchform .section input[type=text] { /* styles for home */
+    #custom-searchform .section input[type=text] {
         border-radius: 0;
     }
 
@@ -312,12 +300,12 @@ img{height:auto;}
         margin-left: auto;
         display: grid;
         place-content: center;
-        width: 43.8px;
+        width: 60px;
         height: 43.8px;
         border: none;
         background-color: transparent;
         color: var(--wp--preset--color--contrast);
-        border-radius: 6px;
+        border-radius: 0 6px 6px 0;
         transition:all .3s ease;
     }
 
@@ -326,8 +314,7 @@ img{height:auto;}
         border-radius: 0 6px 6px 0;
     }
 
-    :is(.scroll-down,.scroll-up) #search-mobile__button,
-    .home:is(.scroll-down,.scroll-up) #search-mobile__button { /* styles for scroll on home */
+    :is(.scroll-down,.scroll-up) #search-mobile__button { /* styles for scroll on home */
         width: 43.8px;
         border-radius: 0;
     }
