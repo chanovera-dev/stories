@@ -298,6 +298,7 @@ img{height:auto;}
 
     /* searchform button */
     #search-mobile__button {
+        position: relative;
         margin-left: auto;
         display: grid;
         place-content: center;
@@ -308,11 +309,6 @@ img{height:auto;}
         color: var(--wp--preset--color--contrast);
         border-radius: 0 6px 6px 0;
         transition:all .3s ease;
-    }
-
-    .home #search-mobile__button { /* styles for home */
-        width: 60px;
-        border-radius: 0 6px 6px 0;
     }
 
     :is(.scroll-down,.scroll-up) #search-mobile__button { /* styles for scroll on home */
