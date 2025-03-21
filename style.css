@@ -189,6 +189,10 @@ img{height:auto;}
         background: linear-gradient(to bottom, transparent 10%, var(--wp--preset--color--cyan-bluish-gray) 40%, var(--wp--preset--color--cyan-bluish-gray) 60%, transparent 90%);
     }
 
+    :is(.scroll-down,.scroll-up) #main-header .header-content > *:not(:nth-child(1), :last-child):after {
+        background: linear-gradient(to bottom, transparent 10%, transparent 40%, transparent 60%, transparent 90%);
+    }
+
     #main-header .header-content .main-menu {
         position:relative;
         display: flex;
