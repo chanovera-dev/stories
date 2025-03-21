@@ -17,6 +17,24 @@ aside ul li a {
     align-items: center;
     gap: 7px;
     padding:9px 0;
+    transition: color .3s ease;
+}
+
+aside a:hover {
+    color: var(--wp--preset--color--category);
+}
+
+aside .wp-block-group :is(ul,ol,p) {
+    visibility: hidden;
+}
+
+aside .wp-block-group :is(ul,ol,p) > * {
+    visibility: visible;
+    transition: opacity .3s;
+}
+
+aside .wp-block-group :is(ul:hover,ol:hover,p:hover) > :not(:hover) {
+    opacity: .25;
 }
 
 aside .wp-block-search .wp-block-search__inside-wrapper {
