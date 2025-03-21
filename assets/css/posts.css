@@ -216,6 +216,11 @@
     flex-wrap: wrap;
 }
 
+#main .container--posts .section .posts .archive-post .archive-post--content .date {
+    font-size: var(--wp--preset--font-size--small);
+    color: #4d5f71;
+}
+
 #main .container--posts .section .posts .archive-post .archive-post--content .tags {
     display: inline-flex;
     flex-wrap: wrap;
