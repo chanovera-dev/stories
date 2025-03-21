@@ -8,11 +8,25 @@
 get_header(); ?>
 
 <main id="main" class="site-main" role="main">
-    <header class="container container--title">
-        <section class="section">
+    <header class="container post-header">
+        <div class="container">
+            <section class="section top">
+                <div class="breadcrumbs">
+                    <?php
+                        if ( function_exists('wp_breadcrumbs') ) {
+                            wp_breadcrumbs( '<p id="breadcrumbs">','</p>' );
+                        }
+                    ?>
+                </div>
+            </section>
+        </div>
+        <div class="container container--title">
+            <section class="section">
             <h1 class="main-title"><?php echo esc_html__('Búsqueda de "', 'stories'); echo the_search_query(); echo esc_html__('"', 'stories') ?></h1>
-        </section>
-    </header><!-- .container--title -->
+            </section>
+        </div><!-- .container--title -->
+    </header><!-- .post-header -->
+    
     <div class="container container--posts">
         <section class="section">
             <div class="posts">
