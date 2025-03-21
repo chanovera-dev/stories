@@ -16,7 +16,7 @@
         </a>
         <?php
             the_excerpt();
-            if ( ! is_active_sidebar( 'sidebar-posts' && ! is_active_widget( false, false, 'wp-block-tag-cloud', true ) ) ) {
+            if ( ! is_active_sidebar( 'sidebar-posts' ) && ! is_active_widget( false, false, 'tag_cloud', true ) ) {
                 echo '<div class="tags">' . get_the_tag_list() . '</div>';
             }
         ?>
