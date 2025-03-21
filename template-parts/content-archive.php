@@ -14,6 +14,7 @@
         </a>
         <?php
             the_excerpt();
+            echo '<div class="date">' . get_the_date() . '</div>';
             echo '<div class="tags">' . get_the_tag_list() . '</div>';
         ?>
     </div><!-- .archive-post--content -->
