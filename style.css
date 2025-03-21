@@ -199,10 +199,13 @@ img{height:auto;}
         align-items: center;
     }
 
-    :is(.scroll-down,.scroll-up) #main-header .header-content .site-brand a, /* scroll styles */
     #main-header .header-content .site-brand a {
-        padding: 9.31px 0;
+        padding: 9.31px 20px;
         display: block;
+    }
+
+    :is(.scroll-down,.scroll-up) #main-header .header-content .site-brand a { /* scroll styles */
+        padding: 9.31px 0;
     }
 
     #primary .menu {
