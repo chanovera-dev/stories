@@ -1,7 +1,7 @@
 <article class="micro-post">
     <header class="micro-post--header">
         <?php
-            if ( ! is_active_sidebar( 'sidebar-posts' ) ) {
+            if ( ! is_active_sidebar( 'sidebar-posts' ) && ! is_active_widget( false, false, 'categories', true ) ) {
                 the_category();
             }
         ?>

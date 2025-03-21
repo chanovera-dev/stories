@@ -1,7 +1,7 @@
 <article class="archive-post">
     <header class="archive-post--header">
         <?php
-            if ( ! is_active_widget( false, false, 'categories', true ) ) {
+            if ( ! is_active_sidebar( 'sidebar-posts' ) && ! is_active_widget( false, false, 'categories', true ) ) {
                 the_category();
             }
             
