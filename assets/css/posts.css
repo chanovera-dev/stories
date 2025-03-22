@@ -288,6 +288,10 @@
     #main .container--header .section .tree {
         display:none;
     }
+
+    #main .container--posts .section .posts {
+        padding-bottom: 50px;
+    }
 }
 
 @media(min-width:768px) {

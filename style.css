@@ -298,7 +298,6 @@ img{height:auto;}
     }
 
     #custom-searchform .section .buttons-container #searchsubmit{position:absolute;top:0;right:0;width:43.8px;height:43.8px;border:1px solid transparent;border-radius:0px;background-color:transparent;color:var(--wp--preset--color--contrast);transition:all .3s ease;}
-    #custom-searchform .section .buttons-container #searchsubmit:hover{}
     #custom-searchform .section .buttons-container #searchsubmit svg{transform:translateY(2px);}
     #custom-searchform .section .buttons-container .close-custom-searchform{display:none;}
     #custom-searchform.show{max-width:500px;}

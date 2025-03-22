@@ -16,55 +16,6 @@
 }
 
 /* header - top */
-.site-main .post-header > .container:has(.section.top) {
-    background-color: var(--wp--preset--color--bg-breadcrumbs);
-    border-top: 1px solid var(--wp--preset--color--border-breadcrumbs);
-    border-bottom: 1px solid var(--wp--preset--color--border-breadcrumbs);
-}
-
-.site-main .post-header .section.top {
-    position: relative;
-    display: flex;
-    align-items: start;
-    justify-content: space-between;
-    gap: 50px;
-    padding: 13px 0;
-}
-
-.site-main .post-header .section.top .breadcrumbs {
-    display: inline-flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 5px 10px;
-}
-
-.site-main .post-header .section.top .breadcrumbs a {
-    transition: color .3s ease;
-}
-
-.site-main .post-header .section.top .breadcrumbs a:first-child svg {
-    width: 17px;
-    height: 17px;
-    position: relative;
-    top: 1px; 
-    margin-right: 7px;
-}
-
-.site-main .post-header .section.top .post-categories {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: inline-flex;
-}
-
-.site-main .post-header .section.top .post-categories li a {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    transition: color .3s ease;
-}
-
-.site-main .post-header .section.top .breadcrumbs a:hover,
 .site-main .post-header .section.top .post-categories li a:hover {
     color: var(--wp--preset--color--category-hover);
 }
@@ -88,8 +39,6 @@
     text-align: left;
     margin-inline: auto;
 }
-
-.site-main .post-header .section.middle .author .author-name {}
 
 .site-main .post-header .section.middle .author .avatar {
     grid-row: 1 / 3;
