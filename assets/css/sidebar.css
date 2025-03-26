@@ -21,7 +21,7 @@ aside ul li a {
 }
 
 aside li:has(a:hover),
-aside li:has(a:hover):hover {
+aside li:has(a):hover {
     border-bottom: 1px solid color-mix(in srgb, currentColor 5%, transparent);
 }
 
