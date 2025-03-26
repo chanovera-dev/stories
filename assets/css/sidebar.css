@@ -21,20 +21,20 @@ aside ul li a {
 }
 
 aside li:has(a:hover) {
-    opacity: .25;
+    border-bottom: 1px solid color-mix(in srgb, currentColor 5%, transparent);
 }
 
 aside a:hover {
     color: var(--wp--preset--color--category);
 }
 
-aside .wp-block-group :is(ul,ol,li,p) {
+aside .wp-block-group :is(ul,ol,p) {
     visibility: hidden;
 }
 
-aside .wp-block-group :is(ul,ol,li,p) > * {
+aside .wp-block-group :is(ul,ol,p) > * {
     visibility: visible;
-    transition: opacity .3s;
+    transition: all .3s;
 }
 
 aside .wp-block-group :is(ul:hover,ol:hover,p:hover) > :not(:hover) {
