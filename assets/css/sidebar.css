@@ -21,18 +21,18 @@ aside ul li a {
 }
 
 aside li:has(a:hover) {
-    border-bottom: 1px solid orangered;
+    opacity: .25;
 }
 
 aside a:hover {
     color: var(--wp--preset--color--category);
 }
 
-aside .wp-block-group :is(ul,ol,p) {
+aside .wp-block-group :is(ul,ol,li,p) {
     visibility: hidden;
 }
 
-aside .wp-block-group :is(ul,ol,p) > * {
+aside .wp-block-group :is(ul,ol,li,p) > * {
     visibility: visible;
     transition: opacity .3s;
 }
