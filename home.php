@@ -12,8 +12,26 @@ get_header(); ?>
     <header class="container container--header">
         <section class="section">
             <div class="message">
-                <h2 class="main-title"><?php esc_html_e( '"Espero curarme de ti en unos días. Debo dejar de fumarte, de beberte, de pensarte. Es posible. Siguiendo las prescripciones de la moral en turno. Me receto tiempo, abstinencia, soledad."', 'stories' ); ?></h2>
-                <h3 class="reference"><?php esc_html_e( '—Jaime Sabines.', 'stories' ); ?></h3>
+            <?php
+                $args = array(
+                    'post_type'      => 'quote',
+                    'posts_per_page' => 3,
+                    'orderby'        => 'date',
+                    'order'          => 'DESC',
+                );
+
+                $query = new WP_Query($args);
+
+                if ($query->have_posts()) : 
+                    while ($query->have_posts()) : $query->the_post(); ?>
+                        <article><?php the_content(); ?></article>
+                    <?php endwhile;
+                    wp_reset_postdata();
+                else :
+                    echo '<p>No hay quotes disponibles.</p>';
+                endif;
+            ?>
+
             </div>
             <img  class="tree" src="<?php echo get_theme_mod('bg_welcome', get_bloginfo('template_url') . '/assets/img/tree.webp'); ?>" alt="" srcset="">
             <div class="clouds">
