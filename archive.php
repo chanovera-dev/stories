@@ -30,14 +30,18 @@ get_header(); ?>
 
     <div class="container container--posts">
         <section class="section">
-            <div class="posts">
+        <div class="posts">
                 <?php
 
                     if ( have_posts() ) {
                         
                         while ( have_posts() ) {
                             the_post();
-                            get_template_part( 'template-parts/content', 'archive' );
+                            if ( get_post_format() === 'aside' ) { 
+                                get_template_part( 'template-parts/content', 'micro' );
+                            } else { 
+                                get_template_part( 'template-parts/content', 'archive' );
+                            }
                         }
                         the_posts_pagination( array(
                             'mid_size'  => 2,
