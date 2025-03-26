@@ -15,16 +15,16 @@
     z-index: 1;
 }
 
-#main .container--header .section .message > *:not(:last-child) {
+#main .container--header .section .message article > *:not(:last-child) {
     margin-bottom:20px;
 }
 
-#main .container--header .section .message .main-title {
+#main .container--header .section .message article .main-title {
     line-height: 1.5;
     text-align: right;
 }
 
-#main .container--header .section .message .reference {
+#main .container--header .section .message article .reference {
     text-align: right;
 }
 
