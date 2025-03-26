@@ -20,8 +20,8 @@ aside ul li a {
     transition: color .3s ease;
 }
 
-aside li:has(a:hover),
-aside li:has(a):hover {
+aside li:has(a:hover):not(:last-child),
+aside li:has(a):not(:last-child):hover {
     border-bottom: 1px solid color-mix(in srgb, currentColor 5%, transparent);
 }
 
