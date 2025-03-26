@@ -33,7 +33,7 @@ aside .wp-block-group :is(ul,ol,p) > * {
     transition: opacity .3s;
 }
 
-aside .wp-block-group :is(ul:hover,ol:hover,p:hover) > :not(:hover) {
+aside .wp-block-group :is(ul:hover,ol:hover,li:hover,p:hover) > :not(:hover) {
     opacity: .25;
 }
 
