@@ -9,6 +9,7 @@
 get_header(); ?>
 
 <main id="main" class="site-main" role="main">
+    <?php if ( ! is_paged() ) : ?>
     <header class="container container--header">
         <section class="section">
             <div class="message">
@@ -31,9 +32,8 @@ get_header(); ?>
                     echo '<p>No hay quotes disponibles.</p>';
                 endif;
             ?>
-
             </div>
-            <img  class="tree" src="<?php echo get_theme_mod('bg_welcome', get_bloginfo('template_url') . '/assets/img/tree.webp'); ?>" alt="" srcset="">
+            <img class="tree" src="<?php echo get_theme_mod('bg_welcome', get_bloginfo('template_url') . '/assets/img/tree.webp'); ?>" alt="" srcset="">
             <div class="clouds">
                 <div class="c1 one"></div>
                 <div class="c1 two"></div>
@@ -46,6 +46,8 @@ get_header(); ?>
             </div>
         </section>
     </header>
+    <?php endif; ?>
+
     <div class="container container--posts">
         <section class="section">
             <div class="posts">
