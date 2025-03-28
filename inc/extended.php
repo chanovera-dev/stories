@@ -91,12 +91,8 @@ function wp_breadcrumbs() {
         }
         if ($showCurrent == 1) echo $current . ' ' . single_cat_title('', false);
     } elseif (is_home()) {
-
-        echo $current . ' ';
-
-        if ($paged > 1) {
-            echo ' - Página ' . get_query_var('paged') ? get_query_var('paged') : 1;;
-        }
+        $paged = get_query_var('paged') ? get_query_var('paged') : 1;
+        echo $current . ' ' . ' Página ' . $paged;
     }elseif (is_search()) {
         echo $current . ' ' . get_search_query();
     } elseif (is_day()) {
