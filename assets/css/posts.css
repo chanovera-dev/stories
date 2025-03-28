@@ -89,6 +89,10 @@
 }
 
 /* micro posts */
+#main .container--posts .section .posts .micro-post {
+    grid-column: span 2;
+}
+
 #main .container--posts .section .posts .micro-post > *:not(:last-child) {
     margin-bottom:10px;
 }
