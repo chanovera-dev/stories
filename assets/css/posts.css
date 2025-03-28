@@ -291,9 +291,6 @@
         display:none;
     }
 
-    #main .container--posts .section .posts {
-        padding-bottom: 50px;
-    }
 }
 
 @media(min-width:768px) {
@@ -317,6 +314,14 @@
     #main .container--posts .section .posts .micro-post:nth-child(odd) {
         grid-column: span 2;
     }
+}
+
+@media(max-width:1024px) {
+
+    #main .container--posts .section .posts {
+        padding-bottom: 50px;
+    }
+
 }
 
 @media(min-width:1024px) {
