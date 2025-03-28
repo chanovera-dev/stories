@@ -86,7 +86,7 @@
     display: grid;
     gap: 50px;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-template-rows: 1fr auto;
+    place-content: start;
     grid-auto-flow: dense;
 }
 
