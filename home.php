@@ -46,6 +46,20 @@ get_header(); ?>
             </div>
         </section>
     </header>
+    <?php else : ?>
+        <header class="container post-header">
+        <div class="container">
+            <section class="section top">
+                <div class="breadcrumbs">
+                    <?php
+                        if ( function_exists('wp_breadcrumbs') ) {
+                            wp_breadcrumbs( '<p id="breadcrumbs">','</p>' );
+                        }
+                    ?>
+                </div>
+            </section>
+        </div>
+    </header><!-- .post-header -->
     <?php endif; ?>
 
     <div class="container container--posts">
