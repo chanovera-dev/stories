@@ -91,10 +91,6 @@
 }
 
 /* micro posts */
-#main .container--posts .section .posts .micro-post:nth-child(odd) {
-    grid-column: span 2;
-}
-
 #main .container--posts .section .posts .micro-post > *:not(:last-child) {
     margin-bottom:10px;
 }
@@ -315,6 +311,11 @@
         position:relative;
         transform: translateY(30px);
         z-index: 1;
+    }
+
+    /* posts - micro post */
+    #main .container--posts .section .posts .micro-post:nth-child(odd) {
+        grid-column: span 2;
     }
 }
 
