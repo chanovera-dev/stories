@@ -91,7 +91,7 @@
 }
 
 /* micro posts */
-#main .container--posts .section .posts .micro-post:nth-child(even) {
+#main .container--posts .section .posts .micro-post:nth-child(odd) {
     grid-column: span 2;
 }
 
