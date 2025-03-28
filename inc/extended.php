@@ -90,7 +90,9 @@ function wp_breadcrumbs() {
             echo $cats;
         }
         if ($showCurrent == 1) echo $current . ' ' . single_cat_title('', false);
-    } elseif (is_search()) {
+    } elseif (is_home()) {
+        echo $current . ' ' . get_the_title(get_option('page_for_posts', true));
+    }elseif (is_search()) {
         echo $current . ' ' . get_search_query();
     } elseif (is_day()) {
         echo '<a href="' . get_year_link(get_the_time('Y')) . '">' . get_the_time('Y') . '</a>' . $separator;
