@@ -61,7 +61,7 @@ aside .wp-block-search .wp-block-search__inside-wrapper {
     
 }
 
-@media(min-width:1024px) and (max-width:1366px) {
+@media(min-width:1024px) and (max-width:1365px) {
     #main .container--posts .section aside{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
