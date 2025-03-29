@@ -336,3 +336,9 @@ img{height:auto;}
         margin-left: auto;
     }
 }
+
+@media(max-width:1024px) {
+    aside .wp-block-tag-cloud > a{
+        margin: 15px;
+    }
+}
