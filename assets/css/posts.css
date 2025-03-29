@@ -324,7 +324,7 @@
     }
 }
 
-@media(max-width:1024px) {
+@media(max-width:1365px) {
 
     #main .container--posts .section .posts {
         padding-bottom: 50px;
@@ -332,7 +332,7 @@
 
 }
 
-@media(min-width:1365px) {
+@media(min-width:1024px) {
     #main .container--header .section {
         width: min(100% - 40px, 1096px);
         grid-template-columns:1fr 330px;
