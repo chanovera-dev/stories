@@ -20,6 +20,11 @@ function get_asset_version($file_path) {
  function posts_styles() {
     if ( is_home() or is_archive() or is_search() ) {
 
+        function unload_parts_header() {
+            wp_dequeue_style( 'wp-block-library' );
+        }
+        add_action( 'wp_enqueue_scripts', 'unload_parts_header', 100 );
+
         wp_enqueue_style( 'posts', get_template_directory_uri() . '/assets/css/posts.css', array(), get_asset_version('/assets/css/posts.css'), 'all' );
         wp_enqueue_style( 'breadcrumbs', get_template_directory_uri() . '/assets/css/breadcrumbs.css', array(), get_asset_version('/assets/css/breadcrumbs.css'), 'all' );
 
