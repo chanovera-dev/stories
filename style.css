@@ -163,7 +163,7 @@ img{height:auto;}
     
     :is(.scroll-down,.scroll-up) #main-header .header-content, /* scroll styles */
     #main-header .header-content {
-        width: min(100% - 30px, 1096px);
+        width: min(100% - 40px, 1096px);
         display: grid;
         grid-template-columns: 1fr auto 1fr;
         align-items: center;
