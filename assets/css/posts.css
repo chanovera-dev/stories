@@ -257,6 +257,10 @@
     margin-inline: auto;
 }
 
+#main .container--posts .section .posts .navigation.pagination .screen-reader-text {
+    display: none;
+}
+
 #main .container--posts .section .posts .navigation.pagination .nav-links {
     display: flex;
     align-items:center;
