@@ -46,7 +46,7 @@ aside .wp-block-search .wp-block-search__inside-wrapper {
     position:relative;
 }
 
-@media(min-width:1096px) {
+@media(min-width:1366px) {
 
     .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){
         max-width: 100%;
