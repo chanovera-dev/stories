@@ -5,6 +5,13 @@
     <meta name="description" content="<?php bloginfo( 'description' ); ?>">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7XNN23WGQT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7XNN23WGQT');
+    </script>
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
