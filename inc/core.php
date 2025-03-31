@@ -71,6 +71,22 @@ function setup_stories() {
 
     add_theme_support( 'wp-block-styles' );
     add_theme_support( 'align-wide' );
+
+    // Habilitar el uso de plantillas de bloques
+    add_theme_support( 'block-templates' );
+   
+    // Estilos en el editor de bloques
+    add_theme_support( 'wp-block-styles' );
+   
+    // Estilos personalizados en el editor
+    add_theme_support( 'editor-styles' );
+
+    // Soporte para theme.json y variaciones de estilo
+    add_theme_support( 'global-styles' ); 
+
+    // Soporte para alineación completa
+    add_theme_support( 'align-wide' );
+    
 }
 add_action( 'after_setup_theme', 'setup_stories' );
 
