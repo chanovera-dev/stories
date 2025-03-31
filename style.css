@@ -14,8 +14,21 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 :root{
+    /* display */
     --nodisplay-mobile-button:none;
     --display-mobile-button:grid;
+
+    /* colors */
+    --background-base: #ffffff;
+    --color-text-base: #3D4651;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root{
+        /* colors */
+        --background-base: #000000;
+        --color-text-base: #9198a1;
+    }
 }
 
 *,:before,:after{box-sizing:border-box;margin:0;}
@@ -29,7 +42,7 @@ img{height:auto;}
 
 #main-header {
     position: sticky;
-    background-color: var(--wp--preset--color--base);
+    background-color: var(--background-base);
     top: 0;
     z-index:99;
     transition: all .3s ease;
@@ -86,12 +99,12 @@ img{height:auto;}
     #main-header{position:relative;}
 
     #main-header .header-content{display:flex;gap:10px;padding:26px 0;align-items:center;justify-content:space-between;}
-    #main-header .header-content #search-mobile__button{margin-left:auto;display:grid;width:48px;height:48px;place-content:center;border:none;border-radius:0;background-color:transparent;color:var(--wp--preset--color--contrast);}
+    #main-header .header-content #search-mobile__button{margin-left:auto;display:grid;width:48px;height:48px;place-content:center;border:none;border-radius:0;background-color:transparent;color:var(--color-text-base);}
     #main-header .header-content #search-mobile__button svg{width:20px;height:20px;}
     #main-header .header-content #search-mobile__button .bi-x-circle{display:var(--nodisplay-mobile-button);}
 
     #main-header .header-content #menu-mobile__button{place-content:space-between;justify-content:space-between;padding:0;width:30px;height:23px;background-color:transparent;border:none;cursor:pointer;z-index:6;}
-    #main-header .header-content #menu-mobile__button :is(.bar){display:block;height:1.5px;background-color:var(--wp--preset--color--contrast);transition:transform .3s ease;}
+    #main-header .header-content #menu-mobile__button :is(.bar){display:block;height:1.5px;background-color:var(--color-text-base);transition:transform .3s ease;}
     #main-header .header-content #menu-mobile__button :is(.bar:nth-child(odd)){width:30px;}
     #main-header .header-content #menu-mobile__button :is(.bar:nth-child(even)){width:15px;margin-left:auto;}
     #main-header .header-content #menu-mobile__button.open{transform:rotate(45deg)!important;transition:all .3s ease;}
@@ -110,7 +123,7 @@ img{height:auto;}
     #custom-searchform .section input[type=text]::placeholder {
         font-size: var(--wp--preset--font-size--medium);
         font-family: var(--wp--preset--font-family--manrope);
-        color: var(--wp--preset--color--contrast);
+        color: var(--color-text-base);
         opacity:.65;
     }
 
@@ -121,18 +134,18 @@ img{height:auto;}
     #custom-searchform .section .buttons-container{display:flex;padding-right:6px;}
     #custom-searchform .section .buttons-container #searchsubmit{border:none;border-radius:0;background-color:transparent;}
     #custom-searchform .section .buttons-container :is(#searchsubmit,.close-custom-searchform){width:48px;height:48px;display:grid;place-content:center;}
-    #custom-searchform .section .buttons-container :is(#searchsubmit,.close-custom-searchform) svg{width:20px;height:20px;color:var(--wp--preset--color--contrast);}
+    #custom-searchform .section .buttons-container :is(#searchsubmit,.close-custom-searchform) svg{width:20px;height:20px;color:var(--color-text-base);}
     #custom-searchform .section .buttons-container .close-custom-searchform svg{opacity:.65;}
     
     
-    #primary{position:absolute;top:0;left:0;width:100%;height:100svh;padding:72px 0 20px;background-color:var(--wp--preset--color--base);transform:translateX(-100svw);overflow-y:scroll;z-index:5;transition:transform .3s ease;}
+    #primary{position:absolute;top:0;left:0;width:100%;height:100svh;padding:72px 0 20px;background-color:var(--background-base);transform:translateX(-100svw);overflow-y:scroll;z-index:5;transition:transform .3s ease;}
     #primary::-webkit-scrollbar{display:none;}
     #primary ul{padding-left:0;list-style:none;}
     #primary .menu li a{padding:6.65px 20px;display:block;}
     #primary .menu li .sub-menu{background-color:var(--wp--preset--color--accent-5);max-height:0;transition:max-height .3s ease;overflow:hidden;}
     #primary .menu li .sub-menu.open{max-height:1000px;}
     #primary .menu li a:has(.mobile-links__item-toggle){position:relative;padding:0!important;}
-    #primary .menu li .mobile-links__item-toggle{padding:6.65px 20px;background-color:transparent;font-size:var(--wp--preset--font-size--medium);font-family:(--wp--preset--font-family--manrope);color:var(--wp--preset--color--contrast);font-weight:600;border:none;border-radius:0;display:flex;gap:7px;align-items:center;justify-content:space-between;width:100%;}
+    #primary .menu li .mobile-links__item-toggle{padding:6.65px 20px;background-color:transparent;font-size:var(--wp--preset--font-size--medium);font-family:(--wp--preset--font-family--manrope);color:var(--color-text-base);font-weight:600;border:none;border-radius:0;display:flex;gap:7px;align-items:center;justify-content:space-between;width:100%;}
     #primary .menu li .mobile-links__item-toggle svg{transition:transform .3s ease;}
     #primary .menu li .mobile-links__item-toggle.rotate svg{transform:rotate(180deg);}
     #primary .menu li .sub-menu li:first-child a{box-shadow:inset 0px 17px 10px -17px rgb(0 0 0 / 15%);}
@@ -298,7 +311,7 @@ img{height:auto;}
         border-radius: 0;
     }
 
-    #custom-searchform .section .buttons-container #searchsubmit{position:absolute;top:0;right:0;width:43.8px;height:43.8px;border:1px solid transparent;border-radius:0px;background-color:transparent;color:var(--wp--preset--color--contrast);transition:all .3s ease;}
+    #custom-searchform .section .buttons-container #searchsubmit{position:absolute;top:0;right:0;width:43.8px;height:43.8px;border:1px solid transparent;border-radius:0px;background-color:transparent;color:var(--color-text-base);transition:all .3s ease;}
     #custom-searchform .section .buttons-container #searchsubmit svg{transform:translateY(2px);}
     #custom-searchform .section .buttons-container .close-custom-searchform{display:none;}
     #custom-searchform.show{max-width:500px;}
@@ -313,7 +326,7 @@ img{height:auto;}
         height: 43.8px;
         border: none;
         background-color: transparent;
-        color: var(--wp--preset--color--contrast);
+        color: var(--color-text-base);
         border-radius: 0 6px 6px 0;
         transition:all .3s ease;
     }
