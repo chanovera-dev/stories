@@ -1,0 +1,68 @@
+{
+    "version": 3,
+    "title": "Dark Mode",
+    "styles": {
+      "color": {
+			"defaultDuotone": false,
+			"defaultGradients": false,
+			"defaultPalette": false,
+			"palette": [
+				{
+					"color": "#000000",
+					"name": "Base",
+					"slug": "base"
+				},
+				{
+					"color": "#3D4651",
+					"name": "Contrast",
+					"slug": "contrast"
+				},
+				{
+					"color": "#7a70bf",
+					"name": "Category color",
+					"slug": "category"
+				},
+				{
+					"color": "#998CEF",
+					"name": "Category color on hover",
+					"slug": "category-hover"
+				},
+				{
+					"color": "#503AA8",
+					"name": "Accent 3",
+					"slug": "accent-3"
+				},
+				{
+					"color": "#686868",
+					"name": "Accent 4",
+					"slug": "accent-4"
+				},
+				{
+					"color": "#e5eaee",
+					"name": "Accent 5",
+					"slug": "accent-5"
+				},
+				{
+					"color": "color-mix(in srgb, currentColor 20%, transparent)",
+					"name": "Accent 6",
+					"slug": "accent-6"
+				},
+				{
+					"color": "#e6ebef",
+					"name": "Background Breadcrumbs",
+					"slug": "bg-breadcrumbs"
+				},
+				{
+					"color": "#DBE1F3",
+					"name": "Border Breadcrumbs",
+					"slug": "border-breadcrumbs"
+				},
+				{
+					"color": "#dbe1e8",
+					"name": "Background main navigation",
+					"slug": "bg-main-navigation"
+				}
+			]
+		}
+    }
+  }
