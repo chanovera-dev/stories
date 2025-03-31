@@ -201,10 +201,6 @@
 		"useRootPaddingAwareAlignments": true
 	},
 	"styles": {
-		"color": {
-			"background": "var:preset|color|base",
-			"text": "var:preset|color|contrast"
-		},
 		"spacing": {
 			"blockGap": "1.2rem",
 			"padding": {
