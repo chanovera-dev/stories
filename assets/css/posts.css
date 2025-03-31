@@ -13,7 +13,6 @@
 #main .container--header .section .message {
     position:relative;
     z-index: 1;
-    color: #3D4651;
 }
 
 #main .container--header .section .message article > *:not(:last-child) {
