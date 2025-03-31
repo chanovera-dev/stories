@@ -21,6 +21,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
     /* colors */
     --background-base: #ffffff;
     --background-tags: #dbe1e8;
+    --background-tags-hover: #e5eaee;
     --color-text-base: #3D4651;
     --color-tags: #4d5f71;
 }
@@ -30,6 +31,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
         /* colors */
         --background-base: #000000;
         --background-tags: #26303b;
+        --background-tags-hover: #515962;
         --color-text-base: #9198a1;
         --color-tags: #d1d1d1;
     }
