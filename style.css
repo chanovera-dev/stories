@@ -33,7 +33,14 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 *,:before,:after{box-sizing:border-box;margin:0;}
 html{scroll-behavior:smooth;}
-body{position:relative;overflow-y:scroll;}
+
+body{
+    position: relative;
+    overflow-y: scroll;
+    background-color: var(--background-base);
+    color: var(--color-text-base);
+}
+
 .container{width:100%;}
 .container .section{width:min(100% - 40px, 1096px);margin-inline:auto;}
 img{height:auto;}
