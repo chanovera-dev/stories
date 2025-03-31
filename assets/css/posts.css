@@ -5,7 +5,7 @@
 #main .container--header .section {
     width: 100%;
     padding:20px;
-    background: linear-gradient(#B7B0E3, #FFD3D6);
+    background: linear-gradient(var(--background-sky-1), var(--background-sky-2));
     position:relative;
     overflow:hidden;
 }
