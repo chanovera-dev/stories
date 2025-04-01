@@ -208,6 +208,7 @@
     aspect-ratio: 3 / 2;
     object-fit: cover;
     border-radius: 8px;
+    filter: brightness(var(--brightness-thumbnail));
 }
 
 #main .container--posts .section .posts .archive-post .archive-post--content > *:not(:last-child) {

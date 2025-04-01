@@ -19,6 +19,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
     --display-mobile-button:grid;
     --opacity-clouds: 1;
     --brightness-tree: 1;
+    --brightness-thumbnail: 1;
 
     /* colors */
     --background-desktop-header: #dbe1e8;
@@ -37,6 +38,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
         /* display */
         --opacity-clouds: .25;
         --brightness-tree: .2;
+        --brightness-thumbnail: .5;
 
         /* colors */
         --background-desktop-header: #26303b;
