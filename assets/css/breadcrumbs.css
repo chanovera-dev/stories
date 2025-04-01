@@ -1,7 +1,7 @@
 .site-main .post-header > .container:has(.section.top) {
     background-color: var(--background-breadcrumbs);
-    border-top: 1px solid var(--line-1);
-    border-bottom: 1px solid var(--line-1);
+    border-top: 1px solid var(--line-2);
+    border-bottom: 1px solid var(--line-2);
 }
 
 .site-main .post-header .section.top {
