@@ -10,42 +10,7 @@ get_header(); ?>
 
 <main id="main" class="site-main" role="main">
     <?php if ( ! is_paged() ) : ?>
-    <header class="container container--header">
-        <section class="section">
-            <div class="message">
-            <?php
-                $args = array(
-                    'post_type'      => 'quote',
-                    'posts_per_page' => 3,
-                    'orderby'        => 'date',
-                    'order'          => 'DESC',
-                );
-
-                $query = new WP_Query($args);
-
-                if ($query->have_posts()) : 
-                    while ($query->have_posts()) : $query->the_post(); ?>
-                        <article><?php the_content(); ?></article>
-                    <?php endwhile;
-                    wp_reset_postdata();
-                else :
-                    echo '<p>No hay quotes disponibles.</p>';
-                endif;
-            ?>
-            </div>
-            <img class="tree" src="<?php echo get_theme_mod('bg_welcome', get_bloginfo('template_url') . '/assets/img/tree-min.webp'); ?>" alt="Decorative tree" srcset="" loading="lazy">
-            <div class="clouds">
-                <div class="c1 one"></div>
-                <div class="c1 two"></div>
-                <div class="c1 three"></div>
-                <div class="c1 four"></div>
-                <div class="c2 one"></div>
-                <div class="c2 two"></div>
-                <div class="c2 three"></div>
-                <div class="c2 four"></div>
-            </div>
-        </section>
-    </header>
+    
     <?php else : ?>
         <header class="container post-header">
         <div class="container">
