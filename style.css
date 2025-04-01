@@ -348,7 +348,7 @@ img{height:auto;}
         font-size: var(--wp--preset--font-size--medium);
         font-family: var(--wp--preset--font-family--manrope);
         color: var(--color-text-base);
-        opacity:.65;
+        opacity:.4;
     }
 
     :is(.scroll-down,.scroll-up) #custom-searchform .section input[type=text], /* styles for scroll */
