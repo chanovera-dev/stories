@@ -21,6 +21,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
     --brightness-tree: 1;
 
     /* colors */
+    --background-desktop-header: #dbe1e8;
+    --background-desktop-header--hover-buttons: ##e5eaee;
     --background-sky-1: #B7B0E3;
     --background-sky-2: #FFD3D6;
     --background-base: #ffffff;
@@ -37,6 +39,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
         --brightness-tree: .2;
 
         /* colors */
+        --background--desktop-header: #26303b;
+        --background-desktop-header--hover-buttons: #515962;
         --background-sky-1: #111111;
         --background-sky-2: #000000;
         --background-base: #000000;
@@ -209,7 +213,7 @@ img{height:auto;}
     }
 
     #main-header .header-content {
-        background-color: var(--wp--preset--color--bg-main-navigation);
+        background-color: var(--background-desktop-header);
         width: fit-content;
         grid-template-columns: repeat(3, auto);
         border-radius: 6px;
@@ -293,7 +297,7 @@ img{height:auto;}
     #primary .menu li .sub-menu li .sub-menu{max-height:0;position:relative;top:0;width:auto;box-shadow:none;background-color:var(--bg-input);border-radius:0;}
     #primary .menu li .sub-menu li .sub-menu li:first-child a{box-shadow:inset 0px 17px 10px -17px rgb(0 0 0 / 15%);padding-top:6.65px;}
     #primary .menu li .sub-menu li .sub-menu li a{padding-left:40px;transition:background-color .3s ease;}
-    #primary .menu li .sub-menu li .sub-menu li a:hover{background-color:var(--bg-l1);}
+    #primary .menu li .sub-menu li .sub-menu li a:hover{background-color:var(--background-desktop-header--hover-buttons);}
     #primary .menu li .sub-menu li .sub-menu li:last-child a{box-shadow:inset 0px -17px 6px -17px rgb(0 0 0 / 15%);padding-bottom:6.65px;}
     #primary .menu li .sub-menu li .sub-menu.open{max-height:1000px;}
     
