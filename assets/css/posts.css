@@ -107,7 +107,7 @@
 #main .container--posts .section .posts .micro-post .micro-post--header .post-categories li a {
     font-size: var(--wp--preset--font-size--medium);
     font-weight: 500;
-    color: var(--wp--preset--color--category);
+    color: var(--color-link);
     display:flex;
     align-items: center;
     gap:7px;
@@ -116,7 +116,7 @@
 }
 
 #main .container--posts .section .posts .micro-post .micro-post--header .post-categories li a:hover {
-    color: var(--wp--preset--color--category-hover);
+    color: var(--color-link-hover);
 }
 
 #main .container--posts .section .posts .micro-post .micro-post--header .post-categories li a svg {
@@ -186,7 +186,7 @@
 #main .container--posts .section .posts .archive-post .archive-post--header .post-categories li a {
     font-size: var(--wp--preset--font-size--medium);
     font-weight: 500;
-    color: var(--wp--preset--color--category);
+    color: var(--color-link);
     display:flex;
     align-items: center;
     gap:7px;
@@ -195,7 +195,7 @@
 }
 
 #main .container--posts .section .posts .archive-post .archive-post--header .post-categories li a:hover {
-    color: var(--wp--preset--color--category-hover);
+    color: var(--color-link-hover);
 }
 
 #main .container--posts .section .posts .archive-post .archive-post--header .post-categories li a svg {
