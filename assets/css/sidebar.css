@@ -26,7 +26,7 @@ aside li:has(a):not(:last-child):hover {
 }
 
 aside a:hover {
-    color: var(--wp--preset--color--category);
+    color: var(--color-link-hover);
 }
 
 aside .wp-block-group :is(ul,ol,p) {

@@ -37,7 +37,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
     --color-text-base: #3D4651;
     --color-tags: #4d5f71;
     --color-link: #1e90ff;
-    --color-link-hover: #1e90ff;
+    --color-link-hover: #329aff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -129,6 +129,7 @@ img{height:auto;}
 #main-footer .middle-footer .section .other-links .group-links ul li a {
     display:block;
     padding: 9px 0;
+    transition: color .3s ease;
 }
 
 #main-footer .middle-footer .section .other-links .group-links ul li a:hover {
