@@ -363,7 +363,7 @@ img{height:auto;}
         border-radius: 0;
     }
 
-    #search-mobile__button:hover{background-color:var(--wp--preset--color--accent-5);}
+    #search-mobile__button:hover{background-color:var(--background-desktop-header--hover-buttons);}
     #search-mobile__button .bi-x-circle{display:none;}
     #search-mobile__button svg.hide{display:none;}
     #search-mobile__button svg.show{display:inherit;}
