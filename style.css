@@ -29,6 +29,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
     --background-base: #ffffff;
     --background-tags: #dbe1e8;
     --background-tags-hover: #e5eaee;
+    --line-1: #abb8c3;
     --color-text-base: #3D4651;
     --color-tags: #4d5f71;
 }
@@ -48,6 +49,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
         --background-base: #000000;
         --background-tags: #26303b;
         --background-tags-hover: #3b444e;
+        --line-1: #626971;
         --color-text-base: #9198a1;
         --color-tags: #d1d1d1;
     }
@@ -228,7 +230,7 @@ img{height:auto;}
         content: '';
         width: 1px;
         height: 43.8px;
-        background: linear-gradient(to bottom, transparent 10%, var(--wp--preset--color--cyan-bluish-gray) 40%, var(--wp--preset--color--cyan-bluish-gray) 60%, transparent 90%);
+        background: linear-gradient(to bottom, transparent 10%, var(--line-1) 40%, var(--line-1) 60%, transparent 90%);
     }
 
     :is(.scroll-down,.scroll-up) #main-header .header-content > *:not(:nth-child(1), :last-child):after { /* scroll styles */
@@ -270,7 +272,7 @@ img{height:auto;}
         content: '';
         width: 1px;
         height: 43.8px;
-        background: linear-gradient(to bottom, transparent 10%, var(--wp--preset--color--cyan-bluish-gray) 40%, var(--wp--preset--color--cyan-bluish-gray) 60%, transparent 90%);
+        background: linear-gradient(to bottom, transparent 10%, var(--line-1) 40%, var(--line-1) 60%, transparent 90%);
         transition: all .3s ease;
     }
 
