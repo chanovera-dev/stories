@@ -33,7 +33,7 @@ get_header(); ?>
                 endif;
             ?>
             </div>
-            <img class="tree" src="<?php echo get_theme_mod('bg_welcome', get_bloginfo('template_url') . '/assets/img/tree-min.webp'); ?>" alt="" srcset="">
+            <img class="tree" src="<?php echo get_theme_mod('bg_welcome', get_bloginfo('template_url') . '/assets/img/tree-min.webp'); ?>" alt="Decorative tree" srcset="" loading="lazy">
             <div class="clouds">
                 <div class="c1 one"></div>
                 <div class="c1 two"></div>
