@@ -1,7 +1,7 @@
 .site-main .post-header > .container:has(.section.top) {
-    background-color: var(--wp--preset--color--bg-breadcrumbs);
-    border-top: 1px solid var(--wp--preset--color--border-breadcrumbs);
-    border-bottom: 1px solid var(--wp--preset--color--border-breadcrumbs);
+    background-color: var(--background-breadcrumbs);
+    border-top: 1px solid var(--line-1);
+    border-bottom: 1px solid var(--line-1);
 }
 
 .site-main .post-header .section.top {
