@@ -283,7 +283,7 @@
 }
 
 #main .container--posts .section .posts .navigation.pagination .nav-links .page-numbers:hover:not(.current) {
-    background-color: var(--wp--preset--color--accent-5);
+    background-color: var(--background-hover-navigation);
     border-color: var(--wp--preset--color--accent-6);
 }
 
