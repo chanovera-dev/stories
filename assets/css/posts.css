@@ -271,8 +271,8 @@
 #main .container--posts .section .posts .navigation.pagination .nav-links .page-numbers {
     display: grid;
     place-content: center;
-    width: 30px;
-    height: 30px;
+    width: var(--width-pagination);
+    height: var(--width-pagination);
     border-radius: 6px;
     border: 1px solid transparent;
     transition: all .3s ease;

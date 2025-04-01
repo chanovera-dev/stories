@@ -21,6 +21,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
     --brightness-tree: 1;
     --brightness-thumbnail: 1;
 
+    /* sizes */
+    --width-pagination: 30px;
+
     /* colors */
     --background-base: #ffffff;
     --background-desktop-header: #dbe1e8;
@@ -212,6 +215,9 @@ img{height:auto;}
 
     :root{
         --display-mobile-button:none;
+
+        /* sizes */
+        --width-pagination: 43px;
     }
 
     /* header */ 
