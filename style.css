@@ -22,7 +22,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
     /* colors */
     --background-desktop-header: #dbe1e8;
-    --background-desktop-header--hover-buttons: ##e5eaee;
+    --background-desktop-header--hover-buttons: #e5eaee;
     --background-sky-1: #B7B0E3;
     --background-sky-2: #FFD3D6;
     --background-base: #ffffff;
@@ -40,7 +40,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
         /* colors */
         --background-desktop-header: #26303b;
-        --background-desktop-header--hover-buttons: #515962;
+        --background-desktop-header--hover-buttons: #3b444e;
         --background-sky-1: #111111;
         --background-sky-2: #000000;
         --background-base: #000000;
