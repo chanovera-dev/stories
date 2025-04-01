@@ -96,7 +96,7 @@ img{height:auto;}
 }
 
 #main-footer :is(.middle-footer,.end-footer) {
-    border-top: 1px solid var(--wp--preset--color--accent-5);
+    border-top: 1px solid var(--wp--preset--color--accent-6);
 }
 
 #main-footer .middle-footer .section {
