@@ -35,6 +35,7 @@
     width: 100%;
     height: 100%;
     z-index: 0;
+    opacity: var(--opacity-clouds);
     overflow: hidden;
 }
 
@@ -311,6 +312,7 @@
         height:auto;
         position:relative;
         transform: translateY(30px);
+        filter: brightness(var(--brightness-tree));
         z-index: 1;
     }
 

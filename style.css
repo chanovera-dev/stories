@@ -17,6 +17,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
     /* display */
     --nodisplay-mobile-button:none;
     --display-mobile-button:grid;
+    --opacity-clouds: 1;
+    --brightness-tree: 1;
 
     /* colors */
     --background-sky-1: #B7B0E3;
@@ -30,6 +32,10 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 @media (prefers-color-scheme: dark) {
     :root{
+        /* display */
+        --opacity-clouds: .25;
+        --brightness-tree: .2;
+
         /* colors */
         --background-sky-1: #111111;
         --background-sky-2: #000000;
