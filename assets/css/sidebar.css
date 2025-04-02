@@ -34,9 +34,13 @@ aside ul.wp-block-latest-posts li .wp-post-image {
     display: block;
 } 
 
-aside ul.wp-block-latest-posts li .content {
+aside ul.wp-block-latest-posts li .latest-post-content {
     display: grid;
     font-size: var(--wp--preset--font-size--small);
+}
+
+aside ul.wp-block-latest-posts li .latest-post-content .latest-post-date {
+    opacity: .5;
 }
 
 aside li:has(a:hover):not(:last-child),
