@@ -32,6 +32,7 @@ aside ul.wp-block-latest-posts li a .wp-post-image {
     aspect-ratio: 3 / 2;
     object-fit: cover;
     display: block;
+    border-radius: 6px;
 } 
 
 aside ul.wp-block-latest-posts li a .latest-post-content {
