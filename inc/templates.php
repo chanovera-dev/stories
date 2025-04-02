@@ -7,14 +7,6 @@
  */
 
 /**
- * Cache booster
- */
-function get_asset_version($file_path) {
-    $full_path = get_template_directory() . $file_path;
-    return file_exists($full_path) ? filemtime($full_path) : time();
-}
-
-/**
  * Posts styles for home, archive or search
  */
  function posts_styles() {

@@ -76,6 +76,14 @@ function setup_stories() {
 add_action( 'after_setup_theme', 'setup_stories' );
 
 /**
+ * Cache booster
+ */
+function get_asset_version($file_path) {
+    $full_path = get_template_directory() . $file_path;
+    return file_exists($full_path) ? filemtime($full_path) : time();
+}
+
+/**
  * Load parts in header
  */
 function load_parts_header() {

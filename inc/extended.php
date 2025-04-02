@@ -6,6 +6,24 @@
  * @since 1.0.0
  */
 
+ /**
+  * Add Google Tag Manager
+  */
+ function add_gtm_header() {
+    ?>
+    <!-- Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7XNN23WGQT"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-7XNN23WGQT', { 'transport_type': 'beacon', 'send_page_view': false });
+    </script>
+    <?php
+}
+add_action('wp_head', 'add_gtm_header');
+
 /**
  * Support for svg files
  */
