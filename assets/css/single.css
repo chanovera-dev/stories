@@ -11,7 +11,7 @@
     width: 120%;
     height: 120%;
     object-fit: cover;
-    filter: blur(20px) brightness(.5);
+    filter: blur(20px) brightness(--brightness-single-post-thumbnail);
     z-index: 0;
 }
 
