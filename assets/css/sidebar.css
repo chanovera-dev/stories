@@ -36,6 +36,8 @@ aside ul.wp-block-latest-posts li a .wp-post-image {
 
 aside ul.wp-block-latest-posts li a .latest-post-content {
     display: grid;
+    height: -webkit-fill-available;
+    align-items: end;
 }
 
 aside ul.wp-block-latest-posts li a .latest-post-content .wp-block-latest-posts__post-title {
