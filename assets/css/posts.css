@@ -165,6 +165,88 @@
     height: 13px;
 }
 
+/* image posts */
+#main .container--posts .section .posts .image-post > *:not(:last-child) {
+    margin-bottom:10px;
+}
+
+#main .container--posts .section .posts .image-post .image-post--header .post-categories {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display:inline-flex;
+    flex-wrap: wrap;
+}
+
+#main .container--posts .section .posts .image-post .image-post--header .post-categories li a {
+    font-size: var(--wp--preset--font-size--medium);
+    font-weight: 500;
+    color: var(--color-link);
+    display:flex;
+    align-items: center;
+    gap:7px;
+    flex-wrap:nowrap;
+    transition: color .3s ease;
+}
+
+#main .container--posts .section .posts .image-post .image-post--header .post-categories li a:hover {
+    color: var(--color-link-hover);
+}
+
+#main .container--posts .section .posts .image-post .image-post--header .post-categories li a svg {
+    width: 13px;
+    height: 13px;   
+}
+
+#main .container--posts .section .posts .image-post .image-post--content > *:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+#main .container--posts .section .posts .image-post .image-post--header .thumbnail {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 8px;
+    filter: brightness(var(--brightness-thumbnail));
+}
+
+#main .container--posts .section .posts .image-post .image-post--content > p {
+    font-size: var(--wp--preset--font-size--x-large);
+}
+
+#main .container--posts .section .posts .image-post .image-post--content .date {
+    font-size: var(--wp--preset--font-size--small);
+    color: #4d5f71;
+}
+
+#main .container--posts .section .posts .image-post .image-post--content .tags {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 7px 10px;
+}
+
+#main .container--posts .section .posts .image-post .image-post--content .tags a {
+    font-size: var(--wp--preset--font-size--small);
+    display: flex;
+    align-items:center;
+    gap: 7px;
+    flex-wrap: nowrap;
+    padding: 3px 7px;
+    background-color: var(--background-tags);
+    color: var(--color-tags);
+    border-radius: 4px;
+    transition: background-color .3s ease;
+}
+
+#main .container--posts .section .posts .image-post .image-post--content .tags a:hover {
+    background-color: var(--background-tags-hover);
+}
+
+#main .container--posts .section .posts .image-post .image-post--content .tags a svg {
+    width: 13px;
+    height: 13px;
+}
+
 /* archive posts */
 #main .container--posts .section .posts .archive-post > *:not(:last-child) {
     margin-bottom: 10px;
