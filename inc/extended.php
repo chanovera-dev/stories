@@ -84,8 +84,9 @@ add_filter('term_links-post_tag', 'custom_modify_tag_links');
 /**
  * Add a custom output for latest posts block
  */
-function custom_latest_posts_output($block_content, $block) {
-    if (!isset($block['attrs']['className']) || strpos($block['attrs']['className'], 'wp-block-latest-posts') === false) {
+function custom_modify_latest_posts_block($block_content, $block) {
+    // Verificamos que el bloque sea 'core/latest-posts'
+    if ($block['blockName'] !== 'core/latest-posts') {
         return $block_content;
     }
 
@@ -100,6 +101,7 @@ function custom_latest_posts_output($block_content, $block) {
         return $block_content;
     }
 
+    // Construimos el nuevo contenido del bloque
     $output = '<ul class="wp-block-latest-posts custom-latest-posts">';
 
     foreach ($recent_posts as $post) {
@@ -122,7 +124,7 @@ function custom_latest_posts_output($block_content, $block) {
 
     return $output;
 }
-add_filter('render_block_core/latest-posts', 'custom_latest_posts_output', 10, 2);
+add_filter('render_block', 'custom_modify_latest_posts_block', 10, 2);
 
 /**
  * Breadcrumbs
