@@ -42,23 +42,19 @@ function reduce_excerpt( $limit ) {
 add_filter( 'excerpt_length', 'reduce_excerpt', 999 );
 
 /**
- * Custom output un the_category() function
+ * Custom output on the_category() function
  */
 function custom_the_category() {
-    // Obtener las categorías
     $categories = get_the_category();
     $output = '<ul class="post-categories">';
 
     if ($categories) {
         foreach ($categories as $category) {
-            // Crear el SVG
             $svg_icon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16"><path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/></svg>';
 
-            // Crear el enlace a la categoría
             $category_link = esc_url(get_category_link($category->term_id));
             $category_name = esc_html($category->name);
 
-            // Formatear la salida
             $output .= '<li class="category-item"><a href="' . $category_link . '">' . $svg_icon . $category_name . '</a></li>';
         }
     }
@@ -84,6 +80,49 @@ function custom_modify_tag_links($links) {
     return $links;
 }
 add_filter('term_links-post_tag', 'custom_modify_tag_links');
+
+/**
+ * Add a custom output for latest posts block
+ */
+function custom_latest_posts_output($block_content, $block) {
+    if (!isset($block['attrs']['className']) || strpos($block['attrs']['className'], 'wp-block-latest-posts') === false) {
+        return $block_content;
+    }
+
+    // Obtener las publicaciones recientes
+    $args = [
+        'posts_per_page' => $block['attrs']['postsToShow'] ?? 5,
+        'post_status'    => 'publish',
+    ];
+    $recent_posts = get_posts($args);
+
+    if (empty($recent_posts)) {
+        return $block_content;
+    }
+
+    $output = '<ul class="wp-block-latest-posts custom-latest-posts">';
+
+    foreach ($recent_posts as $post) {
+        $post_id = $post->ID;
+        $post_title = esc_html(get_the_title($post_id));
+        $post_link = esc_url(get_permalink($post_id));
+        $post_date = get_the_date('', $post_id);
+        $post_thumbnail = get_the_post_thumbnail($post_id, 'thumbnail', ['class' => 'latest-post-thumbnail']);
+
+        $output .= '<li>';
+        if ($post_thumbnail) {
+            $output .= '<div class="latest-post-thumbnail-wrapper">' . $post_thumbnail . '</div>';
+        }
+        $output .= '<a href="' . $post_link . '">' . $post_title . '</a>';
+        $output .= '<div class="latest-post-date">' . $post_date . '</div>';
+        $output .= '</li>';
+    }
+
+    $output .= '</ul>';
+
+    return $output;
+}
+add_filter('render_block_core/latest-posts', 'custom_latest_posts_output', 10, 2);
 
 /**
  * Breadcrumbs
