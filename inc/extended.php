@@ -84,47 +84,7 @@ add_filter('term_links-post_tag', 'custom_modify_tag_links');
 /**
  * Add a custom output for latest posts block
  */
-function custom_modify_latest_posts_block($block_content, $block) {
-    // Verificamos que el bloque sea 'core/latest-posts'
-    if ($block['blockName'] !== 'core/latest-posts') {
-        return $block_content;
-    }
 
-    // Obtener las publicaciones recientes
-    $args = [
-        'posts_per_page' => $block['attrs']['postsToShow'] ?? 5,
-        'post_status'    => 'publish',
-    ];
-    $recent_posts = get_posts($args);
-
-    if (empty($recent_posts)) {
-        return $block_content;
-    }
-
-    // Construimos el nuevo contenido del bloque
-    $output = '<ul class="wp-block-latest-posts custom-latest-posts">';
-
-    foreach ($recent_posts as $post) {
-        $post_id = $post->ID;
-        $post_title = esc_html(get_the_title($post_id));
-        $post_link = esc_url(get_permalink($post_id));
-        $post_date = get_the_date('', $post_id);
-        $post_thumbnail = get_the_post_thumbnail($post_id, 'thumbnail', ['class' => 'latest-post-thumbnail']);
-
-        $output .= '<li>';
-        if ($post_thumbnail) {
-            $output .= '<div class="latest-post-thumbnail-wrapper">' . $post_thumbnail . '</div>';
-        }
-        $output .= '<a href="' . $post_link . '">' . $post_title . '</a>';
-        $output .= '<div class="latest-post-date">' . $post_date . '</div>';
-        $output .= '</li>';
-    }
-
-    $output .= '</ul>';
-
-    return $output;
-}
-add_filter('render_block', 'custom_modify_latest_posts_block', 10, 2);
 
 /**
  * Breadcrumbs
