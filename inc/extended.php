@@ -90,10 +90,18 @@ function custom_modify_latest_posts_block($block_content, $block) {
         return $block_content;
     }
 
-    // Obtener las publicaciones recientes
+    // Obtener las publicaciones recientes excluyendo formato "minientrada"
     $args = [
         'posts_per_page' => $block['attrs']['postsToShow'] ?? 5,
         'post_status'    => 'publish',
+        'tax_query'      => [
+            [
+                'taxonomy' => 'post_format',
+                'field'    => 'slug',
+                'terms'    => ['post-format-aside'],
+                'operator' => 'NOT IN'
+            ]
+        ]
     ];
     $recent_posts = get_posts($args);
 
@@ -101,7 +109,6 @@ function custom_modify_latest_posts_block($block_content, $block) {
         return $block_content;
     }
 
-    // Construimos el nuevo contenido del bloque
     $output = '<ul class="wp-block-latest-posts__list wp-block-latest-posts">';
 
     foreach ($recent_posts as $post) {
