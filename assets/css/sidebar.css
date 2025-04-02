@@ -57,16 +57,16 @@ aside a:hover {
     color: var(--color-link-hover);
 }
 
-aside .wp-block-group :is(ul,ol,p) {
+aside .wp-block-group :is(ul,ol,p,img,a) {
     visibility: hidden;
 }
 
-aside .wp-block-group :is(ul,ol,p) > * {
+aside .wp-block-group :is(ul,ol,p,img,a) > * {
     visibility: visible;
     transition: all .3s;
 }
 
-aside .wp-block-group :is(ul:hover,ol:hover,p:hover) > :not(:hover) {
+aside .wp-block-group :is(ul:hover,ol:hover,p:hover,img:hover,a:hover) > :not(:hover) {
     opacity: .25;
 }
 
