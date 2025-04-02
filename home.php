@@ -71,11 +71,9 @@ get_header(); ?>
                         
                         while ( have_posts() ) {
                             the_post();
-                            $post_format = get_post_format();
-                        
-                            if ( $post_format === 'aside' ) { 
+                            if ( get_post_format() === 'aside' ) { 
                                 get_template_part( 'template-parts/content', 'micro' );
-                            } elseif ( $post_format === 'image' ) { 
+                            } elseif ( get_post_format() === 'image' ) {
                                 get_template_part( 'template-parts/content', 'image' );
                             } else { 
                                 get_template_part( 'template-parts/content', 'archive' );
