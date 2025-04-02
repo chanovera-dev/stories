@@ -39,6 +39,8 @@ get_header(); ?>
                             the_post();
                             if ( get_post_format() === 'aside' ) { 
                                 get_template_part( 'template-parts/content', 'micro' );
+                            } elseif ( get_post_format() === 'image' ) {
+                                get_template_part( 'template-parts/content', 'image' );
                             } else { 
                                 get_template_part( 'template-parts/content', 'archive' );
                             }
