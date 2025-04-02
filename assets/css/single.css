@@ -84,7 +84,7 @@
 }
 
 .site-main .post-header .section.bottom .share a:hover {
-    color: var(--wp--preset--color--category-hover);
+    color: var(--color-link-hover);
 }
 
 /* Body */
