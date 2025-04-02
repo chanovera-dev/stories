@@ -43,10 +43,6 @@ aside ul.wp-block-latest-posts li a .latest-post-content {
     align-items: end;
 }
 
-aside ul.wp-block-latest-posts li a .latest-post-content .wp-block-latest-posts__post-title {
-    font-weight: 500;
-}
-
 aside ul.wp-block-latest-posts li a .latest-post-content .latest-post-date {
     font-size: var(--wp--preset--font-size--small);
     opacity: .5;
