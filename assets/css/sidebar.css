@@ -25,6 +25,7 @@ aside ul.wp-block-latest-posts li {
     grid-template-columns: auto 1fr;
     gap: 15px;
     align-items: center;
+    padding: 9px 0;
 }
 
 aside ul.wp-block-latest-posts li .wp-post-image {
@@ -37,6 +38,10 @@ aside ul.wp-block-latest-posts li .wp-post-image {
 aside ul.wp-block-latest-posts li .latest-post-content {
     display: grid;
     font-size: var(--wp--preset--font-size--small);
+}
+
+aside ul.wp-block-latest-posts li .latest-post-content .wp-block-latest-posts__post-title {
+    padding: 0;
 }
 
 aside ul.wp-block-latest-posts li .latest-post-content .latest-post-date {
