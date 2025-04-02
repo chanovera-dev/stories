@@ -20,6 +20,25 @@ aside ul li a {
     transition: color .3s ease;
 }
 
+aside ul.wp-block-latest-posts li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 15px;
+    align-items: center;
+}
+
+aside ul.wp-block-latest-posts li .wp-post-image {
+    width: 100px;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    display: block;
+} 
+
+aside ul.wp-block-latest-posts li .content {
+    display: grid;
+    font-size: var(--wp--preset--font-size--small);
+}
+
 aside li:has(a:hover):not(:last-child),
 aside li:has(a):not(:last-child):hover {
     border-bottom: 1px solid color-mix(in srgb, currentColor 5%, transparent);
