@@ -171,7 +171,7 @@
 }
 
 #main .container--posts .section .posts .image-post .image-post--header .post-categories {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding: 0;
     list-style: none;
     display:inline-flex;
@@ -204,7 +204,7 @@
 
 #main .container--posts .section .posts .image-post .image-post--header .thumbnail {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 9 / 11;
     object-fit: cover;
     border-radius: 8px;
     filter: brightness(var(--brightness-thumbnail));
