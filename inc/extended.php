@@ -118,13 +118,13 @@ function custom_modify_latest_posts_block($block_content, $block) {
         $post_date = get_the_date('', $post_id);
         $post_thumbnail = get_the_post_thumbnail($post_id, 'thumbnail', ['class' => 'latest-post-thumbnail']);
 
-        $output .= '<li>';
+        $output .= '<li><a href="' . $post_link . '">';
         if ($post_thumbnail) {
             $output .= '<div class="latest-post-thumbnail-wrapper">' . $post_thumbnail . '</div>';
         }
-        $output .= '<div class="latest-post-content"><a class="wp-block-latest-posts__post-title" href="' . $post_link . '">' . $post_title . '</a>';
+        $output .= '<div class="latest-post-content"><h4 class="wp-block-latest-posts__post-title">' . $post_title . '</h4>';
         $output .= '<div class="latest-post-date">' . $post_date . '</div></div>';
-        $output .= '</li>';
+        $output .= '</li></a>';
     }
 
     $output .= '</ul>';

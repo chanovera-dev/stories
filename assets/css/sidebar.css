@@ -25,7 +25,6 @@ aside ul.wp-block-latest-posts li {
     grid-template-columns: auto 1fr;
     gap: 15px;
     align-items: center;
-    padding: 9px 0;
 }
 
 aside ul.wp-block-latest-posts li .wp-post-image {
@@ -41,7 +40,7 @@ aside ul.wp-block-latest-posts li .latest-post-content {
 }
 
 aside ul.wp-block-latest-posts li .latest-post-content .wp-block-latest-posts__post-title {
-    padding: 0;
+    font-weight: 500;
 }
 
 aside ul.wp-block-latest-posts li .latest-post-content .latest-post-date {
@@ -57,16 +56,16 @@ aside a:hover {
     color: var(--color-link-hover);
 }
 
-aside .wp-block-group :is(ul,ol,p,img,a) {
+aside .wp-block-group :is(ul,ol,p) {
     visibility: hidden;
 }
 
-aside .wp-block-group :is(ul,ol,p,img,a) > * {
+aside .wp-block-group :is(ul,ol,p) > * {
     visibility: visible;
     transition: all .3s;
 }
 
-aside .wp-block-group :is(ul:hover,ol:hover,p:hover,img:hover,a:hover) > :not(:hover) {
+aside .wp-block-group :is(ul:hover,ol:hover,p:hover) > :not(:hover) {
     opacity: .25;
 }
 
