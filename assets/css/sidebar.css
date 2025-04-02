@@ -78,6 +78,12 @@ aside .wp-block-search .wp-block-search__inside-wrapper {
     position:relative;
 }
 
+@media(max-width:1365px) {
+    .site-main .post-body .section .post-body--content {
+        padding-bottom: 50px;
+    }
+}
+
 @media(min-width:1366px) {
 
     .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){

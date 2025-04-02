@@ -102,9 +102,3 @@
         justify-content: space-between;
     }
 }
-
-@media(max-width:1365px) {
-    .site-main .post-body .section .post-body--content {
-        padding-bottom: 50px;
-    }
-}
