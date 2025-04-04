@@ -311,9 +311,24 @@ img{height:auto;}
         background: linear-gradient(to bottom, transparent 10%, transparent 40%, transparent 60%, transparent 90%);
     }
     
+    #primary .menu > li a {
+        padding:9.65px 20px;
+        border-radius: 6px;
+        transition:all .3s ease;
+    }
+
+    :is(.scroll.down,.scroll-up) #primary .menu > li a, /* styles for scroll */
+    #primary .menu > li a {
+        border-radius: 0;
+    }
+
+    #primary .menu li a:hover {
+        background-color: var(--wp--preset--color--accent-5);
+    }
+
     /* primary submenus on desktop mode */
     .sub-menu {
-        min-width: 100%;
+        min-width: fit-content;
         padding: 15px 0;
         position: absolute;
         background: #ebebeb;
@@ -321,7 +336,7 @@ img{height:auto;}
         transition: 0.5s padding, 0.5s background;
       }
       
-      .menu-item-has-children a:not(:hover) > .sub-menu {
+      .menu-item-has-children:not(:hover) > .sub-menu {
         padding: 4px 0;
         background: #dddddd;
         z-index: 99;
@@ -340,7 +355,7 @@ img{height:auto;}
         background: rgba(0, 0, 0, 0.1);
       }
       
-      .menu-item-has-children a:not(:hover) > .sub-menu > * {
+      .menu-item-has-children:not(:hover) > .sub-menu > * {
         visibility: hidden;
         height: 0;
         padding-top: 0;
@@ -350,28 +365,8 @@ img{height:auto;}
         transition: 0.5s 0.1s height, 0.5s 0.1s padding, 0.5s 0.1s margin, 0.3s color, 0.6s visibility;
         z-index: 99;
       }
-    
-    
-    #primary .menu > li a {
-        padding:9.65px 20px;
-        border-radius: 6px;
-        transition:all .3s ease;
-    }
 
-    :is(.scroll.down,.scroll-up) #primary .menu > li a, /* styles for scroll */
-    #primary .menu > li a {
-        border-radius: 0;
-    }
-
-    #primary .menu li a:hover {
-        background-color: var(--wp--preset--color--accent-5);
-    }
-
-    #primary .menu li .mobile-links__item-toggle{font-family:var(--wp--preset--font-family--manrope);font-size:var(--wp--preset--font-size--medium);color:var(--color-body);padding:0;border:none;background-color:transparent;display:inline-flex;align-items:center;gap:7px;transition:color .3s ease;}
-    #primary .menu li .mobile-links__item-toggle:hover{color:var(--color-emphasis);}
-    #primary .menu li .mobile-links__item-toggle svg{transition:transform .3s ease;}
-    #primary .menu li .mobile-links__item-toggle.rotate svg{transform:rotate(180deg);}
-
+    /* custom searchform on desktop mode */
     #custom-searchform{max-width:0;overflow:hidden;transition:max-width .3s ease;}
     #custom-searchform .section{position:relative;display:grid;align-items:center;width:100%;}
     
@@ -427,6 +422,7 @@ img{height:auto;}
     #search-mobile__button svg.hide{display:none;}
     #search-mobile__button svg.show{display:inherit;}
 
+    /* footer */
     #main-footer .middle-footer .section .about {
         max-width: 375px;
     }
