@@ -349,9 +349,11 @@
     display: flex;
     align-items:center;
     background-color: var(--background-breadcrumbs);
+    border-radius: 6px;
+    position: relative;
 }
 
-#main .container--posts .section .posts .navigation.pagination .nav-links > *:not(:nth-child(1), :last-child):after {
+#main .container--posts .section .posts .navigation.pagination .nav-links > *:not(:last-child):after {
     position: absolute;
     top: 0;
     left: 0;
