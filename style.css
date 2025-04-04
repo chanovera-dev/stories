@@ -318,7 +318,7 @@ img{height:auto;}
     }
 
     #primary .menu > li > a:hover {
-        background-color: var(--wp--preset--color--accent-5);
+        background-color: var(--background-desktop-header--hover-buttons);
     }
 
     /* primary submenus on desktop mode */
