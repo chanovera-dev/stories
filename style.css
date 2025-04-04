@@ -348,7 +348,7 @@ img{height:auto;}
       }
       
       .sub-menu > *:hover {
-        background: rgba(0, 0, 0, 0.1);
+        background: var(--background-desktop-header--hover-buttons);
       }
       
       .menu-item-has-children:not(:hover) > .sub-menu > * {
