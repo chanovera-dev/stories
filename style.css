@@ -360,8 +360,7 @@ img{height:auto;}
       .menu-item-has-children:not(:hover) > .sub-menu > li a {
         visibility: hidden;
         height: 0;
-        padding-top: 0;
-        padding-bottom: 0;
+        padding: 9.65px 20px;
         margin: 0;
         color: rgba(25, 25, 25, 0);
         transition: 0.5s 0.1s height, 0.5s 0.1s padding, 0.5s 0.1s margin, 0.3s color, 0.6s visibility;
