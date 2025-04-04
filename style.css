@@ -327,14 +327,14 @@ img{height:auto;}
         padding: 0;
         position: absolute;
         top: 43.8px;
-        background: #ebebeb;
+        background: var(--background-desktop-header);
         z-index: 100;
         transition: 0.5s padding, 0.5s background;
       }
       
       .menu-item-has-children:not(:hover) > .sub-menu {
         padding: 0;
-        background: #dddddd;
+        background: var(--background-desktop-header);
         z-index: 99;
       }
       
