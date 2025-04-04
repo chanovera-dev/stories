@@ -329,7 +329,7 @@ img{height:auto;}
         top: 43.8px;
         background: var(--background-desktop-header);
         z-index: 100;
-        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
         border-radius: 0 0 6px 6px;
         overflow-y: hidden;
         transition: 0.5s padding, 0.5s background, 0.5s box-shadow;
@@ -337,7 +337,7 @@ img{height:auto;}
       
       .menu-item-has-children:not(:hover) > .sub-menu {
         padding: 0;
-        box-shadow: rgba(17, 12, 46, 0) 0px 48px 100px 0px;
+        box-shadow: rgba(50, 50, 93, 0) 0px 6px 12px -2px, rgba(0, 0, 0, 0) 0px 3px 7px -3px;
         background: var(--background-desktop-header);
         border-radius: 0 0 6px 6px;
         overflow-y: hidden;
