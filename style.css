@@ -327,7 +327,7 @@ img{height:auto;}
         padding: 0;
         position: absolute;
         top: 43.8px;
-        background: #ebebeb;
+        background: var(--background-desktop-header);
         z-index: 100;
         transition: 0.5s padding, 0.5s background;
       }
@@ -349,16 +349,15 @@ img{height:auto;}
       .sub-menu > * {
         overflow: hidden;
         height: 43.8px;
-        background: rgba(0, 0, 0, 0);
         white-space: nowrap;
         transition: 0.5s height cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s padding cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s margin cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s 0.2s color, 0.2s background-color;
       }
       
-      .sub-menu > *:hover {
-        background: rgba(0, 0, 0, 0.1);
+      .sub-menu > li a:hover {
+        background: var(--wp--preset--color--accent-5);
       }
       
-      .menu-item-has-children:not(:hover) > .sub-menu > * {
+      .menu-item-has-children:not(:hover) > .sub-menu > li a {
         visibility: hidden;
         height: 0;
         padding-top: 0;
