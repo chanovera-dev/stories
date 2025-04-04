@@ -347,9 +347,13 @@ img{height:auto;}
         height: 0;
       }
 
+      .menu-item-has-children:hover > .sub-menu > li a {
+        display: block;
+      }
+
       .sub-menu > * {
         overflow: hidden;
-        height: 30px;
+        height: 43.8px;
         background: rgba(0, 0, 0, 0);
         white-space: nowrap;
         transition: 0.5s height cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s padding cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s margin cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s 0.2s color, 0.2s background-color;
