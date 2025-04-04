@@ -326,6 +326,7 @@ img{height:auto;}
         min-width: fit-content;
         padding: 15px 0;
         position: absolute;
+        top: 43.8px;
         background: #ebebeb;
         z-index: 100;
         transition: 0.5s padding, 0.5s background;
