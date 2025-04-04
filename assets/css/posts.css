@@ -348,7 +348,7 @@
 #main .container--posts .section .posts .navigation.pagination .nav-links {
     display: flex;
     align-items:center;
-    background-color: var(--background-breadcrumbs);
+    background-color: var(--background-desktop-header);
     border-radius: 6px;
     position: relative;
     overflow: hidden;
