@@ -343,6 +343,10 @@ img{height:auto;}
         z-index: 99;
       }
       
+      .menu-item-has-children:not(:hover) > .sub-menu > * {
+        height: 0;
+      }
+
       .sub-menu > * {
         overflow: hidden;
         height: 30px;
