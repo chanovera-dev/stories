@@ -311,19 +311,46 @@ img{height:auto;}
         background: linear-gradient(to bottom, transparent 10%, transparent 40%, transparent 60%, transparent 90%);
     }
     
-    #primary .menu li{position:relative;}
-    #primary .menu li .sub-menu{position:absolute;top:40px;width:max-content;background-color:var(--solid);left:0;max-height:0;overflow:hidden;padding-left:0;list-style:none;border-radius:6px;box-shadow:var(--wp--preset--shadow--floating-bar);transition:max-height .3s ease;}
-    #primary .menu li .sub-menu.open{max-height:1000px;}
-    #primary .menu li .sub-menu li:first-child a{padding-top:20px;}
-    #primary .menu li .sub-menu li a{padding:6.65px 20px;display:block;transition:background-color .3s ease;}
-    #primary .menu li .sub-menu li a:hover{background-color:var(--bg-input);}
-    #primary .menu li .sub-menu li:last-child a{padding-bottom:20px;}
-    #primary .menu li .sub-menu li .sub-menu{max-height:0;position:relative;top:0;width:auto;box-shadow:none;background-color:var(--bg-input);border-radius:0;}
-    #primary .menu li .sub-menu li .sub-menu li:first-child a{box-shadow:inset 0px 17px 10px -17px rgb(0 0 0 / 15%);padding-top:6.65px;}
-    #primary .menu li .sub-menu li .sub-menu li a{padding-left:40px;transition:background-color .3s ease;}
-    #primary .menu li .sub-menu li .sub-menu li a:hover{background-color:var(--background-desktop-header--hover-buttons);}
-    #primary .menu li .sub-menu li .sub-menu li:last-child a{box-shadow:inset 0px -17px 6px -17px rgb(0 0 0 / 15%);padding-bottom:6.65px;}
-    #primary .menu li .sub-menu li .sub-menu.open{max-height:1000px;}
+    /* primary submenus on desktop mode */
+    .sub-menu {
+        min-width: 100%;
+        padding: 15px 0;
+        position: absolute;
+        background: #ebebeb;
+        z-index: 100;
+        transition: 0.5s padding, 0.5s background;
+      }
+      
+      .menu-item-has-children a:not(:hover) > .sub-menu {
+        padding: 4px 0;
+        background: #dddddd;
+        z-index: 99;
+      }
+      
+      .sub-menu > * {
+        overflow: hidden;
+        height: 30px;
+        padding: 5px 10px;
+        background: rgba(0, 0, 0, 0);
+        white-space: nowrap;
+        transition: 0.5s height cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s padding cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s margin cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s 0.2s color, 0.2s background-color;
+      }
+      
+      .sub-menu > *:hover {
+        background: rgba(0, 0, 0, 0.1);
+      }
+      
+      .menu-item-has-children a:not(:hover) > .sub-menu > * {
+        visibility: hidden;
+        height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin: 0;
+        color: rgba(25, 25, 25, 0);
+        transition: 0.5s 0.1s height, 0.5s 0.1s padding, 0.5s 0.1s margin, 0.3s color, 0.6s visibility;
+        z-index: 99;
+      }
+    
     
     #primary .menu > li a {
         padding:9.65px 20px;
