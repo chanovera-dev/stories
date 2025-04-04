@@ -353,7 +353,7 @@
     position: relative
 }
 
-#main .container--posts .section .posts .navigation.pagination .nav-links > *:not(:nth-child(1), :last-child):after {
+#main .container--posts .section .posts .navigation.pagination .nav-links > *:not(:last-child):after {
     position: absolute;
     top: 0;
     right: 0;
