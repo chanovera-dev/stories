@@ -281,7 +281,7 @@ img{height:auto;}
         transition: max-width .3s ease;
     }
 
-    #primary .menu > li a {
+    #primary .menu > li > a {
         position: relative;
     }
 
@@ -311,18 +311,13 @@ img{height:auto;}
         background: linear-gradient(to bottom, transparent 10%, transparent 40%, transparent 60%, transparent 90%);
     }
     
-    #primary .menu > li a {
+    #primary .menu > li > a {
         padding:9.65px 20px;
         border-radius: 6px;
         transition:all .3s ease;
     }
 
-    :is(.scroll.down,.scroll-up) #primary .menu > li a, /* styles for scroll */
-    #primary .menu > li a {
-        border-radius: 0;
-    }
-
-    #primary .menu li a:hover {
+    #primary .menu > li > a:hover {
         background-color: var(--wp--preset--color--accent-5);
     }
 
