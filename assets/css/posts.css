@@ -354,9 +354,9 @@
 }
 
 #main .container--posts .section .posts .navigation.pagination .nav-links > *:not(:nth-child(1), :last-child):after {
-    position: relative;
+    position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
     content: '';
     width: 1px;
     height: 43.8px;
@@ -364,6 +364,7 @@
 }
 
 #main .container--posts .section .posts .navigation.pagination .nav-links .page-numbers {
+    position:relative;
     display: grid;
     place-content: center;
     width: var(--width-pagination);
