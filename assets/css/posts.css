@@ -350,11 +350,11 @@
     align-items:center;
     background-color: var(--background-breadcrumbs);
     border-radius: 6px;
-    position: relative;
+    position: relative
 }
 
-#main .container--posts .section .posts .navigation.pagination .nav-links > *:not(:last-child):after {
-    position: absolute;
+#main .container--posts .section .posts .navigation.pagination .nav-links > *:not(:nth-child(1), :last-child):after {
+    position: relative;
     top: 0;
     left: 0;
     content: '';
