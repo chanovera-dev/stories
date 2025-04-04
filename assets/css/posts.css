@@ -373,7 +373,7 @@
 }
 
 #main .container--posts .section .posts .navigation.pagination .nav-links .page-numbers:hover:not(.current) {
-    background-color: var(--background-hover-navigation);
+    background-color: var(--background-desktop-header--hover-buttons);
 }
 
 #main .container--posts .section .posts .navigation.pagination .nav-links :is(.page-numbers.prev,.page-numbers.next) {
