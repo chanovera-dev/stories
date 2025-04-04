@@ -324,7 +324,7 @@ img{height:auto;}
     /* primary submenus on desktop mode */
     .sub-menu {
         min-width: fit-content;
-        padding: 15px 0;
+        padding: 0;
         position: absolute;
         top: 43.8px;
         background: #ebebeb;
@@ -333,7 +333,7 @@ img{height:auto;}
       }
       
       .menu-item-has-children:not(:hover) > .sub-menu {
-        padding: 4px 0;
+        padding: 0;
         background: #dddddd;
         z-index: 99;
       }
