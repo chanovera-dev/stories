@@ -329,23 +329,23 @@ img{height:auto;}
     /* primary submenus on desktop mode */
     .sub-menu {
         min-width: fit-content;
-        padding: 15px 0;
+        padding: 0;
         position: absolute;
+        top: 43.8px;
         background: #ebebeb;
         z-index: 100;
         transition: 0.5s padding, 0.5s background;
       }
       
       .menu-item-has-children:not(:hover) > .sub-menu {
-        padding: 4px 0;
-        background: #dddddd;
+        padding: 0;
+        background: transparent;
         z-index: 99;
       }
       
       .sub-menu > * {
         overflow: hidden;
         height: 30px;
-        padding: 5px 10px;
         background: rgba(0, 0, 0, 0);
         white-space: nowrap;
         transition: 0.5s height cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s padding cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s margin cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s 0.2s color, 0.2s background-color;
