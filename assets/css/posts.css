@@ -348,8 +348,19 @@
 #main .container--posts .section .posts .navigation.pagination .nav-links {
     display: flex;
     align-items:center;
-    gap:20px;
+    background-color: var(--background-breadcrumbs);
 }
+
+#main .container--posts .section .posts .navigation.pagination .nav-links > *:not(:nth-child(1), :last-child):after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    width: 1px;
+    height: 43.8px;
+    background: linear-gradient(to bottom, transparent 10%, var(--line-1) 40%, var(--line-1) 60%, transparent 90%);
+}
+
 #main .container--posts .section .posts .navigation.pagination .nav-links .page-numbers {
     display: grid;
     place-content: center;
