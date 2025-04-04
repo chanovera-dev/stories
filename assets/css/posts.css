@@ -373,6 +373,10 @@
     transition: all .3s ease;
 }
 
+#main .container--posts .section .posts .navigation.pagination .nav-links .page-numbers.current {
+    background-color: var(--background-desktop-header--searchform);
+}
+
 #main .container--posts .section .posts .navigation.pagination .nav-links .page-numbers:hover:not(.current) {
     background-color: var(--background-desktop-header--hover-buttons);
 }
