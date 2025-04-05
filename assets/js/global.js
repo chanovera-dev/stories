@@ -1,10 +1,12 @@
 function openMenuMobile() {
     if ( window.innerWidth <= 767 ) {
+        const body = document.body;
         const btnMenuMobile = document.querySelector( '#menu-mobile__button' );
         const menuMobile = document.querySelector( '.main-menu' );
 
         btnMenuMobile.classList.toggle( 'open' );
         menuMobile.classList.toggle( 'show' );
+        body.style.overflow = body.style.overflow === 'hidden' ? '' : 'hidden';
     }
 }
 
