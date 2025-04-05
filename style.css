@@ -268,6 +268,7 @@ img{height:auto;}
         display: none;
     } 
 
+    /* button for mobile menu */
     #main-header .header-content #menu-mobile__button{place-content:space-between;justify-content:space-between;padding:0;width:30px;height:23px;background-color:transparent;border:none;cursor:pointer;z-index:6;}
     #main-header .header-content #menu-mobile__button :is(.bar){display:block;height:1.5px;background-color:var(--color-text-base);transition:transform .3s ease;}
     #main-header .header-content #menu-mobile__button :is(.bar:nth-child(odd)){width:30px;}
