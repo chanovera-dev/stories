@@ -168,7 +168,7 @@ img{height:auto;}
         transform: translateX(-100svw);
         transition: transform .3s ease;
         background-color: var(--background-base);
-        padding: 86px 0 20px;
+        padding: 56px 0 20px;
         display: flex;
         flex-direction: column;
         gap: 30px;
