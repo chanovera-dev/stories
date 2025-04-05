@@ -321,7 +321,7 @@ img{height:auto;}
     }
 
     #primary .menu > li > .menu-toggle-container .mobile-links__item-toggle {
-        padding: 9.65px 20px;
+        padding: 9.65px 10px 9.65px 20px;
         height: 43px;
         font-size: var(--wp--preset--font-size--medium);
         font-weight: 400;
@@ -331,7 +331,7 @@ img{height:auto;}
         border: none;
         border-radius:0;
         display:flex;
-        gap: 7px;
+        gap: 10px;
         align-items: center;
         transition:all .3s ease;
     }
