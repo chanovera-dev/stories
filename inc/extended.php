@@ -187,31 +187,34 @@ function wp_breadcrumbs() {
         }
     } elseif (!is_single() && !is_page() && get_post_type() != 'post' && !is_404()) {}
 }
+/**
+ * Replace menu links with submenus with divs
+ */
+function replace_menu_links_with_div($item_output, $item, $depth, $args) {
+    global $submenu_items_by_parent;
 
-function reemplazar_links_con_div_en_menus($item_output, $item, $depth, $args) {
-    global $menu_items_by_parent;
+    // Initialize child menu cache per menu
+    static $checked_menus = [];
 
-    // Inicializamos la lista de hijos una vez por menú
-    static $menu_checked = [];
-
-    if (!in_array($args->menu->term_id, $menu_checked)) {
+    if (!in_array($args->menu->term_id, $checked_menus)) {
         $menu_items = wp_get_nav_menu_items($args->menu->term_id);
         foreach ($menu_items as $menu_item) {
-            $menu_items_by_parent[$menu_item->menu_item_parent][] = $menu_item;
+            $submenu_items_by_parent[$menu_item->menu_item_parent][] = $menu_item;
         }
-        $menu_checked[] = $args->menu->term_id;
+        $checked_menus[] = $args->menu->term_id;
     }
 
-    $tiene_hijos = !empty($menu_items_by_parent[$item->ID]);
+    $has_children = !empty($submenu_items_by_parent[$item->ID]);
 
-    if ($tiene_hijos) {
-        $texto = esc_html($item->title);
-        $svg = '<svg width="13" height="13" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>';
+    if ($has_children) {
+        $text = esc_html($item->title);
+        $svg_icon = '<svg width="13" height="13" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>';
 
-        return '<div class="menu-item-with-submenu">' . $texto . ' ' . $svg . '</div>';
+        return '<div class="menu-item-with-submenu">' . $text . ' ' . $svg_icon . '</div>';
     }
 
     return $item_output;
 }
-add_filter('walker_nav_menu_start_el', 'reemplazar_links_con_div_en_menus', 10, 4);
+add_filter('walker_nav_menu_start_el', 'replace_menu_links_with_div', 10, 4);
+
 
