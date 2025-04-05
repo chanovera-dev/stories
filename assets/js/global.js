@@ -68,26 +68,30 @@ function menuWithChildren() {
     // Iterar sobre cada elemento y agregar el botón con el SVG y texto
     menuItems.forEach(function(item) {
         // Obtener el enlace más cercano al elemento li
-        var link = item.querySelector('a')
+        let link = item.querySelector('a');
 
         if (!link) return; // Evitar errores si no hay enlace
 
+        // Crear un nuevo div
+        let div = document.createElement('div');
+        div.classList.add('menu-toggle-container'); // Clase para estilos si es necesario
+
         // Crear un nuevo botón
-        var button = document.createElement('button');
+        let button = document.createElement('button');
         button.classList.add('mobile-links__item-toggle');
         //button.setAttribute('onclick', 'toggleSubMenu(this)');
 
         // Obtener el texto del enlace
-        var linkText = link.innerText;
+        let linkText = link.innerText;
 
         // Crear un nuevo elemento de texto con el contenido del enlace
-        var buttonText = document.createTextNode(linkText);
+        let buttonText = document.createTextNode(linkText);
 
         // Agregar el texto al botón
         button.appendChild(buttonText);
 
         // Crear el elemento SVG
-        var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         svg.setAttribute('width', '13');
         svg.setAttribute('height', '13');
         svg.setAttribute('fill', 'currentColor');
@@ -95,7 +99,7 @@ function menuWithChildren() {
         svg.setAttribute('viewBox', '0 0 16 16');
 
         // Crear el elemento path dentro del SVG
-        var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
         path.setAttribute('fill-rule', 'evenodd');
         path.setAttribute('d', 'M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z');
 
