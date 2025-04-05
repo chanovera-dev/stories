@@ -184,6 +184,7 @@ img{height:auto;}
 
     #main-header .header-content .main-menu #primary {
         order: 2;
+        overflow-y: scroll;
     }
 
     #main-header .header-content .main-menu #primary .menu {
