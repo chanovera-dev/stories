@@ -320,7 +320,7 @@ img{height:auto;}
         background-color: var(--background-desktop-header--hover-buttons);
     }
 
-    #primary .menu > li > .mobile-links__itm-toggle {
+    #primary .menu > li > .menu-toggle-container .mobile-links__item-toggle {
         padding:9.65px 20px;
         font-size: var(--wp--preset--font-size--medium);
         color: var(--color-text-base);
@@ -333,7 +333,7 @@ img{height:auto;}
         transition:all .3s ease;
     }
 
-    #primary .menu > li > .mobile-links__itm-toggle:hover {
+    #primary .menu > li > .menu-toggle-container .mobile-links__item-toggle:hover {
         background-color: var(--background-desktop-header--hover-buttons);
     }
 
