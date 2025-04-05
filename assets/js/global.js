@@ -16,12 +16,11 @@ function menuWithChildren() {
   
         menuItems.forEach(item => {
             item.addEventListener('click', function (e) {
-                // Si el clic fue sobre el enlace directamente, permitir que navegue
+
                 if (e.target.tagName === 'A') {
-                    return; // No hacer nada, dejar que funcione el enlace
+                    return;
                 }
 
-                // Si no fue sobre el enlace (por ejemplo en el li o span), evitar navegación
                 e.preventDefault();
 
                 item.classList.toggle('open');
