@@ -281,11 +281,11 @@ img{height:auto;}
         transition: max-width .3s ease;
     }
 
-    #primary .menu > li > a {
+    #primary .menu > li {
         position: relative;
     }
 
-    #primary .menu > li:not(:last-child) a:after {
+    #primary .menu > li:not(:last-child):after {
         position: absolute;
         top: 0;
         right: 0;
