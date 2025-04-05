@@ -186,6 +186,26 @@ img{height:auto;}
         order: 2;
     }
 
+    #main-header .header-content .main-menu #primary .menu {
+        padding: 0 20px;
+        list-style: none;
+    }
+
+    #main-header .header-content .main-menu #primary .menu :is(.menu-item-with-submenu,a) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 9.15px 0;
+        font-size: var(--wp--preset--font-size--large);
+        font-weight: 300;
+        color: var(--color-text-base);
+    }
+
+    #main-header .header-content .main-menu #primary .menu .sub-menu {
+        list-style: none;
+    }
+
     #search-mobile__button {
         display: none;
     }
