@@ -320,6 +320,25 @@ img{height:auto;}
         background-color: var(--background-desktop-header--hover-buttons);
     }
 
+    #primary .menu > li > .mobile-links__itm-toggle {
+        padding:9.65px 20px;
+        font-size: var(--wp--preset--font-size--medium);
+        color: var(--color-text-base);
+        background-color: transparent;
+        border: none;
+        border-radius:0;
+        display:flex;
+        gap: 7px;
+        align-items: center;
+        transition:all .3s ease;
+    }
+
+    #primary .menu > li > .mobile-links__itm-toggle:hover {
+        background-color: var(--background-desktop-header--hover-buttons);
+    }
+
+
+
     /* primary submenus on desktop mode */
     .sub-menu {
         min-width: fit-content;
