@@ -190,6 +190,11 @@ img{height:auto;}
         display: none;
     }
 
+    #main-header .header-content .main-menu #custom-searchform .section {
+        display: flex;
+        align-items: center;
+    }
+
     #main-header .header-content .main-menu #custom-searchform .section .wp-block-search__input {
         flex: 1;
         padding: 10px;
