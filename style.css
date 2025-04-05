@@ -204,6 +204,7 @@ img{height:auto;}
         list-style: none;
         max-height: 0;
         overflow: hidden;
+        transition: max-height .3s ease;
     }
 
     #main-header .header-content .main-menu #primary .menu .sub-menu.open {
