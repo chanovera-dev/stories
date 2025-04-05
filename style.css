@@ -340,15 +340,14 @@ img{height:auto;}
         background-color: var(--background-desktop-header--hover-buttons);
     }
 
-    #primary .menu > li > .menu-item-with-submenu svg {
+    #primary .menu > li.menu-item-has-children > .menu-item-with-submenu svg {
+        transform: rotate(180deg);
         transition: transform .3s ease;
     }
 
-    #primary .menu > li > .menu-item-with-submenu:hover svg {
-        transform: rotate(180deg);
+    #primary .menu > li.menu-item-has-children:not(:hover) > .menu-item-with-submenu svg {
+        transform: rotate(0deg);
     }
-
-
 
     /* primary submenus on desktop mode */
     .sub-menu {
