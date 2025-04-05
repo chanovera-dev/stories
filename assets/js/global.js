@@ -72,10 +72,6 @@ function menuWithChildren() {
 
         if (!link) return; // Evitar errores si no hay enlace
 
-        // Crear un nuevo div
-        var div = document.createElement('div');
-        div.classList.add('menu-toggle-container'); // Clase para estilos si es necesario
-
         // Crear un nuevo botón
         var button = document.createElement('button');
         button.classList.add('mobile-links__item-toggle');
