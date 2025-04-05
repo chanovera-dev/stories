@@ -200,6 +200,15 @@ img{height:auto;}
         color: var(--color-text-base);
     }
 
+    #main-header .header-content .main-menu #primary .menu .menu-item-has-children .menu-item-with-submenu svg {
+        transform: rotate(0deg);
+        transition: transform .3s ease;
+    }
+
+    #main-header .header-content .main-menu #primary .menu .menu-item-has-children.open .menu-item-with-submenu svg {
+        transform: rotate(180deg);
+    }
+
     #main-header .header-content .main-menu #primary .menu .sub-menu {
         list-style: none;
         max-height: 0;
