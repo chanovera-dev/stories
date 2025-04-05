@@ -188,24 +188,30 @@ function wp_breadcrumbs() {
     } elseif (!is_single() && !is_page() && get_post_type() != 'post' && !is_404()) {}
 }
 
-function modificar_items_menu_con_submenu($items) {
-    // Recorremos todos los elementos para detectar relaciones padre-hijo
-    foreach ($items as $item) {
-        $menu_items_by_parent[$item->menu_item_parent][] = $item;
-    }
+function reemplazar_links_con_div_en_menus($item_output, $item, $depth, $args) {
+    global $menu_items_by_parent;
 
-    foreach ($items as &$item) {
-        // Si este ítem tiene hijos (es decir, tiene submenú)
-        if (!empty($menu_items_by_parent[$item->ID])) {
-            $texto = esc_html($item->title);
-            $svg = '<svg width="13" height="13" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>';
+    // Inicializamos la lista de hijos una vez por menú
+    static $menu_checked = [];
 
-            // Reemplazamos el enlace con un div personalizado
-            $item->title = '<div class="menu-item-with-submenu">' . $texto . ' ' . $svg . '</div>';
-            $item->url = ''; // Quitar el hipervínculo
+    if (!in_array($args->menu->term_id, $menu_checked)) {
+        $menu_items = wp_get_nav_menu_items($args->menu->term_id);
+        foreach ($menu_items as $menu_item) {
+            $menu_items_by_parent[$menu_item->menu_item_parent][] = $menu_item;
         }
+        $menu_checked[] = $args->menu->term_id;
     }
 
-    return $items;
+    $tiene_hijos = !empty($menu_items_by_parent[$item->ID]);
+
+    if ($tiene_hijos) {
+        $texto = esc_html($item->title);
+        $svg = '<svg width="13" height="13" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>';
+
+        return '<div class="menu-item-with-submenu">' . $texto . ' ' . $svg . '</div>';
+    }
+
+    return $item_output;
 }
-add_filter('wp_nav_menu_objects', 'modificar_items_menu_con_submenu');
+add_filter('walker_nav_menu_start_el', 'reemplazar_links_con_div_en_menus', 10, 4);
+
