@@ -17,6 +17,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
     /* display */
     --nodisplay-mobile-button:none;
     --display-mobile-button:grid;
+    --display-search-mobile-button: none;
     --opacity-clouds: 1;
     --brightness-tree: 1;
     --brightness-thumbnail: 1;
@@ -147,20 +148,31 @@ img{height:auto;}
 }
 
 @media(max-width:767px){
-    #main-header{position:relative;}
+    
+    #main-header {
+        position: relative;
+    }
 
-    #main-header .header-content{display:flex;gap:10px;padding:26px 0;align-items:center;justify-content:space-between;}
-    #main-header .header-content #search-mobile__button{margin-left:auto;display:grid;width:48px;height:48px;place-content:center;border:none;border-radius:0;background-color:transparent;color:var(--color-text-base);}
-    #main-header .header-content #search-mobile__button svg{width:20px;height:20px;}
-    #main-header .header-content #search-mobile__button .bi-x-circle{display:var(--nodisplay-mobile-button);}
+    #main-header .header-content{
+        display: flex; 
+        gap: 10px;
+        padding: 26px 0;
+        align-items: center;
+        justify-content: space-between;
+    }
 
-    #main-header .header-content #menu-mobile__button{place-content:space-between;justify-content:space-between;padding:0;width:30px;height:23px;background-color:transparent;border:none;cursor:pointer;z-index:6;}
-    #main-header .header-content #menu-mobile__button :is(.bar){display:block;height:1.5px;background-color:var(--color-text-base);transition:transform .3s ease;}
-    #main-header .header-content #menu-mobile__button :is(.bar:nth-child(odd)){width:30px;}
-    #main-header .header-content #menu-mobile__button :is(.bar:nth-child(even)){width:15px;margin-left:auto;}
-    #main-header .header-content #menu-mobile__button.open{transform:rotate(45deg)!important;transition:all .3s ease;}
-    #main-header .header-content #menu-mobile__button.open :is(.bar:nth-child(1)){transform:translateY(11px) rotate(90deg);}
-    #main-header .header-content #menu-mobile__button.open :is(.bar:nth-child(3)){transform:translateY(-10.5px);}
+    #main-header .header-content .main-menu {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100svw;
+        height: 100svh;
+        transform: translateX(-100svw);
+    }
+    
+    #main-header .header-content #search-mobile__button{
+        display: var(--display-search-mobile-button);
+    }
 
     #custom-searchform{background-color:var(--wp--preset--color--accent-5);box-shadow:var(--wp--preset--shadow--floating-bar);position:absolute;top:0;left:0;width:100%;padding:26px 0;transform:translateY(-120px);z-index:7;transition:transform .3s ease;}
     #custom-searchform.show{transform:translateY(0);}
@@ -216,7 +228,8 @@ img{height:auto;}
 @media(min-width:768px){
 
     :root{
-        --display-mobile-button:none;
+        --display-mobile-button: none;
+        --display-search-mobile-button: grid;
     }
 
     /* header */ 
@@ -433,7 +446,7 @@ img{height:auto;}
     #search-mobile__button {
         position: relative;
         margin-left: auto;
-        display: grid;
+        display: var(--display-search-mobile-button);
         place-content: center;
         width: 60px;
         height: 43.8px;
