@@ -147,9 +147,6 @@ img{height:auto;}
 }
 
 @media(max-width:767px){
-    #main-header {
-        position: relative;
-    }
 
     #main-header .header-content{
         display: flex; 

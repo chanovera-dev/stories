@@ -10,6 +10,29 @@ function openMenuMobile() {
     }
 }
 
+function menuWithChildrens() {
+    if ( window.innerWidth <= 767 ) {
+        // Obtener todos los elementos que contienen submenús
+        const menuItems = document.querySelectorAll('.menu-item-with-submenu');
+    
+        menuItems.forEach(item => {
+        item.addEventListener('click', function (e) {
+            // Evitar que el enlace navegue si es necesario
+            e.preventDefault();
+    
+            // Buscar el submenú dentro del ítem clickeado
+            const subMenu = item.querySelector('.sub-menu');
+    
+            if (subMenu) {
+            subMenu.classList.toggle('open');
+            }
+            });
+        });
+    }
+}
+document.addEventListener('DOMContentLoaded', menuWithChildrens);
+  
+
 function openCustomSearchform() {
     const customSearchform = document.querySelector( '#custom-searchform' );
     const primaryMenu = document.querySelector( '#primary .menu' );
