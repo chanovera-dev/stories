@@ -11,24 +11,26 @@ function openMenuMobile() {
 }
 
 function menuWithChildren() {
-    if ( window.innerWidth <= 767 ) {
-        const menuItems = document.querySelectorAll('.menu-item-has-children');
-    
+    if (window.innerWidth <= 767) {
+      const menuItems = document.querySelectorAll('.menu-item-has-children');
+  
         menuItems.forEach(item => {
-        item.addEventListener('click', function (e) {
-            e.preventDefault();
-            const withSubMenu = document.querySelectorAll('.menu-item-with-submenu');
-            const subMenu = item.querySelector('.sub-menu');
-    
+            item.addEventListener('click', function (e) {
+                e.preventDefault();
+        
+                item.classList.toggle('open');
+        
+                const subMenu = item.querySelector('.sub-menu');
                 if (subMenu) {
-                    withSubMenu.classList.toggle('open');
                     subMenu.classList.toggle('open');
                 }
             });
         });
     }
-}
-document.addEventListener('DOMContentLoaded', menuWithChildren);
+  }
+  
+  document.addEventListener('DOMContentLoaded', menuWithChildren);
+  
   
 
 function openCustomSearchform() {
