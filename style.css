@@ -205,6 +205,12 @@ img{height:auto;}
 
     #main-header .header-content .main-menu #primary .menu .sub-menu {
         list-style: none;
+        max-height: 0;
+        overflow: hidden;
+    }
+
+    #main-header .header-content .main-menu #primary .menu .sub-menu.open {
+        max-height: 500px;
     }
 
     #search-mobile__button {
