@@ -1,7 +1,7 @@
 function openMenuMobile() {
     if ( window.innerWidth <= 767 ) {
         const btnMenuMobile = document.querySelector( '#menu-mobile__button' );
-        const menuMobile = document.querySelector( '#primary' );
+        const menuMobile = document.querySelector( '.main-menu' );
 
         btnMenuMobile.classList.toggle( 'open' );
         menuMobile.classList.toggle( 'show' );
