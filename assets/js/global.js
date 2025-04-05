@@ -12,26 +12,26 @@ function openMenuMobile() {
 
 function menuWithChildren() {
     if (window.innerWidth <= 767) {
-        const menuItems = document.querySelectorAll('.menu-item-has-children > a');
+      const menuItems = document.querySelectorAll('.menu-item-has-children');
   
-        menuItems.forEach(link => {
-            link.addEventListener('click', function (e) {
-                const parentItem = link.parentElement;
-                const subMenu = parentItem.querySelector('.sub-menu');
+        menuItems.forEach(item => {
+            item.addEventListener('click', function (e) {
+                e.preventDefault();
         
+                item.classList.toggle('open');
+        
+                const subMenu = item.querySelector('.sub-menu');
                 if (subMenu) {
-
-                    e.preventDefault();
-        
-                    parentItem.classList.toggle('open');
                     subMenu.classList.toggle('open');
                 }
             });
         });
     }
-}
+  }
   
-document.addEventListener('DOMContentLoaded', menuWithChildren);
+  document.addEventListener('DOMContentLoaded', menuWithChildren);
+  
+  
 
 function openCustomSearchform() {
     const customSearchform = document.querySelector( '#custom-searchform' );
