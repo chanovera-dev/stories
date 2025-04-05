@@ -155,7 +155,7 @@ img{height:auto;}
     #main-header .header-content{
         display: flex; 
         gap: 10px;
-        padding: 26px 0;
+        padding: 16.5px 0;
         align-items: center;
         justify-content: space-between;
     }
@@ -169,10 +169,19 @@ img{height:auto;}
         transform: translateX(-100svw);
         transition: transform .3s ease;
         background-color: var(--background-base);
+        padding: 56px 0 20px;
     }
 
     #main-header .header-content .main-menu.show {
         transform: translateX(0);
+    }
+
+    #main-header .header-content .main-menu #custom-searchform {
+        order: 1;
+    }
+
+    #main-header .header-content .main-menu #primary {
+        order: 2;
     }
 
     #main-header .header-content #menu-mobile__button{place-content:space-between;justify-content:space-between;padding:0;width:30px;height:23px;background-color:transparent;border:none;cursor:pointer;z-index:6;}
@@ -183,33 +192,7 @@ img{height:auto;}
     #main-header .header-content #menu-mobile__button.open :is(.bar:nth-child(1)){transform:translateY(11px) rotate(90deg);}
     #main-header .header-content #menu-mobile__button.open :is(.bar:nth-child(3)){transform:translateY(-10.5px);}
 
-    #main-header .header-content #search-mobile__button{
-        display: var(--display-search-mobile-button);
-    }
-
-    #custom-searchform{}
-
-    
-    #custom-searchform .section input[type=text] {
-
-    }
-
-    #custom-searchform .section input[type=text]::placeholder {
-
-    }
-
-    #custom-searchform .section input[type=text]:focus {
-        outline: none;
-    }
-
-    #custom-searchform .section .buttons-container{display:flex;padding-right:6px;}
-    #custom-searchform .section .buttons-container #searchsubmit{border:none;border-radius:0;background-color:transparent;}
-    #custom-searchform .section .buttons-container :is(#searchsubmit,.close-custom-searchform){width:48px;height:48px;display:grid;place-content:center;}
-    #custom-searchform .section .buttons-container :is(#searchsubmit,.close-custom-searchform) svg{width:20px;height:20px;color:var(--color-text-base);}
-
-    #custom-searchform .section .buttons-container .close-custom-searchform{
-        display: none;
-    }
+ 
     
 }
 
