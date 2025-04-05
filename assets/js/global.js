@@ -13,7 +13,7 @@ function openMenuMobile() {
 function menuWithChildrens() {
     if ( window.innerWidth <= 767 ) {
         // Obtener todos los elementos que contienen submenús
-        const menuItems = document.querySelectorAll('.menu-item-with-submenu');
+        const menuItems = document.querySelectorAll('.menu-item-has-children');
     
         menuItems.forEach(item => {
         item.addEventListener('click', function (e) {
@@ -39,22 +39,11 @@ function openCustomSearchform() {
     const iconSearchBtn = document.querySelector( '#search-mobile__button .bi-search' );
     const iconCloseBtn = document.querySelector( '#search-mobile__button .bi-x-circle' );
 
-    if (window.innerWidth <= 767) {
-        if (customSearchform) customSearchform.classList.add('show');
-    }
-
     if (window.innerWidth >= 768) {
         if (customSearchform) customSearchform.classList.toggle('show');
         if (primaryMenu) primaryMenu.classList.toggle('hide');
         if (iconSearchBtn) iconSearchBtn.classList.toggle('hide');
         if (iconCloseBtn) iconCloseBtn.classList.toggle('show');
-    }
-}
-
-function closeCustomSearchform() {
-    if ( window.innerWidth <= 767 ) {
-        const customSearchform = document.querySelector( '#custom-searchform' );
-        customSearchform.classList.remove( 'show' );
     }
 }
 
