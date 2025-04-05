@@ -12,14 +12,20 @@ function openMenuMobile() {
 
 function menuWithChildren() {
     if (window.innerWidth <= 767) {
-      const menuItems = document.querySelectorAll('.menu-item-has-children');
+        const menuItems = document.querySelectorAll('.menu-item-has-children');
   
         menuItems.forEach(item => {
             item.addEventListener('click', function (e) {
+                // Si el clic fue sobre el enlace directamente, permitir que navegue
+                if (e.target.tagName === 'A') {
+                    return; // No hacer nada, dejar que funcione el enlace
+                }
+
+                // Si no fue sobre el enlace (por ejemplo en el li o span), evitar navegación
                 e.preventDefault();
-        
+
                 item.classList.toggle('open');
-        
+
                 const subMenu = item.querySelector('.sub-menu');
                 if (subMenu) {
                     subMenu.classList.toggle('open');
@@ -27,9 +33,9 @@ function menuWithChildren() {
             });
         });
     }
-  }
+}
+document.addEventListener('DOMContentLoaded', menuWithChildren);
   
-  document.addEventListener('DOMContentLoaded', menuWithChildren);
   
   
 
