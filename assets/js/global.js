@@ -79,7 +79,7 @@ function menuWithChildren() {
         // Crear un nuevo botón
         var button = document.createElement('button');
         button.classList.add('mobile-links__item-toggle');
-        button.setAttribute('onclick', 'toggleSubMenu(this)');
+        //button.setAttribute('onclick', 'toggleSubMenu(this)');
 
         // Obtener el texto del enlace
         var linkText = link.innerText;
