@@ -16,6 +16,9 @@ textarea {
     font-family: var(--wp--preset--font-family--manrope);
     transition: border-color .3s ease;
 }
+textarea {
+    padding: 10px;
+}
 
 input[type=text]::placeholder,
 input[type=email]::placeholder,
