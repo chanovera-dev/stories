@@ -35,9 +35,6 @@ function menuWithChildren() {
 }
 document.addEventListener('DOMContentLoaded', menuWithChildren);
   
-  
-  
-
 function openCustomSearchform() {
     const customSearchform = document.querySelector( '#custom-searchform' );
     const primaryMenu = document.querySelector( '#primary .menu' );
@@ -52,7 +49,6 @@ function openCustomSearchform() {
     }
 }
 
-// add class for scroll
 function scrollActions() {
     const body = document.body
     const scrollUp = "scroll-up"
