@@ -90,20 +90,13 @@ function custom_modify_latest_posts_block($block_content, $block) {
         return $block_content;
     }
 
+    // Obtener las publicaciones recientes excluyendo formato "minientrada"
     $args = [
         'post_type'      => 'post',
-        'posts_per_page' => $block['attrs']['postsToShow'] ?? 5,
-        'post_status'    => 'publish',
-        'tax_query'      => [
-            [
-                'taxonomy' => 'post_format',
-                'field'    => 'slug',
-                'terms'    => ['post-format-aside'],
-                'operator' => 'NOT IN'
-            ]
-        ]
+        'posts_per_page' => 5,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
     ];
-
     $recent_posts = get_posts($args);
 
     if (empty($recent_posts)) {
