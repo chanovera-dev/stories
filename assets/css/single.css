@@ -97,6 +97,11 @@
     margin-block-start: 3rem;
 }
 
+/* footer */
+.ste-main .post-footer .section .related-post h2 {
+    margin-bottom: 20px;
+}
+
 @media(min-width:768px) {
     .site-main .post-header .section.bottom {
         justify-content: space-between;
