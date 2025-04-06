@@ -78,9 +78,16 @@
         </section>
     </div><!-- .post-body -->
     <div class="container post-footer container--posts">
-        <section class="section">
-            <?php comments_template(); ?>
-        </section>
+        <?php
+            if ( comments_open() ) :
+                echo '
+                <section class="section">';
+                    comments_template();
+                echo '
+                </section>';
+            else:
+            endif;
+        ?>
         <section class="section">
             <?php
 
