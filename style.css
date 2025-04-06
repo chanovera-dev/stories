@@ -472,6 +472,7 @@ img{height:auto;}
     #custom-searchform .section{position:relative;display:grid;align-items:center;width:100%;}
     
     #custom-searchform .section input[type=text] {
+        height: 43.8px;
         width: 400px;
         border-color: transparent;
         border-radius: 6px;
