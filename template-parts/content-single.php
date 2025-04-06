@@ -77,7 +77,7 @@
             ?>
         </section>
     </div><!-- .post-body -->
-    <div class="post-footer container--posts">
+    <div class="post-footer">
         <?php
             if ( comments_open() ) :
                 echo '
@@ -90,7 +90,7 @@
             else:
             endif;
         ?>
-        <div class="container">
+        <div class="container container--posts">
             <section class="section">
                 <?php
 
