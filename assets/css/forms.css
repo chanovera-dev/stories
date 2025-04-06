@@ -1,13 +1,15 @@
 /* formularios */
-input[type=text],
+.site-main :is(
+    input[type=text],
 input[type=email],
 input[type=tel],
 input[type=url],
 input[type=number],
 input[type=password],
 input[type=search],
-textarea {
-    min-height: 43.8px;
+textarea
+)  {
+    padding: 10px;
     border-radius: 4px;
     background-color: var(--background-base);
     border: 1px solid var(--line-1);
@@ -16,42 +18,45 @@ textarea {
     font-family: var(--wp--preset--font-family--manrope);
     transition: border-color .3s ease;
 }
-textarea {
-    padding: 10px;
-}
 
-input[type=text]::placeholder,
-input[type=email]::placeholder,
-input[type=tel]::placeholder,
-input[type=url]::placeholder,
-input[type=number]::placeholder,
-input[type=password]::placeholder,
-input[type=search]::placeholder,
-textarea::placeholder {
+.site-main :is(
+    input[type=text]::placeholder,
+    input[type=email]::placeholder,
+    input[type=tel]::placeholder,
+    input[type=url]::placeholder,
+    input[type=number]::placeholder,
+    input[type=password]::placeholder,
+    input[type=search]::placeholder,
+    textarea::placeholder
+) {
     font-size: var(--wp--preset--font-size--medium);
     font-family: var(--wp--preset--font-family--manrope);
     opacity: .6;
 }
 
-input[type=text]:hover,
-input[type=email]:hover,
-input[type=tel]:hover,
-input[type=url]:hover,
-input[type=number]:hover,
-input[type=password]:hover,
-input[type=search]:hover,
-textarea:hover {
+.site-main :is(
+    input[type=text]:hover,
+    input[type=email]:hover,
+    input[type=tel]:hover,
+    input[type=url]:hover,
+    input[type=number]:hover,
+    input[type=password]:hover,
+    input[type=search]:hover,
+    textarea:hover
+) {
     border-color: var(--color-link);
 }
 
-input[type=text]:focus,
-input[type=email]:focus,
-input[type=tel]:focus,
-input[type=url]:focus,
-input[type=number]:focus,
-input[type=password]:focus,
-input[type=search]:focus,
-textarea:focus {
+.site-main :is(
+    input[type=text]:focus,
+    input[type=email]:focus,
+    input[type=tel]:focus,
+    input[type=url]:focus,
+    input[type=number]:focus,
+    input[type=password]:focus,
+    input[type=search]:focus,
+    textarea:focus
+) {
     outline:none;
     border-color: var(--color-link-hover);
 }
