@@ -77,7 +77,7 @@
             ?>
         </section>
     </div><!-- .post-body -->
-    <div class="container post-footer">
+    <div class="container post-footer container--posts">
         <section class="section">
             <?php comments_template(); ?>
         </section>
