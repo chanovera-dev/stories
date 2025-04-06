@@ -130,7 +130,7 @@
                 ?>
 
                 <div class="related-posts">
-                    <h2><?php echo esc_html_e( 'Artículos relacionados', 'stories' ); ?></h2>
+                    <h2><?php echo esc_html_e( 'Contenido relacionado', 'stories' ); ?></h2>
                     <div class="posts related-posts--list">
                         <?php 
                             while ($related_posts->have_posts()) : $related_posts->the_post();
