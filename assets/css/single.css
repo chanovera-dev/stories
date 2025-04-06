@@ -107,6 +107,28 @@
     padding: 13px 0;
 }
 
+/* comments */
+#respond {
+    max-width: 716px;
+}
+
+#reply-title {
+    margin-bottom: 20px;
+}
+
+.site-main .post-footer .no-comments--wrapper .section .comments-title {
+    font-size: var(--wp--preset--font-size--large);
+    margin-bottom: 20px;
+}
+
+#commentform > *:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+#commentform :is(.comment-form-comment, .comment-form-author, .comment-form-email, .comment-form-url) {
+    display: grid;
+}
+
 .site-main .post-footer .section .related-posts h2 {
     margin-bottom: 20px;
 }
