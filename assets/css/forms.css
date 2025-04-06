@@ -7,7 +7,7 @@ input[type=number],
 input[type=password],
 input[type=search],
 textarea {
-    min-height: 43.8px;
+    height: 43.8px;
     padding: 10px;
     line-height: 1;
     border-radius: 4px;
@@ -17,6 +17,9 @@ textarea {
     font-size: var(--wp--preset--font-size--medium);
     font-family: var(--wp--preset--font-family--manrope);
     transition: border-color .3s ease;
+}
+textarea {
+    height: auto;
 }
 
 input[type=text]::placeholder,
