@@ -129,6 +129,31 @@
     display: grid;
 }
 
+#commentform .submit {
+    padding: 6px 16px;
+    border: 1px solid #3aaa4a;
+    border-radius: 6px;
+    background-color: #3fb950;
+    color: #11151A;
+    font-size: var(--wp--preset--font-size--medium);
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all .3s ease;
+    background-image: linear-gradient(-60deg, transparent, transparent 40%, #ffffff44 40%, #ffffff44 60%, transparent 60%, transparent 100%);
+    background-size: 200% 100%;
+    background-position-x: 150%;
+    background-repeat: no-repeat;
+}
+
+#commentform .submit:hover {
+    cursor: pointer;
+    background-position-x: -150%;
+    transition: all 1s;
+    background-color: #59c668;
+}
+
 .site-main .post-footer .section .related-posts h2 {
     margin-bottom: 20px;
 }
