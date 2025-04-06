@@ -7,7 +7,6 @@ input[type=number],
 input[type=password],
 input[type=search],
 textarea {
-    padding: 10px;
     min-height: 43.8px;
     border-radius: 4px;
     background-color: var(--background-base);
