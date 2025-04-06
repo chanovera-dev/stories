@@ -11,6 +11,7 @@ textarea
 )  {
     padding: 10px;
     border-radius: 4px;
+    line-height: 1;
     background-color: var(--background-base);
     border: 1px solid var(--line-1);
     color: var(--color-text-base);
