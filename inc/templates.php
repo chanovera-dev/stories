@@ -38,6 +38,10 @@ function post_styles() {
 
         if ( is_single() ) {
             wp_enqueue_style( 'posts', get_template_directory_uri() . '/assets/css/posts.css', array(), get_asset_version('/assets/css/posts.css'), 'all' );
+
+            if ( comments_open() ) {
+                wp_enqueue_style( 'forms', get_template_directory_uri() . '/assets/css/posts.css', array(), get_asset_version('/assets/css/forms.css'), 'all' );
+            }
         }
         
         if ( has_post_thumbnail() == true ) {
