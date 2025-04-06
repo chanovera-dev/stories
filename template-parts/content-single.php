@@ -77,4 +77,57 @@
             ?>
         </section>
     </div><!-- .post-body -->
+    <div class="container post-footer">
+        <section class="section">
+            <?php comments_template(); ?>
+        </section>
+        <section class="section">
+            <?php
+
+                $categories = wp_get_post_categories(get_the_ID());
+                $tags = wp_get_post_tags(get_the_ID());
+                $args = array(
+                    'post_type'      => 'post',
+                    'posts_per_page' => 3,
+                    'post__not_in'   => array(get_the_ID()),
+                    'orderby'        => 'rand',
+                    'tax_query'      => array(
+                        'relation' => 'OR',
+                        array(
+                            'taxonomy' => 'category',
+                            'field'    => 'term_id',
+                            'terms'    => $categories,
+                        ),
+                        array(
+                            'taxonomy' => 'post_tag',
+                            'field'    => 'term_id',
+                            'terms'    => wp_list_pluck($tags, 'term_id'),
+                        ),
+                    ),
+                );
+
+                $related_posts = new WP_Query($args);
+
+                if ($related_posts->have_posts()) :
+            
+            ?>
+
+            <div class="related-posts">
+                <h2><?php echo esc_html_e( 'Artículos relacionados', 'stories' ); ?></h2>
+                <div class="posts related-posts--list">
+                    <?php 
+                        while ($related_posts->have_posts()) : $related_posts->the_post();
+                            get_template_part( 'template-parts/content', 'archive' );
+                        endwhile;
+                    ?>
+                </div>
+            </div>
+            
+            <?php
+                wp_reset_postdata();
+                endif;
+            ?>
+
+        </section>
+    </div><!-- .post-footer -->
 </article><!-- #main -->
