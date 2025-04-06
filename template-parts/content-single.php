@@ -81,13 +81,20 @@
         <?php
             if ( comments_open() ) :
                 echo '
-                <div class="container">
+                <div class="container comments--wrapper">
                     <section class="section">';
                         comments_template();
                     echo '
                     </section>
                 </div>';
             else:
+                echo '
+                <div class="container no-comments--wrapper">
+                    <section class="section">';
+                        esc_html_e( 'Los comentarios están cerrados.', 'stories' );
+                    echo '
+                    </section>
+                </div>';
             endif;
         ?>
         <div class="container container--posts">
