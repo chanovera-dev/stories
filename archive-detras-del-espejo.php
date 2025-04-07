@@ -22,11 +22,6 @@ get_header(); ?>
                 </div>
             </section>
         </div>
-        <div class="container container--title">
-            <section class="section">
-                <?php the_archive_title( '<h1 class="main-title">', '</h1>' ); ?>
-            </section>
-        </div><!-- .container--title -->
     </header><!-- .post-header -->
 
     <div class="container container--posts">
