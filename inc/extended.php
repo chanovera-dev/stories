@@ -158,7 +158,20 @@ function wp_breadcrumbs() {
         if ($showCurrent == 1) echo $current . ' ' . single_cat_title('', false);
     } elseif (is_home()) {
         echo $current . 'Página ' . get_query_var('paged');
-    }elseif (is_search()) {
+    } elseif (is_page_template('archivo-detras-del-espejo.php')) {
+        echo $current . 'Capítulos de "Detrás del Espejo"';
+    } elseif (is_page()) {
+        if ($post->post_parent) {
+            $ancestors = get_post_ancestors($post->ID);
+            foreach ($ancestors as $ancestor) {
+                $output = '<a href="' . get_permalink($ancestor) . '">' . get_the_title($ancestor) . '</a>' . $separator;
+            }
+            echo $output;
+            echo $current . ' ' . get_the_title();
+        } else {
+            if ($showCurrent == 1) echo $current . ' ' . get_the_title();
+        }
+    } elseif (is_search()) {
         echo $current . ' ' . get_search_query();
     } elseif (is_day()) {
         echo '<a href="' . get_year_link(get_the_time('Y')) . '">' . get_the_time('Y') . '</a>' . $separator;
