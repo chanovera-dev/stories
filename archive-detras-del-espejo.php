@@ -34,7 +34,7 @@ get_header(); ?>
         <div class="posts">
             <?php
                 $args = array(
-                    'post_type' => 'capitulo-detras',
+                    'post_type' => 'detras-del-espejo',
                     'post_status' => 'publish',
                     'paged' => get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1,
                 );
