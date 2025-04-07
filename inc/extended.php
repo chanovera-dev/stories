@@ -239,4 +239,4 @@ function fix_rewrite_detras_del_espejo() {
         )
     );
 }
-add_action( 'init', 'fix_rewrite_detras_del_espejo', 20 );
+add_action( 'init', 'fix_rewrite_detras_del_espejo', 999 );
