@@ -10,7 +10,7 @@
  * Posts styles for home, archive or search
  */
  function posts_styles() {
-    if ( is_home() or is_archive() or is_search() ) {
+    if ( is_home() or is_archive() or is_search() or is_template( 'archive-capitulo-detras.php' ) ) {
 
         function unload_parts_header() {
             wp_dequeue_style( 'wp-block-library' );
