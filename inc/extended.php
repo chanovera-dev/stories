@@ -216,27 +216,3 @@ function replace_menu_links_with_div($item_output, $item, $depth, $args) {
     return $item_output;
 }
 add_filter('walker_nav_menu_start_el', 'replace_menu_links_with_div', 10, 4);
-
-/**
- * Register the custom post type "detras del espejo"
- */
-function fix_rewrite_detras_del_espejo() {
-    unregister_post_type( 'detras-del-espejo' );
-    register_post_type( 'detras-del-espejo',
-        array(
-            'labels' => array(
-                'name' => __( 'Detrás del espejo' ),
-                'singular_name' => __( 'Detrás del espejo' )
-            ),
-            'public' => true,
-            'has_archive' => true,
-            'rewrite' => array(
-                'slug' => 'detras-del-espejo',
-                'with_front' => false
-            ),
-            'supports' => array( 'title', 'editor', 'thumbnail' ),
-            'show_in_rest' => true,
-        )
-    );
-}
-add_action( 'init', 'fix_rewrite_detras_del_espejo', 999 );
