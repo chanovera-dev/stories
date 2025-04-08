@@ -1,0 +1,27 @@
+.not-found {
+    text-align: center;
+}
+
+.not-found *:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.not-found .not-found__icon svg {
+    background-color: var(--background-breadcrumbs);
+    color: var(--color-text-base);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+}
+
+.not-found button {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 20px;
+    border: 1px solid var(--color-text-base);
+    background-color: var(--background-breadcrumbs);
+    border-radius: 8px;
+    font-size: var(--wp--preset--font-size--large);
+}

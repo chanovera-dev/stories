@@ -65,3 +65,13 @@ function post_styles() {
     }
 }
 add_action( 'wp_enqueue_scripts', 'post_styles', 20 );
+
+/**
+ * 404 styles for error page
+ */
+function page404_styles() {
+    if ( is_404() ) {
+        wp_enqueue_style( 'error404-styles', get_template_directory_uri() . '/assets/css/error404.css' );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'page404_styles' );

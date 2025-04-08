@@ -262,5 +262,4 @@ function shortcode_detras_del_espejo() {
 
     return ob_get_clean(); // Devolver el contenido almacenado
 }
-
 add_shortcode('detras_del_espejo', 'shortcode_detras_del_espejo');
