@@ -10,7 +10,7 @@
  * Posts styles for home, archive or search
  */
  function posts_styles() {
-    if ( is_home() or is_archive() or is_search()  ) {
+    if ( is_home() or is_archive() or is_search() ) {
 
         function unload_parts_header() {
             wp_dequeue_style( 'wp-block-library' );
@@ -34,6 +34,10 @@ function posts_detras_styles() {
     if ( is_page_template( 'archive-detras-del-espejo.php' ) ) {
         wp_enqueue_style( 'custom-breadcrumbs', get_template_directory_uri() . '/assets/css/custom-breadcrumbs.css', array(), get_asset_version('/assets/css/custom-breadcrumbs.css'), 'all' );
         wp_enqueue_style( 'posts', get_template_directory_uri() . '/assets/css/posts.css', array(), get_asset_version('/assets/css/posts.css'), 'all' );
+    }
+
+    if ( is_active_sidebar( 'sidebar-detras' ) ) {
+        wp_enqueue_style( 'sidebar', get_template_directory_uri() . '/assets/css/sidebar.css', array(), get_asset_version('/assets/css/sidebar.css'), 'all' );
     }
 }
 add_action( 'wp_enqueue_scripts', 'posts_detras_styles' );
