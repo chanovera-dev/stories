@@ -20,7 +20,7 @@
         wp_enqueue_style( 'posts', get_template_directory_uri() . '/assets/css/posts.css', array(), get_asset_version('/assets/css/posts.css'), 'all' );
         wp_enqueue_style( 'breadcrumbs', get_template_directory_uri() . '/assets/css/breadcrumbs.css', array(), get_asset_version('/assets/css/breadcrumbs.css'), 'all' );
 
-        if ( is_active_sidebar( 'sidebar-posts' ) ) {
+        if ( is_active_sidebar( 'sidebar-posts' ) && ! ( is_post_type_archive( 'detras-del-espejo' ) ) ) {
             wp_enqueue_style( 'sidebar', get_template_directory_uri() . '/assets/css/sidebar.css', array(), get_asset_version('/assets/css/sidebar.css'), 'all' );
         }
     }
@@ -34,10 +34,6 @@ function posts_detras_styles() {
     if ( is_page_template( 'archive-detras-del-espejo.php' ) ) {
         wp_enqueue_style( 'custom-breadcrumbs', get_template_directory_uri() . '/assets/css/custom-breadcrumbs.css', array(), get_asset_version('/assets/css/custom-breadcrumbs.css'), 'all' );
         wp_enqueue_style( 'posts', get_template_directory_uri() . '/assets/css/posts.css', array(), get_asset_version('/assets/css/posts.css'), 'all' );
-    }
-
-    if ( is_active_sidebar( 'sidebar-detras' ) ) {
-        wp_enqueue_style( 'sidebar', get_template_directory_uri() . '/assets/css/sidebar.css', array(), get_asset_version('/assets/css/sidebar.css'), 'all' );
     }
 }
 add_action( 'wp_enqueue_scripts', 'posts_detras_styles' );
