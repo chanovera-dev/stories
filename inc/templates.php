@@ -9,7 +9,7 @@
 /**
  * Posts styles for home, archive or search
  */
- function posts_styles() {
+function posts_styles() {
     if ( is_home() or is_archive() or is_search() ) {
 
         function unload_parts_header() {
@@ -20,7 +20,7 @@
         wp_enqueue_style( 'posts', get_template_directory_uri() . '/assets/css/posts.css', array(), get_asset_version('/assets/css/posts.css'), 'all' );
         wp_enqueue_style( 'breadcrumbs', get_template_directory_uri() . '/assets/css/breadcrumbs.css', array(), get_asset_version('/assets/css/breadcrumbs.css'), 'all' );
 
-        if ( is_home() or is_archive() or is_search() or ! is_page_template( 'archive-detras-del-espejo.php' ) && is_active_sidebar( 'sidebar-posts' ) ) {
+        if ( is_active_sidebar( 'sidebar-posts' ) && ( is_home() or is_search() or ( is_archive() && get_post_type() === 'post' ) ) ) {
             wp_enqueue_style( 'sidebar', get_template_directory_uri() . '/assets/css/sidebar.css', array(), get_asset_version('/assets/css/sidebar.css'), 'all' );
         }
     }
