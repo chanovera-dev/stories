@@ -31,7 +31,7 @@ add_action( 'wp_enqueue_scripts', 'posts_styles' );
  * Post styles for "Detras del espejo"
  */
 function posts_detras_styles() {
-    if ( is_post_type_archive( 'detras-del-espejo' ) ) {
+    if ( is_page_template( 'archive-detras-del-espejo.php' ) ) {
         wp_enqueue_style( 'custom-breadcrumbs', get_template_directory_uri() . '/assets/css/custom-breadcrumbs.css', array(), get_asset_version('/assets/css/custom-breadcrumbs.css'), 'all' );
         wp_enqueue_style( 'posts', get_template_directory_uri() . '/assets/css/posts.css', array(), get_asset_version('/assets/css/posts.css'), 'all' );
 
@@ -41,7 +41,6 @@ function posts_detras_styles() {
     }
 }
 add_action( 'wp_enqueue_scripts', 'posts_detras_styles' );
-
 
 /**
  * Post styles for single or page
