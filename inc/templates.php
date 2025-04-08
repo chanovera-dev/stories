@@ -22,10 +22,6 @@ function posts_styles() {
 
         if ( is_active_sidebar( 'sidebar-posts' ) ) {
             wp_enqueue_style( 'sidebar-posts', get_template_directory_uri() . '/assets/css/sidebar.css', array(), get_asset_version('/assets/css/sidebar.css'), 'all' );
-
-            if ( isset($current_template) && $current_template === 'archive-detras-del-espejo.php' ) {
-                wp_dequeue_style( 'sidebar-posts' );
-            }
         }
     }
 }

@@ -229,12 +229,3 @@ function replace_menu_links_with_div($item_output, $item, $depth, $args) {
     return $item_output;
 }
 add_filter('walker_nav_menu_start_el', 'replace_menu_links_with_div', 10, 4);
-
-/**
- * Add a filter to get the current template name
- */
-add_filter( 'template_include', function ( $template ) {
-    global $current_template;
-    $current_template = basename( $template );
-    return $template;
-}, 100 );
