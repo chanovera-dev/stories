@@ -7,7 +7,7 @@
 }
 
 .not-found .not-found__icon svg {
-    background-color: var(--background-breadcrumbs);
+    background-color: var(--background-desktop-header);
     color: var(--color-text-base);
     border-radius: 50%;
     width: 40px;
@@ -23,10 +23,16 @@
     color: var(--color-text-base);
     padding: 10px 20px;
     border: 1px solid var(--line-1);
-    background-color: var(--background-breadcrumbs);
+    background-color: var(--background-desktop-header);
     border-radius: 8px;
     font-size: var(--wp--preset--font-size--large);
     margin-inline: auto;
+    transition: background-color .3s ease;
+    cursor: pointer;
+}
+
+.not-found button:hover {
+    background-color: var(--background-breadcrumbs);
 }
 
 .not-found button svg {
