@@ -34,10 +34,6 @@ function posts_detras_styles() {
     if ( is_page_template( 'archive-detras-del-espejo.php' ) ) {
         wp_enqueue_style( 'custom-breadcrumbs', get_template_directory_uri() . '/assets/css/custom-breadcrumbs.css', array(), get_asset_version('/assets/css/custom-breadcrumbs.css'), 'all' );
         wp_enqueue_style( 'posts', get_template_directory_uri() . '/assets/css/posts.css', array(), get_asset_version('/assets/css/posts.css'), 'all' );
-
-        if ( is_active_sidebar( 'sidebar-posts' ) ) {
-            wp_dequeue_style( 'sidebar-posts' );
-        }
     }
 }
 add_action( 'wp_enqueue_scripts', 'posts_detras_styles' );
