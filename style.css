@@ -78,6 +78,9 @@ body{
     overflow-y: scroll;
     background-color: var(--background-base);
     color: var(--color-text-base);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100svh;
 }
 
 .container{width:100%;}
