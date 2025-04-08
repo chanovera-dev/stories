@@ -20,9 +20,8 @@ function posts_styles() {
         wp_enqueue_style( 'posts', get_template_directory_uri() . '/assets/css/posts.css', array(), get_asset_version('/assets/css/posts.css'), 'all' );
         wp_enqueue_style( 'breadcrumbs', get_template_directory_uri() . '/assets/css/breadcrumbs.css', array(), get_asset_version('/assets/css/breadcrumbs.css'), 'all' );
 
-        if (
-            is_active_sidebar( 'sidebar-posts' ) && ( is_home() || is_search() || ( is_archive() && ( ! is_post_type_archive() || is_post_type_archive( 'post' ) ) ) ) ) {
-            wp_enqueue_style( 'sidebar', get_template_directory_uri() . '/assets/css/sidebar.css', array(), get_asset_version('/assets/css/sidebar.css'), 'all' );
+        if ( is_active_sidebar( 'sidebar-posts' ) ) {
+            wp_enqueue_style( 'sidebar-posts', get_template_directory_uri() . '/assets/css/sidebar.css', array(), get_asset_version('/assets/css/sidebar.css'), 'all' );
         }
     }
 }
@@ -32,12 +31,17 @@ add_action( 'wp_enqueue_scripts', 'posts_styles' );
  * Post styles for "Detras del espejo"
  */
 function posts_detras_styles() {
-    if ( is_page_template( 'archive-detras-del-espejo.php' ) ) {
+    if ( is_post_type_archive( 'detras-del-espejo' ) ) {
         wp_enqueue_style( 'custom-breadcrumbs', get_template_directory_uri() . '/assets/css/custom-breadcrumbs.css', array(), get_asset_version('/assets/css/custom-breadcrumbs.css'), 'all' );
         wp_enqueue_style( 'posts', get_template_directory_uri() . '/assets/css/posts.css', array(), get_asset_version('/assets/css/posts.css'), 'all' );
+
+        if ( is_active_sidebar( 'sidebar-posts' ) ) {
+            wp_dequeue_style( 'sidebar-posts' );
+        }
     }
 }
 add_action( 'wp_enqueue_scripts', 'posts_detras_styles' );
+
 
 /**
  * Post styles for single or page
