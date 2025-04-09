@@ -357,7 +357,8 @@ img{height:auto;}
         animation:tilt-in-top-1 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) .6s both;
     }
 
-    #main-header .header-content > *:not(:nth-child(1), :last-child):after {
+    #main-header .header-content > *:not(:nth-child(1), :last-child):after,
+    #primary .menu > li:not(:last-child):after {
         animation: header-separators .6s 2.7s both;
     }
 
