@@ -8,6 +8,7 @@
     background: linear-gradient(var(--background-sky-1), var(--background-sky-2));
     position:relative;
     overflow:hidden;
+    animation: in-header-content .6s linear both;
 }
 
 .site-main .container--header .section .message {
