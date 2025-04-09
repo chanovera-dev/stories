@@ -331,7 +331,7 @@ img{height:auto;}
 
     /* animations on desktop mode */
     #main-header .header-content {
-        animation: in-header-content 1.6s linear both;
+        animation: in-header-content .6s linear both;
     }
 
     #main-header .header-content .site-brand {
