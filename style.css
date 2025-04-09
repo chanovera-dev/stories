@@ -358,7 +358,7 @@ img{height:auto;}
     }
 
     #main-header .header-content > *:not(:nth-child(1), :last-child):after {
-        animation: header-separators .3s 1.3s both;
+        animation: header-separators .3s 2.3s both;
     }
 
     @keyframes tilt-in-top-1 {
