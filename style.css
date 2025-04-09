@@ -396,6 +396,7 @@ img{height:auto;}
     
     #primary .menu > li > a {
         padding:9.65px 20px;
+        display: flex;
         transition:all .3s ease;
     }
 
