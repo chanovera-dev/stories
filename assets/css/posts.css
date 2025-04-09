@@ -11,6 +11,11 @@
     animation: in-header-content .6s linear both;
 }
 
+@keyframes in-header-content {
+    0%{transform: translateY(50px); opacity: 0;}
+    100%{transform: translateY(0); opacity: 1;}
+}
+
 .site-main .container--header .section .message {
     position:relative;
     z-index: 1;
