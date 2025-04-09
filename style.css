@@ -570,7 +570,7 @@ img{height:auto;}
         animation: header-separators .6s 2.7s both;
     }
 
-    .site-main .container--header .section .message article .main-title {
+    .site-main .container--header .section .message article {
         animation:zoomInRight 2.3s 1.2s both;
     }
 
