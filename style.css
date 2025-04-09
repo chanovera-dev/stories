@@ -571,7 +571,7 @@ img{height:auto;}
     }
 
     .site-main .container--header .section .message article {
-        animation:zoomInRight 2.3s 1.2s both;
+        animation:zoomInRight 3s 1.5s both;
     }
 
     @keyframes tilt-in-top-1 {
