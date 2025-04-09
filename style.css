@@ -331,7 +331,7 @@ img{height:auto;}
 
     /* animations on desktop mode */
     #main-header .header-content {
-        animation: in-header-content 1.5s linear both;
+        animation: in-header-content 1.6s linear both;
     }
 
     #main-header .header-content .site-brand {
@@ -355,7 +355,7 @@ img{height:auto;}
     }
 
     @keyframes in-header-content {
-        0%{transform: translateY(100px); opacity: 0;}
+        0%{transform: translateY(50px); opacity: 0;}
         100%{transform: translateY(0); opacity: 1;}
     }
 
