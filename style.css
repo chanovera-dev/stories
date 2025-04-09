@@ -318,7 +318,7 @@ img{height:auto;}
     #main-header .header-content > *:not(:nth-child(1), :last-child):after {
         position: absolute;
         top: 0;
-        right: 0;
+        left: 0;
         content: '';
         width: 1px;
         height: 43.8px;
