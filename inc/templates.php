@@ -25,7 +25,7 @@ function posts_styles() {
         }
 
         if ( is_home() && is_main_query() && !is_paged() ) {
-            wp_enqueue_script( 'home-script', get_template_directory_uri() . '/assets/js/home.js', array(), get_asset_version('/assets/js/home.js'), true );
+            wp_enqueue_script( 'home-script', get_template_directory_uri() . '/assets/js/home.js', array(), get_asset_version('/assets/js/home.js'), 'all' );
         }
     }
 }
