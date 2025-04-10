@@ -21,6 +21,10 @@
     z-index: 1;
 }
 
+.site-main .container--header .section .message :is(.main-title,.reference) .word {
+    display: inline-flex;
+}
+
 .site-main .container--header .section .message :is(.main-title,.reference) .letter {
     display: inline-block;
     opacity: 1;
