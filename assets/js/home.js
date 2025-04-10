@@ -2,10 +2,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const titleEl = document.querySelector(".site-main .container--header .section .message article .main-title");
     const refEl = document.querySelector(".site-main .container--header .section .message article .reference");
   
-    const letterDelay = 100; // Tiempo entre letras en ms
-    const animationDelayUnit = 0.03; // para animation-delay en segundos
+    const letterDelay = 100; // ms entre letras
+    const animationDelayUnit = 0.03; // s para animation-delay en CSS
   
-    // Inserta el estilo embebido con duración sincronizada
+    // Inserta estilo embebido
     const style = document.createElement("style");
     style.textContent = `
       .word {
@@ -84,10 +84,12 @@ document.addEventListener("DOMContentLoaded", function () {
       }
   
       setTimeout(() => {
+        // Primero animamos titleEl
         typeAnimated(titleEl, titleText, () => {
+          // Luego de terminar, animamos refEl
           typeAnimated(refEl, refText);
         });
-      }, 1000);
+      }, 1000); // Espera inicial antes de empezar
     }
   });
   
