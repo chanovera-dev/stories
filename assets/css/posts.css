@@ -397,9 +397,10 @@
 @media(max-width:767px) {
 
     .site-main .container--header .section {
-        min-height: 462px;
+        padding: 40px 20px;
+        min-height: 470px;
     }
-    
+
     .site-main .container--header .section .tree {
         display:none;
     }
