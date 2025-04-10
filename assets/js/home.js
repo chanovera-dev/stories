@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
           if (i < text.length) {
             el.textContent += text.charAt(i);
             i++;
-            setTimeout(type, 25); // velocidad por letra
+            setTimeout(type, 40); // velocidad por letra
           } else if (typeof callback === 'function') {
             callback();
           }
