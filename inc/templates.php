@@ -23,6 +23,10 @@ function posts_styles() {
         if ( is_active_sidebar( 'sidebar-posts' ) ) {
             wp_enqueue_style( 'sidebar-posts', get_template_directory_uri() . '/assets/css/sidebar.css', array(), get_asset_version('/assets/css/sidebar.css'), 'all' );
         }
+
+        if ( is_home() && is_main_query() && !is_paged() ) {
+            wp_enqueue_script( 'home-script', get_template_directory_uri() . '/assets/js/home.js', array(), get_asset_version('/assets/js/home.js'), true );
+        }
     }
 }
 add_action( 'wp_enqueue_scripts', 'posts_styles' );
