@@ -23,16 +23,18 @@
 
 .site-main .container--header .section .message :is(.main-title,.reference) .letter {
     display: inline-block;
-    opacity: 0;
+    opacity: 1;
     transform: translateY(0px);
     animation: jump-in 0.3s ease forwards;
   }
 
   @keyframes jump-in {
     0% {
-      transform: translateY(-20px);
+        opacity: 0;
+        transform: translateY(-20px);
     }
     100%{
+        opacity: 1;
         transfofrm: translateY(0px);
     }
   }
