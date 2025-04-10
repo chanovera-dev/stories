@@ -9,13 +9,13 @@ document.addEventListener("DOMContentLoaded", function () {
       titleEl.textContent = "";
       refEl.textContent = "";
   
-      function typeText(el, text, callback) {
+      function typeText(el, text, speed, callback) {
         let i = 0;
         function type() {
           if (i < text.length) {
             el.textContent += text.charAt(i);
             i++;
-            setTimeout(type, 40); // velocidad por letra
+            setTimeout(type, speed);
           } else if (typeof callback === 'function') {
             callback();
           }
@@ -24,9 +24,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
   
       setTimeout(() => {
-        typeText(titleEl, titleText, () => {
-          typeText(refEl, refText);
+        typeText(titleEl, titleText, 40, () => {
+          typeText(refEl, refText, 80);
         });
-      }, 600); // espera 1 segundo antes de empezar
+      }, 600);
     }
-});
+});  
