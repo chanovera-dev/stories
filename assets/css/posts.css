@@ -21,6 +21,22 @@
     z-index: 1;
 }
 
+.site-main .container--header .section .message :is(.main-title,.reference) .letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0px);
+    animation: jump-in 0.3s ease forwards;
+  }
+
+  @keyframes jump-in {
+    0% {
+      transform: translateY(-20px);
+    }
+    100%{
+        transfofrm: translateY(0px);
+    }
+  }
+
 .site-main .container--header .section .message article > *:not(:last-child) {
     margin-bottom:20px;
 }
