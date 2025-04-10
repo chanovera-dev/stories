@@ -4,7 +4,6 @@
 
 .site-main .container--header .section {
     width: 100%;
-    min-height: 462px;
     padding:20px;
     background: linear-gradient(var(--background-sky-1), var(--background-sky-2));
     position:relative;
@@ -399,6 +398,7 @@
 
     .site-main .container--header .section .tree {
         display:none;
+        min-height: 462px;
     }
 
 }
