@@ -2,20 +2,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const titleEl = document.querySelector(".site-main .container--header .section .message article .main-title");
     const refEl = document.querySelector(".site-main .container--header .section .message article .reference");
   
-    const letterDelay = 100; // ms entre letras
-    const animationDelayUnit = 0.03; // s para animation-delay en CSS
+    const letterDelay = 50; // ms entre letras
+    const animationDelayUnit = 0.015; // s para animation-delay en CSS
   
     // Inserta estilo embebido
     const style = document.createElement("style");
     style.textContent = `
       .word {
         white-space: nowrap;
-        display: inline-block;
+        display: inline-flex;
       }
       .letter {
         display: inline;
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(-10px);
         animation: jump-in ${letterDelay}ms ease forwards;
       }
       .space {
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
           // Luego de terminar, animamos refEl
           typeAnimated(refEl, refText);
         });
-      }, 1000); // Espera inicial antes de empezar
+      }, 600); // Espera inicial antes de empezar
     }
   });
   
