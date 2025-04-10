@@ -396,9 +396,12 @@
 
 @media(max-width:767px) {
 
+    .site-main .container--header .section {
+        min-height: 462px;
+    }
+    
     .site-main .container--header .section .tree {
         display:none;
-        min-height: 462px;
     }
 
 }
