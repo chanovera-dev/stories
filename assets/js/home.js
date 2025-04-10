@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
       setTimeout(() => {
         typeText(titleEl, titleText, 40, () => {
           setTimeout(() => {
-            typeText(refEl, refText, 120);
+            typeText(refEl, refText, 200);
           }, 500);
         });
       }, 600);
