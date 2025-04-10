@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const titleEl = document.querySelector(".site-main .container--header .section .message article .main-title");
     const refEl = document.querySelector(".site-main .container--header .section .message article .reference");
   
-    const letterDelay = 50; // ms entre letras
-    const animationDelayUnit = 0.015; // s para animation-delay en CSS
+    const letterDelay = 25; // ms entre letras
+    const animationDelayUnit = 0.0075; // s para animation-delay en CSS
   
     // Inserta estilo embebido
     const style = document.createElement("style");
