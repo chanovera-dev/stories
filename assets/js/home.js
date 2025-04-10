@@ -25,8 +25,11 @@ document.addEventListener("DOMContentLoaded", function () {
   
       setTimeout(() => {
         typeText(titleEl, titleText, 40, () => {
-          typeText(refEl, refText, 100);
+          setTimeout(() => {
+            typeText(refEl, refText, 120);
+          }, 500);
         });
       }, 600);
     }
-});  
+  });
+  
