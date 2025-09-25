@@ -10,8 +10,8 @@ get_header(); ?>
 
 <main id="main" class="site-main" role="main">
     <?php if ( ! is_paged() ) : ?>
-    <header class="container container--header">
-        <section class="section">
+    <header class="block container--header">
+        <div class="content">
             <div class="message">
             <?php
                 $args = array(
@@ -44,12 +44,12 @@ get_header(); ?>
                 <div class="c2 three"></div>
                 <div class="c2 four"></div>
             </div>
-        </section>
+        </div>
     </header>
     <?php else : ?>
-        <header class="container post-header">
-        <div class="container">
-            <section class="section top">
+        <header class="block post-header">
+        <section class="block">
+            <div class="content top">
                 <div class="breadcrumbs">
                     <?php
                         if ( function_exists('wp_breadcrumbs') ) {
@@ -57,13 +57,13 @@ get_header(); ?>
                         }
                     ?>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
     </header><!-- .post-header -->
     <?php endif; ?>
 
-    <div class="container container--posts">
-        <section class="section">
+    <section class="block container--posts">
+        <div class="content">
             <div class="posts">
                 <?php
 
@@ -102,8 +102,8 @@ get_header(); ?>
 
                 }
             ?>
-        </section>
-    </div><!-- .container--posts -->
+        </div>
+    </section><!-- .container--posts -->
 </main><!-- #main -->
 
 <?php get_footer(); ?>

@@ -200,16 +200,22 @@ function wp_breadcrumbs() {
         }
     } elseif (!is_single() && !is_page() && get_post_type() != 'post' && !is_404()) {}
 }
-/**
- * Replace menu links with submenus with divs
- */
-function replace_menu_links_with_div($item_output, $item, $depth, $args) {
-    global $submenu_items_by_parent;
 
-    // Initialize child menu cache per menu
+/**
+ * Replace menu title links with submenus with buttons
+ */
+function custom_mobile_menu($item_output, $item, $depth, $args) {
+    
+    $allowed_locations = ['primary'];
+
+    if (!isset($args->theme_location) || !in_array($args->theme_location, $allowed_locations)) {
+        return $item_output;
+    }
+
+    global $submenu_items_by_parent;
     static $checked_menus = [];
 
-    if (!in_array($args->menu->term_id, $checked_menus)) {
+    if (!empty($args->menu) && !in_array($args->menu->term_id, $checked_menus)) {
         $menu_items = wp_get_nav_menu_items($args->menu->term_id);
         foreach ($menu_items as $menu_item) {
             $submenu_items_by_parent[$menu_item->menu_item_parent][] = $menu_item;
@@ -220,15 +226,15 @@ function replace_menu_links_with_div($item_output, $item, $depth, $args) {
     $has_children = !empty($submenu_items_by_parent[$item->ID]);
 
     if ($has_children) {
-        $text = esc_html($item->title);
+        $text = '<a href="' . esc_url($item->url) . '">' . esc_html($item->title) . '</a>';
         $svg_icon = '<svg width="13" height="13" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>';
 
-        return '<div class="menu-item-with-submenu">' . $text . ' ' . $svg_icon . '</div>';
+        return '<div class="wrapper-for-title">' . $text . '<button class="button-for-submenu">' . $svg_icon . '</button></div>';
     }
 
     return $item_output;
 }
-add_filter('walker_nav_menu_start_el', 'replace_menu_links_with_div', 10, 4);
+add_filter('walker_nav_menu_start_el', 'custom_mobile_menu', 10, 4);
 
 /**
  * Create a shortcode for "detras-del-espejo" posts

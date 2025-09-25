@@ -1,0 +1,63 @@
+:root{
+    /* display */
+    --nodisplay-mobile-button:none;
+    --display-mobile-button:grid;
+    --opacity-clouds: 1;
+    --brightness-tree: 1;
+    --brightness-thumbnail: 1;
+    --brightness-single-post-thumbnail: .5;
+
+    /* sizes */
+    --width-pagination: 43px;
+
+    /* colors */
+    --background-base: #f5f7f5;
+    --background-desktop-header: #dbe1e8;
+    --background-desktop-header--hover-buttons: #e5eaee;
+    --background-desktop-header--searchform: #e5eaee;
+    --background-sky-1: #1e90ff;
+    --background-sky-2: #87CEEB;
+    --background-breadcrumbs: #e6ebef;    
+    --background-tags: #dbe1e8;
+    --background-tags-hover: #e5eaee;
+    --background-hover-navigation: #e5eaee;
+    --line-1: #abb8c3;
+    --line-2: #DBE1F3;
+    --color-text-base: #3D4651;
+    --color-tags: #4d5f71;
+    --color-link: #1e90ff;
+    --color-link-hover: #329aff;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root{
+        /* display */
+        --opacity-clouds: .25;
+        --brightness-tree: .2;
+        --brightness-thumbnail: .5;
+        --brightness-single-post-thumbnail: .25;
+
+        /* colors */
+        --background-base: #0a0d10;
+        --background-desktop-header: #13181d;
+        --background-desktop-header--hover-buttons: #1a2129;
+        --background-desktop-header--searchform: #1a2129;
+        --background-sky-1: #12171c;
+        --background-sky-2: #000000;
+        --background-breadcrumbs: #1a2129;
+        --background-tags: #26303b;
+        --background-tags-hover: #3b444e;
+        --background-hover-navigation: #13181d;
+        --line-1: #3b444e;
+        --line-2: #3b444e;
+        --color-text-base: #9198a1;
+        --color-tags: #d1d1d1;
+    }
+}
+
+@media (width > 768px) {
+    :root {
+        --display-mobile-button: none;
+        --display-search-mobile-button: grid;
+    }
+}

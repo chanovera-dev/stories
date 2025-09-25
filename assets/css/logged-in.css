@@ -1,0 +1,15 @@
+@media (width <= 600px ) {
+    body {
+        & #wpadminbar {
+            top: -46px;
+        }
+    }
+}
+
+@media (width > 600px ) {
+    body:has( #wpadminbar ) {
+        & #main-header {
+            top: 32px;
+        }
+    }
+}

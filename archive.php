@@ -9,9 +9,9 @@ get_header(); ?>
 
 <main id="main" class="site-main" role="main">
 
-    <header class="container post-header">
-        <div class="container">
-            <section class="section top">
+    <header class="block post-header">
+        <section class="block">
+            <div class="content top">
                 <div class="breadcrumbs">
                     <?php
                         if ( function_exists('wp_breadcrumbs') ) {
@@ -19,17 +19,17 @@ get_header(); ?>
                         }
                     ?>
                 </div>
-            </section>
-        </div>
-        <div class="container container--title">
-            <section class="section">
+            </div>
+        </section>
+        <section class="block container--title">
+            <div class="content">
                 <?php the_archive_title( '<h1 class="main-title">', '</h1>' ); ?>
-            </section>
-        </div><!-- .container--title -->
+            </div>
+        </section><!-- .container--title -->
     </header><!-- .post-header -->
 
-    <div class="container container--posts">
-        <section class="section">
+    <section class="block container--posts">
+        <div class="content">
         <div class="posts">
                 <?php
 
@@ -68,8 +68,8 @@ get_header(); ?>
 
                 }
             ?>
-        </section>
-    </div><!-- .container--posts -->
+        </div>
+    </section><!-- .container--posts -->
 </main><!-- #main -->
 
 <?php get_footer(); ?>

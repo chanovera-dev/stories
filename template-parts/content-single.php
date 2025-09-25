@@ -3,8 +3,8 @@
         <?php
             if ( has_post_thumbnail() == true ) : echo '<img class="thumbnail" src="'; the_post_thumbnail_url( 'full' ); echo '" alt="Imagen del artículo" loading="lazy" width="300" height="200">'; endif;
         ?>
-        <div class="container">
-            <section class="section top">
+        <div class="block">
+            <div class="content top">
                 <div class="breadcrumbs">
                     <?php
                         if ( function_exists('wp_breadcrumbs') ) {
@@ -13,10 +13,10 @@
                     ?>
                 </div>
                 <?php echo the_category(); ?>
-            </section>
+            </div>
         </div>
-        <div class="container">
-            <section class="section middle">
+        <div class="block">
+            <div class="content middle">
                 <?php the_title( '<h1 class="post-header--title">', '</h1>' ); ?>
                 <div class="author">
                     <?php
@@ -25,10 +25,10 @@
                         <span class="author-position">'; the_author_meta('description'); echo '</span>';
                     ?>
                 </div>
-            </section>
+            </div>
         </div>
-        <div class="container">
-            <section class="section bottom">
+        <div class="block">
+            <div class="content bottom">
                 <div class="date">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3-event" viewBox="0 0 16 16">
                         <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z"/>
@@ -59,11 +59,11 @@
                         </svg>
                     </a>
                 </p>
-            </section>
+            </div>
         </div>
     </header><!-- .post-header -->
-    <div class="container post-body">
-        <section class="section">
+    <div class="block post-body">
+        <div class="content">
             <div class="post-body--content is-layout-constrained">
                 <?php the_content(); ?>
             </div>
@@ -75,30 +75,30 @@
                     </aside>';
                 }
             ?>
-        </section>
+        </div>
     </div><!-- .post-body -->
     <div class="post-footer">
         <?php
             if ( comments_open() ) :
                 echo '
-                <div class="container comments--wrapper">
-                    <section class="section">';
+                <div class="block comments--wrapper">
+                    <div class="content">';
                         comments_template();
                     echo '
-                    </section>
+                    </div>
                 </div>';
             else:
                 echo '
-                <div class="container no-comments--wrapper">
-                    <section class="section">';
+                <div class="block no-comments--wrapper">
+                    <div class="content">';
                         esc_html_e( 'Los comentarios están cerrados.', 'stories' );
                     echo '
-                    </section>
+                    </div>
                 </div>';
             endif;
         ?>
-        <div class="container container--posts">
-            <section class="section">
+        <div class="block container--posts">
+            <div class="content">
                 <?php
 
                     $categories = wp_get_post_categories(get_the_ID());
@@ -151,7 +151,7 @@
                     endif;
                 ?>
 
-            </section>
+            </div>
         </div>
     </div><!-- .post-footer -->
 </article><!-- #main -->

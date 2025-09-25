@@ -27,6 +27,9 @@ function menuWithChildren() {
 
                 const subMenu = item.querySelector('.sub-menu');
                 if (subMenu) {
+                    const childrenCount = subMenu.children.length;
+                    const transitionTime = childrenCount * 0.1; // Calculate transition time based on number of children
+                    subMenu.style.transition = `max-height ${transitionTime}s ease-in-out`;
                     subMenu.classList.toggle('open');
                 }
             });

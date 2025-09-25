@@ -3,23 +3,29 @@
  * Stories engine room
  */
 
+// Prevent direct access to this file for security reasons
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 /**
- * Assign the Stories version to a var
+ * Define the theme version as a constant for better performance and clarity
  */
 $theme = wp_get_theme( 'stories' );
-$stories_version = $theme['Version'];
+define( 'STORIES_VERSION', $theme['Version'] );
 
 /**
- * WordPress functions core
+ * Load core functionalities of the theme
  */
 $stories = (object) array(
-    'version' => $stories_version,
+    'version' => STORIES_VERSION,
 
     /**
-     * Initialize all the things
+     * Initialize all required components of the theme
+     * Each component is loaded only if the corresponding file exists
      */
-    'core'              => require_once 'inc/core.php',
-    'extended'          => require_once 'inc/extended.php',
-    'custom-widgets'    => require_once 'inc/custom-widgets.php',
-    'templates'         => require_once 'inc/templates.php',
+    'core'              => file_exists( __DIR__ . '/inc/core.php' ) ? require_once __DIR__ . '/inc/core.php' : null,
+    'extended'          => file_exists( __DIR__ . '/inc/extended.php' ) ? require_once __DIR__ . '/inc/extended.php' : null,
+    'custom-widgets'    => file_exists( __DIR__ . '/inc/custom-widgets.php' ) ? require_once __DIR__ . '/inc/custom-widgets.php' : null,
+    'templates'         => file_exists( __DIR__ . '/inc/templates.php' ) ? require_once __DIR__ . '/inc/templates.php' : null,
 );

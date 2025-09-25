@@ -3,8 +3,8 @@
         <?php
             if ( has_post_thumbnail() == true ) : echo '<img class="thumbnail" src="'; the_post_thumbnail_url( 'full' ); echo '" alt="Imagen del artículo" loading="lazy" width="300" height="200">'; endif;
         ?>
-        <div class="container">
-            <section class="section top">
+        <section class="block">
+            <div class="content top">
                 <div class="breadcrumbs">
                     <?php
                         if ( function_exists('wp_breadcrumbs') ) {
@@ -12,10 +12,10 @@
                         }
                     ?>
                 </div>
-            </section>
-        </div>
-        <div class="container">
-            <section class="section middle">
+            </div>
+        </section>
+        <section class="block">
+            <div class="content middle">
                 <?php the_title( '<h1 class="post-header--title">', '</h1>' ); ?>
                 <div class="author">
                     <?php
@@ -24,11 +24,11 @@
                         }
                     ?>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
     </header><!-- .post-header -->
-    <div class="container post-body">
-        <section class="section">
+    <section class="block post-body">
+        <div class="content">
             <div class="post-body--content is-layout-constrained">
                 <?php the_content(); ?>
             </div>
@@ -40,6 +40,6 @@
                     </aside>';
                 }
             ?>
-        </section>
-    </div><!-- .post-body -->
+        </div>
+    </section><!-- .post-body -->
 </article><!-- #main -->

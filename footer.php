@@ -1,9 +1,9 @@
         <footer id="main-footer">
-            <div class="container middle-footer">
-                <section class="section">
+            <section class="block middle-footer">
+                <div class="content">
                     <div class="about">
                         <h3 class="title-section">Sobre Relatos y Cartas</h3>
-                        <p class="content">Relatos y Cartas es un espacio dedicado a la creatividad y la expresión a través de las palabras. Aquí encontrarás cuentos, microcuentos, poemas e historias que buscan inspirar, emocionar y conectar con los lectores.</p>
+                        <p class="section">Relatos y Cartas es un espacio dedicado a la creatividad y la expresión a través de las palabras. Aquí encontrarás cuentos, microcuentos, poemas e historias que buscan inspirar, emocionar y conectar con los lectores.</p>
                     </div>
                     <div class="other-links">
                         <div class="group-links">
@@ -26,13 +26,13 @@
                             ?>
                         </div>
                     </div>
-                </section>
-            </div>
-            <div class="container end-footer">
-                <section class="section">
+                </div>
+            </section>
+            <section class="block end-footer">
+                <div class="content">
                     <p>© <?php bloginfo( 'name' ); echo ' ' . date("Y"); ?> • <?= __('Todos los Derechos Reservados', 'stories') ?></p>
-                </section>
-            </div>
+                </div>
+            </section>
         </footer>
         <?php wp_footer(); ?>
     </body>

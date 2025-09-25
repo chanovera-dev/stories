@@ -9,8 +9,8 @@
 </head>
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
-    <header id="main-header" class="container">
-        <section class="section header-content">
+    <header id="main-header" class="block">
+        <div class="content header-content">
             <?php
                 if ( file_exists( get_template_directory() . '/templates/header/brand.php' ) ) :
                     include_once( TEMPLATEPATH . '/templates/header/brand.php' );
@@ -28,5 +28,5 @@
                     include_once( TEMPLATEPATH . '/templates/header/menu-mobile-button.php' );
                 endif;
             ?>
-        </section><!-- .header-content -->
+        </div><!-- .header-content -->
     </header><!-- #main-header -->

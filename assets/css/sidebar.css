@@ -1,4 +1,4 @@
-#main .container--posts .section aside > *:not(:last-child) {
+#main .container--posts .content aside > *:not(:last-child) {
     margin-bottom:50px;
 }
 
@@ -74,7 +74,7 @@ aside .wp-block-search .wp-block-search__inside-wrapper {
 }
 
 @media(max-width:1365px) {
-    .site-main .post-body .section .post-body--content {
+    .site-main .post-body .content .post-body--content {
         padding-bottom: 50px;
     }
 }
@@ -85,8 +85,8 @@ aside .wp-block-search .wp-block-search__inside-wrapper {
         max-width: 100%;
     }
 
-    #main .container--posts .section,
-    .site-main .post-body .section{
+    #main .container--posts .content,
+    .site-main .post-body .content{
         display: grid;
         grid-template-columns: 1fr 290px;
         gap: 0 90px;
@@ -95,7 +95,7 @@ aside .wp-block-search .wp-block-search__inside-wrapper {
 }
 
 @media(min-width:1024px) and (max-width:1365px) {
-    #main .container--posts .section aside{
+    #main .container--posts .content aside{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         gap:50px;
