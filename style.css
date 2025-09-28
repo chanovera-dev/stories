@@ -613,17 +613,9 @@ html {
 
 @media(min-width:768px){
       
-      .sub-menu > * {
-        
-      }
-      
-      .sub-menu > *:hover {
-        background: var(--background-desktop-header--hover-buttons);
-      }
-      
-      .menu-item-has-children:not(:hover) > .sub-menu > * {
-        
-      }
+    .sub-menu > *:hover {
+    background: var(--background-desktop-header--hover-buttons);
+    }
 
     /* custom searchform on desktop mode */
     #custom-searchform{max-width:0;overflow:hidden;transition:max-width .3s ease;}
