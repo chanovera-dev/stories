@@ -45,13 +45,15 @@ html {
 
         &.scroll-down {
             & #main-header {
-                /* transform: translateY(-100%); */
+                transform: translateY(-100%);
             }
         }
 
         &:is(.scroll-down,.scroll-up) {
             & #main-header {
                 box-shadow: 0 0 15px rgba(0 0 0 / 5%);
+                background-color: var(--background-desktop-header--transparent);
+                backdrop-filter: saturate(180%) blur(20px);
             }
         }
 
@@ -390,7 +392,7 @@ html {
         & body {
             &:is(.scroll-down,.scroll-up) {
                 & #main-header {
-                    padding: 0;
+                    padding: 5px 0;
 
                     & .header-content {
                         background-color: transparent;
@@ -418,6 +420,14 @@ html {
                                 & .menu {
                                     & > *:not(:last-child):after {
                                         background: linear-gradient(to bottom, transparent 10%, transparent 40%, transparent 60%, transparent 90%);
+                                    }
+
+                                    & .menu-item-has-children {
+                                        & .sub-menu {
+                                            top: 49px;
+                                            border-radius: 0 0 6px 6px;
+                                            background-color: var(--background-solid);
+                                        }
                                     }
                                 }
                             }
@@ -516,8 +526,11 @@ html {
                                         height: 43.8px;
                                         overflow: hidden;
                                         transition: padding .3s ease;
+                                    }
 
-                                        & .button-for-submenu {
+                                    &.menu-item-has-children {
+                                        & .wrapper-for-title {
+                                            & .button-for-submenu {
                                             background-color: transparent;
                                             border: none;
                                             display: grid;
@@ -525,17 +538,55 @@ html {
                                             width: 13px;
                                             height: 13px;
                                             transition: transform .3s ease;
+                                            transform: rotate(180deg);
 
-                                            & svg {
-                                                fill: var(--color-text-base);
+                                                & svg {
+                                                    fill: var(--color-text-base);
+                                                }
                                             }
                                         }
 
-                                        &:hover {
-                                            background-color: var(--background-desktop-header--hover-buttons);
+                                        & .sub-menu {
+                                            min-width: fit-content;
+                                            padding: 6px 0;
+                                            position: absolute;
+                                            top: 45.8px;
+                                            background-color: var(--background-desktop-header);
+                                            z-index: 100;
+                                            box-shadow: rgba(50, 50, 93, 0.1) 0px 6px 10px -4px, rgba(0, 0, 0, 0.75) 0px 3px 7px -4px;
+                                            border-radius: 6px;
+                                            overflow-y: hidden;
+                                            transition: 0.5s padding, 0.5s background-color, 0.5s box-shadow;
 
+                                            > * {
+                                                overflow: hidden;
+                                                height: 43.8px;
+                                                padding: 9.65px 20px;
+                                                white-space: nowrap;
+                                                transition: 0.5s height cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s padding cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s margin cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s 0.2s color, 0.2s background-color;
+                                            }
+                                        }
+                                    }
+
+                                    &.menu-item-has-children:not(:hover) {
+                                        & .wrapper-for-title {
                                             & .button-for-submenu {
-                                                transform: rotate(180deg);
+                                                transform: rotate(0deg);
+                                            }
+                                        }
+
+                                        & > .sub-menu {
+                                            padding: 0;
+                                            
+                                            & > * {
+                                                visibility: hidden;
+                                                height: 0;
+                                                padding-top: 0;
+                                                padding-bottom: 0;
+                                                margin: 0;
+                                                color: rgba(25, 25, 25, 0);
+                                                transition: 0.5s 0.1s height, 0.5s 0.1s padding, 0.5s 0.1s margin, 0.3s color, 0.6s visibility;
+                                                z-index: 99;
                                             }
                                         }
                                     }
@@ -561,37 +612,9 @@ html {
 }
 
 @media(min-width:768px){
-
-    /* primary submenus on desktop mode */
-    .sub-menu {
-        min-width: fit-content;
-        padding: 0;
-        position: absolute;
-        top: 45.8px;
-        background-color: var(--background-desktop-header);
-        z-index: 100;
-        box-shadow: rgba(50, 50, 93, 0.1) 0px 6px 10px -4px, rgba(0, 0, 0, 0.75) 0px 3px 7px -4px;
-        border-radius: 6px;
-        overflow-y: hidden;
-        transition: 0.5s padding, 0.5s background-color, 0.5s box-shadow;
-      }
-      
-      .menu-item-has-children:not(:hover) > .sub-menu {
-        padding: 0;
-        box-shadow:  rgba(50, 50, 93, 0) 0px 6px 10px -4px, rgba(0, 0, 0, 0) 0px 3px 7px -4px;
-        background-color: var(--background-desktop-header);
-        border-radius: 6px;
-        overflow-y: hidden;
-        z-index: 99;
-      }
       
       .sub-menu > * {
-        overflow: hidden;
-        height: 43.8px;
-        padding: 9.65px 20px;
-        background: var(--background-desktop-header);
-        white-space: nowrap;
-        transition: 0.5s height cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s padding cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s margin cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s 0.2s color, 0.2s background-color;
+        
       }
       
       .sub-menu > *:hover {
@@ -599,14 +622,7 @@ html {
       }
       
       .menu-item-has-children:not(:hover) > .sub-menu > * {
-        visibility: hidden;
-        height: 0;
-        padding-top: 0;
-        padding-bottom: 0;
-        margin: 0;
-        color: rgba(25, 25, 25, 0);
-        transition: 0.5s 0.1s height, 0.5s 0.1s padding, 0.5s 0.1s margin, 0.3s color, 0.6s visibility;
-        z-index: 99;
+        
       }
 
     /* custom searchform on desktop mode */

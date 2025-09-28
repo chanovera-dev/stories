@@ -11,8 +11,10 @@
     --width-pagination: 43px;
 
     /* colors */
+    --background-solid: #ffffff;
     --background-base: #f5f7f5;
     --background-desktop-header: #dbe1e8;
+    --background-desktop-header--transparent: #ffffffc2;
     --background-desktop-header--hover-buttons: #e5eaee;
     --background-desktop-header--searchform: #e5eaee;
     --background-sky-1: #1e90ff;
@@ -38,8 +40,10 @@
         --brightness-single-post-thumbnail: .25;
 
         /* colors */
+        --background-solid: #000000;
         --background-base: #0a0d10;
         --background-desktop-header: #13181d;
+        --background-desktop-header--transparent: #000000c2;
         --background-desktop-header--hover-buttons: #1a2129;
         --background-desktop-header--searchform: #1a2129;
         --background-sky-1: #12171c;
