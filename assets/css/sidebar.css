@@ -1,76 +1,122 @@
-#main .container--posts .content aside > *:not(:last-child) {
-    margin-bottom:50px;
-}
+.site-main {
+    & :is(.container--posts,.post-body) {
+        & .content {
+            & aside {
+                overflow: hidden;
 
-aside ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
+                & > *:not(:last-child) {
+                    margin-bottom: 50px;
+                }
 
-aside ul li:not(:last-child) {
-    border-bottom: 1px solid var(--wp--preset--color--accent-6);
-}
+                & ul {
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
 
-aside ul li a {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding:9px 0;
-    transition: color .3s ease;
-}
+                    &.wp-block-latest-posts {
+                        & li {
+                            & a {
+                                display: grid;
+                                grid-template-columns: auto 1fr;
+                                gap: 15px;
+                                align-items: center;
 
-aside ul.wp-block-latest-posts li a {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 15px;
-    align-items: center;
-}
+                                & .wp-post-image {
+                                    width: 100px;
+                                    aspect-ratio: 3 / 2;
+                                    object-fit: cover;
+                                    display: block;
+                                    border-radius: 1rem;
+                                    corner-shape: squircle;
+                                }
 
-aside ul.wp-block-latest-posts li a .wp-post-image {
-    width: 100px;
-    aspect-ratio: 3 / 2;
-    object-fit: cover;
-    display: block;
-    border-radius: 6px;
-} 
+                                & .latest-post-content {
+                                    display: grid;
+                                    grid-template-rows: 1fr auto;
+                                    gap: 5px;
+                                    align-items: end;
 
-aside ul.wp-block-latest-posts li a .latest-post-content {
-    display: grid;
-    grid-template-rows: 1fr auto;
-    gap: 5px;
-    align-items: end;
-}
+                                    & .latest-post-date {
+                                        font-size: var(--wp--preset--font-size--small);
+                                        opacity: .5;
+                                    }
+                                }
+                            }
+                        }
+                    }
 
-aside ul.wp-block-latest-posts li a .latest-post-content .latest-post-date {
-    font-size: var(--wp--preset--font-size--small);
-    opacity: .5;
-}
+                    & li {
+                        &:not(:last-child) {
+                            border-bottom: 1px solid var(--wp--preset--color--accent-6);
+                        }
 
-aside li:has(a:hover):not(:last-child),
-aside li:has(a):not(:last-child):hover {
-    border-bottom: 1px solid color-mix(in srgb, currentColor 5%, transparent);
-}
+                        &:has(a:hover):not(:last-child),
+                        :has(a):not(:last-child):hover {
+                            border-bottom: 1px solid color-mix(in srgb, currentColor 5%, transparent);
+                        }
 
-aside a:hover {
-    color: var(--color-link-hover);
-}
+                        & a {
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 7px;
+                            padding:9px 0;
+                            transition: color .3s ease;
 
-aside .wp-block-group :is(ul,ol,p) {
-    visibility: hidden;
-}
+                            &:hover {
+                                color: var(--color-link-hover);
+                            }
+                        }
+                    }
+                }
 
-aside .wp-block-group :is(ul,ol,p) > * {
-    visibility: visible;
-    transition: all .3s;
-}
+                & .wp-block-group {
+                    & > * {
+                        transition: transform .6s ease-in-out;
+                        transform: translateX(-120%);
+                    }
 
-aside .wp-block-group :is(ul:hover,ol:hover,p:hover) > :not(:hover) {
-    opacity: .25;
-}
+                    &.animate-in {
+                        & > * {
+                            animation: widget-entrance .6s ease forwards;
+                        }  
+                    }
 
-aside .wp-block-search .wp-block-search__inside-wrapper {
-    position:relative;
+                    & .wp-block-heading {
+                        margin-bottom: 1.2rem;
+                    }
+
+                    & :is(ul,ol,p) {
+                        visibility: hidden;
+
+                        & > * {
+                            visibility: visible;
+                            transition: all .3s;
+                        }
+                    }
+
+                    & :is(ul:hover,ol:hover,p:hover) {
+                        & > :not(:hover) {
+                           opacity: .25; 
+                        }
+                    }
+                }
+
+                & .wp-block-search {
+                    &.animate-in {
+                        > .wp-block-search__inside-wrapper {
+                            animation: widget-entrance .6s ease forwards;
+                        }
+                    }
+
+                    & .wp-block-search__inside-wrapper {
+                        position:relative;
+                        transition: transform .6s ease-in-out;
+                        transform: translateX(-120%);
+                    }
+                }
+            }
+        }
+    }
 }
 
 @media(max-width:1365px) {
@@ -99,5 +145,15 @@ aside .wp-block-search .wp-block-search__inside-wrapper {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         gap:50px;
+    }
+}
+
+@keyframes widget-entrance {
+    0% {
+        transform: translateX(-120%);
+    }
+
+    100% {
+        transform: translateX(0);
     }
 }

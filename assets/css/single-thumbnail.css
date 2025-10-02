@@ -1,6 +1,22 @@
-.site-main .post-header .section.top .breadcrumbs,
-.site-main .post-header .section.top .post-categories li a,
-.site-main .post-header .section.middle,
-.site-main .post-header .section.bottom {
+.site-main {
+    & .post-header {
+        & > .block:has(.content.top) {
+            position: relative;
+
+            &:before {
+                background-color: transparent;
+            }
+
+            &:after {
+                background-color: transparent;
+            }
+        }
+    }
+}
+
+.site-main .post-header .content.top .breadcrumbs,
+.site-main .post-header .content.top .post-categories li a,
+.site-main .post-header .content.middle,
+.site-main .post-header .content.bottom {
     color: #fff;
 }

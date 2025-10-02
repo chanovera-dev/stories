@@ -25,7 +25,12 @@ function posts_styles() {
         }
 
         if ( is_home() && is_main_query() && !is_paged() ) {
-            wp_enqueue_script( 'home-script', get_template_directory_uri() . '/assets/js/home.js', array(), get_asset_version('/assets/js/home.js'), 'all' );
+            wp_enqueue_style( 'home-posts', get_template_directory_uri() . '/assets/css/home-picture.css', array(), get_asset_version('/assets/css/home-picture.css'), 'all' );
+            wp_enqueue_script( 'cloud-animation', get_template_directory_uri() . '/assets/js/cloud-animation.js', array(), get_asset_version('/assets/js/cloud-animation.js'), 'all' );
+        }
+
+        if ( paginate_links() ) {
+            wp_enqueue_style( 'custom-pagination', get_template_directory_uri() . '/assets/css/pagination.css', array(), get_asset_version('/assets/css/pagination.css'), 'all' );
         }
     }
 }

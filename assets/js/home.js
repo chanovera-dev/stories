@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const titleEl = document.querySelector(".site-main .container--header .section .message article .main-title");
-    const refEl = document.querySelector(".site-main .container--header .section .message article .reference");
+    const titleEl = document.querySelector(".site-main .container--header .content .message article .main-title");
+    const refEl = document.querySelector(".site-main .container--header .content .message article .reference");
   
     if (titleEl && refEl) {
       const titleText = titleEl.textContent.trim();

@@ -3,18 +3,7 @@
         <?php
             if ( has_post_thumbnail() == true ) : echo '<img class="thumbnail" src="'; the_post_thumbnail_url( 'full' ); echo '" alt="Imagen del artículo" loading="lazy" width="300" height="200">'; endif;
         ?>
-        <div class="block">
-            <div class="content top">
-                <div class="breadcrumbs">
-                    <?php
-                        if ( function_exists('wp_breadcrumbs') ) {
-                            wp_breadcrumbs( '<p id="breadcrumbs">','</p>' );
-                        }
-                    ?>
-                </div>
-                <?php echo the_category(); ?>
-            </div>
-        </div>
+        <?php get_template_part( 'templates/page/breadcrumb' ); ?>
         <div class="block">
             <div class="content middle">
                 <?php the_title( '<h1 class="post-header--title">', '</h1>' ); ?>

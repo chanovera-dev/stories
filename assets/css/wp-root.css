@@ -5,6 +5,7 @@
     --opacity-clouds: 1;
     --brightness-tree: 1;
     --brightness-thumbnail: 1;
+    --brightness-thumbnail--hover: 1.2;
     --brightness-single-post-thumbnail: .5;
 
     /* sizes */
@@ -17,6 +18,8 @@
     --background-desktop-header--transparent: #ffffffc2;
     --background-desktop-header--hover-buttons: #e5eaee;
     --background-desktop-header--searchform: #e5eaee;
+    --background-desktop-header--searchform--scroll: #ffffff57;
+    --border-desktop-header--searchform--scroll: #d1d1d15e;
     --background-sky-1: #1e90ff;
     --background-sky-2: #87CEEB;
     --background-breadcrumbs: #e6ebef;    
@@ -37,6 +40,7 @@
         --opacity-clouds: .25;
         --brightness-tree: .2;
         --brightness-thumbnail: .5;
+        --brightness-thumbnail--hover: .7;
         --brightness-single-post-thumbnail: .25;
 
         /* colors */
@@ -46,6 +50,8 @@
         --background-desktop-header--transparent: #000000c2;
         --background-desktop-header--hover-buttons: #1a2129;
         --background-desktop-header--searchform: #1a2129;
+        --background-desktop-header--searchform--scroll: #00000057;
+        --border-desktop-header--searchform--scroll: #292929;
         --background-sky-1: #12171c;
         --background-sky-2: #000000;
         --background-breadcrumbs: #1a2129;

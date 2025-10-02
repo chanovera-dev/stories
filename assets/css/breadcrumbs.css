@@ -1,51 +1,103 @@
-.site-main .post-header > .container:has(.section.top) {
-    background-color: var(--background-breadcrumbs);
-    border-top: 1px solid var(--line-2);
-    border-bottom: 1px solid var(--line-2);
+.site-main {
+    & .post-header {
+        & > .block:has(.content.top) {
+            position: relative;
+
+            &:before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 0;
+                height: 1px;
+                background-color: var(--line-2);
+                z-index: 1;
+                animation: border-expand 1s ease .5s forwards;
+            }
+
+            &:after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 0;
+                height: 1px;
+                background-color: var(--line-2);
+                z-index: 1;
+                animation: border-expand 1s ease 1s forwards;
+            }
+
+            & .background-breadcrumbs {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 0;
+                height: 100%;
+                background-color: var(--background-breadcrumbs);
+                z-index: -1;
+                animation: border-expand 1s ease forwards;
+            }
+
+            & .content.top {
+                position: relative;
+                display: flex;
+                align-items: start;
+                justify-content: space-between;
+                gap: 50px;
+                padding: 13px 0;
+                overflow: hidden;
+
+                & .breadcrumbs {
+                    display: inline-flex;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    gap: 5px 10px;
+                    transform: translateX(-100%);
+                    animation: breadcrumbs-entrance .6s ease .6s forwards;
+
+                    & a {
+                        transition: color .3s ease;
+
+                        &:first-child {
+                            & svg {
+                                width: 17px;
+                                height: 17px;
+                                position: relative;
+                                top: 1px; 
+                                margin-right: 7px;
+                            }
+                        }
+
+                        &:hover {
+                            color: var(--color-link);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
-.site-main .post-header .section.top {
-    position: relative;
-    display: flex;
-    align-items: start;
-    justify-content: space-between;
-    gap: 50px;
-    padding: 13px 0;
+@keyframes border-expand {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
 }
 
-.site-main .post-header .section.top .breadcrumbs {
-    display: inline-flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 5px 10px;
-}
+@keyframes breadcrumbs-entrance {
+    0% {
+        transform: translateX(-100%);
+    }
 
-.site-main .post-header .section.top .breadcrumbs a {
-    transition: color .3s ease;
-}
-
-.site-main .post-header .section.top .breadcrumbs a:first-child svg {
-    width: 17px;
-    height: 17px;
-    position: relative;
-    top: 1px; 
-    margin-right: 7px;
-}
-
-.site-main .post-header .section.top .post-categories {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: inline-flex;
-}
-
-.site-main .post-header .section.top .post-categories li a {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    transition: color .3s ease;
-}
-
-.site-main .post-header .section.top .breadcrumbs a:hover {
-    color: var(--color-link-hover);
+    100% {
+        transform: translateX(0);
+    }
 }

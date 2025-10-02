@@ -34,32 +34,24 @@ get_header(); ?>
             ?>
             </div>
             <img class="tree" src="<?php echo get_theme_mod('bg_welcome', get_bloginfo('template_url') . '/assets/img/tree-min.webp'); ?>" alt="Decorative tree" srcset="" loading="lazy">
-            <div class="clouds">
-                <div class="c1 one"></div>
-                <div class="c1 two"></div>
-                <div class="c1 three"></div>
-                <div class="c1 four"></div>
-                <div class="c2 one"></div>
-                <div class="c2 two"></div>
-                <div class="c2 three"></div>
-                <div class="c2 four"></div>
+            <div class="clouds--wrapper">
+                <div class="clouds">
+                    <div class="c1 one"></div>
+                    <div class="c1 two"></div>
+                    <div class="c1 three"></div>
+                    <div class="c1 four"></div>
+                    <div class="c2 one"></div>
+                    <div class="c2 two"></div>
+                    <div class="c2 three"></div>
+                    <div class="c2 four"></div>
+                </div>
             </div>
         </div>
     </header>
     <?php else : ?>
         <header class="block post-header">
-        <section class="block">
-            <div class="content top">
-                <div class="breadcrumbs">
-                    <?php
-                        if ( function_exists('wp_breadcrumbs') ) {
-                            wp_breadcrumbs( '<p id="breadcrumbs">','</p>' );
-                        }
-                    ?>
-                </div>
-            </div>
-        </section>
-    </header><!-- .post-header -->
+            <?php get_template_part( 'templates/page/breadcrumb' ); ?>
+        </header><!-- .post-header -->
     <?php endif; ?>
 
     <section class="block container--posts">

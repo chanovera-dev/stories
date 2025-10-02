@@ -1,0 +1,244 @@
+.site-main {
+    & .block.container--header {
+        & .content {
+            width: 100%;
+            padding:20px;
+            position:relative;
+            overflow:hidden;
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 0;
+                height: 0;
+                background: linear-gradient(var(--background-sky-1), var(--background-sky-2));
+                border-radius: 100%;
+                corner-shape: initial;
+                z-index: -1;
+                animation: in-header-content 2s ease forwards;
+            }
+
+            & .message {
+                position: relative;
+                z-index: 1;
+
+                & article:first-child {
+                    opacity: 0;
+                    transform: translateX(-100%);
+                    animation: slide-in-message 1s ease 1.2s forwards;
+                }
+
+                & article {
+                    & .main-title {
+                        line-height: 1.5;
+                        margin-bottom: 20px;
+                    }
+
+                    & .reference {
+                        text-align: right;
+                    }
+                }
+            }
+
+            & .clouds--wrapper {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 300%;
+                height: 100%;
+                display: flex;
+                
+                & .clouds {
+                    width: 100%;
+                    height: 100%;
+                    z-index: 0;
+                    opacity: 0;
+                    overflow: hidden;
+                    animation: opacity-clouds .6s ease 1.5s forwards;
+                }
+            }
+        }
+    }
+}
+
+@media (width <= 767px) {
+    .site-main {
+        & .block.container--header {
+            & .content {
+                padding: 40px 20px;
+                min-height: 505px;
+
+                & .tree {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+@media (width > 768px) {
+    .site-main {
+        & .block.container--header {
+            & .content {
+                position: relative;
+                display: grid;
+                gap:50px;
+                grid-template-columns:1fr 150px;
+
+                & .tree {
+                    width:330px;
+                    height:auto;
+                    position:relative;
+                    transform: translate(130%, 30px);
+                    filter: brightness(var(--brightness-tree));
+                    z-index: 1;
+                    animation: tree-entrance 1s ease 1.5s forwards;
+                }
+
+                & .clouds--wrapper {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@media (width <= 1023px) {
+    @keyframes in-header-content {
+        0%{
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            corner-shape: initial;
+        }
+
+        50% {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            corner-shape: initial;
+        }
+        70% {
+            width: 100%;
+            height: 100%;
+            border-radius: 10rem;
+            corner-square: squircle;
+        }
+        100% {
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+            corner-shape: square;
+        }
+    }
+}
+
+@media (width >= 1024px) {
+    .site-main {
+        & .block.container--header {
+            & .content {
+                width: min(100% - 40px, 1096px);
+                grid-template-columns:1fr 330px;
+
+                &:before {
+                    width: 0;
+                    height: 0;
+                    border-radius: 50%;
+                    corner-shape: initial;
+                }
+            }
+        }
+    }
+
+    @keyframes in-header-content {
+        0%{
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            corner-shape: initial;
+        }
+
+        50% {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            corner-shape: initial;
+        }
+        70% {
+            width: 100%;
+            height: 100%;
+            border-radius: 10rem;
+            corner-square: squircle;
+        }
+        100% {
+            width: 100%;
+            height: 100%;
+            border-radius: 2rem;
+            corner-shape: squircle;
+        }
+    }
+}
+
+@keyframes slide-in-message {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.c1, .c2 {
+    width: 400px;
+    height: 350px;
+    position: absolute;
+    background: transparent url("https://relatosycartas.com/wp-content/themes/stories/assets/img/clouds.webp") 0 0 no-repeat;
+    background-size: 100%;
+    z-index:999;
+    animation: moving-clouds 60s linear infinite;
+  }
+
+  @keyframes opacity-clouds {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: var(--opacity-clouds);
+    }
+  }
+
+  .c1.one, .c2.one {
+    top: -260px;
+    left: 0px;
+  }
+  .c1.two, .c2.two {
+    top: -200px;
+    left: 100px;
+  }
+  .c1.three, .c2.three {
+    top: -240px;
+    right: 100px;
+  }
+  .c1.four, .c22.four {
+    top: -180px;
+    right: 0px;
+  }
+  
+  .c2 .one {
+    top: -209px;
+  }
+
+@keyframes tree-entrance {
+    0% { 
+        transform: translate(130%, 30px);
+    }
+    100% {
+        transform: translate(0, 30px);
+    }
+}

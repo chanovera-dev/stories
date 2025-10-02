@@ -1,0 +1,90 @@
+.site-main {
+    & .container--posts {
+        & .content {
+            & .posts {
+                & .navigation.pagination {
+                    grid-column: 1 / -1;
+                    margin-inline: auto;
+
+                    & .screen-reader-text {
+                        display: none;
+                    }
+
+                    & .nav-links {
+                        display: flex;
+                        align-items:center;
+                        background-color: var(--background-desktop-header);
+                        border-radius: 2rem;
+                        corner-shape: squircle;
+                        position: relative;
+                        overflow: hidden;
+
+                        & > *:not(:last-child):after {
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            content: '';
+                            width: 1px;
+                            height: 43.8px;
+                            background: linear-gradient(to bottom, transparent 10%, var(--line-1) 40%, var(--line-1) 60%, transparent 90%);
+                        }
+
+                        & .page-numbers {
+                            position:relative;
+                            display: grid;
+                            place-content: center;
+                            width: var(--width-pagination);
+                            height: var(--width-pagination);
+                            transition: all .3s ease;
+
+                            &.current {
+                                /* background-color: var(--background-desktop-header--searchform); */
+                                &:before {
+                                    position: absolute;
+                                    content: '';
+                                    bottom: 0;
+                                    left: 50%;
+                                    transform: translateX(-50%);
+                                    width: 15px;
+                                    height: 4px;
+                                    background-color: var(--color-tags);
+                                    opacity: .5;
+                                }
+                            }
+
+                            &:hover:not(.current) {
+                                background-color: var(--background-desktop-header--hover-buttons);
+                                &:before {
+                                    position: absolute;
+                                    content: '';
+                                    bottom: 0;
+                                    left: 50%;
+                                    transform: translateX(-50%);
+                                    width: 0;
+                                    height: 4px;
+                                    background-color: var(--color-tags);
+                                    opacity: .25;
+                                    animation: mark-pagination .3s ease forwards;
+                                }
+                            }
+                        }
+
+                        & :is(.page-numbers.prev,.page-numbers.next) {
+                            font-size: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes mark-pagination {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 15px;
+    }
+}
