@@ -94,6 +94,7 @@ html {
                         content: '';
                         background-color: var(--color-tags);
                         filter: blur(80px);
+                        opacity: .7;
                     }
 
                     & .about {
