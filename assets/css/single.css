@@ -3,18 +3,6 @@
     overflow: hidden;
 }
 
-.site-main .post-header > .thumbnail {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 120%;
-    height: 120%;
-    object-fit: cover;
-    filter: blur(20px) brightness(var(--brightness-single-post-thumbnail));
-    z-index: 0;
-}
-
 /* header - top */
 .site-main .post-header .content.top .post-categories li a:hover {
     color: var(--color-link-hover);

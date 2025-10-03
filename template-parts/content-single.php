@@ -3,10 +3,11 @@
         <?php
             if ( has_post_thumbnail() == true ) : echo '<img class="thumbnail" src="'; the_post_thumbnail_url( 'full' ); echo '" alt="Imagen del artículo" loading="lazy" width="300" height="200">'; endif;
         ?>
+        <div class="background-blur"></div>
         <?php get_template_part( 'templates/page/breadcrumb' ); ?>
         <div class="block">
             <div class="content middle">
-                <?php the_title( '<h1 class="post-header--title">', '</h1>' ); ?>
+                <?php the_title( '<h1 class="post-header--title main-title">', '</h1>' ); ?>
                 <div class="author">
                     <?php
                         echo get_avatar( get_the_author_meta('email'), '43' ) . '

@@ -108,8 +108,9 @@
                             position: relative;
                             width: 100%;
                             aspect-ratio: 3 / 2;
-                            border-radius: 100%;
-                            corner-shape: initial;
+                            border-radius: 2rem;
+                            corner-shape: squircle;
+                            overflow: hidden;
 
                             &:has(.thumbnail.full) {
                                 aspect-ratio: 9 / 11;

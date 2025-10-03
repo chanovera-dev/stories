@@ -71,7 +71,7 @@ html {
             }
         }
 
-        & #main-footer {
+        & #main-footer {         
             & :is(.middle-footer,.end-footer) {
                 border-top: 1px solid var(--wp--preset--color--accent-6);
             }
@@ -82,6 +82,19 @@ html {
                     display: flex;
                     flex-wrap: wrap;
                     gap:50px;
+                    position: relative;
+
+                    &:before {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%) skew(20deg);
+                        width: 100px;
+                        height: 80%;
+                        content: '';
+                        background-color: var(--color-tags);
+                        filter: blur(80px);
+                    }
 
                     & .about {
                         & .title-section {

@@ -55,6 +55,7 @@ function post_styles() {
 
         wp_enqueue_style( 'breadcrumbs', get_template_directory_uri() . '/assets/css/breadcrumbs.css', array(), get_asset_version('/assets/css/breadcrumbs.css'), 'all' );
         wp_enqueue_style( 'single', get_template_directory_uri() . '/assets/css/single.css', array(), get_asset_version('/assets/css/single.css'), 'all' );
+        wp_enqueue_script( 'blur-typing', get_template_directory_uri() . '/assets/js/blur-typing.js', array(), get_asset_version('/assets/js/blur-typing.js'), 'all' );
 
         if ( is_single() ) {
             wp_enqueue_style( 'posts', get_template_directory_uri() . '/assets/css/posts.css', array(), get_asset_version('/assets/css/posts.css'), 'all' );
