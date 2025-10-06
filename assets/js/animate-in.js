@@ -5,15 +5,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const observer = new IntersectionObserver(
     (entries, observer) => {
-      entries.forEach(entry => {
+      entries.forEach((entry, index) => {
         if (entry.isIntersecting && entry.intersectionRatio >= 0.1) {
-          entry.target.classList.add('animate-in');
-          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('animate-in');
+            observer.unobserve(entry.target);
+          }, index * 500); // Escalonar con un retraso de 0.5s por elemento
         }
       });
     },
     {
-      threshold: 0.5,
+      threshold: 0.1,
     }
   );
 
