@@ -640,6 +640,12 @@ html {
                                                 transition: 0.5s 0.1s height, 0.5s 0.1s padding, 0.5s 0.1s margin, 0.3s color, 0.6s visibility;
                                                 z-index: 99;
                                             }
+
+                                            & > li :is(a) {
+                                                color: rgba(25, 25, 25, 0);
+                                                fill: rgba(25, 25, 25, 0);
+                                                transition: 0.1s color, 0.1s fill;
+                                            }
                                         }
                                     }
                                 }
