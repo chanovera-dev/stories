@@ -72,7 +72,7 @@ function createSlideshow({
             if (w < 600) itemsPerView = 1
             else if (w < 809) itemsPerView = 2
             else if (w < 1065) itemsPerView = 3
-            else itemsPerView = 4
+            else itemsPerView = 3
 
             updateSlideWidth()
             updateBullets()
