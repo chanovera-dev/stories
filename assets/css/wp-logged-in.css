@@ -1,0 +1,19 @@
+body:has(#wpadminbar) {
+    min-height: calc(100dvh - var(--heigh-wp-adminbar));
+
+    &:is(.scroll-down, .scroll-up) {
+        #main-header {
+            top: var(--heigh-wp-adminbar);
+        }
+    }
+}
+
+@media (width <=600px) {
+    body:has(#wpadminbar) {
+        &:is(.scroll-down, .scroll-up) {
+            #main-header {
+                top: 0;
+            }
+        }
+    }
+}

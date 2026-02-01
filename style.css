@@ -1,0 +1,648 @@
+/*
+Theme Name: Stories
+Theme URI: https://github.com/chanovera-dev/stories
+Author: Chano Vera
+Author URI: https://chano.dev
+Description: Stories es un tema de narrativa inmersiva y blogging diseñado para escritores. Cuenta con un amplio conjunto de formatos de entrada (Estándar, Minientrada, Dibujo, Video, Cita, Artículo externo, Galería), tipografía fluida y una paleta de colores moderna preparada para el modo oscuro. Construido con capacidades híbridas, combina el poder de los bloques de edición completa del sitio con la estabilidad de las plantillas clásicas. Incluye widgets personalizados, múltiples áreas de barra lateral y un diseño responsive inspirado en el glassmorphism.
+Requires at least: 6.7
+Tested up to: 6.9
+Requires PHP: 8.0
+Version: 2.1.1
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: stories
+Tags: blog, fondo-personalizado, colores-personalizados, logotipo-personalizado, menu-personalizado, estilo-de-editor, imagenes-destacadas, widgets-pie-de-pagina, plantilla-ancho-completo, microformatos, formatos-de-entrada, barra-lateral-derecha, entrada-fija, opciones-de-tema, listo-para-traduccion, listo-para-accesibilidad, patrones-de-bloques, bloques-anchos
+*/
+
+#main-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: box-shadow .3s ease;
+
+    &>.glass-backdrop {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+    }
+
+    & .block {
+        & .content {
+            position: relative;
+            padding: 1.25rem 0;
+            display: flex;
+            align-items: center;
+            transition: padding .3s ease;
+
+            & .site-brand {
+                grid-column: 2 / 3;
+
+                & .custom-logo {
+                    width: auto;
+                    height: 46px;
+                }
+            }
+
+            & .main-navigation {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                z-index: 0;
+                height: 0;
+                overflow: hidden;
+
+                /*nivel principal*/
+                & .menu {
+                    position: relative;
+                    border: 2px solid light-dark(#ffffff80, #0000003c);
+                    padding-left: 0;
+                    padding: .4rem;
+
+                    & li {
+                        &>a {
+                            font-size: var(--wp--preset--font-size--small);
+                            display: flex;
+                            align-items: center;
+                            padding: 0 .7rem;
+                            height: 30px;
+                            transition: background-color .3s ease;
+
+                            &:hover {
+                                background-color: light-dark(var(--wp--preset--color--primary-alpha-50), var(--wp--preset--color--primary-alpha-50-night));
+                            }
+                        }
+
+                        &.menu-item-has-children {
+                            & .wrapper-for-title {
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+                                gap: .5rem;
+                                height: 30px;
+                                padding-left: .7rem;
+
+                                &>a {
+                                    font-size: var(--wp--preset--font-size--small);
+
+                                    &:hover {
+                                        color: light-dark(var(--wp--preset--color--primary-strong), var(--wp--preset--color--primary));
+                                    }
+                                }
+
+                                & .button-for-submenu {
+                                    display: grid;
+                                    place-content: center;
+                                    width: 1rem;
+                                    height: 1rem;
+                                    background-color: transparent;
+                                    border-radius: 50%;
+                                    border: none;
+                                    cursor: pointer;
+                                    transition: background-color .3s ease, transform .6s ease;
+
+                                    &:hover {
+                                        background-color: light-dark(var(--wp--preset--color--primary-alpha-50), var(--wp--preset--color--primary-alpha-50-night));
+                                    }
+                                }
+                            }
+
+                            /*submenú de primer nivel abierto*/
+                            &.open {
+                                &.menu-item-has-children {
+                                    & .wrapper-for-title {
+                                        & .button-for-submenu {
+                                            transform: rotate(180deg);
+                                        }
+                                    }
+
+                                    & .sub-menu {
+                                        & li {
+                                            &>a {
+                                                visibility: visible;
+                                                height: 30px;
+                                                color: initial;
+                                                transition: 0.3s height cubic-bezier(0.4, 0, 0.2, 1),
+                                                    0.3s 0.3s color,
+                                                    0.3s background-color;
+                                            }
+
+                                            &.menu-item-has-children {
+                                                & .wrapper-for-title {
+                                                    visibility: visible;
+                                                    height: 30px;
+                                                    color: initial;
+                                                    transition: 0.3s height cubic-bezier(0.4, 0, 0.2, 1),
+                                                        0.3s 0.3s color,
+                                                        0.6s visibility;
+
+                                                    & .button-for-submenu {
+                                                        color: initial;
+                                                        visibility: visible;
+                                                        transition: 0.3s 0.3s color,
+                                                            0.6s visibility,
+                                                            background-color .3s ease, transform .6s ease;
+                                                        transform: rotate(0deg);
+                                                    }
+                                                }
+
+                                                & .sub-menu {
+                                                    & li {
+                                                        &>a {
+                                                            visibility: hidden;
+                                                            height: 0;
+                                                            color: transparent;
+                                                        }
+
+                                                        &.menu-item-has-children {
+                                                            & .wrapper-for-title {
+                                                                visibility: hidden;
+                                                                height: 0;
+                                                                color: transparent;
+
+                                                                & .button-for-submenu {
+                                                                    visibility: hidden;
+                                                                    color: transparent;
+                                                                    transform: rotate(0deg);
+                                                                    transition: background-color .3s ease, transform .6s ease;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                /*submenu de segundo nivel abierto*/
+                                                &.open {
+                                                    &.menu-item-has-children {
+                                                        & .wrapper-for-title {
+                                                            & .button-for-submenu {
+                                                                transform: rotate(180deg);
+                                                            }
+                                                        }
+
+                                                        & .sub-menu {
+                                                            & li {
+                                                                &>a {
+                                                                    visibility: visible;
+                                                                    height: 30px;
+                                                                    color: initial;
+                                                                    transition: 0.3s height cubic-bezier(0.4, 0, 0.2, 1),
+                                                                        0.3s 0.3s color,
+                                                                        0.3s background-color;
+                                                                }
+
+                                                                &.menu-item-has-children {
+                                                                    & .wrapper-for-title {
+                                                                        visibility: visible;
+                                                                        height: 30px;
+                                                                        color: initial;
+                                                                        transition: 0.3s height cubic-bezier(0.4, 0, 0.2, 1),
+                                                                            0.3s 0.3s color;
+
+                                                                        & .button-for-submenu {
+                                                                            color: initial;
+                                                                            visibility: visible;
+                                                                            transition: 0.3s 0.3s color,
+                                                                                0.6s visibility;
+                                                                            transform: rotate(0deg);
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            /*submenú de primer nivel cerrado*/
+                            & .sub-menu {
+                                list-style: none;
+                                padding-left: 1.6rem;
+
+                                & li {
+                                    &>a {
+                                        visibility: hidden;
+                                        height: 0;
+                                        color: transparent;
+                                        transition: 0.3s 0.3s height,
+                                            0.6s visibility,
+                                            0.3s color;
+                                    }
+
+                                    &.menu-item-has-children {
+                                        & .wrapper-for-title {
+                                            visibility: hidden;
+                                            height: 0;
+                                            color: transparent;
+                                            transition: 0.3s 0.3s height,
+                                                0.6s visibility,
+                                                0.3s color;
+                                        }
+
+                                        & .sub-menu {
+                                            & li {
+                                                &>a {
+                                                    visibility: hidden;
+                                                    height: 0;
+                                                    color: transparent;
+                                                    transition: 0.3s 0.3s height,
+                                                        0.6s visibility,
+                                                        0.3s color;
+                                                }
+
+                                                &.menu-item-has-children {
+                                                    & .wrapper-for-title {
+                                                        visibility: hidden;
+                                                        height: 0;
+                                                        color: transparent;
+                                                        transition: 0.3s 0.3s height,
+                                                            0.6s visibility,
+                                                            0.3s color;
+
+                                                        & .button-for-submenu {
+                                                            visibility: hidden;
+                                                            color: transparent;
+                                                            transition: 0.6s visibility,
+                                                                0.3s color;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &.open {
+                    height: fit-content;
+                    border: 1px solid light-dark(#8b8b8b80, #84848480);
+                    box-shadow: rgba(17, 12, 46, 0.3) 0px 24px 50px 0px;
+
+                    & .glass-backdrop {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        z-index: 0;
+                    }
+
+
+                }
+            }
+
+            & .menu-mobile__button {
+                background-color: transparent;
+                position: relative;
+                z-index: 3;
+
+                & .bar {
+                    position: relative;
+                    width: 1rem;
+                    height: 1px;
+                    background-color: light-dark(var(--wp--preset--color--contrast), var(--wp--preset--color--base));
+                    transition: transform .3s ease-in-out;
+
+                    &::before,
+                    &::after {
+                        position: absolute;
+                        content: '';
+                        left: 0;
+                        width: 1rem;
+                        height: 1px;
+                        background-color: light-dark(var(--wp--preset--color--contrast), var(--wp--preset--color--base));
+                    }
+
+                    &::before {
+                        top: -0.35rem;
+                        transition: transform .3s ease-in-out, top .3s ease-in-out;
+                    }
+
+                    &::after {
+                        bottom: -0.35rem;
+                        transition: opacity .3s ease-in-out, bottom .3s ease-in-out;
+                    }
+                }
+
+                &:focus-visible {
+                    background-color: var(--wp--preset--color--focus);
+
+                    & .bar {
+                        background-color: var(--wp--preset--color--base);
+
+                        &::before,
+                        &::after {
+                            background-color: var(--wp--preset--color--base);
+                        }
+                    }
+
+                    &:hover {
+                        background-color: var(--wp--preset--color--focus);
+                    }
+                }
+
+                &.active {
+                    & .bar {
+                        transform: rotate(45deg);
+                    }
+
+                    & .bar:before {
+                        top: 0;
+                        transform: rotate(90deg);
+                    }
+
+                    & .bar:after {
+                        bottom: 0;
+                        opacity: 0;
+                    }
+                }
+
+                &:hover {
+                    background-color: light-dark(var(--wp--preset--color--primary-alpha-50), var(--wp--preset--color--primary-alpha-50-night));
+                }
+            }
+
+            .search-mobile__button {
+                background-color: transparent;
+                margin-left: auto;
+                position: relative;
+                z-index: 5;
+                backdrop-filter: blur(2rem);
+
+                & .icon--wrapper {
+                    position: relative;
+                    display: grid;
+                    width: 16px;
+                    height: 16px;
+
+                    &::before {
+                        position: absolute;
+                        content: '';
+                        top: 0;
+                        left: 0;
+                        width: 50px;
+                        max-width: 13px;
+                        aspect-ratio: 1 / 1;
+                        border: 1px solid light-dark(var(--wp--preset--color--contrast), var(--wp--preset--color--base));
+                        border-radius: 50%;
+                        z-index: 1;
+                        transition: max-width .3s ease;
+                    }
+
+                    &::after {
+                        position: absolute;
+                        content: '';
+                        top: 82%;
+                        left: 83%;
+                        transform: translate(-50%, -50%) rotate(-45deg);
+                        width: 2px;
+                        height: 50px;
+                        max-height: 7.5px;
+                        border-radius: 2px;
+                        background-color: light-dark(var(--wp--preset--color--contrast), var(--wp--preset--color--base));
+                        transition: max-height .3s ease, top .3s ease, left .3s ease, border-radius .3s ease;
+                    }
+
+                    & .bar {
+                        position: absolute;
+                        content: '';
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%) rotate(45deg);
+                        width: 1px;
+                        height: 50px;
+                        max-height: 0;
+                        border-radius: 1px;
+                        background-color: light-dark(var(--wp--preset--color--contrast), var(--wp--preset--color--base));
+                        transition: max-height .3s ease;
+                    }
+                }
+
+                &.active {
+                    transform: translateX(48px);
+
+                    & .icon--wrapper {
+                        &::before {
+                            max-width: 16px;
+                        }
+
+                        &::after {
+                            top: 50%;
+                            left: 50%;
+                            width: 1px;
+                            max-height: 10px;
+                            border-radius: 1px;
+                            background-color: light-dark(var(--wp--preset--color--contrast), var(--wp--preset--color--base));
+                        }
+
+                        & .bar {
+                            max-height: 10px;
+                        }
+                    }
+                }
+
+                &:focus-visible {
+                    background-color: var(--wp--preset--color--focus);
+
+                    & .icon--wrapper {
+                        &::before {
+                            border-color: var(--wp--preset--color--base);
+                        }
+
+                        & .bar,
+                        &::after {
+                            background-color: var(--wp--preset--color--base);
+                        }
+                    }
+
+                    &:hover {
+                        background-color: var(--wp--preset--color--focus);
+                    }
+                }
+
+                &:hover {
+                    background-color: light-dark(var(--wp--preset--color--primary-alpha-50), var(--wp--preset--color--primary-alpha-50-night));
+                }
+            }
+
+            & #custom-searchform {
+                position: absolute;
+                top: 0;
+                left: 0;
+                transform: translateY(-130%);
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 2;
+                background-color: light-dark(var(--wp--preset--color--base-alpha-50), var(--wp--preset--color--base-alpha-50-night));
+                backdrop-filter: blur(7px);
+                transition: transform .5s ease-in-out;
+
+                &.show {
+                    transform: translateY(0);
+                }
+
+                & .section {
+                    display: flex;
+                    width: 100%;
+                    max-width: 500px;
+
+                    & .wp-block-search__input {
+                        height: 48px;
+                    }
+
+                    & .buttons-container {
+                        display: flex;
+                        position: relative;
+
+                        & #searchsubmit {
+                            position: absolute;
+                            top: 3px;
+                            left: 0;
+                            transform: translateX(calc(-100% - 3px));
+                            height: 2.625rem;
+                            width: 2.625rem;
+                            padding: 0;
+                            display: grid;
+                            place-content: center;
+                            background-color: transparent;
+                            border: none;
+                            color: inherit;
+                            transition: background-color .3s ease;
+
+                            &:hover {
+                                background-color: light-dark(var(--wp--preset--color--tertiary), var(--wp--preset--color--tertiary-night));
+                            }
+
+                            &:focus-visible {
+                                outline: none;
+                                background-color: var(--wp--preset--color--focus);
+                                color: var(--wp--preset--color--base);
+                            }
+                        }
+
+                        & .close-custom-searchform {
+                            & svg {
+                                width: 1rem;
+                                height: 1rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+:is(.scroll-up, .scroll-down) {
+    #main-header {
+        box-shadow: rgba(17, 12, 46, 0.3) 0px 24px 50px 0px;
+
+        & .block {
+            & .content {
+                padding: 0.5rem 0;
+            }
+        }
+    }
+}
+
+#main-footer {
+    background-color: light-dark(var(--wp--preset--color--footer-background), var(--wp--preset--color--footer-background-night));
+    color: var(--wp--preset--color--base);
+
+    & ul {
+        padding-left: 0;
+        list-style: none;
+
+        & li {
+            & a {
+                transition: color .3s ease;
+
+                &::before {
+                    transition: background-color .3s ease;
+                }
+
+                &:hover {
+                    color: var(--wp--preset--color--primary);
+
+                    &::before {
+                        background-color: var(--wp--preset--color--primary);
+                    }
+                }
+
+                &:focus-visible {
+                    outline: none;
+                    color: var(--wp--preset--color--focus);
+                }
+            }
+        }
+    }
+
+    & .title-section {
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    & .block.middle-footer {
+        & .content {
+            padding: 4rem 0;
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
+            & .about {
+                max-width: 400px;
+
+                &>*:not(:last-child) {
+                    margin-bottom: 1rem;
+                }
+
+                & .site-bio {
+                    font-size: var(--wp--preset--font-size--small);
+                }
+            }
+
+            & .other-links {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 3rem;
+            }
+        }
+    }
+
+    & .block.end-footer {
+        & .content {
+            text-align: center;
+            padding: 1rem 0;
+            border-top: 1px dashed var(--wp--preset--color--accent-6);
+        }
+    }
+}
+
+@media (width < 768px) {
+    #main-header {
+        & .block {
+            & .content {
+                & #custom-searchform {
+                    justify-content: left;
+
+                    & .section {
+                        width: calc(100% - 56px);
+                    }
+                }
+            }
+        }
+    }
+}

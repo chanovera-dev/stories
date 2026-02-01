@@ -1,0 +1,15 @@
+:root {
+    color-scheme: light dark;
+
+    /* sizes */
+    --heigh-wp-adminbar: 2.875rem;
+
+    --max-width--content: min(100% - 1.25rem, 68.5rem);
+}
+
+@media (width >=783px) {
+    :root {
+        /* sizes */
+        --heigh-wp-adminbar: 2rem;
+    }
+}
