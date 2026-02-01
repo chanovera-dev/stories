@@ -505,7 +505,8 @@ body {
 .post-video-wrapper video,
 .attachment-full.size-full.wp-post-image,
 .post--author,
-.post-audio-wrapper {
+.post-audio-wrapper,
+.is-layout-constrained .wp-block-video video {
     border-radius: 1rem;
 }
 
@@ -574,7 +575,8 @@ body.is-chromium {
     .post-video-wrapper video,
     .attachment-full.size-full.wp-post-image,
     .post--author,
-    .post-audio-wrapper {
+    .post-audio-wrapper,
+    .is-layout-constrained .wp-block-video video {
         border-radius: 2rem;
         corner-shape: squircle;
     }
