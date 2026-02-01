@@ -368,6 +368,11 @@ function wp_breadcrumbs()
         echo $current . 'Dibujos más recientes';
     }
 
+    // ARCHIVO FORMATO AUDIO
+    elseif (is_tax('post_format', 'post-format-audio')) {
+        echo $current . 'Audios más recientes';
+    }
+
     // ARCHIVO FORMATO VIDEO
     elseif (is_tax('post_format', 'post-format-video')) {
         echo $current . 'Videos más recientes';
@@ -393,6 +398,15 @@ function wp_breadcrumbs()
         echo $current . 'Minientradas más recientes';
     }
 
+    // 1.5 CPT DETRAS DEL ESPEJO
+    elseif (is_post_type_archive('detras-del-espejo')) {
+        if ($paged === 1) {
+            echo '<span>Descubriendo lo que hay</span>';
+            echo '<h1 class="page-title">Detrás del espejo</h1>';
+        } else {
+            echo '<span>' . esc_html('Página ' . $paged . ' de ') . '</span>' . '<h1 class="page-title">Detrás del espejo</h1>';
+        }
+    }
     // 2. CATEGORÍA
     elseif (is_category()) {
         if ($paged === 1) {
@@ -453,9 +467,14 @@ function wp_breadcrumbs()
         echo $current . ' ' . get_the_time('Y');
     } elseif (is_single() && !is_attachment()) {
         if (get_post_type() != 'post') {
-            $post_type = get_post_type_object(get_post_type());
-            $slug = $post_type->rewrite;
-            echo '<a href="' . $homeLink . '/' . $slug['slug'] . '/">' . $post_type->labels->singular_name . '</a>' . $separator;
+            if (get_post_type() == 'detras-del-espejo') {
+                echo '<a href="' . $homeLink . '/detras-del-espejo/">Detrás del espejo</a>' . $separator;
+            } else {
+                $post_type = get_post_type_object(get_post_type());
+                $slug = $post_type->rewrite;
+                echo '<a href="' . $homeLink . '/' . $slug['slug'] . '/">' . $post_type->labels->singular_name . '</a>' . $separator;
+            }
+
             if ($showCurrent == 1)
                 echo $current . ' ';
         } else {
