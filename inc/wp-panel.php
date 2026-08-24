@@ -293,6 +293,14 @@ function stories_settings_init() {
 	);
 
 	add_settings_field(
+		'loop_gap',
+		__( 'Espaciado del Loop (Gap)', 'stories' ),
+		'stories_render_loop_gap_field',
+		'stories_options',
+		'stories_appearance_section'
+	);
+
+	add_settings_field(
 		'pagination_style',
 		__( 'Estilo de Paginación', 'stories' ),
 		'stories_render_select_field',
@@ -354,6 +362,19 @@ function stories_sanitize_theme_options( $input ) {
 		$sanitized['loop_design'] = $input['loop_design'];
 	} else {
 		$sanitized['loop_design'] = 'default';
+	}
+
+	// Loop gap
+	if ( isset( $input['loop_gap'] ) ) {
+		$gap = sanitize_text_field( trim( $input['loop_gap'] ) );
+		if ( '' !== $gap ) {
+			if ( is_numeric( $gap ) ) {
+				$gap = floatval( $gap ) <= 5 ? $gap . 'rem' : $gap . 'px';
+			}
+			$sanitized['loop_gap'] = $gap;
+		} else {
+			$sanitized['loop_gap'] = '1rem';
+		}
 	}
 
 	// Pagination style
@@ -434,6 +455,20 @@ function stories_render_loop_design_field() {
 	</select>
 	<p class="description">
 		<?php esc_html_e( 'Selecciona el tema/plantilla para los posts en el loop. Puedes crear nuevas carpetas dentro de template-parts/ (ej: loop00, loop01, loop-minimal) y aparecerán automáticamente en esta lista.', 'stories' ); ?>
+	</p>
+	<?php
+}
+
+/**
+ * Render field for Loop Gap selection.
+ */
+function stories_render_loop_gap_field() {
+	$options       = get_option( 'stories_theme_options', array() );
+	$current_value = ! empty( $options['loop_gap'] ) ? $options['loop_gap'] : '1rem';
+	?>
+	<input type="text" name="stories_theme_options[loop_gap]" id="stories_loop_gap" value="<?php echo esc_attr( $current_value ); ?>" class="stories-select-field stories-gap-input" placeholder="1rem">
+	<p class="description">
+		<?php esc_html_e( 'Espacio de separación entre las tarjetas del loop (ej: 1rem, 20px).', 'stories' ); ?>
 	</p>
 	<?php
 }

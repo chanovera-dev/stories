@@ -241,3 +241,12 @@
 .stories-custom-color-row .description {
     margin: 0;
 }
+
+/* ==========================================================================
+   Loop Gap Control
+   ========================================================================== */
+.stories-gap-input {
+    max-width: 140px !important;
+    min-width: 120px !important;
+    font-weight: 600;
+}

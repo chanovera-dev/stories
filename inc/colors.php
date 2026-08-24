@@ -281,6 +281,11 @@ function stories_get_color_scheme_css() {
 		$css_vars = $schemes[ $scheme_key ]['vars'];
 	}
 
+	// Loop gap
+	if ( ! empty( $options['loop_gap'] ) ) {
+		$css_vars['--loop-gap'] = sanitize_text_field( $options['loop_gap'] );
+	}
+
 	if ( empty( $css_vars ) ) {
 		return '';
 	}
