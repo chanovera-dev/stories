@@ -356,3 +356,70 @@ function stories_meta_description() {
 	}
 }
 add_action( 'wp_head', 'stories_meta_description', 2 );
+
+/**
+ * Preload critical CSS stylesheet in <head> for faster First Contentful Paint (FCP).
+ */
+function stories_preload_critical_assets() {
+	if ( is_admin() ) {
+		return;
+	}
+	$assets       = stories_get_assets();
+	$main_css_url = STORIES_URI . $assets['css']['main'];
+	$version      = stories_get_asset_version( $assets['css']['main'] );
+	$full_url     = add_query_arg( 'ver', $version, $main_css_url );
+	echo '<link rel="preload" href="' . esc_url( $full_url ) . '" as="style">' . "\n";
+}
+add_action( 'wp_head', 'stories_preload_critical_assets', 1 );
+
+/**
+ * Add defer attribute to frontend enqueued scripts to eliminate render-blocking JavaScript.
+ *
+ * @param string $tag    The <script> tag for the enqueued script.
+ * @param string $handle The script's registered handle.
+ * @param string $src    The script's source URL.
+ * @return string Modified script tag.
+ */
+function stories_defer_enqueued_scripts( $tag, $handle, $src ) {
+	if ( is_admin() || wp_is_json_request() ) {
+		return $tag;
+	}
+
+	// Don't modify if already has async or defer attribute.
+	if ( false !== strpos( $tag, ' defer' ) || false !== strpos( $tag, ' async' ) ) {
+		return $tag;
+	}
+
+	return str_replace( '<script ', '<script defer ', $tag );
+}
+add_filter( 'script_loader_tag', 'stories_defer_enqueued_scripts', 10, 3 );
+
+/**
+ * Load non-critical below-the-fold stylesheets asynchronously to eliminate render-blocking CSS.
+ *
+ * @param string $html   The link tag for the enqueued style.
+ * @param string $handle The style's registered handle.
+ * @param string $href   The stylesheet's source URL.
+ * @param string $media  The stylesheet's media attribute.
+ * @return string Modified link tag.
+ */
+function stories_async_non_critical_styles( $html, $handle, $href, $media ) {
+	if ( is_admin() ) {
+		return $html;
+	}
+
+	// Handles that are strictly below the fold or decorative.
+	$async_handles = array(
+		'stories-related-styles',
+		'stories-comments',
+		'stories-rounded',
+	);
+
+	if ( in_array( $handle, $async_handles, true ) ) {
+		return '<link rel="stylesheet" id="' . esc_attr( $handle ) . '-css" href="' . esc_url( $href ) . '" media="print" onload="this.media=\'all\'">' . "\n" .
+				'<noscript><link rel="stylesheet" id="' . esc_attr( $handle ) . '-noscript-css" href="' . esc_url( $href ) . '" media="' . esc_attr( $media ) . '"></noscript>' . "\n";
+	}
+
+	return $html;
+}
+add_filter( 'style_loader_tag', 'stories_async_non_critical_styles', 10, 4 );
