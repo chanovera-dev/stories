@@ -38,6 +38,7 @@ function stories_admin_options_scripts( $hook ) {
 		return;
 	}
 
+	wp_enqueue_media();
 	wp_enqueue_style( 'wp-color-picker' );
 	wp_enqueue_script( 'wp-color-picker' );
 
@@ -69,6 +70,49 @@ function stories_admin_options_scripts( $hook ) {
 			});
 
 			toggleCustomColors();
+
+			// Media uploader for footer logo & images
+			$(document).on("click", ".stories-media-upload-btn", function(e) {
+				e.preventDefault();
+				var button = $(this);
+				var targetId = button.data("target");
+				var wrapper = $("#wrapper_" + targetId);
+				var input = $("#" + targetId);
+				var preview = wrapper.find(".stories-media-preview");
+				var removeBtn = wrapper.find(".stories-media-remove-btn");
+
+				var frame = wp.media({
+					title: "Seleccionar o subir imagen",
+					button: { text: "Usar esta imagen" },
+					multiple: false
+				});
+
+				frame.on("select", function() {
+					var attachment = frame.state().get("selection").first().toJSON();
+					input.val(attachment.url);
+					preview.find("img").attr("src", attachment.url);
+					preview.show();
+					removeBtn.show();
+					button.text("Cambiar Imagen");
+				});
+
+				frame.open();
+			});
+
+			$(document).on("click", ".stories-media-remove-btn", function(e) {
+				e.preventDefault();
+				var button = $(this);
+				var targetId = button.data("target");
+				var wrapper = $("#wrapper_" + targetId);
+				var input = $("#" + targetId);
+				var preview = wrapper.find(".stories-media-preview");
+				var uploadBtn = wrapper.find(".stories-media-upload-btn");
+
+				input.val("");
+				preview.hide().find("img").attr("src", "");
+				button.hide();
+				uploadBtn.text("Seleccionar Imagen");
+			});
 		});'
 	);
 }
@@ -317,6 +361,55 @@ function stories_settings_init() {
 			'description' => __( 'Selecciona el diseño visual aplicado a la barra de paginación (.navigation.pagination).', 'stories' ),
 		)
 	);
+
+	/* -------------------------------------------------------------------------
+	 * Section 4: Pie de Página (Footer)
+	 * ------------------------------------------------------------------------- */
+	add_settings_section(
+		'stories_footer_section',
+		__( 'Ajustes del Pie de Página (Footer)', 'stories' ),
+		'__return_empty_string',
+		'stories_options'
+	);
+
+	add_settings_field(
+		'footer_logo',
+		__( 'Logo del Pie de Página', 'stories' ),
+		'stories_render_media_field',
+		'stories_options',
+		'stories_footer_section',
+		array(
+			'id'          => 'footer_logo',
+			'description' => __( 'Opcional. Si se define un logo, se mostrará en lugar del título de la sección Sobre nosotros.', 'stories' ),
+		)
+	);
+
+	add_settings_field(
+		'footer_title',
+		__( 'Título de la Sección Sobre Nosotros', 'stories' ),
+		'stories_render_text_field',
+		'stories_options',
+		'stories_footer_section',
+		array(
+			'id'          => 'footer_title',
+			'placeholder' => __( 'Sobre ', 'stories' ) . get_bloginfo( 'name' ),
+			'description' => __( 'Título que se muestra en la primera columna del footer si no hay logo asignado.', 'stories' ),
+		)
+	);
+
+	add_settings_field(
+		'footer_bio',
+		__( 'Descripción / Biografía del Sitio', 'stories' ),
+		'stories_render_textarea_field',
+		'stories_options',
+		'stories_footer_section',
+		array(
+			'id'          => 'footer_bio',
+			'rows'        => 4,
+			'default'     => __( 'Relatos y Cartas es un espacio dedicado a la creatividad y la expresión a través de las palabras. Aquí encontrarás cuentos, microcuentos, poemas e historias que buscan inspirar, emocionar y conectar con los lectores.', 'stories' ),
+			'description' => __( 'Texto descriptivo o biografía que aparece debajo del título/logo en el pie de página. Acepta etiquetas HTML básicas.', 'stories' ),
+		)
+	);
 }
 add_action( 'admin_init', 'stories_settings_init' );
 
@@ -383,6 +476,17 @@ function stories_sanitize_theme_options( $input ) {
 		$sanitized['pagination_style'] = $input['pagination_style'];
 	} else {
 		$sanitized['pagination_style'] = 'default';
+	}
+
+	// Footer fields
+	if ( isset( $input['footer_title'] ) ) {
+		$sanitized['footer_title'] = sanitize_text_field( trim( $input['footer_title'] ) );
+	}
+	if ( isset( $input['footer_bio'] ) ) {
+		$sanitized['footer_bio'] = wp_kses_post( trim( $input['footer_bio'] ) );
+	}
+	if ( isset( $input['footer_logo'] ) ) {
+		$sanitized['footer_logo'] = esc_url_raw( trim( $input['footer_logo'] ) );
 	}
 
 	return $sanitized;
@@ -530,6 +634,72 @@ function stories_gtm_id_render() {
 	?>
 	<input type="text" name="stories_theme_options[gtm_id]" value="<?php echo esc_attr( $value ); ?>" class="regular-text" placeholder="GTM-XXXXXXX">
 	<p class="description"><?php esc_html_e( 'Ingresa el ID de Google Tag Manager (ej. GTM-XXXXXXX).', 'stories' ); ?></p>
+	<?php
+}
+
+/**
+ * Render text input field.
+ *
+ * @param array $args Field arguments.
+ */
+function stories_render_text_field( $args ) {
+	$options       = get_option( 'stories_theme_options', array() );
+	$id            = $args['id'];
+	$default       = isset( $args['default'] ) ? $args['default'] : '';
+	$current_value = isset( $options[ $id ] ) ? $options[ $id ] : $default;
+	$placeholder   = isset( $args['placeholder'] ) ? $args['placeholder'] : '';
+	?>
+	<input type="text" name="stories_theme_options[<?php echo esc_attr( $id ); ?>]" id="stories_<?php echo esc_attr( $id ); ?>" value="<?php echo esc_attr( $current_value ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" class="regular-text">
+	<?php if ( ! empty( $args['description'] ) ) : ?>
+		<p class="description"><?php echo esc_html( $args['description'] ); ?></p>
+	<?php endif; ?>
+	<?php
+}
+
+/**
+ * Render textarea field.
+ *
+ * @param array $args Field arguments.
+ */
+function stories_render_textarea_field( $args ) {
+	$options       = get_option( 'stories_theme_options', array() );
+	$id            = $args['id'];
+	$default       = isset( $args['default'] ) ? $args['default'] : '';
+	$current_value = isset( $options[ $id ] ) ? $options[ $id ] : $default;
+	$rows          = isset( $args['rows'] ) ? intval( $args['rows'] ) : 4;
+	?>
+	<textarea name="stories_theme_options[<?php echo esc_attr( $id ); ?>]" id="stories_<?php echo esc_attr( $id ); ?>" rows="<?php echo esc_attr( $rows ); ?>" class="large-text"><?php echo esc_textarea( $current_value ); ?></textarea>
+	<?php if ( ! empty( $args['description'] ) ) : ?>
+		<p class="description"><?php echo esc_html( $args['description'] ); ?></p>
+	<?php endif; ?>
+	<?php
+}
+
+/**
+ * Render media uploader field.
+ *
+ * @param array $args Field arguments.
+ */
+function stories_render_media_field( $args ) {
+	$options       = get_option( 'stories_theme_options', array() );
+	$id            = $args['id'];
+	$current_value = isset( $options[ $id ] ) ? $options[ $id ] : '';
+	?>
+	<div class="stories-media-field-wrapper" id="wrapper_stories_<?php echo esc_attr( $id ); ?>">
+		<input type="hidden" name="stories_theme_options[<?php echo esc_attr( $id ); ?>]" id="stories_<?php echo esc_attr( $id ); ?>" value="<?php echo esc_url( $current_value ); ?>">
+		<div class="stories-media-preview" style="margin-bottom: 10px; max-width: 220px; <?php echo empty( $current_value ) ? 'display:none;' : ''; ?>">
+			<img src="<?php echo esc_url( $current_value ); ?>" style="max-width: 100%; height: auto; display: block; border: 1px solid #ccd0d4; border-radius: 6px; padding: 6px; background: #fff;" alt="">
+		</div>
+		<button type="button" class="button stories-media-upload-btn" data-target="stories_<?php echo esc_attr( $id ); ?>">
+			<?php echo empty( $current_value ) ? esc_html__( 'Seleccionar Imagen', 'stories' ) : esc_html__( 'Cambiar Imagen', 'stories' ); ?>
+		</button>
+		<button type="button" class="button button-link-delete stories-media-remove-btn" data-target="stories_<?php echo esc_attr( $id ); ?>" style="<?php echo empty( $current_value ) ? 'display:none;' : ''; ?>">
+			<?php esc_html_e( 'Eliminar Imagen', 'stories' ); ?>
+		</button>
+		<?php if ( ! empty( $args['description'] ) ) : ?>
+			<p class="description"><?php echo esc_html( $args['description'] ); ?></p>
+		<?php endif; ?>
+	</div>
 	<?php
 }
 

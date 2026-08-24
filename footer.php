@@ -19,8 +19,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="content">
 				<div class="about">
 					<?php
-					$footer_logo  = get_option('essentialis_footer_logo', get_option('stories_footer_logo'));
-					$footer_title = get_option('essentialis_footer_title', get_option('stories_footer_title', __('Sobre ', 'stories') . get_bloginfo('name')));
+					$stories_options = get_option('stories_theme_options', array());
+
+					$footer_logo  = !empty($stories_options['footer_logo'])
+						? $stories_options['footer_logo']
+						: get_option('essentialis_footer_logo', get_option('stories_footer_logo'));
+
+					$default_title = __('Sobre ', 'stories') . get_bloginfo('name');
+					$footer_title = !empty($stories_options['footer_title'])
+						? $stories_options['footer_title']
+						: get_option('essentialis_footer_title', get_option('stories_footer_title', $default_title));
 
 					if ($footer_logo): ?>
 						<img class="footer-logo" src="<?php echo esc_url($footer_logo); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
@@ -30,7 +38,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<p class="site-bio">
 						<?php
 						$bio_default = __('Relatos y Cartas es un espacio dedicado a la creatividad y la expresión a través de las palabras. Aquí encontrarás cuentos, microcuentos, poemas e historias que buscan inspirar, emocionar y conectar con los lectores.', 'stories');
-						$bio = get_option('essentialis_bio', get_option('stories_bio'));
+						$bio = !empty($stories_options['footer_bio'])
+							? $stories_options['footer_bio']
+							: get_option('essentialis_bio', get_option('stories_bio'));
+
 						if (false === $bio || empty($bio)) {
 							$bio = get_theme_mod('essentialis_bio', get_theme_mod('stories_bio', $bio_default));
 						}
