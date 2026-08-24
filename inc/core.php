@@ -185,15 +185,14 @@ function stories_enqueue_scripts() {
 
 	// Enqueue loop grid & pagination CSS on post lists.
 	if ( is_home() || is_archive() || is_search() || is_front_page() || is_singular() ) {
-		stories_enqueue_style( 'stories-loop', $a['css']['loop'], array( 'stories-main' ) );
 		stories_enqueue_style( 'stories-pagination', $a['css']['pagination'], array( 'stories-main' ) );
 
 		$loop_design = function_exists( 'stories_get_loop_design' ) ? stories_get_loop_design() : 'default';
 		if ( 'default' !== $loop_design && file_exists( STORIES_DIR . "/assets/css/{$loop_design}.css" ) ) {
 			stories_enqueue_style( "stories-loop-{$loop_design}", "/assets/css/{$loop_design}.css", array( 'stories-main' ) );
-		} elseif ( file_exists( STORIES_DIR . '/assets/css/loop00.css' ) ) {
-			stories_enqueue_style( 'stories-loop-default', '/assets/css/loop00.css', array( 'stories-main' ) );
-		} else {
+		} elseif ( file_exists( STORIES_DIR . '/assets/css/loop.css' ) ) {
+			stories_enqueue_style( 'stories-loop', $a['css']['loop'], array( 'stories-main' ) );
+		} elseif ( file_exists( STORIES_DIR . '/assets/css/posts.css' ) ) {
 			stories_enqueue_style( 'stories-posts', $a['css']['posts'], array( 'stories-main' ) );
 		}
 	}
