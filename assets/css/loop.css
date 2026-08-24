@@ -587,14 +587,14 @@
 
     & .stories-quote-container {
         /* Paleta COMPLEMENTARIA pura (h + 180°) calculada al 100% en tiempo real */
-        --quote-comp-base: hsl(from var(--color-primary, #8bc34a) calc(h + 180) 65% 15%);
+        /* --quote-comp-base: hsl(from var(--color-primary, #8bc34a) calc(h + 180) 65% 15%);
         --quote-comp-surface: hsl(from var(--color-primary, #8bc34a) calc(h + 180) 60% 22%);
         --quote-comp-accent: hsl(from var(--color-primary, #8bc34a) calc(h + 180) 85% 55%);
         --quote-comp-accent-light: hsl(from var(--color-primary, #8bc34a) calc(h + 180) 90% 75%);
         --quote-comp-glow: hsl(from var(--color-primary, #8bc34a) calc(h + 180) 95% 60% / 0.4);
         --quote-comp-shadow: hsl(from var(--color-primary, #8bc34a) calc(h + 180) 80% 8% / 0.5);
         --quote-comp-text: hsl(from var(--color-primary, #8bc34a) calc(h + 180) 25% 96%);
-        --quote-comp-text-muted: hsl(from var(--color-primary, #8bc34a) calc(h + 180) 30% 78%);
+        --quote-comp-text-muted: hsl(from var(--color-primary, #8bc34a) calc(h + 180) 30% 78%); */
 
         box-sizing: border-box;
         position: relative;
@@ -619,10 +619,10 @@
 
         /* Capa Decorativa */
         & .quote-decor {
-            position: absolute;
+            /* position: absolute;
             inset: 0;
             pointer-events: none;
-            z-index: 1;
+            z-index: 1; */
 
             /* Marco fino luminoso complementario */
             /* &::before {
