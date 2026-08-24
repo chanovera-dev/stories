@@ -48,6 +48,18 @@
         & :is(.page-numbers.prev, .page-numbers.next) {
             padding: 0;
             font-size: 0;
+            line-height: 0;
+
+            & .nav-prev-text,
+            & .nav-next-text {
+                font-size: 0;
+                line-height: 0;
+                display: inline-block;
+                width: 0;
+                height: 0;
+                overflow: hidden;
+                text-indent: -9999px;
+            }
 
             & svg {
                 display: block;

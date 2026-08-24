@@ -106,9 +106,9 @@ if ( ! function_exists( 'stories_pagination' ) ) :
 
 		the_posts_pagination(
 			array(
-				'prev_text'          => stories_get_svg( 'arrow-left-circle', array( 'size' => 18 ) ),
-				'next_text'          => stories_get_svg( 'arrow-right-circle', array( 'size' => 18 ) ),
-				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'stories' ) . ' </span>',
+				'prev_text'          => stories_get_svg( 'arrow-left-circle', array( 'size' => 18 ) ) . '<span class="nav-prev-text">' . esc_html__( 'Anterior', 'stories' ) . '</span>',
+				'next_text'          => '<span class="nav-next-text">' . esc_html__( 'Siguiente', 'stories' ) . '</span>' . stories_get_svg( 'arrow-right-circle', array( 'size' => 18 ) ),
+				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Página', 'stories' ) . ' </span>',
 			)
 		);
 
