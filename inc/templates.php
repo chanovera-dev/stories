@@ -483,7 +483,7 @@ if ( ! function_exists( 'stories_render_like_button' ) ) :
 		$likes_count = stories_get_likes_count( $post_id );
 		$has_liked   = stories_user_has_liked( $post_id );
 
-		$is_active = ( $has_liked || $likes_count > 0 );
+		$is_active = $has_liked;
 		$class     = 'button__like' . ( $is_active ? ' liked' : '' );
 		$icon_key  = $is_active ? 'heart-fill' : 'heart';
 		$icon      = stories_get_svg( $icon_key, array( 'size' => 16 ) );

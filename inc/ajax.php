@@ -67,18 +67,13 @@ add_action( 'wp_ajax_nopriv_stories_filter_posts', 'stories_ajax_filter_posts' )
  * AJAX Handler for toggling likes on a post.
  */
 function stories_ajax_like_post() {
+	check_ajax_referer( 'stories_ajax_nonce', 'nonce' );
+
 	$post_id = isset( $_POST['post_id'] ) ? absint( $_POST['post_id'] ) : 0;
 
-	if ( ! $post_id ) {
+	if ( ! $post_id || 'post' !== get_post_type( $post_id ) || 'publish' !== get_post_status( $post_id ) ) {
 		wp_send_json_error( __( 'ID de post no válido.', 'stories' ) );
 	}
-
-	// Retrieve existing likes from _avante_likes_count or _stories_likes_count
-	$likes = get_post_meta( $post_id, '_avante_likes_count', true );
-	if ( '' === $likes || false === $likes ) {
-		$likes = get_post_meta( $post_id, '_stories_likes_count', true );
-	}
-	$likes = $likes ? (int) $likes : 0;
 
 	$cookie_stories = 'stories_liked_' . $post_id;
 	$cookie_avante  = 'avante_liked_' . $post_id;
@@ -87,24 +82,49 @@ function stories_ajax_like_post() {
 	$cookie_path   = defined( 'COOKIEPATH' ) && COOKIEPATH ? COOKIEPATH : '/';
 	$cookie_domain = defined( 'COOKIE_DOMAIN' ) ? COOKIE_DOMAIN : '';
 
+	global $wpdb;
+	$meta_key = '_stories_likes_count';
+	$canonical_likes = get_post_meta( $post_id, $meta_key, true );
+	if ( '' === $canonical_likes || false === $canonical_likes ) {
+		$legacy_likes = get_post_meta( $post_id, '_avante_likes_count', true );
+		if ( '' !== $legacy_likes && false !== $legacy_likes ) {
+			add_post_meta( $post_id, $meta_key, max( 0, (int) $legacy_likes ), true );
+		}
+	}
+
 	if ( $is_liked ) {
 		// Unlike
-		$likes = max( 0, $likes - 1 );
+		$wpdb->query(
+			$wpdb->prepare(
+				"UPDATE {$wpdb->postmeta} SET meta_value = GREATEST(0, CAST(meta_value AS UNSIGNED) - 1) WHERE post_id = %d AND meta_key = %s",
+				$post_id,
+				$meta_key
+			)
+		);
 		setcookie( $cookie_stories, '', time() - 3600, $cookie_path, $cookie_domain );
 		setcookie( $cookie_avante, '', time() - 3600, $cookie_path, $cookie_domain );
 		$action = 'unliked';
 	} else {
 		// Like
-		$likes++;
+		$updated = $wpdb->query(
+			$wpdb->prepare(
+				"UPDATE {$wpdb->postmeta} SET meta_value = CAST(meta_value AS UNSIGNED) + 1 WHERE post_id = %d AND meta_key = %s",
+				$post_id,
+				$meta_key
+			)
+		);
+		if ( ! $updated ) {
+			add_post_meta( $post_id, $meta_key, 1, true );
+		}
 		setcookie( $cookie_stories, '1', time() + ( 86400 * 30 ), $cookie_path, $cookie_domain );
 		setcookie( $cookie_avante, '1', time() + ( 86400 * 30 ), $cookie_path, $cookie_domain );
 		$action = 'liked';
 	}
 
+	$likes = (int) get_post_meta( $post_id, $meta_key, true );
 	update_post_meta( $post_id, '_avante_likes_count', $likes );
-	update_post_meta( $post_id, '_stories_likes_count', $likes );
 
-	$icon_key = ( 'liked' === $action || $likes > 0 ) ? 'heart-fill' : 'heart';
+	$icon_key = 'liked' === $action ? 'heart-fill' : 'heart';
 
 	wp_send_json_success(
 		array(
@@ -125,12 +145,16 @@ add_action( 'wp_ajax_nopriv_stories_like_post', 'stories_ajax_like_post' );
  * AJAX Handler for loading more timeline posts dynamically.
  */
 function stories_ajax_load_more_timeline() {
-	$last_post_id = isset( $_POST['last_post_id'] ) ? absint( $_POST['last_post_id'] ) : 0;
-	$count        = isset( $_POST['count'] ) ? absint( $_POST['count'] ) : 6;
+	check_ajax_referer( 'stories_ajax_nonce', 'nonce' );
 
-	if ( ! $last_post_id ) {
+	$last_post_id = isset( $_POST['last_post_id'] ) ? absint( $_POST['last_post_id'] ) : 0;
+	$count        = isset( $_POST['count'] ) ? min( 12, absint( $_POST['count'] ) ) : 6;
+
+	if ( ! $last_post_id || 'post' !== get_post_type( $last_post_id ) || 'publish' !== get_post_status( $last_post_id ) ) {
 		wp_send_json_error( array( 'message' => 'Invalid post ID' ) );
 	}
+
+	$count = max( 1, $count );
 
 	$last_post = get_post( $last_post_id );
 	if ( ! $last_post ) {

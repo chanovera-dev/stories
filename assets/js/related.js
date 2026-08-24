@@ -164,6 +164,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 formData.append('action', 'stories_load_more_timeline');
                 formData.append('last_post_id', wrapper.dataset.lastPostId);
                 formData.append('count', 6);
+                if (typeof storiesAjax !== 'undefined' && storiesAjax.nonce) {
+                    formData.append('nonce', storiesAjax.nonce);
+                }
 
                 fetch(ajaxUrl, {
                     method: 'POST',

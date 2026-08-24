@@ -778,6 +778,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const formData = new FormData();
         formData.append('action', 'stories_post_like');
         formData.append('post_id', postId);
+        if (typeof storiesAjax !== 'undefined' && storiesAjax.nonce) {
+            formData.append('nonce', storiesAjax.nonce);
+        }
 
         fetch(ajaxUrl, {
             method: 'POST',
