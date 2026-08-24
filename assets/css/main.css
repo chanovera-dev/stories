@@ -23,6 +23,7 @@
     --color-text-white: #ffffff;
     --color-text-subtle: #cbd5e1;
     --color-text-footer: #a0aec0;
+    --bright-line: #ffffff;
     --color-white: #ffffff;
     --color-black: #000000;
 
@@ -39,6 +40,7 @@
     --footer-background: #092327;
     --accent-background-1: #539067;
     --accent-background-2: #89c39d;
+    --shadow-color: #404554;
 
     /* Colors - Post Format Badges & Accents */
     --format-video-bg: #feebc8;
@@ -64,8 +66,8 @@
     --size-button: 46px;
 
     /* Shadows - Optimized for high-performance 60fps GPU rendering */
-    --shadow-card: color-mix(in srgb, var(--color-text-heading), transparent 90.5%) 0px 54px 55px, color-mix(in srgb, var(--color-text-heading), transparent 97.12%) 0px -12px 30px, color-mix(in srgb, var(--color-text-heading), transparent 90.5%) 0px 4px 6px, color-mix(in srgb, var(--color-text-heading), transparent 94.37%) 0px 12px 13px, color-mix(in srgb, var(--color-text-heading), transparent 98.69%) 0px -3px 5px;
-    --shadow-card-hover: color-mix(in srgb, var(--color-text-heading), transparent 88.5%) 0px 54px 55px, color-mix(in srgb, var(--color-text-heading), transparent 95.12%) 0px -12px 30px, color-mix(in srgb, var(--color-text-heading), transparent 88.5%) 0px 4px 6px, color-mix(in srgb, var(--color-text-heading), transparent 92.37%) 0px 12px 13px, color-mix(in srgb, var(--color-text-heading), transparent 96.69%) 0px -3px 5px;
+    --shadow-card: color-mix(in srgb, var(--shadow-color), transparent 90.5%) 0px 54px 55px, color-mix(in srgb, var(--shadow-color), transparent 97.12%) 0px -12px 30px, color-mix(in srgb, var(--shadow-color), transparent 90.5%) 0px 4px 6px, color-mix(in srgb, var(--shadow-color), transparent 94.37%) 0px 12px 13px, color-mix(in srgb, var(--shadow-color), transparent 98.69%) 0px -3px 5px;
+    --shadow-card-hover: color-mix(in srgb, var(--shadow-color), transparent 88.5%) 0px 54px 55px, color-mix(in srgb, var(--shadow-color), transparent 95.12%) 0px -12px 30px, color-mix(in srgb, var(--shadow-color), transparent 88.5%) 0px 4px 6px, color-mix(in srgb, var(--shadow-color), transparent 92.37%) 0px 12px 13px, color-mix(in srgb, var(--shadow-color), transparent 96.69%) 0px -3px 5px;
     --shadow-glass-bar: 0 2px 8px rgba(0, 0, 0, 0.08);
     --shadow-glass-controls: 0 2px 8px rgba(0, 0, 0, 0.15);
 
@@ -185,7 +187,7 @@ body {
             left: 0;
             width: 100%;
             height: 1px;
-            background-color: var(--color-white);
+            background-color: var(--bright-line);
         }
 
         &::after {
@@ -757,7 +759,7 @@ body {
     }
 
     #main-header .stories-navigation .main-navigation>ul>li>a:hover {
-        background-color: var(--color-white);
+        background-color: var(--bright-line);
     }
 
     #main-header .stories-navigation .main-navigation>ul>li .wrapper-for-title {
@@ -771,7 +773,7 @@ body {
     }
 
     #main-header .stories-navigation .main-navigation>ul>li .wrapper-for-title:hover {
-        background-color: var(--color-white);
+        background-color: var(--bright-line);
     }
 
     #main-header .stories-navigation .main-navigation>ul>li .wrapper-for-title:hover .button-for-submenu {
@@ -781,7 +783,7 @@ body {
     /* EFECTO VISUAL EN PADRE ACTIVO (solo en navegadores modernos) */
     #main-header .stories-navigation .main-navigation>ul>li.menu-item-has-children:hover> :is(a, .button-for-submenu),
     #main-header .stories-navigation .main-navigation>ul>li.menu-item-has-children:has(.sub-menu:hover)>.wrapper-for-title {
-        background-color: var(--color-white);
+        background-color: var(--bright-line);
 
         & .button-for-submenu {
             transform: rotate(180deg);
@@ -818,8 +820,6 @@ body {
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         z-index: 100;
         transition: 0.4s padding, 0.4s background-color, 0.4s box-shadow;
-        /* border-bottom-left-radius: .5rem;
-        border-bottom-right-radius: .5rem; */
     }
 
     #main-header .stories-navigation .main-navigation>ul>li.menu-item-has-children .sub-menu li {
@@ -1008,7 +1008,7 @@ section.block.block-breadcrumbs {
         left: 0;
         width: 100%;
         height: 1px;
-        background-color: var(--color-white);
+        background-color: var(--bright-line);
     }
 
     &::after {

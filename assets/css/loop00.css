@@ -846,7 +846,7 @@
 
                 & p {
                     line-height: var(--notebook-line-height, 1.75rem);
-                    color: inherit;
+                    color: var(--color-black);
 
                     &.has-small-font-size {
                         font-size: 0.875rem;
@@ -2070,10 +2070,10 @@
 .inset-shadow-effect {
     height: auto;
     padding: 4px;
-    background-color: color-mix(in srgb, var(--color-text-heading), transparent 80%);
-    border: 1px solid color-mix(in srgb, var(--color-text-heading), transparent 86%);
-    box-shadow: inset 0 2px 4px color-mix(in srgb, var(--color-text-heading), transparent 86%),
-        inset 0 1px 2px color-mix(in srgb, var(--color-text-heading), transparent 80%),
+    background-color: color-mix(in srgb, var(--shadow-color), transparent 80%);
+    border: 1px solid color-mix(in srgb, var(--shadow-color), transparent 86%);
+    box-shadow: inset 0 2px 4px color-mix(in srgb, var(--shadow-color), transparent 86%),
+        inset 0 1px 2px color-mix(in srgb, var(--shadow-color), transparent 80%),
         0 1px 0 color-mix(in srgb, var(--color-white), transparent 50%);
     z-index: 30;
     display: flex;

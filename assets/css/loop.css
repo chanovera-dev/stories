@@ -982,7 +982,7 @@
 
                 & p {
                     line-height: var(--notebook-line-height, 1.75rem);
-                    color: inherit;
+                    color: var(--color-black);
 
                     &.has-small-font-size {
                         font-size: 0.875rem;
