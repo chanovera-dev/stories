@@ -304,3 +304,55 @@ function stories_comment_form_submit_button( $defaults ) {
 	return $defaults;
 }
 add_filter( 'comment_form_defaults', 'stories_comment_form_submit_button' );
+
+/**
+ * Output dynamic meta description tag for SEO when no external SEO plugin is active.
+ */
+function stories_meta_description() {
+	// Skip if a dedicated SEO plugin is handling meta descriptions (Yoast, Rank Math, AIOSEO, SEOPress).
+	if ( defined( 'WPSEO_VERSION' ) || defined( 'RANK_MATH_VERSION' ) || defined( 'AIOSEO_VERSION' ) || function_exists( 'seopress_init' ) ) {
+		return;
+	}
+
+	$description = '';
+
+	if ( is_singular() ) {
+		$post = get_queried_object();
+		if ( $post ) {
+			if ( ! empty( $post->post_excerpt ) ) {
+				$description = $post->post_excerpt;
+			} elseif ( ! empty( $post->post_content ) ) {
+				$description = wp_strip_all_tags( strip_shortcodes( $post->post_content ) );
+			}
+		}
+	} elseif ( is_home() || is_front_page() ) {
+		$description = get_bloginfo( 'description', 'display' );
+		if ( empty( $description ) ) {
+			$description = get_bloginfo( 'name', 'display' );
+		}
+	} elseif ( is_category() || is_tag() || is_tax() ) {
+		$term_desc = term_description();
+		if ( ! empty( $term_desc ) ) {
+			$description = wp_strip_all_tags( $term_desc );
+		} else {
+			$description = sprintf( __( 'Explora todas las historias y publicaciones etiquetadas en %s.', 'stories' ), single_term_title( '', false ) );
+		}
+	} elseif ( is_author() ) {
+		$author = get_queried_object();
+		if ( $author && ! empty( $author->description ) ) {
+			$description = $author->description;
+		} else {
+			$description = sprintf( __( 'Historias y artículos escritos por %s.', 'stories' ), get_the_author_meta( 'display_name' ) );
+		}
+	} elseif ( is_search() ) {
+		$description = sprintf( __( 'Resultados de búsqueda para: %s.', 'stories' ), get_search_query() );
+	}
+
+	if ( ! empty( $description ) ) {
+		$description = wp_strip_all_tags( $description );
+		$description = preg_replace( '/\s+/', ' ', $description );
+		$description = wp_trim_words( $description, 28, '...' );
+		echo '<meta name="description" content="' . esc_attr( trim( $description ) ) . '">' . "\n";
+	}
+}
+add_action( 'wp_head', 'stories_meta_description', 2 );
