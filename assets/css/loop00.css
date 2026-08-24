@@ -156,6 +156,7 @@
     }
 
     &.format-audio-card {
+        & .stories-audio-container,
         & .stories-container {
             display: grid;
             grid-template-rows: auto 1fr auto;

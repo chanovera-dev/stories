@@ -15,7 +15,7 @@ $has_media  = ! empty( $audio_data['src'] ) || ! empty( $audio_data['iframe'] ) 
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'story-card format-audio-card' ); ?> data-id="<?php echo esc_attr( get_the_ID() ); ?>">
 	<?php if ( $has_media ) : ?>
-		<div class="stories-audio-container">
+		<div class="stories-container stories-audio-container">
 			<!-- Background Music-Themed Decorative Backdrop -->
 			<div class="audio-cover-bg" aria-hidden="true">
 				<div class="audio-bg-glow"></div>

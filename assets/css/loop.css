@@ -113,6 +113,8 @@
     }
 
     &.format-audio-card {
+
+        & .stories-audio-container,
         & .stories-container {
             display: grid;
             grid-template-rows: auto 1fr auto;
@@ -2633,4 +2635,3 @@ body.stories-lightbox-open {
         mask-image: linear-gradient(to bottom, transparent 0%, black 1.5rem, black 100%), linear-gradient(black, black);
     }
 }
-

@@ -15,7 +15,7 @@ $has_media  = ! empty( $audio_data['src'] ) || ! empty( $audio_data['iframe'] ) 
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'story-card format-audio-card' ); ?> data-id="<?php echo esc_attr( get_the_ID() ); ?>">
 	<?php if ( $has_media ) : ?>
-		<div class="stories-audio-container">
+		<div class="stories-container stories-audio-container">
 			<!-- Background Music-Themed Decorative Backdrop -->
 			<div class="audio-cover-bg" aria-hidden="true">
 				<div class="audio-bg-glow"></div>
@@ -52,19 +52,12 @@ $has_media  = ! empty( $audio_data['src'] ) || ! empty( $audio_data['iframe'] ) 
 						<span class="spectrum-bar bar-28"></span>
 					</div>
 				</div>
-				<div class="audio-bg-notes">
-					<span class="music-note note-1">♪</span>
-					<span class="music-note note-2">♫</span>
-					<span class="music-note note-3">♩</span>
-					<span class="music-note note-4">♬</span>
-					<span class="music-note note-5">♪</span>
-				</div>
 				<div class="audio-cover-backdrop-overlay"></div>
 			</div>
 
 			<!-- Top Actions (Info Toggle & Like Button) -->
 			<div class="post-top-actions audio-top-actions">
-				<div class="toggle-info-container">
+				<div class="toggle-info-container inset-shadow-effect">
 					<button type="button" class="toggle-info-btn" aria-label="<?php esc_attr_e( 'Toggle Post Info', 'stories' ); ?>" title="<?php esc_attr_e( 'Toggle Post Info', 'stories' ); ?>">
 						<?php stories_svg( 'info', array( 'size' => 18 ) ); ?>
 					</button>
@@ -102,7 +95,7 @@ $has_media  = ! empty( $audio_data['src'] ) || ! empty( $audio_data['iframe'] ) 
 
 			<?php if ( ! empty( $audio_data['src'] ) ) : ?>
 				<!-- Custom Audio Controls Bar (Cross-Browser Unified Experience) -->
-				<div class="custom-audio-controls">
+				<div class="custom-audio-controls custom-controls">
 					<button type="button" class="audio-btn play-pause-btn" aria-label="<?php esc_attr_e( 'Play / Pause', 'stories' ); ?>" title="<?php esc_attr_e( 'Play / Pause', 'stories' ); ?>">
 						<?php stories_svg( 'play', array( 'size' => 18 ) ); ?>
 					</button>
@@ -138,12 +131,14 @@ $has_media  = ! empty( $audio_data['src'] ) || ! empty( $audio_data['iframe'] ) 
 			<?php endif; ?>
 
 			<!-- Information Overlay Card (Toggleable via Info Button) -->
-			<div class="audio-info-overlay">
+			<div class="info-overlay audio-info-overlay">
 				<header class="entry-header">
 					<div class="entry-badge">
 						<?php stories_post_type_badge(); ?>
 					</div>
+				</header>
 
+				<div class="entry-body">
 					<?php
 					if ( is_singular() ) :
 						the_title( '<h1 class="entry-title">', '</h1>' );
@@ -157,48 +152,40 @@ $has_media  = ! empty( $audio_data['src'] ) || ! empty( $audio_data['iframe'] ) 
 						stories_posted_on();
 						stories_posted_by();
 						?>
+						<?php if ( has_category() ) : ?>
+							<span class="entry-categories">
+								<?php stories_svg( 'folder', array( 'size' => 13 ) ); ?>
+								<?php the_category( ', ' ); ?>
+							</span>
+						<?php endif; ?>
 					</div>
-				</header>
 
-				<div class="entry-summary">
-					<?php the_excerpt(); ?>
+					<div class="entry-summary">
+						<?php the_excerpt(); ?>
+					</div>
 				</div>
 
 				<footer class="entry-footer">
-					<?php stories_entry_footer(); ?>
+					<?php
+					$tags = get_the_tags();
+					if ( $tags ) :
+						?>
+						<div class="post--tags__wrapper">
+							<div class="tags post--tags">
+								<?php
+								foreach ( $tags as $tag ) {
+									echo '<a class="post-tag small" href="' . esc_url( get_tag_link( $tag->term_id ) ) . '">' . stories_get_svg( 'tag', array( 'size' => 12 ) ) . esc_html( $tag->name ) . '</a>';
+								}
+								?>
+							</div>
+						</div>
+					<?php endif; ?>
 				</footer>
 			</div>
 		</div>
 	<?php else : ?>
 		<!-- Fallback if no media found -->
-		<header class="entry-header">
-			<div class="entry-badge">
-				<?php stories_post_type_badge(); ?>
-			</div>
-
-			<?php
-			if ( is_singular() ) :
-				the_title( '<h1 class="entry-title">', '</h1>' );
-			else :
-				the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-			endif;
-			?>
-
-			<div class="entry-meta">
-				<?php
-				stories_posted_on();
-				stories_posted_by();
-				?>
-			</div>
-		</header>
-
-		<div class="entry-summary">
-			<?php the_excerpt(); ?>
-		</div>
-
-		<footer class="entry-footer">
-			<?php stories_entry_footer(); ?>
-		</footer>
+		<p>No se encontró archivo de audio.</p>
 	<?php endif; ?>
 	<div class="post__overlay"></div>
 </article>
