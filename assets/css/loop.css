@@ -941,20 +941,76 @@
             pointer-events: none;
             z-index: 1;
 
-            /* Hole punch marks along the left margin */
-            &::before {
-                content: '';
+            & .aside-holes {
                 position: absolute;
-                top: 22%;
-                left: 13px;
+                top: 0;
+                left: 12px;
                 width: 14px;
-                height: 14px;
-                border-radius: 50%;
-                background: var(--bg-body, #f5f7f5);
-                box-shadow:
-                    0 80px 0 0 var(--bg-body, #f5f7f5),
-                    0 160px 0 0 var(--bg-body, #f5f7f5);
+                height: 100%;
+                pointer-events: none;
                 z-index: 3;
+
+                & .aside-hole {
+                    position: absolute;
+                    left: 0;
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50%;
+                    background: var(--bg-body, #f5f7f5);
+                    box-shadow:
+                        inset 0 2px 6px color-mix(in srgb, var(--shadow-color), transparent 80%),
+                        inset 0 1px 4px color-mix(in srgb, var(--shadow-color), transparent 74%),
+                        0 1px 0 color-mix(in srgb, var(--bg-body), transparent 80%);
+
+                    /* Renglones pares (2, 4, 6, 8, 10, 12, 14, 16...) */
+                    &:nth-child(1) {
+                        top: calc(var(--notebook-line-height) * 2 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(2) {
+                        top: calc(var(--notebook-line-height) * 4 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(3) {
+                        top: calc(var(--notebook-line-height) * 6 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(4) {
+                        top: calc(var(--notebook-line-height) * 8 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(5) {
+                        top: calc(var(--notebook-line-height) * 10 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(6) {
+                        top: calc(var(--notebook-line-height) * 12 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(7) {
+                        top: calc(var(--notebook-line-height) * 14 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(8) {
+                        top: calc(var(--notebook-line-height) * 16 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(9) {
+                        top: calc(var(--notebook-line-height) * 18 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(10) {
+                        top: calc(var(--notebook-line-height) * 20 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(11) {
+                        top: calc(var(--notebook-line-height) * 22 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(12) {
+                        top: calc(var(--notebook-line-height) * 24 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+                }
             }
 
             /* Subtle paper texture grain overlay */
@@ -3902,24 +3958,148 @@
             pointer-events: none;
             z-index: 1;
 
-            &::before {
-                content: '';
+            & .aside-holes {
                 position: absolute;
-                top: 40px;
+                top: 0;
                 left: 18px;
                 width: 16px;
-                height: 16px;
-                border-radius: 50%;
-                background: var(--bg-body, #f5f7f5);
-                box-shadow:
-                    0 100px 0 0 var(--bg-body, #f5f7f5),
-                    0 200px 0 0 var(--bg-body, #f5f7f5),
-                    0 300px 0 0 var(--bg-body, #f5f7f5),
-                    0 400px 0 0 var(--bg-body, #f5f7f5),
-                    0 500px 0 0 var(--bg-body, #f5f7f5),
-                    0 600px 0 0 var(--bg-body, #f5f7f5),
-                    0 700px 0 0 var(--bg-body, #f5f7f5);
+                height: 100%;
+                pointer-events: none;
                 z-index: 3;
+
+                & .aside-hole {
+                    position: absolute;
+                    left: 0;
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50%;
+                    background: var(--bg-body, #f5f7f5);
+                    box-shadow:
+                        inset 0 2px 6px color-mix(in srgb, var(--shadow-color), transparent 80%),
+                        inset 0 1px 4px color-mix(in srgb, var(--shadow-color), transparent 74%),
+                        0 1px 0 color-mix(in srgb, var(--bg-body), transparent 80%);
+
+                    /* Renglones pares en single aside (2, 4, 6, 8, 10, 12, 14, 16...) */
+                    &:nth-child(1) {
+                        top: calc(var(--notebook-line-height) * 2 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(2) {
+                        top: calc(var(--notebook-line-height) * 4 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(3) {
+                        top: calc(var(--notebook-line-height) * 6 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(4) {
+                        top: calc(var(--notebook-line-height) * 8 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(5) {
+                        top: calc(var(--notebook-line-height) * 10 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(6) {
+                        top: calc(var(--notebook-line-height) * 12 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(7) {
+                        top: calc(var(--notebook-line-height) * 14 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(8) {
+                        top: calc(var(--notebook-line-height) * 16 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(9) {
+                        top: calc(var(--notebook-line-height) * 18 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(10) {
+                        top: calc(var(--notebook-line-height) * 20 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(11) {
+                        top: calc(var(--notebook-line-height) * 22 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(12) {
+                        top: calc(var(--notebook-line-height) * 24 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(13) {
+                        top: calc(var(--notebook-line-height) * 26 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(14) {
+                        top: calc(var(--notebook-line-height) * 28 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(15) {
+                        top: calc(var(--notebook-line-height) * 30 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(16) {
+                        top: calc(var(--notebook-line-height) * 32 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(17) {
+                        top: calc(var(--notebook-line-height) * 34 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(18) {
+                        top: calc(var(--notebook-line-height) * 36 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(19) {
+                        top: calc(var(--notebook-line-height) * 38 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(20) {
+                        top: calc(var(--notebook-line-height) * 40 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(21) {
+                        top: calc(var(--notebook-line-height) * 42 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(22) {
+                        top: calc(var(--notebook-line-height) * 44 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(23) {
+                        top: calc(var(--notebook-line-height) * 46 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(24) {
+                        top: calc(var(--notebook-line-height) * 48 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(25) {
+                        top: calc(var(--notebook-line-height) * 50 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(26) {
+                        top: calc(var(--notebook-line-height) * 52 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(27) {
+                        top: calc(var(--notebook-line-height) * 54 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(28) {
+                        top: calc(var(--notebook-line-height) * 56 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(29) {
+                        top: calc(var(--notebook-line-height) * 58 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+
+                    &:nth-child(30) {
+                        top: calc(var(--notebook-line-height) * 60 - (var(--notebook-line-height) / 2) - 14px);
+                    }
+                }
             }
 
             &::after {

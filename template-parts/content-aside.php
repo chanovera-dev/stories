@@ -12,7 +12,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'story-card format-aside-card' ); ?> data-id="<?php echo esc_attr( get_the_ID() ); ?>">
 	<div class="stories-aside-container">
-		<div class="aside-decor" aria-hidden="true"></div>
+		<div class="aside-decor" aria-hidden="true">
+			<div class="aside-holes">
+				<span class="aside-hole"></span>
+				<span class="aside-hole"></span>
+				<span class="aside-hole"></span>
+				<span class="aside-hole"></span>
+				<span class="aside-hole"></span>
+				<span class="aside-hole"></span>
+				<span class="aside-hole"></span>
+				<span class="aside-hole"></span>
+			</div>
+		</div>
 		<!-- Top Actions (Info Toggle & Like Button) -->
 		<div class="post-top-actions">
 			<div class="toggle-info-container inset-shadow-effect">

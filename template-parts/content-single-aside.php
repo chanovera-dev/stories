@@ -87,7 +87,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php endif; ?>
 
 	<div class="aside-single-card stories-aside-container">
-		<div class="aside-decor" aria-hidden="true"></div>
+		<div class="aside-decor" aria-hidden="true">
+			<div class="aside-holes">
+				<?php for ( $i = 0; $i < 30; $i++ ) : ?>
+					<span class="aside-hole"></span>
+				<?php endfor; ?>
+			</div>
+		</div>
 		<div class="entry-content aside-front-content aside-single-content">
 			<?php
 			the_content(
