@@ -156,6 +156,7 @@ function stories_get_assets() {
 			'main'         => "$assets_path/css/main.css",
 			'custom-forms' => "$assets_path/css/custom-forms.css",
 			'loop'         => "$assets_path/css/loop.css",
+			'single'       => "$assets_path/css/single.css",
 			'pagination'   => "$assets_path/css/pagination.css",
 			'posts'        => "$assets_path/css/posts.css",
 			'comments'     => "$assets_path/css/comments.css",
@@ -183,9 +184,11 @@ function stories_enqueue_scripts() {
 	stories_enqueue_style( 'stories-main', $a['css']['main'] );
 	stories_enqueue_style( 'stories-custom-forms', $a['css']['custom-forms'], array( 'stories-main' ) );
 
-	// Enqueue loop grid & pagination CSS on post lists.
+	// Enqueue loop grid CSS on post lists and singular views (for Timeline and Related Posts cards).
 	if ( is_home() || is_archive() || is_search() || is_front_page() || is_singular() ) {
-		stories_enqueue_style( 'stories-pagination', $a['css']['pagination'], array( 'stories-main' ) );
+		if ( ! is_singular() ) {
+			stories_enqueue_style( 'stories-pagination', $a['css']['pagination'], array( 'stories-main' ) );
+		}
 
 		$loop_design = function_exists( 'stories_get_loop_design' ) ? stories_get_loop_design() : 'default';
 		if ( 'default' !== $loop_design && file_exists( STORIES_DIR . "/assets/css/{$loop_design}.css" ) ) {
@@ -195,6 +198,11 @@ function stories_enqueue_scripts() {
 		} elseif ( file_exists( STORIES_DIR . '/assets/css/posts.css' ) ) {
 			stories_enqueue_style( 'stories-posts', $a['css']['posts'], array( 'stories-main' ) );
 		}
+	}
+
+	// Enqueue single post view styles on singular views.
+	if ( is_singular() ) {
+		stories_enqueue_style( 'stories-single', $a['css']['single'], array( 'stories-main' ) );
 	}
 
 	// Enqueue comments CSS on singular pages when comments are open.
