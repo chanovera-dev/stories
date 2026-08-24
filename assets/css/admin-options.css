@@ -1,0 +1,243 @@
+/* ==========================================================================
+   macOS Native Toggle Switch
+   ========================================================================== */
+.stories-toggle-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.stories-toggle {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+/* Hide native WordPress checkbox */
+#wpbody .stories-toggle input[type="checkbox"],
+.stories-toggle input[type="checkbox"] {
+    position: absolute !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    outline: 0 !important;
+    pointer-events: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+}
+
+/* Track */
+.stories-toggle .slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: #e2e8f0;
+    border-radius: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s ease;
+}
+
+/* Knob */
+.stories-toggle .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 1px;
+    bottom: 1px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), width 0.15s ease;
+}
+
+/* Checked State - macOS Green */
+.stories-toggle input[type="checkbox"]:checked+.slider {
+    background-color: #34c759;
+    border-color: #2fb350;
+}
+
+.stories-toggle input[type="checkbox"]:checked+.slider:before {
+    transform: translateX(20px);
+}
+
+.stories-toggle:hover .slider:before {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+.stories-toggle:active .slider:before {
+    width: 23px;
+}
+
+.stories-toggle input[type="checkbox"]:focus-visible+.slider {
+    box-shadow: 0 0 0 2px rgba(52, 199, 89, 0.4);
+}
+
+.stories-toggle-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #50575e;
+}
+
+/* ==========================================================================
+   Grid exclusivo para la sección de Optimización del Head
+   ========================================================================== */
+.toplevel_page_stories_options .form-table:has(#stories_disable_emojis) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px 32px;
+    margin-top: 16px;
+    margin-bottom: 24px;
+}
+
+.toplevel_page_stories_options .form-table:has(#stories_disable_emojis) tbody {
+    display: contents;
+}
+
+.toplevel_page_stories_options .form-table:has(#stories_disable_emojis) tr {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.toplevel_page_stories_options .form-table:has(#stories_disable_emojis) th {
+    width: auto;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1d2327;
+}
+
+.toplevel_page_stories_options .form-table:has(#stories_disable_emojis) td {
+    width: auto;
+    padding: 0;
+}
+
+.toplevel_page_stories_options .form-table:has(#stories_disable_emojis) td .description {
+    margin-top: 4px;
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+   Select Fields
+   ========================================================================== */
+.stories-select-field {
+    min-width: 280px;
+    max-width: 100%;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccd0d4;
+    background-color: #ffffff;
+    font-size: 14px;
+    color: #2c3338;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stories-select-field:focus {
+    border-color: #34c759;
+    box-shadow: 0 0 0 2px rgba(52, 199, 89, 0.25);
+    outline: none;
+}
+
+/* ==========================================================================
+   Color Schemes Visual Grid & Swatches
+   ========================================================================== */
+.stories-color-schemes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    max-width: 960px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+}
+
+.stories-color-scheme-card {
+    position: relative;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px 14px;
+    background: #ffffff;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    user-select: none;
+}
+
+.stories-color-scheme-card input[type="radio"] {
+    position: absolute !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    pointer-events: none !important;
+}
+
+.stories-color-scheme-card:hover {
+    border-color: #94a3b8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.stories-color-scheme-card.is-selected {
+    border-color: #34c759;
+    background: #f8fdf9;
+    box-shadow: 0 0 0 1px #34c759, 0 4px 14px rgba(52, 199, 89, 0.16);
+}
+
+.stories-color-scheme-card .scheme-preview-bar {
+    display: flex;
+    height: 28px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.stories-color-scheme-card .preview-swatch {
+    flex: 1;
+    height: 100%;
+}
+
+.stories-color-scheme-card .scheme-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stories-color-scheme-card .scheme-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.stories-color-scheme-card.is-selected .scheme-title {
+    color: #15803d;
+}
+
+.stories-color-scheme-card .scheme-desc {
+    font-size: 11.5px;
+    color: #64748b;
+    line-height: 1.35;
+    margin-top: 3px;
+}
+
+/* Custom Color Rows */
+.stories-custom-color-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.stories-custom-color-row .description {
+    margin: 0;
+}

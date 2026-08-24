@@ -1,0 +1,182 @@
+/* ==========================================================================
+   Comments Section & Comment Form Styles (Avante Design System)
+   ========================================================================== */
+
+.site-main .block .content-comments,
+.block.comments-block .content-comments {
+    padding: 3rem 0;
+    width: min(100% - 2.5rem, 40.313rem);
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   COMMENTS LIST
+   ========================================================================== */
+#comments {
+    position: relative;
+    margin-bottom: 28px;
+    align-items: center;
+}
+
+.comments-title {
+    font-size: var(--wp--preset--font-size--x-large);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--color-text-heading);
+}
+
+.commentlist,
+.comment-list {
+    padding-left: 0;
+    list-style: none;
+    margin-bottom: 1.25rem;
+}
+
+.commentlist ul,
+.comment-list ul {
+    list-style: none;
+    padding-left: 1.5rem;
+}
+
+.commentlist li.comment:not(:last-child) .comment-body,
+.comment-list li.comment:not(:last-child) .comment-body {
+    border-bottom: 1px solid var(--wp--preset--color--accent-6, var(--border-light));
+}
+
+.commentlist li.comment .comment-body,
+.comment-list li.comment .comment-body {
+    position: relative;
+    padding: 25px 0 45px;
+}
+
+.commentlist li.comment .comment-body .comment-meta .avatar,
+.comment-list li.comment .comment-body .comment-meta .avatar {
+    display: none;
+}
+
+.commentlist li.comment .comment-body .comment-meta .comment-author .fn,
+.comment-list li.comment .comment-body .comment-meta .comment-author .fn {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--color-text-heading);
+}
+
+.commentlist li.comment .comment-body .says,
+.comment-list li.comment .comment-body .says {
+    display: none;
+}
+
+.commentlist li.comment .comment-body .reply,
+.comment-list li.comment .comment-body .reply {
+    position: absolute;
+    top: 25px;
+    right: 0;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.commentlist li.comment .comment-body .reply a,
+.comment-list li.comment .comment-body .reply a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.commentlist li.comment .comment-body .reply a:hover,
+.comment-list li.comment .comment-body .reply:hover {
+    color: var(--color-primary-hover);
+}
+
+.commentlist li.comment .comment-body .comment-metadata a,
+.comment-list li.comment .comment-body .comment-metadata a {
+    position: absolute;
+    bottom: 20px;
+    font-size: 13px;
+    opacity: 0.5;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.commentlist li.comment .comment-body .comment-metadata a:hover,
+.comment-list li.comment .comment-body .comment-metadata a:hover {
+    opacity: 1;
+    color: var(--color-primary);
+}
+
+.commentlist li.comment .comment-body .comment-metadata .comment-edit-link,
+.comment-list li.comment .comment-body .comment-metadata .comment-edit-link {
+    right: 0;
+}
+
+/* ==========================================================================
+   COMMENTS FORM
+   ========================================================================== */
+#reply-title,
+.comment-reply-title {
+    font-size: var(--wp--preset--font-size--x-large);
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    color: var(--color-text-heading);
+}
+
+#commentform {
+    display: grid;
+    gap: 1rem 0.6rem;
+}
+
+#commentform :is(.comment-notes, .comment-form-cookies-consent, .form-submit, .comment-form-comment, .logged-in-as) {
+    grid-column: 1 / -1;
+    margin: 0;
+}
+
+#commentform .comment-form-cookies-consent {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+/* ==========================================================================
+   DESKTOP RESPONSIVENESS (min-width: 48rem)
+   ========================================================================== */
+@media (min-width: 48rem) {
+
+    .commentlist li.comment .comment-body,
+    .comment-list li.comment .comment-body {
+        padding-left: 90px;
+    }
+
+    .commentlist li.comment .comment-body .comment-meta .avatar,
+    .comment-list li.comment .comment-body .comment-meta .avatar {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 25px;
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+    }
+
+    #commentform {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    #commentform .comment-form-author {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+    }
+
+    #commentform .comment-form-email {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+    }
+
+    #commentform .comment-form-url {
+        grid-column: 3 / 4;
+        grid-row: 2 / 3;
+    }
+}

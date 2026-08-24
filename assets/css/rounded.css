@@ -1,0 +1,180 @@
+/**
+ * Stories Theme - Rounded & Squircle Styles
+ * Handles base border-radius and Chromium squircle corner shaping.
+ *
+ * @package Stories
+ */
+
+/* ==========================================================================
+   1. Border Radius Custom Properties
+   ========================================================================== */
+:root {
+    --card-border-radius: 1.125rem;
+    --badge-border-radius: .625rem;
+    --minibadge-border-radius: .375rem;
+}
+
+body.is-chromium {
+    --card-border-radius: 2.25rem;
+    --badge-border-radius: 1.25rem;
+    --minibadge-border-radius: 0.75rem;
+}
+
+/* ==========================================================================
+   2. Form Controls (Inputs, Textarea, Select)
+   ========================================================================== */
+.dot-nav {
+    border-radius: 50%;
+}
+
+input:not([type="submit"], [type="button"], [type="checkbox"], [type="radio"], [type="file"], [type="hidden"], [type="range"], [type="color"]),
+textarea,
+select,
+.btn,
+#submit,
+.wpcf7-submit,
+.wp-element-button,
+.toggle-info-btn,
+.image-lightbox-trigger,
+.gallery-lightbox-trigger,
+.button__like,
+.slideshow-control,
+.slideshow-counter,
+.stories-lightbox-close,
+.stories-lightbox-nav,
+.stories-lightbox-meta-item,
+.stories-lightbox-post-link,
+.post-tag,
+.entry-categories,
+.entry-category-badge,
+.cat-links a,
+.tags-links a,
+.single-audio-story .custom-audio-controls,
+.single-audio-story .custom-controls,
+.search-submit,
+.nav-badge.count-badge,
+.theater-btn,
+.theater-meta-item {
+    border-radius: var(--minibadge-border-radius);
+
+    .is-chromium & {
+        -webkit-corner-shape: squircle;
+        corner-shape: squircle;
+    }
+}
+
+.like-btn-container,
+.toggle-info-container,
+.navigation.post-nav-title-controls,
+.slideshow-control-container,
+.slideshow-counter-container,
+.standard-bottom-bar,
+.audio-bottom-bar,
+.custom-video-controls,
+.custom-audio-controls,
+.stories-lightbox-info-bar,
+.stories-lightbox-image,
+.single-audio-story .single-audio-player-hero,
+.entry-meta-card,
+.theater-info-bar,
+.theater-image,
+.aside-single-card,
+.post-thumbnail,
+.post-thumbnail img {
+    border-radius: var(--badge-border-radius);
+
+    .is-chromium & {
+        -webkit-corner-shape: squircle;
+        corner-shape: squircle;
+    }
+}
+
+#main-header .search-mobile__button {
+    border-radius: var(--minibadge-border-radius);
+
+    &::before {
+        border-radius: var(--minibadge-border-radius);
+    }
+
+    .is-chromium & {
+        -webkit-corner-shape: squircle;
+        corner-shape: squircle;
+
+        &::before {
+            -webkit-corner-shape: squircle;
+            corner-shape: squircle;
+        }
+    }
+}
+
+.story-card,
+.format-gallery-card .stories-slideshow {
+    border-radius: var(--card-border-radius);
+
+    .is-chromium & {
+        -webkit-corner-shape: squircle;
+        corner-shape: squircle;
+    }
+}
+
+.post__overlay {
+    border-bottom-left-radius: var(--card-border-radius);
+    border-bottom-right-radius: var(--card-border-radius);
+
+    .is-chromium & {
+        -webkit-corner-shape: squircle;
+        corner-shape: squircle;
+    }
+}
+
+/* ==========================================================================
+   3. Pagination
+   ========================================================================== */
+.pagination:not(.pagination--capsule) .page-numbers {
+    border-radius: var(--minibadge-border-radius);
+
+    .is-chromium & {
+        -webkit-corner-shape: squircle;
+        corner-shape: squircle;
+    }
+}
+
+.pagination.pagination--segmented .nav-links {
+    border-radius: var(--badge-border-radius);
+
+    .is-chromium & {
+        -webkit-corner-shape: squircle;
+        corner-shape: squircle;
+    }
+}
+
+.pagination.pagination--segmented .page-numbers {
+    border-radius: var(--minibadge-border-radius);
+
+    .is-chromium & {
+        -webkit-corner-shape: squircle;
+        corner-shape: squircle;
+    }
+}
+
+@media (width >=1200px) {
+
+    #main-header .stories-navigation .main-navigation>ul>li.menu-item-has-children .sub-menu {
+        border-bottom-left-radius: var(--badge-border-radius);
+        border-bottom-right-radius: var(--badge-border-radius);
+
+        .is-chromium & {
+            -webkit-corner-shape: squircle;
+            corner-shape: squircle;
+        }
+
+        & a {
+            border-radius: var(--minibadge-border-radius);
+
+            .is-chromium & {
+                -webkit-corner-shape: squircle;
+                corner-shape: squircle;
+            }
+        }
+    }
+}

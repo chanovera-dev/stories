@@ -1,0 +1,152 @@
+/* ==========================================================================
+   Related Posts Section & Carousel Styles (Avante Design System)
+   ========================================================================== */
+
+section.block.posts--body.container--related-posts {
+    background-color: var(--bg-card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+}
+
+section.block.posts--body.container--related-posts .content.related-posts--title {
+    width: min(100% - 2rem, var(--container-max-width));
+    margin-inline: auto;
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+section.block.posts--body.container--related-posts .content.related-posts--title h2.title-section {
+    font-size: var(--wp--preset--font-size--x-large);
+    font-weight: 700;
+    color: var(--color-text-heading);
+    margin: 0;
+}
+
+section.block.posts--body.container--related-posts .content.slideshow-wrapper {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+/* Full Width Mask Container around Slideshow List ONLY */
+.slideshow-mask-container {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 1.5rem 0;
+    padding-bottom: 6rem;
+    overflow: hidden;
+    display: flex;
+    box-sizing: border-box;
+
+    @media (width >=1680px) {
+        -webkit-mask-image: linear-gradient(to right, transparent 3%, black 17%, black 80%, transparent 97%);
+        mask-image: linear-gradient(to right, transparent 3%, black 17%, black 80%, transparent 97%);
+    }
+
+
+}
+
+.related-posts--list.slideshow {
+    display: flex;
+    gap: 1rem;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.related-posts--list.slideshow>.story-card,
+.related-posts--list.slideshow>article,
+.related-posts--list.slideshow>.nav-card-item {
+    flex: 0 0 auto;
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   NAVIGATION & BULLETS
+   ========================================================================== */
+.slideshow-wrapper .navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    width: min(100% - 2rem, var(--container-max-width));
+    margin: 0 auto;
+    transform: translateY(-4rem);
+}
+
+
+
+
+
+.slideshow-wrapper .navigation .slideshow-control-container {
+    opacity: 1;
+}
+
+.slideshow-wrapper .navigation .btn-pagination.small-pagination.slideshow-control {
+    min-width: var(--size-button, 36px);
+    height: var(--size-button, 36px);
+    font-family: var(--font-family-base);
+    background-color:
+        color-mix(in srgb, var(--bg-card), transparent 8%);
+    color: var(--color-text-heading);
+    border: none;
+    cursor: pointer;
+    font-size: 1.05rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    line-height: 1;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: color var(--transition-fast), transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.slideshow-wrapper .navigation .slideshow-control-container:has(:disabled) {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+
+
+.related-bullets {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.related-bullets .bullet {
+    width: 0.625rem;
+    height: 0.625rem;
+    border: none;
+    background-color: var(--border-light);
+    cursor: pointer;
+    padding: 0;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+
+    &.squircle {
+        corner-shape: round !important;
+    }
+}
+
+.related-bullets .bullet:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.related-bullets .bullet.active {
+    background-color: var(--color-primary);
+}
