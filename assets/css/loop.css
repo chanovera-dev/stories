@@ -2254,6 +2254,9 @@ body.stories-lightbox-open {
         justify-content: center;
         max-height: 74vh;
         max-width: 100%;
+        touch-action: pan-y;
+        user-select: none;
+        -webkit-user-select: none;
     }
 
     & .stories-lightbox-image {
@@ -2263,6 +2266,9 @@ body.stories-lightbox-open {
         box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
         display: block;
         pointer-events: auto;
+        -webkit-user-drag: none;
+        user-select: none;
+        -webkit-user-select: none;
     }
 
     & .stories-lightbox-info-bar {

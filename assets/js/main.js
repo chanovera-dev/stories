@@ -1030,6 +1030,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
 
+            // Keyboard navigation
             document.addEventListener('keydown', function (e) {
                 if (!modal.classList.contains('is-active')) return;
                 if (e.key === 'Escape' || e.key === 'Esc') {
@@ -1042,6 +1043,62 @@ document.addEventListener('DOMContentLoaded', function () {
                     showGallerySlide(currentGalleryIndex + 1);
                 }
             });
+
+            // Touch Swipe Gestures (Horizontal navigation & Vertical swipe to dismiss)
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let touchEndX = 0;
+            let touchEndY = 0;
+            let isTouchActive = false;
+
+            const lightboxContainer = modal.querySelector('.stories-lightbox-container') || modal;
+            const lightboxInfoBar = modal.querySelector('.stories-lightbox-info-bar');
+
+            modal.addEventListener('touchstart', function (e) {
+                if (!modal.classList.contains('is-active')) return;
+                if (lightboxInfoBar && lightboxInfoBar.contains(e.target)) return;
+                if (e.touches.length === 1) {
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                    touchEndX = touchStartX;
+                    touchEndY = touchStartY;
+                    isTouchActive = true;
+                }
+            }, { passive: true });
+
+            modal.addEventListener('touchmove', function (e) {
+                if (!isTouchActive || e.touches.length !== 1) return;
+                touchEndX = e.touches[0].clientX;
+                touchEndY = e.touches[0].clientY;
+            }, { passive: true });
+
+            modal.addEventListener('touchend', function (e) {
+                if (!isTouchActive) return;
+                isTouchActive = false;
+
+                const diffX = touchEndX - touchStartX;
+                const diffY = touchEndY - touchStartY;
+                const absX = Math.abs(diffX);
+                const absY = Math.abs(diffY);
+                const minSwipeDistance = 40;
+
+                // Horizontal swipe (Prev / Next slide in gallery)
+                if (absX > absY && absX > minSwipeDistance) {
+                    if (currentGallery && currentGallery.length > 1) {
+                        if (diffX < 0) {
+                            // Swipe Left -> Next Image
+                            showGallerySlide(currentGalleryIndex + 1);
+                        } else {
+                            // Swipe Right -> Previous Image
+                            showGallerySlide(currentGalleryIndex - 1);
+                        }
+                    }
+                }
+                // Vertical swipe down (Dismiss / Close Lightbox)
+                else if (absY > absX && diffY > minSwipeDistance * 1.6) {
+                    closeLightbox();
+                }
+            }, { passive: true });
 
             window.closeStoriesLightbox = closeLightbox;
         }
