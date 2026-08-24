@@ -54,7 +54,8 @@ select,
 .search-submit,
 .nav-badge.count-badge,
 .theater-btn,
-.theater-meta-item {
+.theater-meta-item,
+.quote-decor::before {
     border-radius: var(--minibadge-border-radius);
 
     .is-chromium & {

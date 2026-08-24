@@ -586,18 +586,87 @@
     }
 
     & .stories-quote-container {
+        /* Paleta COMPLEMENTARIA pura (h + 180°) calculada al 100% en tiempo real */
+        --quote-comp-base: hsl(from var(--color-primary, #8bc34a) calc(h + 180) 65% 15%);
+        --quote-comp-surface: hsl(from var(--color-primary, #8bc34a) calc(h + 180) 60% 22%);
+        --quote-comp-accent: hsl(from var(--color-primary, #8bc34a) calc(h + 180) 85% 55%);
+        --quote-comp-accent-light: hsl(from var(--color-primary, #8bc34a) calc(h + 180) 90% 75%);
+        --quote-comp-glow: hsl(from var(--color-primary, #8bc34a) calc(h + 180) 95% 60% / 0.4);
+        --quote-comp-shadow: hsl(from var(--color-primary, #8bc34a) calc(h + 180) 80% 8% / 0.5);
+        --quote-comp-text: hsl(from var(--color-primary, #8bc34a) calc(h + 180) 25% 96%);
+        --quote-comp-text-muted: hsl(from var(--color-primary, #8bc34a) calc(h + 180) 30% 78%);
+
         box-sizing: border-box;
         position: relative;
         width: 100%;
         height: 100%;
         min-height: 0;
         overflow: hidden;
-        background-color: var(--format-quote-bg, #faf5ff);
+
+        /* Fondo 100% complementario para sobresalir en el grid */
+        background-color: var(--quote-comp-base);
         background-image:
-            radial-gradient(circle 240px at 90% 10%, color-mix(in srgb, var(--color-primary) 40%, transparent) 0%, transparent 100%),
-            radial-gradient(circle 280px at 10% 90%, color-mix(in srgb, var(--color-primary-light, #eff1e1) 75%, transparent) 0%, transparent 100%),
-            repeating-linear-gradient(135deg, transparent, transparent 18px, color-mix(in srgb, var(--footer-background) 8%, transparent) 18px, color-mix(in srgb, var(--format-quote-border, #e9d8fd) 45%, transparent) 19px),
-            linear-gradient(160deg, var(--bg-card, #ffffff) 0%, var(--format-quote-bg, #faf5ff) 100%);
+            /* Foco de luz complementaria brillante superior */
+            radial-gradient(ellipse at 85% 15%, var(--quote-comp-glow) 0%, transparent 60%),
+            /* Foco de contraste complementario secundario inferior */
+            radial-gradient(ellipse at 15% 85%, hsl(from var(--color-primary, #8bc34a) calc(h + 180) 70% 35% / 0.4) 0%, transparent 65%),
+            /* Degradado de profundidad complementaria */
+            linear-gradient(145deg, var(--quote-comp-surface) 0%, var(--quote-comp-base) 100%);
+        box-shadow: 0 10px 30px -10px var(--quote-comp-shadow),
+            inset 0 0 40px rgba(0, 0, 0, 0.45),
+            inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        transition: background 0.5s ease, box-shadow 0.5s ease;
+
+        /* Capa Decorativa */
+        & .quote-decor {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+
+            /* Marco fino luminoso complementario */
+            &::before {
+                content: '';
+                position: absolute;
+                inset: 0.5rem;
+                border: 1px solid var(--quote-comp-accent);
+                opacity: 0.35;
+                box-shadow: 0 0 15px var(--quote-comp-glow);
+                transition: all 0.4s ease;
+            }
+
+            /* Gran comilla tipográfica clásica en marca de agua */
+            &::after {
+                content: '“';
+                position: absolute;
+                top: 0.2rem;
+                left: 1.25rem;
+                font-size: 9rem;
+                line-height: 1;
+                font-weight: 700;
+                color: var(--quote-comp-accent-light);
+                opacity: 0.22;
+                transform-origin: top left;
+                transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+        }
+
+        /* Efecto al pasar el cursor (Hover) */
+        &:hover {
+            box-shadow: 0 16px 40px -8px var(--quote-comp-shadow),
+                inset 0 0 50px rgba(0, 0, 0, 0.35);
+
+            & .quote-decor::before {
+                inset: 0.6rem;
+                opacity: 0.8;
+                box-shadow: 0 0 25px var(--quote-comp-glow);
+            }
+
+            & .quote-decor::after {
+                opacity: 0.38;
+                transform: translateY(-4px) scale(1.08);
+            }
+        }
 
         & .post-top-actions {
             position: absolute;
@@ -606,41 +675,6 @@
             width: 100%;
             box-sizing: border-box;
             z-index: 30;
-        }
-
-        & .quote-decor {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            z-index: 1;
-
-            /* Opening quote watermark */
-            &::before {
-                content: '“';
-                position: absolute;
-                top: -0.6rem;
-                left: 1.25rem;
-                font-family: Georgia, "Times New Roman", serif;
-                font-size: 6.5rem;
-                font-weight: 700;
-                line-height: 1;
-                color: color-mix(in srgb, var(--color-primary, #805ad5) 18%, transparent);
-                user-select: none;
-                transition: transform 0.4s ease, color 0.4s ease;
-                z-index: 1;
-            }
-        }
-
-        &:hover {
-            & .quote-decor::before {
-                color: color-mix(in srgb, var(--color-primary, #805ad5) 32%, transparent);
-                transform: translateY(-2px);
-            }
-
-            & .quote-decor::after {
-                color: color-mix(in srgb, var(--format-quote-accent, #805ad5) 24%, transparent);
-                transform: translateY(2px);
-            }
         }
 
         & .quote-front-content {
@@ -652,7 +686,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            color: var(--color-text-heading, #404554);
+            color: var(--quote-comp-text);
 
             & .entry-content {
                 overflow-y: auto;
@@ -660,11 +694,11 @@
 
                 & .wp-block-quote,
                 & blockquote.wp-block-quote {
-                    border-left: 3px solid var(--format-quote-accent, #805ad5);
+                    border-left: 3px solid var(--quote-comp-accent);
                     padding-left: 1.15rem;
                     margin: 0.85rem 0;
                     font-style: italic;
-                    color: var(--color-text-body, #2d3748);
+                    color: var(--quote-comp-text);
                     line-height: 1.6;
                 }
 
@@ -675,7 +709,7 @@
                     text-align: center;
                     font-size: 1.25rem;
                     line-height: 1.45;
-                    color: var(--format-quote-color, #6b46c1);
+                    color: var(--quote-comp-accent-light);
                 }
 
                 & .wp-block-quote cite,
@@ -685,13 +719,13 @@
                     font-style: normal;
                     font-weight: 600;
                     margin-top: 0.5rem;
-                    color: var(--color-text-muted, #718096);
+                    color: var(--quote-comp-text-muted);
                     letter-spacing: 0.04em;
                 }
 
                 & p.wp-block-paragraph {
                     font-style: italic;
-                    color: var(--color-text-body, #2d3748);
+                    color: var(--quote-comp-text);
                     margin: 0;
                     line-height: 1.6;
 
