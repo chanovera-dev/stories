@@ -30,7 +30,7 @@ get_header();
 </section>
 
 <?php
-if ( comments_open() || get_comments_number() ) :
+if ( comments_open() ) :
 	?>
 	<section class="block comments-block">
 		<div class="content content-comments">

@@ -33,7 +33,7 @@ get_template_part( 'templates/single/post', 'navigation' );
 // Render related posts carousel section.
 get_template_part( 'templates/single/related', 'posts' );
 
-if ( comments_open() || get_comments_number() ) :
+if ( comments_open() ) :
 	?>
 	<section class="block comments-block">
 		<div class="content content-comments">

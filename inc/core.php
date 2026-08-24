@@ -198,8 +198,8 @@ function stories_enqueue_scripts() {
 		}
 	}
 
-	// Enqueue comments CSS on singular pages when comments are open or existing.
-	if ( is_singular() && ( comments_open() || get_comments_number() ) ) {
+	// Enqueue comments CSS on singular pages when comments are open.
+	if ( is_singular() && comments_open() ) {
 		stories_enqueue_style( 'stories-comments', $a['css']['comments'], array( 'stories-main', 'stories-custom-forms' ) );
 	}
 

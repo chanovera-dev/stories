@@ -65,7 +65,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</time>
 				</div>
 
-				<?php if ( comments_open() || get_comments_number() ) : ?>
+				<?php if ( comments_open() ) : ?>
 					<a href="#comments" class="meta-item meta-comments" aria-label="<?php esc_attr_e( 'Ir a comentarios', 'stories' ); ?>">
 						<?php echo stories_get_svg( 'chat', array( 'size' => 14 ) ); ?>
 						<span><?php echo esc_html( get_comments_number_text( __( '0 comentarios', 'stories' ), __( '1 comentario', 'stories' ), __( '% comentarios', 'stories' ) ) ); ?></span>
