@@ -757,3 +757,58 @@ if ( ! function_exists( 'stories_loop_template_part' ) ) :
 		get_template_part( "template-parts/{$slug}", $format );
 	}
 endif;
+
+if ( ! function_exists( 'stories_custom_archive_title' ) ) :
+	/**
+	 * Filter archive titles to ensure they are rendered in Spanish cleanly.
+	 *
+	 * @param string $title Original archive title.
+	 * @return string Localized archive title in Spanish.
+	 */
+	function stories_custom_archive_title( $title ) {
+		if ( is_category() ) {
+			$title = sprintf( __( 'Categoría: %s', 'stories' ), single_cat_title( '', false ) );
+		} elseif ( is_tag() ) {
+			$title = sprintf( __( 'Etiqueta: %s', 'stories' ), single_tag_title( '', false ) );
+		} elseif ( is_author() ) {
+			$title = sprintf( __( 'Autor: %s', 'stories' ), '<span class="vcard">' . get_the_author() . '</span>' );
+		} elseif ( is_year() ) {
+			$title = sprintf( __( 'Año: %s', 'stories' ), get_the_date( _x( 'Y', 'yearly archives date format', 'stories' ) ) );
+		} elseif ( is_month() ) {
+			$title = sprintf( __( 'Mes: %s', 'stories' ), get_the_date( _x( 'F Y', 'monthly archives date format', 'stories' ) ) );
+		} elseif ( is_day() ) {
+			$title = sprintf( __( 'Día: %s', 'stories' ), get_the_date( _x( 'F j, Y', 'daily archives date format', 'stories' ) ) );
+		} elseif ( is_tax( 'post_format' ) ) {
+			if ( is_tax( 'post_format', 'post-format-aside' ) ) {
+				$title = _x( 'Notas', 'post format archive title', 'stories' );
+			} elseif ( is_tax( 'post_format', 'post-format-gallery' ) ) {
+				$title = _x( 'Galerías', 'post format archive title', 'stories' );
+			} elseif ( is_tax( 'post_format', 'post-format-image' ) ) {
+				$title = _x( 'Imágenes', 'post format archive title', 'stories' );
+			} elseif ( is_tax( 'post_format', 'post-format-video' ) ) {
+				$title = _x( 'Vídeos', 'post format archive title', 'stories' );
+			} elseif ( is_tax( 'post_format', 'post-format-quote' ) ) {
+				$title = _x( 'Citas', 'post format archive title', 'stories' );
+			} elseif ( is_tax( 'post_format', 'post-format-link' ) ) {
+				$title = _x( 'Enlaces', 'post format archive title', 'stories' );
+			} elseif ( is_tax( 'post_format', 'post-format-status' ) ) {
+				$title = _x( 'Estados', 'post format archive title', 'stories' );
+			} elseif ( is_tax( 'post_format', 'post-format-audio' ) ) {
+				$title = _x( 'Audios', 'post format archive title', 'stories' );
+			} elseif ( is_tax( 'post_format', 'post-format-chat' ) ) {
+				$title = _x( 'Chats', 'post format archive title', 'stories' );
+			}
+		} elseif ( is_post_type_archive() ) {
+			$title = sprintf( __( 'Archivos: %s', 'stories' ), post_type_archive_title( '', false ) );
+		} elseif ( is_tax() ) {
+			$tax = get_taxonomy( get_queried_object()->taxonomy );
+			/* translators: 1: Taxonomy singular name, 2: Current taxonomy term */
+			$title = sprintf( __( '%1$s: %2$s', 'stories' ), $tax->labels->singular_name, single_term_title( '', false ) );
+		} else {
+			$title = __( 'Archivos', 'stories' );
+		}
+
+		return $title;
+	}
+	add_filter( 'get_the_archive_title', 'stories_custom_archive_title' );
+endif;
