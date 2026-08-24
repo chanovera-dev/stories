@@ -30,7 +30,11 @@ get_header();
 			while ( have_posts() ) :
 				the_post();
 
-				stories_loop_template_part( 'search' );
+				/*
+				 * Include the Post-Format-specific template for the active loop design.
+				 * Falls back to default template-parts/content-{$format}.php or content.php.
+				 */
+				stories_loop_template_part( get_post_format() );
 
 			endwhile;
 			echo '</div>';
