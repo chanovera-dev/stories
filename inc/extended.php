@@ -423,3 +423,476 @@ function stories_async_non_critical_styles( $html, $handle, $href, $media ) {
 	return $html;
 }
 add_filter( 'style_loader_tag', 'stories_async_non_critical_styles', 10, 4 );
+
+/**
+ * Helper to resolve relative URL to absolute URL.
+ *
+ * @param string $url  Image or link URL.
+ * @param string $base Base URL.
+ * @return string Absolute URL.
+ */
+function stories_resolve_relative_url( $url, $base ) {
+	if ( empty( $url ) ) {
+		return '';
+	}
+
+	// If already an absolute URL.
+	if ( parse_url( $url, PHP_URL_SCHEME ) !== null ) {
+		return $url;
+	}
+
+	// Protocol-relative URL //example.com/img.jpg
+	if ( 0 === strpos( $url, '//' ) ) {
+		$scheme = parse_url( $base, PHP_URL_SCHEME );
+		return ( $scheme ? $scheme : 'https' ) . ':' . $url;
+	}
+
+	if ( empty( $base ) ) {
+		return $url;
+	}
+
+	$parts = parse_url( $base );
+	if ( ! $parts || empty( $parts['host'] ) ) {
+		return $url;
+	}
+
+	$scheme = ! empty( $parts['scheme'] ) ? $parts['scheme'] : 'https';
+	$host   = $parts['host'];
+	$port   = ! empty( $parts['port'] ) ? ':' . $parts['port'] : '';
+	$root   = $scheme . '://' . $host . $port;
+
+	// Absolute path from host root
+	if ( 0 === strpos( $url, '/' ) ) {
+		return $root . $url;
+	}
+
+	// Relative path
+	$path = ! empty( $parts['path'] ) ? $parts['path'] : '/';
+	$dir  = preg_replace( '#/[^/]*$#', '', $path );
+	return $root . $dir . '/' . $url;
+}
+
+/**
+ * Helper to extract the first URL from post content (supporting Gutenberg embeds, HTML anchors, and raw URLs).
+ *
+ * @param string $content Raw post content.
+ * @return string Extracted URL or empty string.
+ */
+function stories_extract_first_url( $content ) {
+	if ( empty( $content ) || ! is_string( $content ) ) {
+		return '';
+	}
+
+	// 1. Check Gutenberg embed blocks: <!-- wp:embed {"url":"..."} --> or core-embed variants
+	if ( preg_match( '/<!--\s+wp:(?:core-embed\/[a-z0-9-]+|embed)\s+(\{.+?\})\s+-->/s', $content, $matches ) ) {
+		$embed_data = json_decode( $matches[1], true );
+		if ( ! empty( $embed_data['url'] ) && filter_var( $embed_data['url'], FILTER_VALIDATE_URL ) ) {
+			return trim( $embed_data['url'] );
+		}
+	}
+
+	// 2. Check standard href attribute: <a href="...">
+	$url = get_url_in_content( $content );
+	if ( ! empty( $url ) && filter_var( $url, FILTER_VALIDATE_URL ) ) {
+		return trim( $url );
+	}
+
+	// 3. Check plain text URL inside content
+	if ( preg_match( '#https?://[^\s<>"\'{}|\\^`\[\]()]+#i', $content, $matches ) ) {
+		if ( filter_var( $matches[0], FILTER_VALIDATE_URL ) ) {
+			return trim( $matches[0] );
+		}
+	}
+
+	return '';
+}
+
+/**
+ * Parse HTML content and extract OpenGraph, Twitter Cards, JSON-LD Schema, and standard metadata.
+ *
+ * @param string $html     Raw HTML string of the target webpage.
+ * @param string $base_url Base URL of the target page for resolving relative asset URLs.
+ * @return array Extracted metadata including title, image, author, excerpt, categories, and tags.
+ */
+function stories_parse_html_meta( $html, $base_url = '' ) {
+	$data = array(
+		'title'      => '',
+		'image'      => '',
+		'author'     => '',
+		'excerpt'    => '',
+		'categories' => array(),
+		'tags'       => array(),
+	);
+
+	if ( empty( $html ) || ! is_string( $html ) ) {
+		return $data;
+	}
+
+	// 1. Parse JSON-LD scripts (Schema.org)
+	if ( preg_match_all( '#<script[^>]+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>#is', $html, $matches ) ) {
+		foreach ( $matches[1] as $json_str ) {
+			$json = json_decode( trim( $json_str ), true );
+			if ( ! $json || ! is_array( $json ) ) {
+				continue;
+			}
+
+			// Handle @graph array or single object
+			$items = isset( $json['@graph'] ) && is_array( $json['@graph'] ) ? $json['@graph'] : array( $json );
+
+			foreach ( $items as $item ) {
+				if ( ! is_array( $item ) ) {
+					continue;
+				}
+
+				// Title / Headline
+				if ( empty( $data['title'] ) ) {
+					if ( ! empty( $item['headline'] ) && is_string( $item['headline'] ) ) {
+						$data['title'] = $item['headline'];
+					} elseif ( ! empty( $item['name'] ) && is_string( $item['name'] ) && ( ! isset( $item['@type'] ) || in_array( $item['@type'], array( 'Article', 'NewsArticle', 'BlogPosting', 'WebPage' ), true ) ) ) {
+						$data['title'] = $item['name'];
+					}
+				}
+
+				// Author
+				if ( empty( $data['author'] ) && ! empty( $item['author'] ) ) {
+					if ( is_string( $item['author'] ) ) {
+						$data['author'] = $item['author'];
+					} elseif ( is_array( $item['author'] ) ) {
+						if ( ! empty( $item['author']['name'] ) && is_string( $item['author']['name'] ) ) {
+							$data['author'] = $item['author']['name'];
+						} elseif ( ! empty( $item['author'][0]['name'] ) && is_string( $item['author'][0]['name'] ) ) {
+							$data['author'] = $item['author'][0]['name'];
+						}
+					}
+				}
+
+				// Image
+				if ( empty( $data['image'] ) && ! empty( $item['image'] ) ) {
+					if ( is_string( $item['image'] ) ) {
+						$data['image'] = $item['image'];
+					} elseif ( is_array( $item['image'] ) ) {
+						if ( ! empty( $item['image']['url'] ) && is_string( $item['image']['url'] ) ) {
+							$data['image'] = $item['image']['url'];
+						} elseif ( ! empty( $item['image'][0] ) && is_string( $item['image'][0] ) ) {
+							$data['image'] = $item['image'][0];
+						} elseif ( ! empty( $item['image'][0]['url'] ) && is_string( $item['image'][0]['url'] ) ) {
+							$data['image'] = $item['image'][0]['url'];
+						}
+					}
+				}
+
+				// Excerpt / Description
+				if ( empty( $data['excerpt'] ) && ! empty( $item['description'] ) && is_string( $item['description'] ) ) {
+					$data['excerpt'] = $item['description'];
+				}
+
+				// Article Section -> Category
+				if ( ! empty( $item['articleSection'] ) ) {
+					$sections = is_array( $item['articleSection'] ) ? $item['articleSection'] : array( $item['articleSection'] );
+					foreach ( $sections as $sec ) {
+						if ( is_string( $sec ) && ! in_array( $sec, $data['categories'], true ) ) {
+							$data['categories'][] = trim( $sec );
+						}
+					}
+				}
+
+				// Keywords -> Tags
+				if ( ! empty( $item['keywords'] ) ) {
+					$kw_raw = is_array( $item['keywords'] ) ? implode( ',', $item['keywords'] ) : $item['keywords'];
+					if ( is_string( $kw_raw ) ) {
+						$split_kws = explode( ',', $kw_raw );
+						foreach ( $split_kws as $kw ) {
+							$kw_clean = trim( $kw );
+							if ( ! empty( $kw_clean ) && ! in_array( $kw_clean, $data['tags'], true ) ) {
+								$data['tags'][] = $kw_clean;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// 2. Parse OpenGraph & HTML Meta Tags via DOMDocument / XPath
+	$internal_errors = libxml_use_internal_errors( true );
+	$dom             = new DOMDocument();
+
+	// Force UTF-8 interpretation if charset is missing or varied.
+	$encoded_html = function_exists( 'mb_encode_numericentity' )
+		? mb_encode_numericentity( $html, array( 0x80, 0x10FFFF, 0, 0x1FFFFF ), 'UTF-8' )
+		: $html;
+
+	@$dom->loadHTML( $encoded_html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD );
+	libxml_clear_errors();
+	libxml_use_internal_errors( $internal_errors );
+
+	$xpath = new DOMXPath( $dom );
+
+	// Title
+	if ( empty( $data['title'] ) ) {
+		$title_queries = array(
+			'//meta[@property="og:title"]/@content',
+			'//meta[@name="twitter:title"]/@content',
+			'//meta[@name="title"]/@content',
+			'//title/text()',
+			'//h1[1]/text()',
+		);
+		foreach ( $title_queries as $query ) {
+			$nodes = $xpath->query( $query );
+			if ( $nodes && $nodes->length > 0 ) {
+				$raw_title = trim( $nodes->item( 0 )->nodeValue );
+				if ( ! empty( $raw_title ) ) {
+					$data['title'] = html_entity_decode( $raw_title, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+					break;
+				}
+			}
+		}
+	}
+
+	// Image
+	if ( empty( $data['image'] ) ) {
+		$image_queries = array(
+			'//meta[@property="og:image:secure_url"]/@content',
+			'//meta[@property="og:image"]/@content',
+			'//meta[@property="og:image:url"]/@content',
+			'//meta[@name="twitter:image:src"]/@content',
+			'//meta[@name="twitter:image"]/@content',
+			'//link[@rel="image_src"]/@href',
+		);
+		foreach ( $image_queries as $query ) {
+			$nodes = $xpath->query( $query );
+			if ( $nodes && $nodes->length > 0 ) {
+				$raw_img = trim( $nodes->item( 0 )->nodeValue );
+				if ( ! empty( $raw_img ) ) {
+					$img_url = stories_resolve_relative_url( $raw_img, $base_url );
+					if ( filter_var( $img_url, FILTER_VALIDATE_URL ) ) {
+						$data['image'] = $img_url;
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	// Excerpt / Description
+	if ( empty( $data['excerpt'] ) ) {
+		$excerpt_queries = array(
+			'//meta[@property="og:description"]/@content',
+			'//meta[@name="twitter:description"]/@content',
+			'//meta[@name="description"]/@content',
+		);
+		foreach ( $excerpt_queries as $query ) {
+			$nodes = $xpath->query( $query );
+			if ( $nodes && $nodes->length > 0 ) {
+				$raw_desc = trim( $nodes->item( 0 )->nodeValue );
+				if ( ! empty( $raw_desc ) ) {
+					$data['excerpt'] = html_entity_decode( $raw_desc, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+					break;
+				}
+			}
+		}
+	}
+
+	// Author
+	if ( empty( $data['author'] ) ) {
+		$author_queries = array(
+			'//meta[@name="author"]/@content',
+			'//meta[@property="article:author"]/@content',
+			'//meta[@name="twitter:creator"]/@content',
+			'//meta[@name="dc.creator"]/@content',
+			'//meta[@name="parsely-author"]/@content',
+			'//meta[@name="sailthru.author"]/@content',
+			'//meta[@property="author"]/@content',
+			'//*[@rel="author"]/text()',
+			'//*[contains(@class, "author-name")]/text()',
+			'//*[contains(@class, "byline")]/text()',
+		);
+		foreach ( $author_queries as $query ) {
+			$nodes = $xpath->query( $query );
+			if ( $nodes && $nodes->length > 0 ) {
+				$raw_author = trim( $nodes->item( 0 )->nodeValue );
+				if ( ! empty( $raw_author ) ) {
+					$data['author'] = html_entity_decode( $raw_author, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+					break;
+				}
+			}
+		}
+	}
+
+	// Categories & Section
+	if ( empty( $data['categories'] ) ) {
+		$category_nodes = $xpath->query( '//meta[@property="article:section"]/@content' );
+		if ( $category_nodes && $category_nodes->length > 0 ) {
+			foreach ( $category_nodes as $c_node ) {
+				$sec = trim( $c_node->nodeValue );
+				if ( ! empty( $sec ) && ! in_array( $sec, $data['categories'], true ) ) {
+					$data['categories'][] = html_entity_decode( $sec, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+				}
+			}
+		}
+	}
+
+	// Tags / Keywords
+	if ( empty( $data['tags'] ) ) {
+		$tag_nodes = $xpath->query( '//meta[@property="article:tag"]/@content' );
+		if ( $tag_nodes && $tag_nodes->length > 0 ) {
+			foreach ( $tag_nodes as $t_node ) {
+				$tag_val = trim( $t_node->nodeValue );
+				if ( ! empty( $tag_val ) && ! in_array( $tag_val, $data['tags'], true ) ) {
+					$data['tags'][] = html_entity_decode( $tag_val, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+				}
+			}
+		}
+
+		if ( empty( $data['tags'] ) ) {
+			$keyword_nodes = $xpath->query( '//meta[@name="keywords"]/@content' );
+			if ( $keyword_nodes && $keyword_nodes->length > 0 ) {
+				$raw_kw = trim( $keyword_nodes->item( 0 )->nodeValue );
+				if ( ! empty( $raw_kw ) ) {
+					$kw_list = explode( ',', $raw_kw );
+					foreach ( $kw_list as $kw ) {
+						$kw_clean = trim( $kw );
+						if ( ! empty( $kw_clean ) && ! in_array( $kw_clean, $data['tags'], true ) ) {
+							$data['tags'][] = html_entity_decode( $kw_clean, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return $data;
+}
+
+/**
+ * Retrieve remote metadata (title, image, author, categories, tags, excerpt) for a link format post with caching.
+ *
+ * Checks post_meta cache first to prevent repeated remote HTTP requests.
+ *
+ * @param int $post_id Post ID.
+ * @return array Cached or freshly fetched link metadata.
+ */
+function stories_get_link_post_metadata( $post_id = 0 ) {
+	if ( ! $post_id ) {
+		$post_id = get_the_ID();
+	}
+	if ( ! $post_id ) {
+		return array();
+	}
+
+	// Extract target URL from post content or fallback to permalink.
+	$raw_content = get_post_field( 'post_content', $post_id );
+	$link_url    = stories_extract_first_url( $raw_content );
+	if ( empty( $link_url ) ) {
+		$link_url = get_permalink( $post_id );
+	}
+
+	// Check post_meta cache.
+	$cached = get_post_meta( $post_id, '_stories_link_metadata', true );
+	if ( is_array( $cached ) && ! empty( $cached['cached_at'] ) && isset( $cached['url'] ) && $cached['url'] === $link_url ) {
+		return $cached;
+	}
+
+	// Prepare default local fallback data.
+	$local_thumb   = has_post_thumbnail( $post_id ) ? get_the_post_thumbnail_url( $post_id, 'medium' ) : '';
+	$local_title   = get_the_title( $post_id );
+	$local_author  = get_the_author_meta( 'display_name', get_post_field( 'post_author', $post_id ) );
+	$local_excerpt = get_the_excerpt( $post_id );
+
+	$local_cats = array();
+	$cat_objs   = get_the_category( $post_id );
+	if ( ! empty( $cat_objs ) && ! is_wp_error( $cat_objs ) ) {
+		foreach ( $cat_objs as $c ) {
+			$local_cats[] = array(
+				'name' => $c->name,
+				'url'  => get_category_link( $c->term_id ),
+			);
+		}
+	}
+
+	$local_tags = array();
+	$tag_objs   = get_the_tags( $post_id );
+	if ( ! empty( $tag_objs ) && ! is_wp_error( $tag_objs ) ) {
+		foreach ( $tag_objs as $t ) {
+			$local_tags[] = array(
+				'name' => $t->name,
+				'url'  => get_tag_link( $t->term_id ),
+			);
+		}
+	}
+
+	$data = array(
+		'url'        => $link_url,
+		'title'      => $local_title,
+		'image'      => $local_thumb,
+		'author'     => $local_author,
+		'categories' => $local_cats,
+		'tags'       => $local_tags,
+		'excerpt'    => $local_excerpt,
+		'cached_at'  => time(),
+		'is_remote'  => false,
+	);
+
+	$site_host = wp_parse_url( home_url(), PHP_URL_HOST );
+	$link_host = wp_parse_url( $link_url, PHP_URL_HOST );
+
+	if ( ! empty( $link_url ) && filter_var( $link_url, FILTER_VALIDATE_URL ) && $link_host && strtolower( $link_host ) !== strtolower( (string) $site_host ) ) {
+		$response = wp_safe_remote_get(
+			$link_url,
+			array(
+				'timeout'     => 6,
+				'redirection' => 4,
+				'user-agent'  => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+				'sslverify'   => false,
+				'headers'     => array(
+					'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+				),
+			)
+		);
+
+		if ( ! is_wp_error( $response ) && wp_remote_retrieve_response_code( $response ) === 200 ) {
+			$html = wp_remote_retrieve_body( $response );
+			if ( ! empty( $html ) ) {
+				$remote_meta = stories_parse_html_meta( $html, $link_url );
+				if ( ! empty( $remote_meta['title'] ) ) {
+					$data['title'] = $remote_meta['title'];
+				}
+				if ( ! empty( $remote_meta['image'] ) ) {
+					$data['image'] = $remote_meta['image'];
+				}
+				if ( ! empty( $remote_meta['author'] ) ) {
+					$data['author'] = $remote_meta['author'];
+				}
+				if ( ! empty( $remote_meta['excerpt'] ) ) {
+					$data['excerpt'] = $remote_meta['excerpt'];
+				}
+				if ( ! empty( $remote_meta['categories'] ) ) {
+					$data['categories'] = $remote_meta['categories'];
+				}
+				if ( ! empty( $remote_meta['tags'] ) ) {
+					$data['tags'] = $remote_meta['tags'];
+				}
+				$data['is_remote'] = true;
+			}
+		}
+	}
+
+	// Persist the metadata in post meta so subsequent views do not perform HTTP requests.
+	update_post_meta( $post_id, '_stories_link_metadata', $data );
+
+	return $data;
+}
+
+/**
+ * Invalidate link metadata cache when post is saved or updated.
+ *
+ * @param int $post_id Post ID.
+ */
+function stories_clear_link_metadata_cache( $post_id ) {
+	if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
+		return;
+	}
+	delete_post_meta( $post_id, '_stories_link_metadata' );
+}
+add_action( 'save_post', 'stories_clear_link_metadata_cache' );
+add_action( 'edit_post', 'stories_clear_link_metadata_cache' );
