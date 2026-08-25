@@ -1145,12 +1145,6 @@
             }
         }
 
-        &:hover {
-            & .post-thumbnail-bg img {
-                transform: scale(1.03);
-            }
-        }
-
         & .post-top-actions {
             position: absolute;
             top: 0;
