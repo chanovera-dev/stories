@@ -1651,11 +1651,11 @@
     color: var(--color-primary-accent);
 }
 
-/* Fallback Design & Standard Text Colors for Cards with NO Thumbnail */
+/* Blueprint Design (White Background & Blue Lines) for Cards with NO Thumbnail */
 .stories-standard-container.has-no-thumbnail,
 .story-card.has-no-thumbnail .stories-standard-container {
     background-color: var(--bg-card, #ffffff);
-    border: 1px solid var(--border-light, rgba(0, 0, 0, 0.08));
+    border: 1px solid var(--border-light, color-mix(in srgb, var(--color-text-body, #0f172a) 8%, transparent));
 }
 
 .no-thumbnail-pattern {
@@ -1664,37 +1664,25 @@
     left: 0;
     width: 100%;
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--bg-body, #f5f7f5);
+    background-color: var(--bg-card, #ffffff);
     background-image: 
-        radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--color-primary, #8bc34a) 25%, transparent) 1.2px, transparent 0),
-        linear-gradient(to right, color-mix(in srgb, var(--color-text-body, #334155) 4%, transparent) 1px, transparent 1px),
-        linear-gradient(to bottom, color-mix(in srgb, var(--color-text-body, #334155) 4%, transparent) 1px, transparent 1px);
-    background-size: 20px 20px, 40px 40px, 40px 40px;
+        /* Major Blueprint Grid (40px) */
+        linear-gradient(to right, color-mix(in srgb, var(--color-primary, #0284c7) 26%, transparent) 1px, transparent 1px),
+        linear-gradient(to bottom, color-mix(in srgb, var(--color-primary, #0284c7) 26%, transparent) 1px, transparent 1px),
+        /* Minor Sub-Grid (8px) */
+        linear-gradient(to right, color-mix(in srgb, var(--color-primary, #0284c7) 10%, transparent) 1px, transparent 1px),
+        linear-gradient(to bottom, color-mix(in srgb, var(--color-primary, #0284c7) 10%, transparent) 1px, transparent 1px);
+    background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px;
+    background-position: center center;
     z-index: 1;
-}
-
-.pattern-decorative-icon {
-    color: var(--color-primary, #8bc34a);
-    opacity: 0.22;
-    transform: scale(1.3);
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.story-card:hover .pattern-decorative-icon {
-    transform: scale(1.5);
-    opacity: 0.35;
+    overflow: hidden;
 }
 
 .stories-standard-container.has-no-thumbnail .standard-bottom-bar,
 .story-card.has-no-thumbnail .standard-bottom-bar {
-    background: var(--bg-card, #ffffff);
-    background-color: var(--bg-card, #ffffff);
-    border-top: 1px solid var(--border-light, rgba(0, 0, 0, 0.08));
-    padding: 0.85rem 1rem;
-    padding-top: 0.85rem;
+    background: linear-gradient(0deg, var(--bright-line) 0%, transparent 100%);
+    padding: 1rem;
+    padding-top: 5rem;
     color: var(--color-text-body, #334155);
 }
 
@@ -1712,8 +1700,8 @@
 .stories-standard-container.has-no-thumbnail .toggle-info-btn,
 .story-card.has-no-thumbnail .toggle-info-btn {
     background-color: var(--bg-card, #ffffff);
-    color: var(--color-text-body);
-    border: 1px solid var(--border-light, rgba(0, 0, 0, 0.08));
+    color: var(--color-text-body, #334155);
+    border: 1px solid var(--border-light, color-mix(in srgb, var(--color-text-body, #0f172a) 8%, transparent));
 }
 
 /* Custom Video Controls Bar (Shown on Hover Across All Browsers) */

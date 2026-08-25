@@ -19,10 +19,6 @@ $container_classes = 'stories-standard-container' . ( ! $has_thumb ? ' has-no-th
 		<div class="post-thumbnail-bg <?php echo ! $has_thumb ? 'no-thumbnail-pattern' : ''; ?>">
 			<?php if ( $has_thumb ) : ?>
 				<?php the_post_thumbnail( 'medium' ); ?>
-			<?php else : ?>
-				<div class="pattern-decorative-icon">
-					<?php stories_svg( 'article', array( 'size' => 48 ) ); ?>
-				</div>
 			<?php endif; ?>
 		</div>
 
