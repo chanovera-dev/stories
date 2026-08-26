@@ -67,7 +67,11 @@ add_action( 'wp_ajax_nopriv_stories_filter_posts', 'stories_ajax_filter_posts' )
  * AJAX Handler for toggling likes on a post.
  */
 function stories_ajax_like_post() {
-	check_ajax_referer( 'stories_ajax_nonce', 'nonce' );
+	// Verificar nonce solo si el usuario está conectado o si se envió el token
+	$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
+	if ( is_user_logged_in() && ! empty( $nonce ) && ! wp_verify_nonce( $nonce, 'stories_ajax_nonce' ) ) {
+		wp_send_json_error( __( 'Sesión expirada. Recarga la página.', 'stories' ) );
+	}
 
 	$post_id = isset( $_POST['post_id'] ) ? absint( $_POST['post_id'] ) : 0;
 
