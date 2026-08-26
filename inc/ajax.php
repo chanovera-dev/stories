@@ -86,47 +86,32 @@ function stories_ajax_like_post() {
 	$cookie_path   = defined( 'COOKIEPATH' ) && COOKIEPATH ? COOKIEPATH : '/';
 	$cookie_domain = defined( 'COOKIE_DOMAIN' ) ? COOKIE_DOMAIN : '';
 
-	global $wpdb;
 	$meta_key = '_stories_likes_count';
-	$canonical_likes = get_post_meta( $post_id, $meta_key, true );
-	if ( '' === $canonical_likes || false === $canonical_likes ) {
+	$likes    = get_post_meta( $post_id, $meta_key, true );
+	if ( '' === $likes || false === $likes ) {
 		$legacy_likes = get_post_meta( $post_id, '_avante_likes_count', true );
-		if ( '' !== $legacy_likes && false !== $legacy_likes ) {
-			add_post_meta( $post_id, $meta_key, max( 0, (int) $legacy_likes ), true );
-		}
+		$likes        = ( '' !== $legacy_likes && false !== $legacy_likes ) ? max( 0, (int) $legacy_likes ) : 0;
+	} else {
+		$likes = max( 0, (int) $likes );
 	}
 
 	if ( $is_liked ) {
 		// Unlike
-		$wpdb->query(
-			$wpdb->prepare(
-				"UPDATE {$wpdb->postmeta} SET meta_value = GREATEST(0, CAST(meta_value AS UNSIGNED) - 1) WHERE post_id = %d AND meta_key = %s",
-				$post_id,
-				$meta_key
-			)
-		);
+		$likes = max( 0, $likes - 1 );
+		update_post_meta( $post_id, $meta_key, $likes );
+		update_post_meta( $post_id, '_avante_likes_count', $likes );
 		setcookie( $cookie_stories, '', time() - 3600, $cookie_path, $cookie_domain );
 		setcookie( $cookie_avante, '', time() - 3600, $cookie_path, $cookie_domain );
 		$action = 'unliked';
 	} else {
 		// Like
-		$updated = $wpdb->query(
-			$wpdb->prepare(
-				"UPDATE {$wpdb->postmeta} SET meta_value = CAST(meta_value AS UNSIGNED) + 1 WHERE post_id = %d AND meta_key = %s",
-				$post_id,
-				$meta_key
-			)
-		);
-		if ( ! $updated ) {
-			add_post_meta( $post_id, $meta_key, 1, true );
-		}
+		$likes = $likes + 1;
+		update_post_meta( $post_id, $meta_key, $likes );
+		update_post_meta( $post_id, '_avante_likes_count', $likes );
 		setcookie( $cookie_stories, '1', time() + ( 86400 * 30 ), $cookie_path, $cookie_domain );
 		setcookie( $cookie_avante, '1', time() + ( 86400 * 30 ), $cookie_path, $cookie_domain );
 		$action = 'liked';
 	}
-
-	$likes = (int) get_post_meta( $post_id, $meta_key, true );
-	update_post_meta( $post_id, '_avante_likes_count', $likes );
 
 	$icon_key = 'liked' === $action ? 'heart-fill' : 'heart';
 

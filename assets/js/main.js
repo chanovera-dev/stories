@@ -844,11 +844,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         setTimeout(() => btn.classList.remove('animating-unlike'), 450);
                     }
 
-                    const isActive = (isUserLiked || likesCount > 0);
-                    btn.classList.toggle('liked', isActive);
-                    btn.classList.toggle('is-liked', isActive);
+                    btn.classList.toggle('liked', isUserLiked);
+                    btn.classList.toggle('is-liked', isUserLiked);
                     if (container) {
-                        container.classList.toggle('is-liked', isActive);
+                        container.classList.toggle('is-liked', isUserLiked);
                     }
 
                     const postTitle = btn.getAttribute('data-post-title') || 'esta publicación';

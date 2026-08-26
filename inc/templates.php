@@ -433,9 +433,9 @@ if ( ! function_exists( 'stories_get_likes_count' ) ) :
 	 * @return int Total likes count.
 	 */
 	function stories_get_likes_count( $post_id ) {
-		$likes = get_post_meta( $post_id, '_avante_likes_count', true );
+		$likes = get_post_meta( $post_id, '_stories_likes_count', true );
 		if ( '' === $likes || false === $likes ) {
-			$likes = get_post_meta( $post_id, '_stories_likes_count', true );
+			$likes = get_post_meta( $post_id, '_avante_likes_count', true );
 		}
 		return $likes ? (int) $likes : 0;
 	}
