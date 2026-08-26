@@ -1,6 +1,6 @@
 <?php
 /**
- * Template part for displaying Video post format
+ * Template part for displaying Video post format in loops (loop00 - Standard Industry Layout)
  *
  * @package Stories
  */
@@ -9,110 +9,74 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$content = apply_filters( 'the_content', get_the_content() );
-$video   = get_media_embedded_in_content( $content, array( 'video', 'object', 'embed', 'iframe' ) );
+$content   = apply_filters( 'the_content', get_the_content() );
+$video     = get_media_embedded_in_content( $content, array( 'video', 'object', 'embed', 'iframe' ) );
+$has_thumb = has_post_thumbnail();
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( 'story-card format-video-card' ); ?> data-id="<?php echo esc_attr( get_the_ID() ); ?>">
-	<?php if ( ! empty( $video ) || has_post_thumbnail() ) : ?>
-		<div class="stories-video-container">
-			<!-- Top Actions (Info Toggle & Like Button) -->
-			<div class="post-top-actions">
-				<div class="toggle-info-container inset-shadow-effect">
-					<button type="button" class="toggle-info-btn" aria-label="<?php esc_attr_e( 'Toggle Post Info', 'stories' ); ?>" title="<?php esc_attr_e( 'Toggle Post Info', 'stories' ); ?>"><?php stories_svg( 'info', array( 'size' => 18 ) ); ?></button>
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'story-card loop00-card format-video-card' ); ?> data-id="<?php echo esc_attr( get_the_ID() ); ?>">
+	<!-- 1. Featured Media / Video Container -->
+	<div class="loop00-card__media loop00-card__media--video">
+		<?php if ( ! empty( $video ) ) : ?>
+			<div class="loop00-card__video-embed">
+				<?php echo $video[0]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			</div>
+		<?php elseif ( $has_thumb ) : ?>
+			<a href="<?php the_permalink(); ?>" class="loop00-card__thumbnail-link" tabindex="-1" aria-hidden="true">
+				<?php the_post_thumbnail( 'medium_large', array( 'class' => 'loop00-card__img', 'loading' => 'lazy' ) ); ?>
+				<div class="loop00-card__play-badge">
+					<?php stories_svg( 'play', array( 'size' => 28 ) ); ?>
 				</div>
-				<?php stories_like_button(); ?>
-			</div>
-
-			<div class="entry-video">
-				<?php
-				if ( ! empty( $video ) ) :
-					echo $video[0]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				elseif ( has_post_thumbnail() ) :
-					the_post_thumbnail( 'full' );
-				endif;
-				?>
-			</div>
-
-			<!-- Custom Video Controls Bar (Cross-Browser Unified Experience) -->
-			<div class="custom-video-controls custom-controls">
-				<button type="button" class="video-btn play-pause-btn" aria-label="<?php esc_attr_e( 'Play / Pause', 'stories' ); ?>" title="<?php esc_attr_e( 'Play / Pause', 'stories' ); ?>">
-					<?php stories_svg( 'play', array( 'size' => 18 ) ); ?>
-				</button>
-
-				<div class="video-progress-container" role="progressbar" aria-label="<?php esc_attr_e( 'Video playback progress', 'stories' ); ?>" tabindex="0">
-					<div class="video-buffer-bar"></div>
-					<div class="video-progress-bar">
-						<span class="video-progress-handle"></span>
-					</div>
+			</a>
+		<?php else : ?>
+			<a href="<?php the_permalink(); ?>" class="loop00-card__thumbnail-link" tabindex="-1" aria-hidden="true">
+				<div class="loop00-card__placeholder">
+					<?php stories_svg( 'video', array( 'size' => 40 ) ); ?>
 				</div>
+			</a>
+		<?php endif; ?>
 
-				<span class="video-time-display">0:00 / 0:00</span>
-
-				<button type="button" class="video-btn mute-btn" aria-label="<?php esc_attr_e( 'Mute / Unmute', 'stories' ); ?>" title="<?php esc_attr_e( 'Mute / Unmute', 'stories' ); ?>">
-					<?php stories_svg( 'unmute', array( 'size' => 18 ) ); ?>
-				</button>
-				<button type="button" class="video-btn fullscreen-btn" aria-label="<?php esc_attr_e( 'Fullscreen', 'stories' ); ?>" title="<?php esc_attr_e( 'Fullscreen', 'stories' ); ?>">
-					<?php stories_svg( 'fullscreen', array( 'size' => 18 ) ); ?>
-				</button>
-			</div>
-
-			<!-- Information Overlay Card (Toggleable via Info Button) -->
-			<div class="info-overlay video-info-overlay">
-				<header class="entry-header">
-					<div class="entry-badge">
-						<?php stories_post_type_badge(); ?>
-					</div>
-				</header>
-
-				<div class="entry-body">
-					<?php
-					if ( is_singular() ) :
-						the_title( '<h1 class="entry-title">', '</h1>' );
-					else :
-						the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-					endif;
-					?>
-
-					<div class="entry-meta">
-						<?php
-						stories_posted_on();
-						stories_posted_by();
-						?>
-						<?php if ( has_category() ) : ?>
-							<span class="entry-categories">
-								<?php stories_svg( 'folder', array( 'size' => 13 ) ); ?>
-								<?php the_category( ', ' ); ?>
-							</span>
-						<?php endif; ?>
-					</div>
-
-					<div class="entry-summary">
-						<?php the_excerpt(); ?>
-					</div>
-				</div>
-
-				<footer class="entry-footer">
-					<?php
-					$tags = get_the_tags();
-					if ( $tags ) :
-						?>
-						<div class="post--tags__wrapper">
-							<div class="tags post--tags">
-								<?php
-								foreach ( $tags as $tag ) {
-									echo '<a class="post-tag small" href="' . esc_url( get_tag_link( $tag->term_id ) ) . '">' . stories_get_svg( 'tag', array( 'size' => 12 ) ) . esc_html( $tag->name ) . '</a>';
-								}
-								?>
-							</div>
-						</div>
-					<?php endif; ?>
-				</footer>
-			</div>
+		<div class="loop00-card__badge-container">
+			<?php stories_post_type_badge(); ?>
 		</div>
-	<?php else : ?>
-		<!-- Fallback if no media found -->
-		<p>No se encontró el video.</p>
-	<?php endif; ?>
-	<div class="post__overlay"></div>
+
+		<div class="loop00-card__action-container">
+			<?php stories_like_button(); ?>
+		</div>
+	</div>
+
+	<!-- 2. Card Body / Content -->
+	<div class="loop00-card__body">
+		<div class="loop00-card__meta">
+			<?php if ( has_category() ) : ?>
+				<span class="loop00-card__categories">
+					<?php the_category( ', ' ); ?>
+				</span>
+				<span class="loop00-card__meta-separator" aria-hidden="true">&bull;</span>
+			<?php endif; ?>
+			<?php stories_posted_on(); ?>
+		</div>
+
+		<h2 class="loop00-card__title entry-title">
+			<a href="<?php the_permalink(); ?>" rel="bookmark">
+				<?php the_title(); ?>
+			</a>
+		</h2>
+
+		<div class="loop00-card__excerpt entry-summary">
+			<?php the_excerpt(); ?>
+		</div>
+	</div>
+
+	<!-- 3. Card Footer -->
+	<footer class="loop00-card__footer entry-footer">
+		<div class="loop00-card__author">
+			<?php stories_posted_by(); ?>
+		</div>
+		<div class="loop00-card__read-more">
+			<a href="<?php the_permalink(); ?>" class="loop00-read-more-btn">
+				<?php esc_html_e( 'Ver vídeo', 'stories' ); ?> &rarr;
+			</a>
+		</div>
+	</footer>
 </article>

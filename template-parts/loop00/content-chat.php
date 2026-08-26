@@ -1,6 +1,6 @@
 <?php
 /**
- * Template part for displaying Chat post format
+ * Template part for displaying Chat post format in loops (loop00 - Standard Industry Layout)
  *
  * @package Stories
  */
@@ -10,49 +10,50 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( 'story-card format-chat-card' ); ?>>
-	<div class="post-top-actions">
-		<?php stories_like_button(); ?>
-	</div>
-	<header class="entry-header">
-		<div class="entry-badge">
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'story-card loop00-card format-chat-card' ); ?> data-id="<?php echo esc_attr( get_the_ID() ); ?>">
+	<!-- 1. Chat Header -->
+	<div class="loop00-card__header loop00-card__header--chat">
+		<div class="loop00-card__badge-container">
 			<?php stories_post_type_badge(); ?>
 		</div>
 
-		<?php
-		if ( is_singular() ) :
-			the_title( '<h1 class="entry-title">', '</h1>' );
-		else :
-			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-		endif;
-		?>
-
-		<div class="entry-meta">
-			<?php
-			stories_posted_on();
-			stories_posted_by();
-			?>
+		<div class="loop00-card__action-container">
+			<?php stories_like_button(); ?>
 		</div>
-	</header>
-
-	<div class="entry-content chat-transcript">
-		<?php the_content(); ?>
 	</div>
 
-	<footer class="entry-footer">
-		<?php
-		$tags = get_the_tags();
-		if ( $tags ) :
-			?>
-			<div class="post--tags__wrapper">
-				<div class="tags post--tags">
-					<?php
-					foreach ( $tags as $tag ) {
-						echo '<a class="post-tag small" href="' . esc_url( get_tag_link( $tag->term_id ) ) . '">' . stories_get_svg( 'tag', array( 'size' => 12 ) ) . esc_html( $tag->name ) . '</a>';
-					}
-					?>
-				</div>
-			</div>
-		<?php endif; ?>
+	<!-- 2. Chat Body / Content -->
+	<div class="loop00-card__body loop00-card__body--chat">
+		<div class="loop00-card__meta">
+			<?php if ( has_category() ) : ?>
+				<span class="loop00-card__categories">
+					<?php the_category( ', ' ); ?>
+				</span>
+				<span class="loop00-card__meta-separator" aria-hidden="true">&bull;</span>
+			<?php endif; ?>
+			<?php stories_posted_on(); ?>
+		</div>
+
+		<h2 class="loop00-card__title entry-title">
+			<a href="<?php the_permalink(); ?>" rel="bookmark">
+				<?php the_title(); ?>
+			</a>
+		</h2>
+
+		<div class="loop00-card__chat-transcript chat-transcript entry-content">
+			<?php the_content(); ?>
+		</div>
+	</div>
+
+	<!-- 3. Chat Footer -->
+	<footer class="loop00-card__footer entry-footer">
+		<div class="loop00-card__author">
+			<?php stories_posted_by(); ?>
+		</div>
+		<div class="loop00-card__read-more">
+			<a href="<?php the_permalink(); ?>" class="loop00-read-more-btn">
+				<?php esc_html_e( 'Ver chat', 'stories' ); ?> &rarr;
+			</a>
+		</div>
 	</footer>
 </article>
