@@ -941,10 +941,49 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>
                     <div class="stories-lightbox-info-bar">
                         <div class="stories-lightbox-header">
+                            <div class="stories-lightbox-property-meta" style="display:none;">
+                                <div class="property-lightbox-top-row">
+                                    <div class="property-lightbox-badges">
+                                        <span class="property-lightbox-badge prop-operation-badge" style="display:none;"></span>
+                                        <span class="property-lightbox-badge prop-type-badge" style="display:none;"></span>
+                                    </div>
+                                    <div class="property-lightbox-price" style="display:none;"></div>
+                                </div>
+                            </div>
                             <h3 class="stories-lightbox-title"></h3>
+                            <div class="property-lightbox-location" style="display:none;">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c4-4.5 7-8.5 7-12A7 7 0 0 0 5 9c0 3.5 3 7.5 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                                <span class="prop-location-val"></span>
+                            </div>
                             <p class="stories-lightbox-caption"></p>
                         </div>
                         <div class="stories-lightbox-meta-group">
+                            <div class="property-lightbox-specs" style="display:none;">
+                                <span class="property-lightbox-spec prop-spec-id" style="display:none;" title="Clave / ID">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 8h10M7 12h6M7 16h4"/></svg>
+                                    <span class="prop-spec-val"></span>
+                                </span>
+                                <span class="property-lightbox-spec prop-spec-construction" style="display:none;" title="Construcción">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9M15 21V9M3 15h18"/></svg>
+                                    <span class="prop-spec-val"></span>
+                                </span>
+                                <span class="property-lightbox-spec prop-spec-lot" style="display:none;" title="Terreno">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l9-4 9 4v12l-9 4-9-4V6z"/><path d="M3 6l9 4 9-4M12 10v12"/></svg>
+                                    <span class="prop-spec-val"></span>
+                                </span>
+                                <span class="property-lightbox-spec prop-spec-bedrooms" style="display:none;" title="Recámaras">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 19h20M2 14v5M22 14v5M4 14V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v6M2 14h20"/><path d="M6 11h4M14 11h4"/></svg>
+                                    <span class="prop-spec-val"></span>
+                                </span>
+                                <span class="property-lightbox-spec prop-spec-bathrooms" style="display:none;" title="Baños">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16a2 2 0 0 1 2 2v2a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4v-2a2 2 0 0 1 2-2z"/><path d="M6 12V5a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1"/><path d="M4 20l-1 2M20 20l1 2"/></svg>
+                                    <span class="prop-spec-val"></span>
+                                </span>
+                                <span class="property-lightbox-spec prop-spec-parking" style="display:none;" title="Estacionamientos">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 17V7h4.5a3 3 0 0 1 0 6H9"/></svg>
+                                    <span class="prop-spec-val"></span>
+                                </span>
+                            </div>
                             <div class="stories-lightbox-meta-item meta-counter" style="display:none;" title="Número de imagen">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
                                 <span class="meta-val"></span>
@@ -986,7 +1025,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <span class="meta-val"></span>
                             </div>
                             <a class="stories-lightbox-post-link" href="" style="display:none;">
-                                <span>Ver publicación</span>
+                                <span class="link-label">Ver publicación</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                             </a>
                         </div>
@@ -1108,10 +1147,10 @@ document.addEventListener('DOMContentLoaded', function () {
         function setMetaItem(modal, selector, value) {
             const item = modal.querySelector(selector);
             if (!item) return;
-            const val = item.querySelector('.meta-val');
+            const val = item.querySelector('.meta-val, .prop-spec-val, .location-val, .prop-location-val');
             if (value && String(value).trim()) {
                 if (val) val.textContent = value;
-                item.style.display = 'inline-flex';
+                item.style.display = item.tagName === 'DIV' && !item.classList.contains('stories-lightbox-meta-item') ? 'flex' : 'inline-flex';
             } else {
                 item.style.display = 'none';
             }
@@ -1140,7 +1179,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             const dimItem = modal.querySelector('.meta-dimensions');
-            if (dimItem) {
+            if (dimItem && !modal.dataset.isProperty) {
                 const dimVal = dimItem.querySelector('.meta-val');
                 img.onload = function () {
                     if (img.naturalWidth && img.naturalHeight) {
@@ -1160,6 +1199,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const prevNav = modal.querySelector('.stories-lightbox-nav.prev-nav');
             const nextNav = modal.querySelector('.stories-lightbox-nav.next-nav');
 
+            const isProperty = Boolean(data.isProperty || data.propertyPrice || data.propertyOperation || data.propertyType || data.propertyId);
+            modal.dataset.isProperty = isProperty ? '1' : '';
+
             currentGallery = (data.gallery && Array.isArray(data.gallery) && data.gallery.length) ? data.gallery : [data.src];
             currentGalleryIndex = parseInt(data.currentIndex, 10) || 0;
             if (currentGalleryIndex < 0 || currentGalleryIndex >= currentGallery.length) {
@@ -1178,14 +1220,95 @@ document.addEventListener('DOMContentLoaded', function () {
                 captionEl.style.display = data.caption ? 'block' : 'none';
             }
 
-            setMetaItem(modal, '.meta-filesize', data.filesize);
-            setMetaItem(modal, '.meta-date', data.date);
-            setMetaItem(modal, '.meta-author', data.author);
-            setMetaItem(modal, '.meta-camera', data.camera);
-            setMetaItem(modal, '.meta-focal', data.focal_length || data.focal);
-            setMetaItem(modal, '.meta-aperture', data.aperture);
-            setMetaItem(modal, '.meta-shutter', data.shutter_speed || data.shutter);
-            setMetaItem(modal, '.meta-iso', data.iso);
+            const propMeta = modal.querySelector('.stories-lightbox-property-meta');
+            const propSpecs = modal.querySelector('.property-lightbox-specs');
+            const propLocation = modal.querySelector('.property-lightbox-location');
+
+            if (isProperty) {
+                // Hide photographic EXIF metadata
+                setMetaItem(modal, '.meta-dimensions', '');
+                setMetaItem(modal, '.meta-filesize', '');
+                setMetaItem(modal, '.meta-date', '');
+                setMetaItem(modal, '.meta-author', '');
+                setMetaItem(modal, '.meta-camera', '');
+                setMetaItem(modal, '.meta-focal', '');
+                setMetaItem(modal, '.meta-aperture', '');
+                setMetaItem(modal, '.meta-shutter', '');
+                setMetaItem(modal, '.meta-iso', '');
+
+                // Render Property Details
+                if (propMeta) propMeta.style.display = 'block';
+                if (propSpecs) propSpecs.style.display = 'inline-flex';
+
+                // Operation badge
+                const opBadge = modal.querySelector('.prop-operation-badge');
+                if (opBadge) {
+                    if (data.propertyOperation) {
+                        opBadge.textContent = data.propertyOperation;
+                        opBadge.className = 'property-lightbox-badge prop-operation-badge ' + (data.propertyOperationSlug || '');
+                        opBadge.style.display = 'inline-block';
+                    } else {
+                        opBadge.style.display = 'none';
+                    }
+                }
+
+                // Type badge
+                const typeBadge = modal.querySelector('.prop-type-badge');
+                if (typeBadge) {
+                    if (data.propertyType) {
+                        typeBadge.textContent = data.propertyType;
+                        typeBadge.style.display = 'inline-block';
+                    } else {
+                        typeBadge.style.display = 'none';
+                    }
+                }
+
+                // Price
+                const priceEl = modal.querySelector('.property-lightbox-price');
+                if (priceEl) {
+                    if (data.propertyPrice) {
+                        priceEl.textContent = data.propertyPrice;
+                        priceEl.style.display = 'inline-block';
+                    } else {
+                        priceEl.style.display = 'none';
+                    }
+                }
+
+                // Location
+                setMetaItem(modal, '.property-lightbox-location', data.propertyLocation);
+
+                // Specs
+                setMetaItem(modal, '.prop-spec-id', data.propertyId);
+                setMetaItem(modal, '.prop-spec-construction', data.propertyConstruction);
+                setMetaItem(modal, '.prop-spec-lot', data.propertyLot);
+                setMetaItem(modal, '.prop-spec-bedrooms', data.propertyBedrooms);
+                setMetaItem(modal, '.prop-spec-bathrooms', data.propertyBathrooms);
+                setMetaItem(modal, '.prop-spec-parking', data.propertyParking);
+
+                if (linkEl) {
+                    const linkSpan = linkEl.querySelector('.link-label');
+                    if (linkSpan) linkSpan.textContent = 'Ver propiedad';
+                }
+            } else {
+                // Regular post - Show photography EXIF metadata
+                if (propMeta) propMeta.style.display = 'none';
+                if (propSpecs) propSpecs.style.display = 'none';
+                if (propLocation) propLocation.style.display = 'none';
+
+                setMetaItem(modal, '.meta-filesize', data.filesize);
+                setMetaItem(modal, '.meta-date', data.date);
+                setMetaItem(modal, '.meta-author', data.author);
+                setMetaItem(modal, '.meta-camera', data.camera);
+                setMetaItem(modal, '.meta-focal', data.focal_length || data.focal);
+                setMetaItem(modal, '.meta-aperture', data.aperture);
+                setMetaItem(modal, '.meta-shutter', data.shutter_speed || data.shutter);
+                setMetaItem(modal, '.meta-iso', data.iso);
+
+                if (linkEl) {
+                    const linkSpan = linkEl.querySelector('.link-label');
+                    if (linkSpan) linkSpan.textContent = 'Ver publicación';
+                }
+            }
 
             if (prevNav) prevNav.style.display = currentGallery.length > 1 ? 'inline-flex' : 'none';
             if (nextNav) nextNav.style.display = currentGallery.length > 1 ? 'inline-flex' : 'none';
@@ -1238,9 +1361,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 let currentIndex = parseInt(trigger.getAttribute('data-current-index'), 10) || 0;
-                const slideshow = trigger.closest('.stories-slideshow');
+                const slideshow = trigger.closest('.stories-slideshow, .single-gallery-main-wrapper');
                 if (slideshow) {
-                    const slides = slideshow.querySelectorAll('.slide-item');
+                    const slides = slideshow.querySelectorAll('.slide-item, .single-gallery-slide');
                     if (!gallery.length) {
                         slides.forEach(function (s) {
                             const fullSrc = s.getAttribute('data-full-src') || (s.querySelector('img') ? s.querySelector('img').getAttribute('data-full-src') || s.querySelector('img').currentSrc || s.querySelector('img').src : '');
@@ -1259,6 +1382,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     src = gallery[currentIndex];
                 }
 
+                const isProperty = trigger.getAttribute('data-is-property') === '1' ||
+                                   trigger.getAttribute('data-is-property') === 'true' ||
+                                   !!trigger.getAttribute('data-property-price') ||
+                                   !!trigger.closest('.property-card, .single-property-article');
+
                 openLightbox({
                     src: src,
                     gallery: gallery,
@@ -1274,7 +1402,19 @@ document.addEventListener('DOMContentLoaded', function () {
                     shutter: trigger.getAttribute('data-lightbox-shutter') || '',
                     iso: trigger.getAttribute('data-lightbox-iso') || '',
                     caption: trigger.getAttribute('data-lightbox-caption') || '',
-                    url: trigger.getAttribute('data-lightbox-url') || ''
+                    url: trigger.getAttribute('data-lightbox-url') || '',
+                    isProperty: isProperty,
+                    propertyPrice: trigger.getAttribute('data-property-price') || '',
+                    propertyOperation: trigger.getAttribute('data-property-operation') || '',
+                    propertyOperationSlug: trigger.getAttribute('data-property-operation-slug') || '',
+                    propertyType: trigger.getAttribute('data-property-type') || '',
+                    propertyLocation: trigger.getAttribute('data-property-location') || '',
+                    propertyId: trigger.getAttribute('data-property-id') || '',
+                    propertyConstruction: trigger.getAttribute('data-property-construction') || '',
+                    propertyLot: trigger.getAttribute('data-property-lot') || '',
+                    propertyBedrooms: trigger.getAttribute('data-property-bedrooms') || '',
+                    propertyBathrooms: trigger.getAttribute('data-property-bathrooms') || '',
+                    propertyParking: trigger.getAttribute('data-property-parking') || ''
                 });
                 return;
             }
@@ -1295,9 +1435,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
 
                     let currentIndex = parseInt(triggerInFrame.getAttribute('data-current-index'), 10) || 0;
-                    const slideshow = theaterImg.closest('.stories-slideshow');
+                    const slideshow = theaterImg.closest('.stories-slideshow, .single-gallery-main-wrapper');
                     if (slideshow) {
-                        const slides = slideshow.querySelectorAll('.slide-item');
+                        const slides = slideshow.querySelectorAll('.slide-item, .single-gallery-slide');
                         if (!gallery.length) {
                             slides.forEach(function (s) {
                                 const fullSrc = s.getAttribute('data-full-src') || (s.querySelector('img') ? s.querySelector('img').getAttribute('data-full-src') || s.querySelector('img').currentSrc || s.querySelector('img').src : '');
@@ -1316,6 +1456,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         src = gallery[currentIndex];
                     }
 
+                    const isProperty = triggerInFrame.getAttribute('data-is-property') === '1' ||
+                                       triggerInFrame.getAttribute('data-is-property') === 'true' ||
+                                       !!triggerInFrame.getAttribute('data-property-price') ||
+                                       !!triggerInFrame.closest('.property-card, .single-property-article');
+
                     openLightbox({
                         src: src || theaterImg.currentSrc || theaterImg.src,
                         gallery: gallery,
@@ -1331,7 +1476,19 @@ document.addEventListener('DOMContentLoaded', function () {
                         shutter: triggerInFrame.getAttribute('data-lightbox-shutter') || '',
                         iso: triggerInFrame.getAttribute('data-lightbox-iso') || '',
                         caption: triggerInFrame.getAttribute('data-lightbox-caption') || '',
-                        url: triggerInFrame.getAttribute('data-lightbox-url') || ''
+                        url: triggerInFrame.getAttribute('data-lightbox-url') || '',
+                        isProperty: isProperty,
+                        propertyPrice: triggerInFrame.getAttribute('data-property-price') || '',
+                        propertyOperation: triggerInFrame.getAttribute('data-property-operation') || '',
+                        propertyOperationSlug: triggerInFrame.getAttribute('data-property-operation-slug') || '',
+                        propertyType: triggerInFrame.getAttribute('data-property-type') || '',
+                        propertyLocation: triggerInFrame.getAttribute('data-property-location') || '',
+                        propertyId: triggerInFrame.getAttribute('data-property-id') || '',
+                        propertyConstruction: triggerInFrame.getAttribute('data-property-construction') || '',
+                        propertyLot: triggerInFrame.getAttribute('data-property-lot') || '',
+                        propertyBedrooms: triggerInFrame.getAttribute('data-property-bedrooms') || '',
+                        propertyBathrooms: triggerInFrame.getAttribute('data-property-bathrooms') || '',
+                        propertyParking: triggerInFrame.getAttribute('data-property-parking') || ''
                     });
                 } else if (theaterImg.currentSrc || theaterImg.src) {
                     openLightbox({
@@ -1339,6 +1496,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         title: theaterImg.alt || ''
                     });
                 }
+                return;
             }
         });
     }
