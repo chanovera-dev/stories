@@ -75,7 +75,9 @@ function stories_ajax_like_post() {
 
 	$post_id = isset( $_POST['post_id'] ) ? absint( $_POST['post_id'] ) : 0;
 
-	if ( ! $post_id || 'post' !== get_post_type( $post_id ) || 'publish' !== get_post_status( $post_id ) ) {
+	$allowed_post_types = apply_filters( 'stories_liked_post_types', array( 'post' ) );
+
+	if ( ! $post_id || ! in_array( get_post_type( $post_id ), $allowed_post_types, true ) || 'publish' !== get_post_status( $post_id ) ) {
 		wp_send_json_error( __( 'ID de post no válido.', 'stories' ) );
 	}
 
