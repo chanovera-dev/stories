@@ -220,7 +220,30 @@ function stories_settings_init() {
 	);
 
 	/* -------------------------------------------------------------------------
-	 * Section 3: Estilos y Apariencia
+	 * Section 3: Soporte Multilenguaje (i18n)
+	 * ------------------------------------------------------------------------- */
+	add_settings_section(
+		'stories_i18n_section',
+		__( 'Soporte Multilenguaje', 'stories' ),
+		'__return_empty_string',
+		'stories_options'
+	);
+
+	add_settings_field(
+		'enable_multilingual',
+		__( 'Activar Soporte Multilenguaje', 'stories' ),
+		'stories_render_toggle_field',
+		'stories_options',
+		'stories_i18n_section',
+		array(
+			'id'          => 'enable_multilingual',
+			'default'     => 0,
+			'description' => __( 'Activa el selector de idiomas en la cabecera (🇲🇽 Español / 🇺🇸 English), la clonación y emparejamiento de entradas/páginas y el filtrado por idioma en los loops. Desactivado por defecto.', 'stories' ),
+		)
+	);
+
+	/* -------------------------------------------------------------------------
+	 * Section 4: Estilos y Apariencia
 	 * ------------------------------------------------------------------------- */
 	add_settings_section(
 		'stories_appearance_section',
@@ -363,7 +386,7 @@ function stories_settings_init() {
 	);
 
 	/* -------------------------------------------------------------------------
-	 * Section 4: Pie de Página (Footer)
+	 * Section 5: Pie de Página (Footer)
 	 * ------------------------------------------------------------------------- */
 	add_settings_section(
 		'stories_footer_section',
@@ -399,6 +422,7 @@ function stories_settings_init() {
 		'stories_options',
 		'stories_footer_section'
 	);
+
 }
 add_action( 'admin_init', 'stories_settings_init' );
 
@@ -412,7 +436,7 @@ function stories_sanitize_theme_options( $input ) {
 	$sanitized = array();
 
 	// Checkbox toggles
-	$toggle_keys = array( 'gtm_enable', 'disable_emojis', 'disable_block_styles', 'clean_meta_tags', 'disable_oembed', 'enable_is_chromium', 'enable_rounded' );
+	$toggle_keys = array( 'gtm_enable', 'disable_emojis', 'disable_block_styles', 'clean_meta_tags', 'disable_oembed', 'enable_is_chromium', 'enable_rounded', 'enable_multilingual' );
 	foreach ( $toggle_keys as $key ) {
 		$sanitized[ $key ] = ! empty( $input[ $key ] ) ? 1 : 0;
 	}
@@ -680,6 +704,16 @@ function stories_render_bilingual_title_field() {
 	$site_name      = get_bloginfo( 'name' );
 	$placeholder_es = __( 'Sobre ', 'stories' ) . $site_name;
 	$placeholder_en = __( 'About ', 'stories' ) . $site_name;
+
+	if ( ! function_exists( 'stories_is_multilingual_enabled' ) || ! stories_is_multilingual_enabled() ) {
+		?>
+		<input type="text" name="stories_theme_options[footer_title]" id="stories_footer_title" value="<?php echo esc_attr( $title_es ); ?>" placeholder="<?php echo esc_attr( $placeholder_es ); ?>" class="regular-text">
+		<p class="description">
+			<?php esc_html_e( 'Título que se muestra en la primera columna del footer si no hay logo asignado.', 'stories' ); ?>
+		</p>
+		<?php
+		return;
+	}
 	?>
 	<div class="stories-bilingual-container">
 		<div class="stories-bilingual-col">
@@ -714,6 +748,16 @@ function stories_render_bilingual_bio_field() {
 	$default_es = __( 'Relatos y Cartas es un espacio dedicado a la creatividad y la expresión a través de las palabras. Aquí encontrarás cuentos, microcuentos, poemas e historias que buscan inspirar, emocionar y conectar con los lectores.', 'stories' );
 	$bio_es     = isset( $options['footer_bio'] ) ? $options['footer_bio'] : $default_es;
 	$bio_en     = isset( $options['footer_bio_en'] ) ? $options['footer_bio_en'] : '';
+
+	if ( ! function_exists( 'stories_is_multilingual_enabled' ) || ! stories_is_multilingual_enabled() ) {
+		?>
+		<textarea name="stories_theme_options[footer_bio]" id="stories_footer_bio" rows="5" class="large-text"><?php echo esc_textarea( $bio_es ); ?></textarea>
+		<p class="description">
+			<?php esc_html_e( 'Texto descriptivo o biografía que aparece debajo del título/logo. Acepta etiquetas HTML básicas.', 'stories' ); ?>
+		</p>
+		<?php
+		return;
+	}
 	?>
 	<div class="stories-bilingual-container">
 		<div class="stories-bilingual-col">

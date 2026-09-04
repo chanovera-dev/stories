@@ -13,11 +13,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Check if multilingual support is enabled in theme options.
+ * Disabled by default.
+ *
+ * @return bool True if enabled, false otherwise.
+ */
+function stories_is_multilingual_enabled() {
+	$options = get_option( 'stories_theme_options', array() );
+	return ! empty( $options['enable_multilingual'] );
+}
+
+/**
  * Get current active language code ('es' or 'en').
  *
  * @return string Current language code ('es' or 'en').
  */
 function stories_get_current_language() {
+	if ( ! stories_is_multilingual_enabled() ) {
+		return 'es';
+	}
+
 	// If Polylang is active, delegate to Polylang.
 	if ( function_exists( 'pll_current_language' ) ) {
 		$pll_lang = pll_current_language( 'slug' );
@@ -68,6 +83,10 @@ function stories_get_current_language() {
  * @return string Filtered locale.
  */
 function stories_determine_locale( $locale ) {
+	if ( ! stories_is_multilingual_enabled() ) {
+		return $locale;
+	}
+
 	// Do not override in admin unless doing AJAX for frontend.
 	if ( is_admin() && ! wp_doing_ajax() ) {
 		return $locale;
@@ -92,6 +111,10 @@ add_filter( 'determine_locale', 'stories_determine_locale', 20 );
  * Set language cookie when requested via GET parameter.
  */
 function stories_handle_language_cookie() {
+	if ( ! stories_is_multilingual_enabled() ) {
+		return;
+	}
+
 	if ( isset( $_GET['lang'] ) && in_array( $_GET['lang'], array( 'es', 'en' ), true ) ) {
 		$lang = sanitize_text_field( wp_unslash( $_GET['lang'] ) );
 		$cookie_domain = defined( 'COOKIE_DOMAIN' ) && COOKIE_DOMAIN ? COOKIE_DOMAIN : '';
@@ -297,6 +320,10 @@ function stories_get_translations( $lang ) {
  * @return string Translated text.
  */
 function stories_filter_gettext( $translation, $text, $domain ) {
+	if ( ! stories_is_multilingual_enabled() ) {
+		return $translation;
+	}
+
 	if ( 'stories' !== $domain && 'default' !== $domain ) {
 		return $translation;
 	}
@@ -322,6 +349,10 @@ add_filter( 'gettext', 'stories_filter_gettext', 20, 3 );
  * @return string Translated text.
  */
 function stories_filter_gettext_with_context( $translation, $text, $context, $domain ) {
+	if ( ! stories_is_multilingual_enabled() ) {
+		return $translation;
+	}
+
 	if ( 'stories' !== $domain && 'default' !== $domain ) {
 		return $translation;
 	}
@@ -349,7 +380,7 @@ add_filter( 'gettext_with_context', 'stories_filter_gettext_with_context', 20, 4
  * @return string Filtered search form HTML.
  */
 function stories_filter_search_form( $form ) {
-	if ( empty( $form ) || ! is_string( $form ) ) {
+	if ( ! stories_is_multilingual_enabled() || empty( $form ) || ! is_string( $form ) ) {
 		return $form;
 	}
 
@@ -398,7 +429,7 @@ add_filter( 'render_block_core/search', 'stories_filter_search_form', 20, 1 );
  * @return string Translated text.
  */
 function stories_filter_ngettext( $translation, $single, $plural, $number, $domain ) {
-	if ( 'stories' !== $domain ) {
+	if ( ! stories_is_multilingual_enabled() || 'stories' !== $domain ) {
 		return $translation;
 	}
 
@@ -423,6 +454,10 @@ add_filter( 'ngettext', 'stories_filter_ngettext', 20, 5 );
  * @return string Filtered title.
  */
 function stories_translate_menu_item_title( $title, $item, $args, $depth ) {
+	if ( ! stories_is_multilingual_enabled() ) {
+		return $title;
+	}
+
 	$current_lang = stories_get_current_language();
 	$dictionary   = stories_get_translations( $current_lang );
 
@@ -441,6 +476,10 @@ add_filter( 'nav_menu_item_title', 'stories_translate_menu_item_title', 20, 4 );
  * @return array Filtered menu item objects.
  */
 function stories_translate_nav_menu_objects( $items ) {
+	if ( ! stories_is_multilingual_enabled() ) {
+		return $items;
+	}
+
 	$current_lang = stories_get_current_language();
 	$dictionary   = stories_get_translations( $current_lang );
 
@@ -464,6 +503,10 @@ add_filter( 'wp_nav_menu_objects', 'stories_translate_nav_menu_objects', 20, 1 )
  * @return WP_Term|false Filtered menu object.
  */
 function stories_translate_menu_object( $menu_obj, $menu ) {
+	if ( ! stories_is_multilingual_enabled() ) {
+		return $menu_obj;
+	}
+
 	if ( ! is_object( $menu_obj ) || empty( $menu_obj->name ) ) {
 		return $menu_obj;
 	}
@@ -489,6 +532,10 @@ add_filter( 'wp_get_nav_menu_object', 'stories_translate_menu_object', 20, 2 );
  * @return array Filtered arguments.
  */
 function stories_filter_nav_menu_args( $args ) {
+	if ( ! stories_is_multilingual_enabled() ) {
+		return $args;
+	}
+
 	$current_lang = stories_get_current_language();
 
 	if ( 'en' === $current_lang && ! empty( $args['theme_location'] ) ) {
@@ -519,6 +566,10 @@ add_filter( 'wp_nav_menu_args', 'stories_filter_nav_menu_args', 20, 1 );
  * @return string Translated title.
  */
 function stories_translate_footer_title( $title ) {
+	if ( ! stories_is_multilingual_enabled() ) {
+		return $title;
+	}
+
 	$current_lang = stories_get_current_language();
 	$dictionary   = stories_get_translations( $current_lang );
 
@@ -547,6 +598,10 @@ function stories_translate_footer_title( $title ) {
  * @return string Translated bio string.
  */
 function stories_translate_footer_bio( $bio ) {
+	if ( ! stories_is_multilingual_enabled() ) {
+		return $bio;
+	}
+
 	$current_lang = stories_get_current_language();
 	$dictionary   = stories_get_translations( $current_lang );
 
@@ -583,6 +638,9 @@ function stories_get_language_flag( $lang ) {
  * Output modern custom language switcher dropdown with rich styles and icons.
  */
 function stories_language_switcher() {
+	if ( ! stories_is_multilingual_enabled() ) {
+		return;
+	}
 	$current_lang = stories_get_current_language();
 
 	// Determine URLs for each language.
@@ -710,6 +768,9 @@ function stories_language_switcher() {
  * Register translation metabox in the editor sidebar for all public post types.
  */
 function stories_register_post_translation_metabox() {
+	if ( ! stories_is_multilingual_enabled() ) {
+		return;
+	}
 	$post_types = get_post_types( array( 'public' => true ), 'names' );
 	unset( $post_types['attachment'] );
 
@@ -838,6 +899,10 @@ function stories_render_post_translation_metabox( $post ) {
  * Handle 1-click cloning of a post to create its counterpart in the other language.
  */
 function stories_handle_clone_post_translation() {
+	if ( ! stories_is_multilingual_enabled() ) {
+		wp_die( esc_html__( 'El soporte multilenguaje está desactivado.', 'stories' ) );
+	}
+
 	if ( ! isset( $_GET['post_id'], $_GET['_wpnonce'] ) ) {
 		wp_die( esc_html__( 'Parámetros inválidos.', 'stories' ) );
 	}
@@ -928,6 +993,10 @@ add_action( 'admin_post_stories_clone_post_translation', 'stories_handle_clone_p
  * @param int $post_id The post ID.
  */
 function stories_save_post_translation( $post_id ) {
+	if ( ! stories_is_multilingual_enabled() ) {
+		return;
+	}
+
 	if ( ! isset( $_POST['stories_translation_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['stories_translation_nonce'] ) ), 'stories_save_post_translation' ) ) {
 		return;
 	}
@@ -998,6 +1067,10 @@ add_action( 'save_post', 'stories_save_post_translation' );
  * @param WP_Query $query The WP_Query instance.
  */
 function stories_filter_queries_by_language( $query ) {
+	if ( ! stories_is_multilingual_enabled() ) {
+		return;
+	}
+
 	// Support admin language filter tabs in edit.php
 	if ( is_admin() && $query->is_main_query() && isset( $_GET['lang_filter'] ) ) {
 		$lang_filter = sanitize_text_field( wp_unslash( $_GET['lang_filter'] ) );
@@ -1083,6 +1156,10 @@ add_action( 'pre_get_posts', 'stories_filter_queries_by_language', 20 );
  * @return array Modified views.
  */
 function stories_admin_language_views( $views ) {
+	if ( ! stories_is_multilingual_enabled() ) {
+		return $views;
+	}
+
 	global $typenow;
 	$post_type      = $typenow ? $typenow : 'post';
 	$current_filter = isset( $_GET['lang_filter'] ) ? sanitize_text_field( wp_unslash( $_GET['lang_filter'] ) ) : '';
@@ -1156,6 +1233,10 @@ add_filter( 'views_edit-page', 'stories_admin_language_views' );
  * @return array Modified post states.
  */
 function stories_admin_display_post_states( $post_states, $post ) {
+	if ( ! stories_is_multilingual_enabled() ) {
+		return $post_states;
+	}
+
 	$post_lang = get_post_meta( $post->ID, '_stories_post_lang', true );
 	$linked_id = intval( get_post_meta( $post->ID, '_stories_translation_of', true ) );
 
@@ -1185,6 +1266,10 @@ add_filter( 'display_post_states', 'stories_admin_display_post_states', 10, 2 );
  * @return array Modified row actions.
  */
 function stories_admin_post_row_actions( $actions, $post ) {
+	if ( ! stories_is_multilingual_enabled() ) {
+		return $actions;
+	}
+
 	$linked_id = intval( get_post_meta( $post->ID, '_stories_translation_of', true ) );
 	$post_lang = get_post_meta( $post->ID, '_stories_post_lang', true );
 	if ( empty( $post_lang ) ) {
@@ -1230,6 +1315,10 @@ function stories_add_translation_admin_column( $columns ) {
  * Output modern stylesheet for translation admin UI (post lists and editor metabox).
  */
 function stories_admin_i18n_styles() {
+	if ( ! stories_is_multilingual_enabled() ) {
+		return;
+	}
+
 	$screen = get_current_screen();
 	if ( ! $screen || ! in_array( $screen->base, array( 'edit', 'post' ), true ) ) {
 		return;
@@ -1436,7 +1525,7 @@ add_action( 'admin_head', 'stories_admin_i18n_styles' );
  * @param int    $post_id     Current post ID.
  */
 function stories_display_translation_admin_column( $column_name, $post_id ) {
-	if ( 'stories_trans' !== $column_name ) {
+	if ( ! stories_is_multilingual_enabled() || 'stories_trans' !== $column_name ) {
 		return;
 	}
 
@@ -1473,6 +1562,10 @@ function stories_display_translation_admin_column( $column_name, $post_id ) {
  * Register translation columns for all public post types.
  */
 function stories_register_translation_columns_for_all_post_types() {
+	if ( ! stories_is_multilingual_enabled() ) {
+		return;
+	}
+
 	$post_types = get_post_types( array( 'public' => true ), 'names' );
 	foreach ( $post_types as $pt ) {
 		add_filter( "manage_{$pt}_posts_columns", 'stories_add_translation_admin_column' );
