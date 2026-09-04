@@ -747,63 +747,63 @@ function stories_render_post_translation_metabox( $post ) {
 	$clone_nonce = wp_create_nonce( 'stories_clone_post_' . $post->ID );
 	$clone_url   = admin_url( 'admin-post.php?action=stories_clone_post_translation&post_id=' . $post->ID . '&_wpnonce=' . $clone_nonce );
 	?>
-	<div class="stories-translation-box" style="font-size: 13px;">
+	<div class="stories-trans-metabox">
 		<!-- Post Language Selection -->
-		<div style="margin-bottom: 12px;">
-			<label style="display: block; font-weight: 600; margin-bottom: 6px; color: #1e293b;">
+		<div class="stories-trans-field-group">
+			<label class="stories-trans-field-label">
 				<?php esc_html_e( 'Idioma de esta publicación:', 'stories' ); ?>
 			</label>
-			<div style="display: flex; gap: 16px; align-items: center;">
-				<label style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 13px;">
+			<div class="stories-trans-lang-selector">
+				<label class="stories-trans-lang-choice">
 					<input type="radio" name="_stories_post_lang" value="es" <?php checked( 'es', $current_lang ); ?>>
 					<span>🇲🇽 Español</span>
 				</label>
-				<label style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 13px;">
+				<label class="stories-trans-lang-choice">
 					<input type="radio" name="_stories_post_lang" value="en" <?php checked( 'en', $current_lang ); ?>>
 					<span>🇺🇸 English</span>
 				</label>
 			</div>
 		</div>
 
-		<hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 12px 0;">
+		<hr class="stories-trans-divider">
 
 		<!-- Translation Pairing Status -->
-		<div style="margin-bottom: 14px;">
-			<label style="display: block; font-weight: 600; margin-bottom: 6px; color: #1e293b;">
+		<div class="stories-trans-field-group">
+			<label class="stories-trans-field-label">
 				<?php printf( esc_html__( 'Publicación vinculada en %s:', 'stories' ), esc_html( $opposite_label ) ); ?>
 			</label>
 
 			<?php if ( $linked_post ) : ?>
-				<div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
-					<div style="font-weight: 600; color: #0f172a; margin-bottom: 4px; line-height: 1.35;">
+				<div class="stories-trans-linked-card">
+					<div class="stories-trans-linked-title">
 						<?php echo esc_html( $linked_post->post_title ); ?>
 					</div>
-					<div style="font-size: 11px; color: #64748b; margin-bottom: 8px;">
+					<div class="stories-trans-linked-meta">
 						<?php printf( esc_html__( 'Estado: %s', 'stories' ), esc_html( ucfirst( get_post_status( $linked_post ) ) ) ); ?>
 					</div>
-					<div style="display: flex; gap: 6px; flex-wrap: wrap;">
-						<a href="<?php echo esc_url( get_edit_post_link( $linked_post->ID ) ); ?>" class="button button-small button-primary" style="display: inline-flex; align-items: center; gap: 4px;">
+					<div class="stories-trans-linked-actions">
+						<a href="<?php echo esc_url( get_edit_post_link( $linked_post->ID ) ); ?>" class="button button-small button-primary">
 							✏️ <?php esc_html_e( 'Editar', 'stories' ); ?>
 						</a>
-						<a href="<?php echo esc_url( get_permalink( $linked_post->ID ) ); ?>" target="_blank" class="button button-small" style="display: inline-flex; align-items: center; gap: 4px;">
+						<a href="<?php echo esc_url( get_permalink( $linked_post->ID ) ); ?>" target="_blank" class="button button-small">
 							👁️ <?php esc_html_e( 'Ver', 'stories' ); ?>
 						</a>
 					</div>
 				</div>
 			<?php else : ?>
-				<div style="margin-bottom: 10px;">
-					<a href="<?php echo esc_url( $clone_url ); ?>" class="button button-primary" style="width: 100%; text-align: center; justify-content: center; display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; font-size: 12.5px; box-sizing: border-box;">
+				<div class="stories-trans-field-group">
+					<a href="<?php echo esc_url( $clone_url ); ?>" class="button button-primary stories-trans-clone-action-btn">
 						📄 <?php printf( esc_html__( 'Clonar a versión en %s', 'stories' ), esc_html( $opposite_label ) ); ?>
 					</a>
-					<p style="margin: 6px 0 0 0; font-size: 11.5px; color: #64748b; line-height: 1.35;">
+					<p class="stories-trans-helper-text">
 						<?php esc_html_e( 'Copia todo el contenido, diseño y bloques actuales a una nueva entrada en borrador para traducir.', 'stories' ); ?>
 					</p>
 				</div>
 			<?php endif; ?>
 
 			<!-- Manual Linking Dropdown -->
-			<div style="margin-top: 10px;">
-				<label for="_stories_translation_of_select" style="display: block; font-size: 12px; color: #475569; margin-bottom: 4px; font-weight: 500;">
+			<div class="stories-trans-field-group" style="margin-top: 6px;">
+				<label for="_stories_translation_of_select" class="stories-trans-field-label" style="font-size: 12px; color: #475569; font-weight: 500;">
 					<?php esc_html_e( 'O asignar vinculación manualmente:', 'stories' ); ?>
 				</label>
 				<select name="_stories_translation_of" id="_stories_translation_of_select" class="widefat" style="font-size: 12px;">
@@ -871,7 +871,7 @@ function stories_handle_clone_post_translation() {
 		exit;
 	}
 
-	// Insert cloned post
+	// Insert cloned post with identical date to keep them side-by-side in WP Admin
 	$new_post_args = array(
 		'post_title'     => $original->post_title . $lang_suffix,
 		'post_content'   => $original->post_content,
@@ -881,6 +881,8 @@ function stories_handle_clone_post_translation() {
 		'post_author'    => get_current_user_id(),
 		'comment_status' => $original->comment_status,
 		'ping_status'    => $original->ping_status,
+		'post_date'      => $original->post_date,
+		'post_date_gmt'  => $original->post_date_gmt,
 	);
 
 	$cloned_id = wp_insert_post( $new_post_args );
@@ -963,6 +965,17 @@ function stories_save_post_translation( $post_id ) {
 			update_post_meta( $post_id, '_stories_translation_of', $new_linked_id );
 			update_post_meta( $new_linked_id, '_stories_translation_of', $post_id );
 
+			// Sync dates so they appear consecutive in WordPress Admin post table
+			$curr_p   = get_post( $post_id );
+			$linked_p = get_post( $new_linked_id );
+			if ( $curr_p && $linked_p && $curr_p->post_date !== $linked_p->post_date ) {
+				wp_update_post( array(
+					'ID'            => $new_linked_id,
+					'post_date'     => $curr_p->post_date,
+					'post_date_gmt' => $curr_p->post_date_gmt,
+				) );
+			}
+
 			// If old counterpart existed and was different, unlink it
 			if ( $old_linked_id > 0 && $old_linked_id !== $new_linked_id ) {
 				delete_post_meta( $old_linked_id, '_stories_translation_of' );
@@ -985,6 +998,34 @@ add_action( 'save_post', 'stories_save_post_translation' );
  * @param WP_Query $query The WP_Query instance.
  */
 function stories_filter_queries_by_language( $query ) {
+	// Support admin language filter tabs in edit.php
+	if ( is_admin() && $query->is_main_query() && isset( $_GET['lang_filter'] ) ) {
+		$lang_filter = sanitize_text_field( wp_unslash( $_GET['lang_filter'] ) );
+		if ( 'en' === $lang_filter ) {
+			$query->set( 'meta_query', array(
+				array(
+					'key'     => '_stories_post_lang',
+					'value'   => 'en',
+					'compare' => '=',
+				),
+			) );
+		} elseif ( 'es' === $lang_filter ) {
+			$query->set( 'meta_query', array(
+				'relation' => 'OR',
+				array(
+					'key'     => '_stories_post_lang',
+					'value'   => 'en',
+					'compare' => '!=',
+				),
+				array(
+					'key'     => '_stories_post_lang',
+					'compare' => 'NOT EXISTS',
+				),
+			) );
+		}
+		return;
+	}
+
 	// Never filter inside wp-admin (unless doing frontend AJAX)
 	if ( is_admin() && ! wp_doing_ajax() ) {
 		return;
@@ -1036,6 +1077,136 @@ function stories_filter_queries_by_language( $query ) {
 add_action( 'pre_get_posts', 'stories_filter_queries_by_language', 20 );
 
 /**
+ * Add language filter tabs at the top of admin post and page lists.
+ *
+ * @param array $views Existing views.
+ * @return array Modified views.
+ */
+function stories_admin_language_views( $views ) {
+	global $typenow;
+	$post_type      = $typenow ? $typenow : 'post';
+	$current_filter = isset( $_GET['lang_filter'] ) ? sanitize_text_field( wp_unslash( $_GET['lang_filter'] ) ) : '';
+
+	// Count posts in Spanish
+	$count_es = count( get_posts( array(
+		'post_type'      => $post_type,
+		'posts_per_page' => -1,
+		'post_status'    => 'any',
+		'fields'         => 'ids',
+		'meta_query'     => array(
+			'relation' => 'OR',
+			array(
+				'key'     => '_stories_post_lang',
+				'value'   => 'en',
+				'compare' => '!=',
+			),
+			array(
+				'key'     => '_stories_post_lang',
+				'compare' => 'NOT EXISTS',
+			),
+		),
+	) ) );
+
+	// Count posts in English
+	$count_en = count( get_posts( array(
+		'post_type'      => $post_type,
+		'posts_per_page' => -1,
+		'post_status'    => 'any',
+		'fields'         => 'ids',
+		'meta_query'     => array(
+			array(
+				'key'     => '_stories_post_lang',
+				'value'   => 'en',
+				'compare' => '=',
+			),
+		),
+	) ) );
+
+	$base_url = remove_query_arg( array( 'lang_filter', 'paged' ) );
+
+	$class_es = ( 'es' === $current_filter ) ? ' class="current"' : '';
+	$class_en = ( 'en' === $current_filter ) ? ' class="current"' : '';
+
+	$views['lang_es'] = sprintf(
+		'<a href="%s"%s>%s <span class="count">(%d)</span></a>',
+		esc_url( add_query_arg( 'lang_filter', 'es', $base_url ) ),
+		$class_es,
+		'🇲🇽 Español',
+		$count_es
+	);
+
+	$views['lang_en'] = sprintf(
+		'<a href="%s"%s>%s <span class="count">(%d)</span></a>',
+		esc_url( add_query_arg( 'lang_filter', 'en', $base_url ) ),
+		$class_en,
+		'🇺🇸 English',
+		$count_en
+	);
+
+	return $views;
+}
+add_filter( 'views_edit-post', 'stories_admin_language_views' );
+add_filter( 'views_edit-page', 'stories_admin_language_views' );
+
+/**
+ * Display language badge and counterpart reference in post title states in WP Admin.
+ *
+ * @param array   $post_states Existing post states.
+ * @param WP_Post $post        Current post object.
+ * @return array Modified post states.
+ */
+function stories_admin_display_post_states( $post_states, $post ) {
+	$post_lang = get_post_meta( $post->ID, '_stories_post_lang', true );
+	$linked_id = intval( get_post_meta( $post->ID, '_stories_translation_of', true ) );
+
+	if ( 'en' === $post_lang ) {
+		if ( $linked_id > 0 && get_post_status( $linked_id ) ) {
+			$linked_post = get_post( $linked_id );
+			$orig_title  = $linked_post ? $linked_post->post_title : '';
+			$post_states['stories_lang'] = '🇺🇸 Versión en Inglés (de: ' . esc_html( wp_trim_words( $orig_title, 3 ) ) . ')';
+		} else {
+			$post_states['stories_lang'] = '🇺🇸 Versión en Inglés';
+		}
+	} elseif ( $linked_id > 0 && get_post_status( $linked_id ) ) {
+		$linked_post = get_post( $linked_id );
+		$orig_title  = $linked_post ? $linked_post->post_title : '';
+		$post_states['stories_lang'] = '🇲🇽 Español (🇺🇸 ' . esc_html( wp_trim_words( $orig_title, 3 ) ) . ')';
+	}
+
+	return $post_states;
+}
+add_filter( 'display_post_states', 'stories_admin_display_post_states', 10, 2 );
+
+/**
+ * Add quick action links below the post title to jump straight to the counterpart or clone it.
+ *
+ * @param array   $actions Existing row actions.
+ * @param WP_Post $post    Current post object.
+ * @return array Modified row actions.
+ */
+function stories_admin_post_row_actions( $actions, $post ) {
+	$linked_id = intval( get_post_meta( $post->ID, '_stories_translation_of', true ) );
+	$post_lang = get_post_meta( $post->ID, '_stories_post_lang', true );
+	if ( empty( $post_lang ) ) {
+		$post_lang = 'es';
+	}
+
+	if ( $linked_id > 0 && get_post_status( $linked_id ) ) {
+		$linked_post = get_post( $linked_id );
+		$target_lang = ( 'en' === $post_lang ) ? '🇲🇽 ' . __( 'Ver/Editar en Español', 'stories' ) : '🇺🇸 ' . __( 'Ver/Editar en Inglés', 'stories' );
+		$actions['stories_linked'] = '<a href="' . esc_url( get_edit_post_link( $linked_id ) ) . '" style="color:#2563eb; font-weight:600;" title="' . esc_attr( $linked_post ? $linked_post->post_title : '' ) . '">' . esc_html( $target_lang ) . '</a>';
+	} else {
+		$clone_nonce = wp_create_nonce( 'stories_clone_post_' . $post->ID );
+		$clone_url   = admin_url( 'admin-post.php?action=stories_clone_post_translation&post_id=' . $post->ID . '&_wpnonce=' . $clone_nonce );
+		$actions['stories_clone'] = '<a href="' . esc_url( $clone_url ) . '" style="color:#0284c7;">' . esc_html__( '📄 Clonar a versión en Inglés', 'stories' ) . '</a>';
+	}
+
+	return $actions;
+}
+add_filter( 'post_row_actions', 'stories_admin_post_row_actions', 10, 2 );
+add_filter( 'page_row_actions', 'stories_admin_post_row_actions', 10, 2 );
+
+/**
  * Add translation status column to admin posts, pages and CPT lists.
  *
  * @param array $columns Existing columns.
@@ -1056,33 +1227,246 @@ function stories_add_translation_admin_column( $columns ) {
 }
 
 /**
+ * Output modern stylesheet for translation admin UI (post lists and editor metabox).
+ */
+function stories_admin_i18n_styles() {
+	$screen = get_current_screen();
+	if ( ! $screen || ! in_array( $screen->base, array( 'edit', 'post' ), true ) ) {
+		return;
+	}
+	?>
+	<style id="stories-admin-i18n-styles">
+	/* --- Translation Column in Post List Table --- */
+	.column-stories_trans {
+		width: 250px;
+		vertical-align: middle;
+	}
+	.stories-trans-cell {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		flex-wrap: wrap;
+	}
+	.stories-lang-badge {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		padding: 3px 8px;
+		font-size: 11px;
+		font-weight: 700;
+		line-height: 1.3;
+		border-radius: 9999px;
+		border: 1px solid transparent;
+		white-space: nowrap;
+		flex-shrink: 0;
+	}
+	.stories-lang-badge--es {
+		background: #fefce8;
+		color: #854d0e;
+		border-color: #fde047;
+	}
+	.stories-lang-badge--en {
+		background: #eff6ff;
+		color: #1d4ed8;
+		border-color: #bfdbfe;
+	}
+	.stories-trans-target-group {
+		display: inline-flex;
+		align-items: center;
+		gap: 5px;
+		background: #f8fafc;
+		border: 1px solid #e2e8f0;
+		border-radius: 6px;
+		padding: 2px 6px;
+	}
+	.stories-trans-target-link {
+		font-size: 12px;
+		font-weight: 600;
+		text-decoration: none;
+		color: #2563eb;
+		max-width: 120px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.stories-trans-target-link:hover {
+		color: #1d4ed8;
+		text-decoration: underline;
+	}
+	.stories-trans-btn-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 22px;
+		height: 22px;
+		border-radius: 4px;
+		border: 1px solid #cbd5e1;
+		background: #ffffff;
+		font-size: 11px;
+		text-decoration: none;
+		line-height: 1;
+		color: #475569;
+		transition: all 0.15s ease;
+	}
+	.stories-trans-btn-icon:hover {
+		background: #f1f5f9;
+		border-color: #94a3b8;
+		color: #0f172a;
+	}
+	.stories-trans-clone-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		padding: 3px 8px;
+		border-radius: 6px;
+		font-size: 11px;
+		font-weight: 600;
+		text-decoration: none;
+		background: #f0f9ff;
+		color: #0284c7;
+		border: 1px solid #bae6fd;
+		white-space: nowrap;
+		transition: all 0.15s ease;
+	}
+	.stories-trans-clone-link:hover {
+		background: #e0f2fe;
+		border-color: #7dd3fc;
+		color: #0369a1;
+	}
+
+	/* --- Editor Metabox Styles --- */
+	.stories-trans-metabox {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		font-size: 13px;
+	}
+	.stories-trans-field-group {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+	.stories-trans-field-label {
+		font-weight: 600;
+		color: #1e293b;
+		margin: 0;
+	}
+	.stories-trans-lang-selector {
+		display: flex;
+		gap: 10px;
+		align-items: center;
+	}
+	.stories-trans-lang-choice {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		padding: 6px 12px;
+		border: 1px solid #cbd5e1;
+		border-radius: 6px;
+		background: #ffffff;
+		cursor: pointer;
+		font-size: 13px;
+		font-weight: 500;
+		transition: all 0.15s ease;
+		user-select: none;
+	}
+	.stories-trans-lang-choice:hover {
+		background: #f8fafc;
+		border-color: #94a3b8;
+	}
+	.stories-trans-lang-choice input[type="radio"]:checked + span {
+		font-weight: 700;
+		color: #0f172a;
+	}
+	.stories-trans-divider {
+		border: 0;
+		border-top: 1px solid #e2e8f0;
+		margin: 4px 0;
+	}
+	.stories-trans-linked-card {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		background: #f8fafc;
+		border: 1px solid #cbd5e1;
+		border-radius: 8px;
+		padding: 10px 12px;
+	}
+	.stories-trans-linked-title {
+		font-weight: 600;
+		color: #0f172a;
+		line-height: 1.35;
+	}
+	.stories-trans-linked-meta {
+		font-size: 11px;
+		color: #64748b;
+	}
+	.stories-trans-linked-actions {
+		display: flex;
+		gap: 8px;
+		align-items: center;
+	}
+	.stories-trans-clone-action-btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 6px;
+		width: 100%;
+		padding: 8px 12px;
+		border-radius: 6px;
+		font-size: 13px;
+		font-weight: 600;
+		box-sizing: border-box;
+	}
+	.stories-trans-helper-text {
+		font-size: 11.5px;
+		color: #64748b;
+		line-height: 1.35;
+		margin: 0;
+	}
+	</style>
+	<?php
+}
+add_action( 'admin_head', 'stories_admin_i18n_styles' );
+
+/**
  * Display translation badge and linked post link in admin list column.
  *
  * @param string $column_name Column identifier.
  * @param int    $post_id     Current post ID.
  */
 function stories_display_translation_admin_column( $column_name, $post_id ) {
-	if ( 'stories_trans' === $column_name ) {
-		$post_lang = get_post_meta( $post_id, '_stories_post_lang', true );
-		if ( empty( $post_lang ) ) {
-			$post_lang = 'es';
-		}
-		$linked_id   = intval( get_post_meta( $post_id, '_stories_translation_of', true ) );
-		$lang_flag   = ( 'en' === $post_lang ) ? '🇺🇸 EN' : '🇲🇽 ES';
-		$flag_style  = ( 'en' === $post_lang ) ? 'background:#eff6ff; color:#1d4ed8; border-color:#bfdbfe;' : 'background:#fefce8; color:#a16207; border-color:#fef08a;';
-
-		echo '<div style="display:flex; flex-direction:column; gap:4px; align-items:flex-start;">';
-		echo '<span style="display:inline-flex; align-items:center; gap:4px; padding:2px 7px; font-size:11px; font-weight:700; ' . esc_attr( $flag_style ) . ' border:1px solid; border-radius:10px;">' . esc_html( $lang_flag ) . '</span>';
-
-		if ( $linked_id > 0 && get_post_status( $linked_id ) ) {
-			$linked_post = get_post( $linked_id );
-			$linked_lang = ( 'en' === $post_lang ) ? '🇲🇽' : '🇺🇸';
-			echo '<a href="' . esc_url( get_edit_post_link( $linked_id ) ) . '" style="font-size:11.5px; text-decoration:none; color:#2563eb;" title="' . esc_attr__( 'Editar versión vinculada', 'stories' ) . '">' . esc_html( $linked_lang . ' ' . wp_trim_words( $linked_post->post_title, 4 ) ) . '</a>';
-		} else {
-			echo '<span style="color:#94a3b8; font-size:11px;">' . esc_html__( 'Sin vincular', 'stories' ) . '</span>';
-		}
-		echo '</div>';
+	if ( 'stories_trans' !== $column_name ) {
+		return;
 	}
+
+	$post_lang = get_post_meta( $post_id, '_stories_post_lang', true );
+	if ( empty( $post_lang ) ) {
+		$post_lang = 'es';
+	}
+	$linked_id = intval( get_post_meta( $post_id, '_stories_translation_of', true ) );
+	$lang_code = strtoupper( $post_lang );
+	$lang_flag = ( 'en' === $post_lang ) ? '🇺🇸 ' . $lang_code : '🇲🇽 ' . $lang_code;
+	$pill_mod  = ( 'en' === $post_lang ) ? 'stories-lang-badge--en' : 'stories-lang-badge--es';
+
+	echo '<div class="stories-trans-cell">';
+	echo '<span class="stories-lang-badge ' . esc_attr( $pill_mod ) . '">' . esc_html( $lang_flag ) . '</span>';
+
+	if ( $linked_id > 0 && get_post_status( $linked_id ) ) {
+		$linked_post = get_post( $linked_id );
+		$linked_flag = ( 'en' === $post_lang ) ? '🇲🇽' : '🇺🇸';
+		echo '<div class="stories-trans-target-group">';
+		echo '<a href="' . esc_url( get_edit_post_link( $linked_id ) ) . '" class="stories-trans-target-link" title="' . esc_attr__( 'Editar versión vinculada', 'stories' ) . '">' . esc_html( $linked_flag . ' ' . wp_trim_words( $linked_post->post_title, 4 ) ) . '</a>';
+		echo '<a href="' . esc_url( get_edit_post_link( $linked_id ) ) . '" class="stories-trans-btn-icon" title="' . esc_attr__( 'Editar', 'stories' ) . '">✏️</a>';
+		echo '<a href="' . esc_url( get_permalink( $linked_id ) ) . '" target="_blank" class="stories-trans-btn-icon" title="' . esc_attr__( 'Ver', 'stories' ) . '">👁️</a>';
+		echo '</div>';
+	} else {
+		$clone_nonce = wp_create_nonce( 'stories_clone_post_' . $post_id );
+		$clone_url   = admin_url( 'admin-post.php?action=stories_clone_post_translation&post_id=' . $post_id . '&_wpnonce=' . $clone_nonce );
+		echo '<a href="' . esc_url( $clone_url ) . '" class="stories-trans-clone-link">➕ ' . esc_html__( 'Clonar a EN', 'stories' ) . '</a>';
+	}
+
+	echo '</div>';
 }
 
 /**
