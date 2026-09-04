@@ -89,6 +89,7 @@ select,
     }
 }
 
+#main-header .language-switcher__trigger,
 #main-header .search-mobile__button {
     border-radius: var(--minibadge-border-radius);
 
@@ -104,6 +105,15 @@ select,
             -webkit-corner-shape: squircle;
             corner-shape: squircle;
         }
+    }
+}
+
+#main-header .language-switcher__menu {
+    border-radius: var(--minibadge-border-radius);
+
+    .is-chromium & {
+        -webkit-corner-shape: squircle;
+        corner-shape: squircle;
     }
 }
 

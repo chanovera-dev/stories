@@ -29,6 +29,7 @@ $stories_includes = array(
 	'/inc/templates.php',     // Custom template tags and helper functions.
 	'/inc/wp-panel.php',      // WordPress admin theme settings panel.
 	'/inc/ajax.php',          // AJAX handlers and script localization.
+	'/inc/i18n.php',          // Multi-language support and switcher.
 );
 
 foreach ( $stories_includes as $file ) {

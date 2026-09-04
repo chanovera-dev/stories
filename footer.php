@@ -30,14 +30,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 						? $stories_options['footer_title']
 						: get_option('essentialis_footer_title', get_option('stories_footer_title', $default_title));
 
+					$current_lang = function_exists( 'stories_get_current_language' ) ? stories_get_current_language() : 'es';
+
+					if ( 'en' === $current_lang && ! empty( $stories_options['footer_title_en'] ) ) {
+						$final_title = $stories_options['footer_title_en'];
+					} else {
+						$final_title = function_exists( 'stories_translate_footer_title' ) ? stories_translate_footer_title( $footer_title ) : $footer_title;
+					}
+
 					if ($footer_logo): ?>
 						<img class="footer-logo" src="<?php echo esc_url($footer_logo); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
 					<?php else: ?>
-						<h3 class="title-section"><?php echo esc_html($footer_title); ?></h3>
+						<h3 class="title-section"><?php echo esc_html( $final_title ); ?></h3>
 					<?php endif; ?>
 					<p class="site-bio">
 						<?php
-						$bio_default = __('Relatos y Cartas es un espacio dedicado a la creatividad y la expresión a través de las palabras. Aquí encontrarás cuentos, microcuentos, poemas e historias que buscan inspirar, emocionar y conectar con los lectores.', 'stories');
+						$bio_default = __( 'Relatos y Cartas es un espacio dedicado a la creatividad y la expresión a través de las palabras. Aquí encontrarás cuentos, microcuentos, poemas e historias que buscan inspirar, emocionar y conectar con los lectores.', 'stories' );
 						$bio = !empty($stories_options['footer_bio'])
 							? $stories_options['footer_bio']
 							: get_option('essentialis_bio', get_option('stories_bio'));
@@ -45,7 +53,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 						if (false === $bio || empty($bio)) {
 							$bio = get_theme_mod('essentialis_bio', get_theme_mod('stories_bio', $bio_default));
 						}
-						echo wp_kses_post($bio);
+
+						if ( 'en' === $current_lang && ! empty( $stories_options['footer_bio_en'] ) ) {
+							$final_bio = $stories_options['footer_bio_en'];
+						} else {
+							$final_bio = function_exists( 'stories_translate_footer_bio' ) ? stories_translate_footer_bio( $bio ) : $bio;
+						}
+						echo wp_kses_post( $final_bio );
 						?>
 					</p>
 					<?php
@@ -92,7 +106,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="content">
 				<p>© <?php bloginfo('name'); echo ' ' . date("Y"); ?> • <?php esc_html_e('Todos los Derechos Reservados', 'stories'); ?></p>
 				<div class="credit">
-					<p>Diseñado y desarrollado por <a href="https://chano.dev/" target="_blank" rel="noopener noreferrer">@ChanoDEV</a></p>
+					<p>
+						<?php
+						printf(
+							/* translators: %s: Author website link. */
+							__( 'Diseñado y desarrollado por %s', 'stories' ),
+							'<a href="https://chano.dev/" target="_blank" rel="noopener noreferrer">@ChanoDEV</a>'
+						);
+						?>
+					</p>
 				</div>
 			</div>
 		</section>

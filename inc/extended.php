@@ -99,10 +99,9 @@ function stories_custom_menu_walker( $item_output, $item, $depth, $args ) {
 	$has_children = ! empty( $submenu_items_by_parent[ $item->ID ] );
 
 	if ( $has_children ) {
-		$text     = '<a href="' . esc_url( $item->url ) . '">' . esc_html( $item->title ) . '</a>';
 		$svg_icon = stories_get_icon( 'chevron-down' );
 
-		return '<div class="wrapper-for-title">' . $text . '<button class="button-for-submenu" aria-label="Toggle submenu">' . $svg_icon . '</button></div>';
+		return '<div class="wrapper-for-title">' . $item_output . '<button class="button-for-submenu" aria-label="Toggle submenu">' . $svg_icon . '</button></div>';
 	}
 
 	return $item_output;

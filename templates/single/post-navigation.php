@@ -18,12 +18,13 @@ $original_post = $post;
 
 // Get all published post IDs in chronological order (oldest to newest) to calculate positions
 $all_post_ids = get_posts( array(
-	'post_type'      => 'post',
-	'posts_per_page' => -1,
-	'post_status'    => 'publish',
-	'orderby'        => 'date',
-	'order'          => 'ASC',
-	'fields'         => 'ids',
+	'post_type'        => 'post',
+	'posts_per_page'   => -1,
+	'post_status'      => 'publish',
+	'orderby'          => 'date',
+	'order'            => 'ASC',
+	'fields'           => 'ids',
+	'suppress_filters' => false,
 ) );
 
 $total_posts_count = count( $all_post_ids );

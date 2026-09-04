@@ -387,28 +387,17 @@ function stories_settings_init() {
 	add_settings_field(
 		'footer_title',
 		__( 'Título de la Sección Sobre Nosotros', 'stories' ),
-		'stories_render_text_field',
+		'stories_render_bilingual_title_field',
 		'stories_options',
-		'stories_footer_section',
-		array(
-			'id'          => 'footer_title',
-			'placeholder' => __( 'Sobre ', 'stories' ) . get_bloginfo( 'name' ),
-			'description' => __( 'Título que se muestra en la primera columna del footer si no hay logo asignado.', 'stories' ),
-		)
+		'stories_footer_section'
 	);
 
 	add_settings_field(
 		'footer_bio',
 		__( 'Descripción / Biografía del Sitio', 'stories' ),
-		'stories_render_textarea_field',
+		'stories_render_bilingual_bio_field',
 		'stories_options',
-		'stories_footer_section',
-		array(
-			'id'          => 'footer_bio',
-			'rows'        => 4,
-			'default'     => __( 'Relatos y Cartas es un espacio dedicado a la creatividad y la expresión a través de las palabras. Aquí encontrarás cuentos, microcuentos, poemas e historias que buscan inspirar, emocionar y conectar con los lectores.', 'stories' ),
-			'description' => __( 'Texto descriptivo o biografía que aparece debajo del título/logo en el pie de página. Acepta etiquetas HTML básicas.', 'stories' ),
-		)
+		'stories_footer_section'
 	);
 }
 add_action( 'admin_init', 'stories_settings_init' );
@@ -482,8 +471,14 @@ function stories_sanitize_theme_options( $input ) {
 	if ( isset( $input['footer_title'] ) ) {
 		$sanitized['footer_title'] = sanitize_text_field( trim( $input['footer_title'] ) );
 	}
+	if ( isset( $input['footer_title_en'] ) ) {
+		$sanitized['footer_title_en'] = sanitize_text_field( trim( $input['footer_title_en'] ) );
+	}
 	if ( isset( $input['footer_bio'] ) ) {
 		$sanitized['footer_bio'] = wp_kses_post( trim( $input['footer_bio'] ) );
+	}
+	if ( isset( $input['footer_bio_en'] ) ) {
+		$sanitized['footer_bio_en'] = wp_kses_post( trim( $input['footer_bio_en'] ) );
 	}
 	if ( isset( $input['footer_logo'] ) ) {
 		$sanitized['footer_logo'] = esc_url_raw( trim( $input['footer_logo'] ) );
@@ -672,6 +667,76 @@ function stories_render_textarea_field( $args ) {
 	<?php if ( ! empty( $args['description'] ) ) : ?>
 		<p class="description"><?php echo esc_html( $args['description'] ); ?></p>
 	<?php endif; ?>
+	<?php
+}
+
+/**
+ * Render bilingual title field (Spanish & English side-by-side).
+ */
+function stories_render_bilingual_title_field() {
+	$options        = get_option( 'stories_theme_options', array() );
+	$title_es       = isset( $options['footer_title'] ) ? $options['footer_title'] : '';
+	$title_en       = isset( $options['footer_title_en'] ) ? $options['footer_title_en'] : '';
+	$site_name      = get_bloginfo( 'name' );
+	$placeholder_es = __( 'Sobre ', 'stories' ) . $site_name;
+	$placeholder_en = __( 'About ', 'stories' ) . $site_name;
+	?>
+	<div class="stories-bilingual-container">
+		<div class="stories-bilingual-col">
+			<label class="stories-bilingual-label" for="stories_footer_title">
+				<span class="stories-bilingual-flag" aria-hidden="true">🇲🇽</span>
+				<span class="stories-bilingual-lang"><?php esc_html_e( 'Español (Principal)', 'stories' ); ?></span>
+			</label>
+			<input type="text" name="stories_theme_options[footer_title]" id="stories_footer_title" value="<?php echo esc_attr( $title_es ); ?>" placeholder="<?php echo esc_attr( $placeholder_es ); ?>" class="regular-text stories-bilingual-input">
+			<p class="description">
+				<?php esc_html_e( 'Título que se muestra en la primera columna del footer si no hay logo asignado.', 'stories' ); ?>
+			</p>
+		</div>
+		<div class="stories-bilingual-col">
+			<label class="stories-bilingual-label" for="stories_footer_title_en">
+				<span class="stories-bilingual-flag" aria-hidden="true">🇺🇸</span>
+				<span class="stories-bilingual-lang"><?php esc_html_e( 'Inglés / English', 'stories' ); ?></span>
+			</label>
+			<input type="text" name="stories_theme_options[footer_title_en]" id="stories_footer_title_en" value="<?php echo esc_attr( $title_en ); ?>" placeholder="<?php echo esc_attr( $placeholder_en ); ?>" class="regular-text stories-bilingual-input">
+			<p class="description">
+				<?php esc_html_e( 'Opcional. Si se deja vacío, se traduce automáticamente.', 'stories' ); ?>
+			</p>
+		</div>
+	</div>
+	<?php
+}
+
+/**
+ * Render bilingual bio/description field (Spanish & English side-by-side).
+ */
+function stories_render_bilingual_bio_field() {
+	$options    = get_option( 'stories_theme_options', array() );
+	$default_es = __( 'Relatos y Cartas es un espacio dedicado a la creatividad y la expresión a través de las palabras. Aquí encontrarás cuentos, microcuentos, poemas e historias que buscan inspirar, emocionar y conectar con los lectores.', 'stories' );
+	$bio_es     = isset( $options['footer_bio'] ) ? $options['footer_bio'] : $default_es;
+	$bio_en     = isset( $options['footer_bio_en'] ) ? $options['footer_bio_en'] : '';
+	?>
+	<div class="stories-bilingual-container">
+		<div class="stories-bilingual-col">
+			<label class="stories-bilingual-label" for="stories_footer_bio">
+				<span class="stories-bilingual-flag" aria-hidden="true">🇲🇽</span>
+				<span class="stories-bilingual-lang"><?php esc_html_e( 'Español (Principal)', 'stories' ); ?></span>
+			</label>
+			<textarea name="stories_theme_options[footer_bio]" id="stories_footer_bio" rows="5" class="large-text stories-bilingual-textarea"><?php echo esc_textarea( $bio_es ); ?></textarea>
+			<p class="description">
+				<?php esc_html_e( 'Texto descriptivo o biografía que aparece debajo del título/logo. Acepta etiquetas HTML básicas.', 'stories' ); ?>
+			</p>
+		</div>
+		<div class="stories-bilingual-col">
+			<label class="stories-bilingual-label" for="stories_footer_bio_en">
+				<span class="stories-bilingual-flag" aria-hidden="true">🇺🇸</span>
+				<span class="stories-bilingual-lang"><?php esc_html_e( 'Inglés / English', 'stories' ); ?></span>
+			</label>
+			<textarea name="stories_theme_options[footer_bio_en]" id="stories_footer_bio_en" rows="5" class="large-text stories-bilingual-textarea" placeholder="<?php esc_attr_e( 'Si se deja vacío, se traduce automáticamente desde el texto en español.', 'stories' ); ?>"><?php echo esc_textarea( $bio_en ); ?></textarea>
+			<p class="description">
+				<?php esc_html_e( 'Opcional. Si se deja vacío, se traduce automáticamente.', 'stories' ); ?>
+			</p>
+		</div>
+	</div>
 	<?php
 }
 

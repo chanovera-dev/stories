@@ -250,3 +250,46 @@
     min-width: 120px !important;
     font-weight: 600;
 }
+
+/* ==========================================================================
+   Bilingual Fields (Side-by-Side)
+   ========================================================================== */
+.stories-bilingual-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    max-width: 920px;
+    width: 100%;
+}
+
+@media (max-width: 820px) {
+    .stories-bilingual-container {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+}
+
+.stories-bilingual-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-sizing: border-box;
+}
+
+.stories-bilingual-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.stories-bilingual-flag {
+    font-size: 17px;
+    line-height: 1;
+}
+
+.stories-bilingual-lang {
+    letter-spacing: 0.2px;
+}

@@ -71,16 +71,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 						</div>
 					</form>
 				</div>
-				<button type="button" id="search-mobile__button" class="search-mobile__button" onclick="toggleCustomSearchform()" aria-label="Open search">
-					<div class="icon--wrapper">
-						<div class="bar"></div>
-					</div>
-				</button>
-				<?php if ( has_nav_menu( 'primary' ) ) : ?>
-					<button type="button" id="menu-mobile__button" class="menu-mobile__button" onclick="toggleMenuMobile()" aria-label="Open mobile menu">
-						<span class="bar"></span>
+				<div class="header-actions">
+					<?php
+					if ( function_exists( 'stories_language_switcher' ) ) {
+						stories_language_switcher();
+					}
+					?>
+					<button type="button" id="search-mobile__button" class="search-mobile__button" onclick="toggleCustomSearchform()" aria-label="Open search">
+						<div class="icon--wrapper">
+							<div class="bar"></div>
+						</div>
 					</button>
-				<?php endif; ?>
+					<?php if ( has_nav_menu( 'primary' ) ) : ?>
+						<button type="button" id="menu-mobile__button" class="menu-mobile__button" onclick="toggleMenuMobile()" aria-label="Open mobile menu">
+							<span class="bar"></span>
+						</button>
+					<?php endif; ?>
+				</div>
 			</div>
 		</div>
 	</header>

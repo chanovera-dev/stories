@@ -893,6 +893,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Photography & Gallery Lightbox Handler with Full Metadata & Navigation
     function initStoriesLightbox() {
+        // Do not initialize lightbox on 404 error pages
+        if (document.body.classList.contains('error404') || document.querySelector('.error-404')) {
+            const existingModal = document.querySelector('.stories-lightbox-modal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            return;
+        }
+
         let currentGallery = [];
         let currentGalleryIndex = 0;
 
@@ -1627,8 +1636,78 @@ function closeMenuMobile() {
     }
 }
 
+/**
+ * Language Switcher Dropdown Controller
+ */
+function storiesToggleLanguageDropdown(trigger) {
+    const container = trigger ? trigger.closest('.language-switcher') : document.getElementById('language-switcher');
+    if (!container) return;
+
+    const isOpen = container.classList.toggle('is-open');
+    const button = container.querySelector('.language-switcher__trigger');
+    if (button) {
+        button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+}
+
+function storiesCloseLanguageDropdown() {
+    const containers = document.querySelectorAll('.language-switcher.is-open');
+    containers.forEach(function (container) {
+        container.classList.remove('is-open');
+        const button = container.querySelector('.language-switcher__trigger');
+        if (button) {
+            button.setAttribute('aria-expanded', 'false');
+        }
+    });
+}
+
+function storiesSelectLanguage(lang, url) {
+    if (lang) {
+        const d = new Date();
+        d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
+        document.cookie = 'stories_lang=' + encodeURIComponent(lang) + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
+    }
+
+    storiesCloseLanguageDropdown();
+
+    if (url) {
+        window.location.href = url;
+    }
+}
+
+function storiesHandleLanguageKey(e, lang, url) {
+    if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        storiesSelectLanguage(lang, url);
+    } else if (e.key === 'Escape') {
+        e.preventDefault();
+        storiesCloseLanguageDropdown();
+        const trigger = document.getElementById('language-switcher-trigger');
+        if (trigger) trigger.focus();
+    }
+}
+
+// Global click outside and escape handler for language switcher
+document.addEventListener('click', function (e) {
+    const switcher = document.getElementById('language-switcher');
+    if (switcher && !switcher.contains(e.target)) {
+        storiesCloseLanguageDropdown();
+    }
+});
+
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+        storiesCloseLanguageDropdown();
+    }
+});
+
 // Explicitly bind to window object for global availability
 window.toggleCustomSearchform = toggleCustomSearchform;
 window.closeCustomSearchform = closeCustomSearchform;
 window.toggleMenuMobile = toggleMenuMobile;
 window.closeMenuMobile = closeMenuMobile;
+window.storiesToggleLanguageDropdown = storiesToggleLanguageDropdown;
+window.storiesCloseLanguageDropdown = storiesCloseLanguageDropdown;
+window.storiesSelectLanguage = storiesSelectLanguage;
+window.storiesHandleLanguageKey = storiesHandleLanguageKey;
+
