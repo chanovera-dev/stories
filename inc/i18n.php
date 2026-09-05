@@ -24,13 +24,43 @@ function stories_is_multilingual_enabled() {
 }
 
 /**
+ * Get site default language code based on WordPress configuration ('es' or 'en').
+ * Reads the WordPress site locale (e.g. 'es_MX', 'es_ES', 'en_US', 'en_GB') or WPLANG option.
+ *
+ * @return string Default language code ('es' or 'en').
+ */
+function stories_get_default_language() {
+	// If Polylang is active, delegate to Polylang default.
+	if ( function_exists( 'pll_default_language' ) ) {
+		$pll_default = pll_default_language( 'slug' );
+		if ( ! empty( $pll_default ) && in_array( $pll_default, array( 'es', 'en' ), true ) ) {
+			return $pll_default;
+		}
+	}
+
+	// Read WordPress locale (e.g., 'es_MX', 'es_ES', 'en_US', 'en_GB').
+	$locale = get_locale();
+	if ( 0 === strpos( $locale, 'en' ) ) {
+		return 'en';
+	}
+
+	// Also check WPLANG option directly as fallback.
+	$wplang = get_option( 'WPLANG', '' );
+	if ( ! empty( $wplang ) && 0 === strpos( $wplang, 'en' ) ) {
+		return 'en';
+	}
+
+	return 'es';
+}
+
+/**
  * Get current active language code ('es' or 'en').
  *
  * @return string Current language code ('es' or 'en').
  */
 function stories_get_current_language() {
 	if ( ! stories_is_multilingual_enabled() ) {
-		return 'es';
+		return stories_get_default_language();
 	}
 
 	// If Polylang is active, delegate to Polylang.
@@ -67,13 +97,8 @@ function stories_get_current_language() {
 		return sanitize_text_field( wp_unslash( $_COOKIE['stories_lang'] ) );
 	}
 
-	// Default to site locale or Spanish.
-	$site_locale = get_locale();
-	if ( 0 === strpos( $site_locale, 'en' ) ) {
-		return 'en';
-	}
-
-	return 'es';
+	// Default to site's configured language in WordPress.
+	return stories_get_default_language();
 }
 
 /**
@@ -97,7 +122,13 @@ function stories_determine_locale( $locale ) {
 		return $locale;
 	}
 
-	$lang = stories_get_current_language();
+	$lang         = stories_get_current_language();
+	$default_lang = stories_get_default_language();
+
+	// If active language matches WordPress default, keep the configured WordPress locale.
+	if ( $lang === $default_lang ) {
+		return $locale;
+	}
 
 	if ( 'en' === $lang ) {
 		return 'en_US';
@@ -488,6 +519,21 @@ function stories_translate_nav_menu_objects( $items ) {
 			if ( ! empty( $item->title ) && isset( $dictionary[ $item->title ] ) ) {
 				$item->title = $dictionary[ $item->title ];
 			}
+
+			// If item links to a post/page and it has a linked counterpart, switch URL
+			if ( ! empty( $item->object_id ) && in_array( $item->type, array( 'post_type', 'post_type_archive' ), true ) ) {
+				$linked_id = intval( get_post_meta( $item->object_id, '_stories_translation_of', true ) );
+				if ( $linked_id > 0 && get_post_status( $linked_id ) ) {
+					$orig_post_lang = get_post_meta( $item->object_id, '_stories_post_lang', true );
+					if ( empty( $orig_post_lang ) ) {
+						$orig_post_lang = 'es';
+					}
+					// If the menu item is for the opposite language, use the counterpart URL
+					if ( $orig_post_lang !== $current_lang ) {
+						$item->url = get_permalink( $linked_id );
+					}
+				}
+			}
 		}
 	}
 
@@ -664,7 +710,7 @@ function stories_language_switcher() {
 		$curr_id   = get_queried_object_id();
 		$post_lang = get_post_meta( $curr_id, '_stories_post_lang', true );
 		if ( empty( $post_lang ) ) {
-			$post_lang = 'es';
+			$post_lang = stories_get_default_language();
 		}
 		$linked_id = get_post_meta( $curr_id, '_stories_translation_of', true );
 
@@ -797,7 +843,7 @@ function stories_render_post_translation_metabox( $post ) {
 
 	$current_lang = get_post_meta( $post->ID, '_stories_post_lang', true );
 	if ( empty( $current_lang ) ) {
-		$current_lang = 'es';
+		$current_lang = stories_get_default_language();
 	}
 
 	$linked_id      = intval( get_post_meta( $post->ID, '_stories_translation_of', true ) );
@@ -923,8 +969,8 @@ function stories_handle_clone_post_translation() {
 
 	$orig_lang = get_post_meta( $post_id, '_stories_post_lang', true );
 	if ( empty( $orig_lang ) ) {
-		$orig_lang = 'es';
-		update_post_meta( $post_id, '_stories_post_lang', 'es' );
+		$orig_lang = stories_get_default_language();
+		update_post_meta( $post_id, '_stories_post_lang', $orig_lang );
 	}
 	$target_lang = ( 'es' === $orig_lang ) ? 'en' : 'es';
 	$lang_suffix = ( 'en' === $target_lang ) ? ' (English)' : ' (Español)';
@@ -1114,6 +1160,27 @@ function stories_filter_queries_by_language( $query ) {
 		return;
 	}
 
+	// Do not filter navigation menus, media attachments, or other internal WordPress types
+	$post_type = $query->get( 'post_type' );
+	if ( ! empty( $post_type ) ) {
+		$excluded_types = array(
+			'nav_menu_item',
+			'attachment',
+			'revision',
+			'wp_global_styles',
+			'wp_template',
+			'wp_template_part',
+			'wp_navigation',
+			'customize_changeset',
+		);
+		if ( is_string( $post_type ) && in_array( $post_type, $excluded_types, true ) ) {
+			return;
+		}
+		if ( is_array( $post_type ) && count( array_intersect( $post_type, $excluded_types ) ) === count( $post_type ) ) {
+			return;
+		}
+	}
+
 	$current_lang = stories_get_current_language();
 
 	$meta_query = $query->get( 'meta_query' );
@@ -1121,21 +1188,24 @@ function stories_filter_queries_by_language( $query ) {
 		$meta_query = array();
 	}
 
-	if ( 'en' === $current_lang ) {
-		// In English: Only show posts explicitly marked as English
+	$default_lang     = stories_get_default_language();
+	$non_default_lang = ( 'en' === $default_lang ) ? 'es' : 'en';
+
+	if ( $current_lang === $non_default_lang ) {
+		// In non-default language: Only show posts explicitly marked as that language
 		$meta_query[] = array(
 			'key'     => '_stories_post_lang',
-			'value'   => 'en',
+			'value'   => $non_default_lang,
 			'compare' => '=',
 		);
 	} else {
-		// In Spanish: Only show posts that are NOT marked as English
-		// (This matches posts with '_stories_post_lang' = 'es' AND legacy posts without meta)
+		// In default language: Show posts that are NOT marked as the non-default language
+		// (This matches posts with '_stories_post_lang' = default AND legacy posts without meta)
 		$meta_query[] = array(
 			'relation' => 'OR',
 			array(
 				'key'     => '_stories_post_lang',
-				'value'   => 'en',
+				'value'   => $non_default_lang,
 				'compare' => '!=',
 			),
 			array(
@@ -1273,7 +1343,7 @@ function stories_admin_post_row_actions( $actions, $post ) {
 	$linked_id = intval( get_post_meta( $post->ID, '_stories_translation_of', true ) );
 	$post_lang = get_post_meta( $post->ID, '_stories_post_lang', true );
 	if ( empty( $post_lang ) ) {
-		$post_lang = 'es';
+		$post_lang = stories_get_default_language();
 	}
 
 	if ( $linked_id > 0 && get_post_status( $linked_id ) ) {
@@ -1283,7 +1353,8 @@ function stories_admin_post_row_actions( $actions, $post ) {
 	} else {
 		$clone_nonce = wp_create_nonce( 'stories_clone_post_' . $post->ID );
 		$clone_url   = admin_url( 'admin-post.php?action=stories_clone_post_translation&post_id=' . $post->ID . '&_wpnonce=' . $clone_nonce );
-		$actions['stories_clone'] = '<a href="' . esc_url( $clone_url ) . '" style="color:#0284c7;">' . esc_html__( '📄 Clonar a versión en Inglés', 'stories' ) . '</a>';
+		$clone_label = ( 'en' === $post_lang ) ? __( '📄 Clonar a versión en Español', 'stories' ) : __( '📄 Clonar a versión en Inglés', 'stories' );
+		$actions['stories_clone'] = '<a href="' . esc_url( $clone_url ) . '" style="color:#0284c7;">' . esc_html( $clone_label ) . '</a>';
 	}
 
 	return $actions;
@@ -1531,7 +1602,7 @@ function stories_display_translation_admin_column( $column_name, $post_id ) {
 
 	$post_lang = get_post_meta( $post_id, '_stories_post_lang', true );
 	if ( empty( $post_lang ) ) {
-		$post_lang = 'es';
+		$post_lang = stories_get_default_language();
 	}
 	$linked_id = intval( get_post_meta( $post_id, '_stories_translation_of', true ) );
 	$lang_code = strtoupper( $post_lang );
@@ -1552,7 +1623,8 @@ function stories_display_translation_admin_column( $column_name, $post_id ) {
 	} else {
 		$clone_nonce = wp_create_nonce( 'stories_clone_post_' . $post_id );
 		$clone_url   = admin_url( 'admin-post.php?action=stories_clone_post_translation&post_id=' . $post_id . '&_wpnonce=' . $clone_nonce );
-		echo '<a href="' . esc_url( $clone_url ) . '" class="stories-trans-clone-link">➕ ' . esc_html__( 'Clonar a EN', 'stories' ) . '</a>';
+		$clone_badge = ( 'en' === $post_lang ) ? __( '➕ Clonar a ES', 'stories' ) : __( '➕ Clonar a EN', 'stories' );
+		echo '<a href="' . esc_url( $clone_url ) . '" class="stories-trans-clone-link">' . esc_html( $clone_badge ) . '</a>';
 	}
 
 	echo '</div>';
