@@ -12,17 +12,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 ?>
 
-<section class="block single-post-block">
+<section class="block single-post-block site-content-block">
 	<div class="content">
-		<?php
-		while ( have_posts() ) :
-			the_post();
+		<div id="primary" class="content-area">
+			<?php
+			while ( have_posts() ) :
+				the_post();
 
-			$format = get_post_format();
-			get_template_part( 'template-parts/content-single', $format ? $format : get_post_type() );
+				$format = get_post_format();
+				get_template_part( 'template-parts/content-single', $format ? $format : get_post_type() );
 
-		endwhile;
-		?>
+			endwhile;
+			?>
+		</div>
+		<?php get_sidebar(); ?>
 	</div>
 </section>
 

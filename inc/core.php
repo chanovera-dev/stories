@@ -227,6 +227,9 @@ function stories_enqueue_scripts() {
 	// Enqueue theme main JavaScript (Vanilla JS).
 	$enable_is_chromium = isset( $theme_options['enable_is_chromium'] ) ? ! empty( $theme_options['enable_is_chromium'] ) : true;
 
+	$posts_page_id = get_option( 'page_for_posts' );
+	$all_posts_url = ( 'page' === get_option( 'show_on_front' ) && ! empty( $posts_page_id ) ) ? get_permalink( $posts_page_id ) : home_url( '/' );
+
 	stories_enqueue_script( 'stories-main', $a['js']['main'], array(), true );
 	wp_localize_script(
 		'stories-main',
@@ -235,6 +238,7 @@ function stories_enqueue_scripts() {
 			'ajax_url'           => admin_url( 'admin-ajax.php' ),
 			'nonce'              => wp_create_nonce( 'stories_ajax_nonce' ),
 			'enable_is_chromium' => $enable_is_chromium ? 1 : 0,
+			'all_posts_url'      => esc_url( $all_posts_url ),
 		)
 	);
 	wp_localize_script(
@@ -272,3 +276,34 @@ function stories_custom_comment_avatar_size( $avatar ) {
 }
 add_filter( 'get_avatar', 'stories_custom_comment_avatar_size', 10, 1 );
 
+/**
+ * Register widget areas.
+ *
+ * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
+ */
+function stories_widgets_init() {
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Barra lateral principal', 'stories' ),
+			'id'            => 'sidebar-1',
+			'description'   => esc_html__( 'Añade widgets aquí para que aparezcan en la barra lateral del blog, entradas y archivos.', 'stories' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h3 class="widget-title">',
+			'after_title'   => '</h3>',
+		)
+	);
+
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Barra lateral de páginas', 'stories' ),
+			'id'            => 'sidebar-page',
+			'description'   => esc_html__( 'Añade widgets aquí para que aparezcan en las páginas estáticas. Si se deja vacía, se usará la barra lateral principal.', 'stories' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h3 class="widget-title">',
+			'after_title'   => '</h3>',
+		)
+	);
+}
+add_action( 'widgets_init', 'stories_widgets_init' );

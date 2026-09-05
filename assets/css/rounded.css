@@ -54,7 +54,10 @@ select,
 .search-submit,
 .nav-badge.count-badge,
 .theater-btn,
-.theater-meta-item {
+.theater-meta-item,
+.stories-custom-select__trigger,
+.stories-custom-select__menu,
+.stories-custom-select__option {
     border-radius: var(--minibadge-border-radius);
 
     .is-chromium & {
@@ -118,7 +121,8 @@ select,
 }
 
 .story-card,
-.format-gallery-card .stories-slideshow {
+.format-gallery-card .stories-slideshow,
+.widget {
     border-radius: var(--card-border-radius);
 
     .is-chromium & {

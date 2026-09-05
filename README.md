@@ -137,6 +137,7 @@ El estilo activo se aplica como clase CSS al `<body>` (`pagination-style-*`) y a
 - **Badges de formato** de entrada con icono SVG junto a cada tarjeta del loop.
 - **Tiempo estimado de lectura** calculado dinámicamente (200 palabras/minuto).
 - **Efectos Squircle y bordes redondeados**: `rounded.css` con soporte para navegadores Chromium mediante detección JS de clase `.is-chromium`.
+- **Soporte para Sidebars y Widgets**: Dos áreas de widgets registradas (`sidebar-1` para blog/entradas/archivos y `sidebar-page` para páginas estáticas). Si no contienen widgets, el contenido se expande automáticamente al 100% sin dejar huecos vacíos (`.no-sidebar`); con widgets activos (`.has-sidebar`), activa el layout adaptable de dos columnas con estilo card, squircles, y soporte completo para widgets nativos y bloques de Gutenberg.
 
 ---
 
@@ -212,6 +213,7 @@ stories/
 ├── index.php                        # Plantilla principal de respaldo
 ├── page.php                         # Plantilla para páginas individuales
 ├── search.php                       # Plantilla de resultados de búsqueda
+├── sidebar.php                      # Barra lateral y área de widgets (sidebar-1 / sidebar-page)
 ├── single.php                       # Plantilla para entradas individuales
 ├── style.css                        # Metadatos del tema y estilos base
 ├── template-parts/

@@ -1510,6 +1510,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     initStoriesLightbox();
+    storiesInitCustomSelects();
 });
 
 document.addEventListener('keydown', function (event) {
@@ -1710,4 +1711,181 @@ window.storiesToggleLanguageDropdown = storiesToggleLanguageDropdown;
 window.storiesCloseLanguageDropdown = storiesCloseLanguageDropdown;
 window.storiesSelectLanguage = storiesSelectLanguage;
 window.storiesHandleLanguageKey = storiesHandleLanguageKey;
+window.storiesInitCustomSelects = storiesInitCustomSelects;
+
+/**
+ * Modern Custom Select for Archives and Category dropdown blocks/widgets
+ */
+function storiesInitCustomSelects() {
+    const selector = '.wp-block-archives-dropdown select, .wp-block-archives select, .widget_archive select, .widget select[name="archive-dropdown"], .wp-block-categories-dropdown select, .widget_categories select';
+    const selects = document.querySelectorAll(selector);
+
+    if (!selects.length) return;
+
+    selects.forEach(function (select) {
+        if (select.dataset.storiesCustomized) return;
+        select.dataset.storiesCustomized = 'true';
+
+        // Hide native select visually but keep it in DOM
+        select.style.display = 'none';
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'stories-custom-select';
+
+        const selectedIndex = select.selectedIndex >= 0 ? select.selectedIndex : 0;
+        const currentOption = select.options[selectedIndex] || select.options[0];
+        const currentText = currentOption ? currentOption.textContent.trim() : '';
+
+        // Trigger button
+        const trigger = document.createElement('button');
+        trigger.type = 'button';
+        trigger.className = 'stories-custom-select__trigger';
+        trigger.setAttribute('aria-haspopup', 'listbox');
+        trigger.setAttribute('aria-expanded', 'false');
+
+        // Contextual SVG icon (calendar for archives, bookmark/category for categories)
+        const isArchive = (select.name && select.name.includes('archive')) || select.closest('.wp-block-archives, .widget_archive');
+        const iconSpan = document.createElement('span');
+        iconSpan.className = 'stories-custom-select__icon';
+        if (isArchive) {
+            iconSpan.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z"/><path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-3 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/></svg>';
+        } else {
+            iconSpan.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M6 8V1h1v6.117L8.743 6.07a.5.5 0 0 1 .514 0L11 7.117V1h1v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8"/><path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/></svg>';
+        }
+
+        const label = document.createElement('span');
+        label.className = 'stories-custom-select__label';
+        const cleanLabel = currentText.replace(/\s*(?:\(\d+\)|&nbsp;\(\d+\))\s*$/, '');
+        label.textContent = cleanLabel || currentText;
+
+        const arrow = document.createElement('span');
+        arrow.className = 'stories-custom-select__arrow';
+        arrow.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>';
+
+        trigger.appendChild(iconSpan);
+        trigger.appendChild(label);
+        trigger.appendChild(arrow);
+        wrapper.appendChild(trigger);
+
+        // Dropdown menu list
+        const menu = document.createElement('ul');
+        menu.className = 'stories-custom-select__menu';
+        menu.setAttribute('role', 'listbox');
+
+        Array.from(select.options).forEach(function (opt, idx) {
+            const rawText = opt.textContent.trim();
+            const matchCount = rawText.match(/^(.*?)(?:\s*(?:&nbsp;|\s)\((\d+)\)|\s*\((\d+)\))$/);
+
+            const li = document.createElement('li');
+            li.className = 'stories-custom-select__option';
+            li.setAttribute('role', 'option');
+            li.dataset.value = opt.value;
+            li.dataset.index = idx;
+
+            if (idx === selectedIndex) {
+                li.classList.add('is-selected');
+                li.setAttribute('aria-selected', 'true');
+            }
+
+            if (matchCount) {
+                const optTitle = document.createElement('span');
+                optTitle.className = 'stories-custom-select__option-text';
+                optTitle.textContent = matchCount[1].trim();
+
+                const countBadge = document.createElement('span');
+                countBadge.className = 'stories-custom-select__count';
+                countBadge.textContent = matchCount[2] || matchCount[3];
+
+                li.appendChild(optTitle);
+                li.appendChild(countBadge);
+            } else {
+                const optTitle = document.createElement('span');
+                optTitle.className = 'stories-custom-select__option-text';
+                optTitle.textContent = rawText;
+                li.appendChild(optTitle);
+            }
+
+            li.addEventListener('click', function (e) {
+                e.stopPropagation();
+                wrapper.classList.remove('is-open');
+                trigger.setAttribute('aria-expanded', 'false');
+
+                menu.querySelectorAll('.stories-custom-select__option').forEach(function (el) {
+                    el.classList.remove('is-selected');
+                    el.removeAttribute('aria-selected');
+                });
+                li.classList.add('is-selected');
+                li.setAttribute('aria-selected', 'true');
+
+                label.textContent = matchCount ? matchCount[1].trim() : rawText;
+
+                select.selectedIndex = idx;
+                select.value = opt.value;
+                select.dispatchEvent(new Event('change', { bubbles: true }));
+
+                if (opt.value && (opt.value.startsWith('http://') || opt.value.startsWith('https://'))) {
+                    window.location.href = opt.value;
+                } else if (!opt.value || idx === 0) {
+                    // Navigate to all archives / posts page
+                    const allPostsUrl = (typeof storiesAjax !== 'undefined' && storiesAjax.all_posts_url)
+                        ? storiesAjax.all_posts_url
+                        : '/';
+                    window.location.href = allPostsUrl;
+                }
+            });
+
+            menu.appendChild(li);
+        });
+
+        wrapper.appendChild(menu);
+
+        trigger.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const isOpen = wrapper.classList.contains('is-open');
+
+            document.querySelectorAll('.stories-custom-select.is-open').forEach(function (s) {
+                if (s !== wrapper) {
+                    s.classList.remove('is-open');
+                    const btn = s.querySelector('.stories-custom-select__trigger');
+                    if (btn) btn.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            if (isOpen) {
+                wrapper.classList.remove('is-open');
+                trigger.setAttribute('aria-expanded', 'false');
+            } else {
+                wrapper.classList.add('is-open');
+                trigger.setAttribute('aria-expanded', 'true');
+            }
+        });
+
+        select.parentNode.insertBefore(wrapper, select.nextSibling);
+    });
+}
+
+// Global click outside and Escape key handler for custom selects
+document.addEventListener('click', function (e) {
+    if (!e.target.closest('.stories-custom-select')) {
+        document.querySelectorAll('.stories-custom-select.is-open').forEach(function (s) {
+            s.classList.remove('is-open');
+            const btn = s.querySelector('.stories-custom-select__trigger');
+            if (btn) btn.setAttribute('aria-expanded', 'false');
+        });
+    }
+});
+
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.stories-custom-select.is-open').forEach(function (s) {
+            s.classList.remove('is-open');
+            const btn = s.querySelector('.stories-custom-select__trigger');
+            if (btn) {
+                btn.setAttribute('aria-expanded', 'false');
+                btn.focus();
+            }
+        });
+    }
+});
+
 

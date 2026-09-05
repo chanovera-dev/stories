@@ -12,16 +12,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 ?>
 
-<section class="block">
+<section class="block site-content-block">
 	<div class="content">
-		<?php
-		while ( have_posts() ) :
-			the_post();
+		<div id="primary" class="content-area">
+			<?php
+			while ( have_posts() ) :
+				the_post();
 
-			get_template_part( 'template-parts/content', 'page' );
+				get_template_part( 'template-parts/content', 'page' );
 
-		endwhile;
-		?>
+			endwhile;
+			?>
+		</div>
+		<?php get_sidebar(); ?>
 	</div>
 </section>
 

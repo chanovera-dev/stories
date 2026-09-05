@@ -44,8 +44,17 @@ add_filter( 'excerpt_more', 'stories_custom_excerpt_more' );
  * @return array Filtered body classes.
  */
 function stories_body_classes( $classes ) {
-	// Add a class if sidebar is active.
-	if ( is_active_sidebar( 'sidebar-1' ) ) {
+	// Add a class if sidebar is active for current context.
+	$has_sidebar = false;
+	if ( ! is_page_template( 'templates/full-width.php' ) ) {
+		if ( is_page() ) {
+			$has_sidebar = is_active_sidebar( 'sidebar-page' ) || is_active_sidebar( 'sidebar-1' );
+		} else {
+			$has_sidebar = is_active_sidebar( 'sidebar-1' );
+		}
+	}
+
+	if ( $has_sidebar ) {
 		$classes[] = 'has-sidebar';
 	} else {
 		$classes[] = 'no-sidebar';
@@ -895,3 +904,46 @@ function stories_clear_link_metadata_cache( $post_id ) {
 }
 add_action( 'save_post', 'stories_clear_link_metadata_cache' );
 add_action( 'edit_post', 'stories_clear_link_metadata_cache' );
+
+/**
+ * Add initial SVG category icon to the WordPress categories block.
+ *
+ * @param string $block_content The block HTML content.
+ * @param array  $block         The block details.
+ * @return string Modified block content with category SVG icon.
+ */
+function stories_add_icon_to_categories_block( $block_content, $block ) {
+	if ( empty( $block_content ) || false !== strpos( $block_content, 'category-icon-wrap' ) ) {
+		return $block_content;
+	}
+
+	$svg = function_exists( 'stories_get_icon' ) ? stories_get_icon( 'category' ) : '';
+	if ( empty( $svg ) ) {
+		return $block_content;
+	}
+
+	$wrapped_svg = '<span class="category-icon-wrap">' . $svg . '</span>';
+	return preg_replace( '/(<a\b[^>]*>)/i', '$1' . $wrapped_svg, $block_content );
+}
+add_filter( 'render_block_core/categories', 'stories_add_icon_to_categories_block', 10, 2 );
+
+/**
+ * Add initial SVG category icon to classic categories widget list.
+ *
+ * @param string $output HTML output of categories list.
+ * @return string Modified HTML with category SVG icon.
+ */
+function stories_add_icon_to_classic_categories_widget( $output ) {
+	if ( empty( $output ) || false !== strpos( $output, 'category-icon-wrap' ) ) {
+		return $output;
+	}
+
+	$svg = function_exists( 'stories_get_icon' ) ? stories_get_icon( 'category' ) : '';
+	if ( empty( $svg ) ) {
+		return $output;
+	}
+
+	$wrapped_svg = '<span class="category-icon-wrap">' . $svg . '</span>';
+	return preg_replace( '/(<a\b[^>]*>)/i', '$1' . $wrapped_svg, $output );
+}
+add_filter( 'wp_list_categories', 'stories_add_icon_to_classic_categories_widget', 10, 1 );

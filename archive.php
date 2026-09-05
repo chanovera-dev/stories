@@ -12,35 +12,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 ?>
 
-<section class="block">
+<section class="block site-content-block">
 	<div class="content">
-		<?php if ( have_posts() ) : ?>
+		<div id="primary" class="content-area">
+			<?php if ( have_posts() ) : ?>
 
-			<header class="page-header">
+				<header class="page-header">
+					<?php
+					the_archive_title( '<h1 class="page-title">', '</h1>' );
+					the_archive_description( '<div class="archive-description">', '</div>' );
+					?>
+				</header>
+
 				<?php
-				the_archive_title( '<h1 class="page-title">', '</h1>' );
-				the_archive_description( '<div class="archive-description">', '</div>' );
-				?>
-			</header>
+				echo '<div class="posts-grid">';
+				while ( have_posts() ) :
+					the_post();
 
-			<?php
-			echo '<div class="posts-grid">';
-			while ( have_posts() ) :
-				the_post();
+					stories_loop_template_part( get_post_format() );
 
-				stories_loop_template_part( get_post_format() );
+				endwhile;
+				echo '</div>';
 
-			endwhile;
-			echo '</div>';
+				stories_pagination();
 
-			stories_pagination();
+			else :
 
-		else :
+				get_template_part( 'template-parts/content', 'none' );
 
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
-		?>
+			endif;
+			?>
+		</div>
+		<?php get_sidebar(); ?>
 	</div>
 </section>
 
