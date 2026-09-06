@@ -1,51 +1,51 @@
-# 📖 Stories — WordPress Theme
+# <img src="./assets/icons/readme/features.svg" width="28" height="28" align="top" alt=""> Stories — WordPress Theme
 
 **Stories** es un tema moderno, modular y de alto rendimiento para WordPress, diseñado específicamente para publicaciones visuales, relatos, artículos editoriales y experiencias multimedia inmersivas.
 
 ---
 
-## ✨ Características Principales
+## <img src="./assets/icons/readme/features.svg" width="22" height="22" align="top" alt=""> Características Principales
 
-### 🎭 Formatos de Entrada Personalizados
+### <img src="./assets/icons/readme/formats.svg" width="18" height="18" align="top" alt=""> Formatos de Entrada Personalizados
 
 Soporte completo para los 9 formatos de entrada de WordPress, cada uno con su propia plantilla de tarjeta en el loop y su propia vista `single` dedicada:
 
 | Formato | Descripción |
 |---------|------------|
-| 🎵 **Audio** | Reproductor de vinilo 3D con disco giratorio, espectrograma de frecuencias animado e iluminación ambiental pulsante. Soporta archivos locales (mp3/ogg/wav), shortcodes `[audio]` y embeds externos (Spotify, SoundCloud, Bandcamp). |
-| 🎬 **Video** | Reproductor integrado con soporte HTML5 y embeds (YouTube, Vimeo, etc.), controles personalizados en hover y modo pantalla completa. |
-| 🖼️ **Galería** | Carrusel táctil interactivo con vista de teatro, navegación por puntos y conteo dinámico. Soporta bloques Gutenberg, shortcodes y archivos adjuntos. |
-| 💬 **Cita** | Diseño tipográfico elegante con comillas de agua tridimensionales e inclinación sutil. |
-| 📝 **Aside** | Hoja de libreta interactiva con renglones calculados según el tamaño de fuente, línea de margen roja y marcas de perforación. |
-| 📷 **Imagen** | Enfoque fotográfico de alta calidad con visor Lightbox, metadatos EXIF (cámara, apertura, velocidad de obturación, focal, ISO) e información de dimensiones y peso de archivo. |
-| 🔗 **Link** | Tarjeta de enlace externo con obtención automática de metadatos remotos vía OpenGraph, Twitter Cards y JSON-LD Schema. Cachea los resultados en `post_meta` para evitar peticiones HTTP repetidas. |
-| 💬 **Chat** | Formato de conversación/diálogo con diseño de burbuja. |
-| 📰 **Estándar** | Tarjeta con imagen de fondo a pantalla completa, degradado fotográfico progresivo (*cinematic scrim*) y panel desplegable de metadatos y extracto. |
+| **Audio** | Reproductor de vinilo 3D con disco giratorio, espectrograma de frecuencias animado e iluminación ambiental pulsante. Soporta archivos locales (mp3/ogg/wav), shortcodes `[audio]` y embeds externos (Spotify, SoundCloud, Bandcamp). |
+| **Video** | Reproductor integrado con soporte HTML5 y embeds (YouTube, Vimeo, etc.), controles personalizados en hover y modo pantalla completa. |
+| **Galería** | Carrusel táctil interactivo con vista de teatro, navegación por puntos y conteo dinámico. Soporta bloques Gutenberg, shortcodes y archivos adjuntos. |
+| **Cita** | Diseño tipográfico elegante con comillas de agua tridimensionales e inclinación sutil. |
+| **Aside** | Hoja de libreta interactiva con renglones calculados según el tamaño de fuente, línea de margen roja y marcas de perforación. |
+| **Imagen** | Enfoque fotográfico de alta calidad con visor Lightbox, metadatos EXIF (cámara, apertura, velocidad de obturación, focal, ISO) e información de dimensiones y peso de archivo. |
+| **Link** | Tarjeta de enlace externo con obtención automática de metadatos remotos vía OpenGraph, Twitter Cards y JSON-LD Schema. Cachea los resultados en `post_meta` para evitar peticiones HTTP repetidas. |
+| **Chat** | Formato de conversación/diálogo con diseño de burbuja. |
+| **Estándar** | Tarjeta con imagen de fondo a pantalla completa, degradado fotográfico progresivo (*cinematic scrim*) y panel desplegable de metadatos y extracto. |
 
 ---
 
-### 🎨 Sistema Dinámico de Temas de Color
+### <img src="./assets/icons/readme/palette.svg" width="18" height="18" align="top" alt=""> Sistema Dinámico de Temas de Color
 
 Configurable desde el panel (**Stories** → **Estilos y Apariencia**). Las variables CSS se inyectan en línea con `wp_add_inline_style` para evitar peticiones adicionales:
 
 | Esquema | Slug | Descripción |
 |---------|------|-------------|
-| 🌿 **Evergreen / Esmeralda** | `evergreen` | Tonos botánicos frescos, verdes naturales y contrastes oscuros profundos. *(Por defecto)* |
-| 🌊 **Azure Ocean / Azul Zafiro** | `nordic` | Gama oceánica con azul eléctrico vibrante y azul marino elegante. |
-| 🌅 **Sunset Amber / Ámbar & Terracota** | `sunset` | Calidez editorial inspirada en atardeceres, fuego y arcilla. |
-| 🔮 **Velvet Midnight / Púrpura Nocturno** | `midnight` | Misterio y sofisticación con violetas eléctricos y carbón nocturno. |
-| 🌹 **Rose & Ruby / Rosa & Carmesí** | `rose` | Estética audaz con tonos rubí, frambuesa y contrastes elegantes. |
-| 🖤 **Charcoal & Slate / Monocromo Minimalista** | `charcoal` | Diseño editorial sobrio y de alto contraste en escala de grises. |
-| 🌌 **Midnight Navy / Modo Oscuro Azul** | `dark` | Modo oscuro en tonos azul medianoche y cobalto con acentos celestes luminosos. |
-| 🎨 **Personalizado** | `custom` | Selectores interactivos (`wp-color-picker`) para color primario, acento, fondo body, cabecera y footer. |
+| **Evergreen / Esmeralda** | `evergreen` | Tonos botánicos frescos, verdes naturales y contrastes oscuros profundos. *(Por defecto)* |
+| **Azure Ocean / Azul Zafiro** | `nordic` | Gama oceánica con azul eléctrico vibrante y azul marino elegante. |
+| **Sunset Amber / Ámbar & Terracota** | `sunset` | Calidez editorial inspirada en atardeceres, fuego y arcilla. |
+| **Velvet Midnight / Púrpura Nocturno** | `midnight` | Misterio y sofisticación con violetas eléctricos y carbón nocturno. |
+| **Rose & Ruby / Rosa & Carmesí** | `rose` | Estética audaz con tonos rubí, frambuesa y contrastes elegantes. |
+| **Charcoal & Slate / Monocromo Minimalista** | `charcoal` | Diseño editorial sobrio y de alto contraste en escala de grises. |
+| **Midnight Navy / Modo Oscuro Azul** | `dark` | Modo oscuro en tonos azul medianoche y cobalto con acentos celestes luminosos. |
+| **Personalizado** | `custom` | Selectores interactivos (`wp-color-picker`) para color primario, acento, fondo body, cabecera y footer. |
 
 ---
 
-### 🌐 Soporte Multilenguaje (ES/EN)
+### <img src="./assets/icons/readme/globe.svg" width="18" height="18" align="top" alt=""> Soporte Multilenguaje (ES/EN)
 
 Sistema nativo de doble idioma (Español / Inglés), activable desde el panel de opciones. **Desactivado por defecto.**
 
-- **Selector de idioma en cabecera**: Menú desplegable (🇲🇽 Español / 🇺🇸 English).
+- **Selector de idioma en cabecera**: Menú desplegable (Español / English).
 - **Detección automática de idioma**: Mediante URL (`?lang=en`), cookie de sesión (`stories_lang`), `post_meta` por entrada (`_stories_post_lang`), o locale de WordPress.
 - **Cambio dinámico de locale**: Filtra `determine_locale` para switchear entre `es_ES` y `en_US` en tiempo de ejecución.
 - **Diccionario de traducción interno** (`inc/i18n.php`): Más de 300 strings de interfaz traducidos sin necesidad de plugins externos.
@@ -55,7 +55,7 @@ Sistema nativo de doble idioma (Español / Inglés), activable desde el panel de
 
 ---
 
-### 🏗️ Layouts de Loop Intercambiables
+### <img src="./assets/icons/readme/layout.svg" width="18" height="18" align="top" alt=""> Layouts de Loop Intercambiables
 
 El diseño de las tarjetas del loop es completamente intercambiable desde el panel de opciones sin tocar código:
 
@@ -67,7 +67,7 @@ El diseño de las tarjetas del loop es completamente intercambiable desde el pan
 
 ---
 
-### 👍 Sistema de Likes (Me Gusta)
+### <img src="./assets/icons/readme/heart.svg" width="18" height="18" align="top" alt=""> Sistema de Likes (Me Gusta)
 
 Sistema de reacciones sin plugins externos:
 
@@ -79,7 +79,7 @@ Sistema de reacciones sin plugins externos:
 
 ---
 
-### 📡 Posts Relacionados con Carrusel AJAX
+### <img src="./assets/icons/readme/rss.svg" width="18" height="18" align="top" alt=""> Posts Relacionados con Carrusel AJAX
 
 - Carrusel de posts relacionados al final de cada entrada singular.
 - **Carga asíncrona** vía AJAX (`stories_load_more_timeline`) para mejor rendimiento.
@@ -88,7 +88,7 @@ Sistema de reacciones sin plugins externos:
 
 ---
 
-### ⚡ Optimizaciones de Rendimiento
+### <img src="./assets/icons/readme/zap.svg" width="18" height="18" align="top" alt=""> Optimizaciones de Rendimiento
 
 | Función | Descripción |
 |---------|------------|
@@ -103,7 +103,7 @@ Sistema de reacciones sin plugins externos:
 
 ---
 
-### 🔍 SEO Automático
+### <img src="./assets/icons/readme/search.svg" width="18" height="18" align="top" alt=""> SEO Automático
 
 - **Meta description dinámica** generada automáticamente para posts, páginas, archivos, autores y búsquedas cuando no hay un plugin SEO activo.
 - **Compatibilidad con SEO plugins**: Detecta Yoast, Rank Math, AIOSEO y SEOPress automáticamente y omite su propio meta description para evitar duplicados.
@@ -112,7 +112,7 @@ Sistema de reacciones sin plugins externos:
 
 ---
 
-### 🎛️ Paginación Configurable
+### <img src="./assets/icons/readme/pagination.svg" width="18" height="18" align="top" alt=""> Paginación Configurable
 
 Tres estilos de paginación seleccionables desde el panel de opciones:
 
@@ -124,7 +124,7 @@ El estilo activo se aplica como clase CSS al `<body>` (`pagination-style-*`) y a
 
 ---
 
-### 🧩 Arquitectura Modular y Extensible
+### <img src="./assets/icons/readme/puzzle.svg" width="18" height="18" align="top" alt=""> Arquitectura Modular y Extensible
 
 - **Panel de administración propio** con Settings API: secciones GTM, optimización del HEAD, multilenguaje, estilos, loop y footer.
 - **Bloques Gutenberg personalizados** registrados en `inc/custom-blocks.php`.
@@ -141,7 +141,7 @@ El estilo activo se aplica como clase CSS al `<body>` (`pagination-style-*`) y a
 
 ---
 
-### 📂 Archivos Genéricos para Custom Post Types (CPTs)
+### <img src="./assets/icons/readme/folder.svg" width="18" height="18" align="top" alt=""> Archivos Genéricos para Custom Post Types (CPTs)
 
 El tema gestiona automáticamente los archivos de cualquier CPT público del sitio sin necesidad de código específico por tipo:
 
@@ -154,7 +154,7 @@ Para excluir un CPT del comportamiento genérico (porque tiene su propio templat
 
 ---
 
-### 🌐 Google Tag Manager & Analytics
+### <img src="./assets/icons/readme/globe.svg" width="18" height="18" align="top" alt=""> Google Tag Manager & Analytics
 
 - Activación del contenedor GTM desde el panel de opciones con toggle macOS.
 - Soporte para IDs `GTM-XXXXXXX` (Google Tag Manager) y `G-XXXXXXXX` / `UA-XXXXXXX` (Google Analytics gtag.js).
@@ -162,7 +162,7 @@ Para excluir un CPT del comportamiento genérico (porque tiene su propio templat
 
 ---
 
-## 💻 Requisitos
+## <img src="./assets/icons/readme/monitor.svg" width="22" height="22" align="top" alt=""> Requisitos
 
 - **WordPress**: 6.0 o superior
 - **PHP**: 7.4 o superior (recomendado 8.1+)
@@ -170,12 +170,12 @@ Para excluir un CPT del comportamiento genérico (porque tiene su propio templat
 
 ---
 
-## 🚀 Instalación
+## <img src="./assets/icons/readme/rocket.svg" width="22" height="22" align="top" alt=""> Instalación
 
 1. Clona o descarga este repositorio dentro del directorio de temas de tu instalación de WordPress:
    ```bash
    cd wp-content/themes/
-   git clone https://github.com/tu-usuario/stories.git
+   git clone https://github.com/chanovera-dev/stories.git
    ```
 2. Accede al panel de administración de WordPress: **Apariencia** → **Temas**.
 3. Busca **Stories** y haz clic en **Activar**.
@@ -183,7 +183,7 @@ Para excluir un CPT del comportamiento genérico (porque tiene su propio templat
 
 ---
 
-## 📁 Estructura del Proyecto
+## <img src="./assets/icons/readme/tree.svg" width="22" height="22" align="top" alt=""> Estructura del Proyecto
 
 ```text
 stories/
@@ -209,6 +209,7 @@ stories/
 │   │   └── related.js               # Carrusel y timeline de posts relacionados
 │   ├── fonts/                       # Fuentes locales del tema
 │   ├── icons/                       # Iconos SVG nativos
+│   │   └── readme/                  # Iconos SVG para este README
 │   └── images/                      # Imágenes estáticas del tema
 ├── footer.php                       # Pie de página con menús y widgets
 ├── functions.php                    # Archivo maestro de arranque (carga inc/)
@@ -221,7 +222,7 @@ stories/
 │   ├── extended.php                 # Filtros extendidos, GTM, SEO, rendimiento, Link meta
 │   ├── i18n.php                     # Sistema nativo ES/EN: locale, diccionario, cookie
 │   ├── icons.php                    # Helper para renderizado de iconos SVG inline
-│   ├── templates.php                # Template tags: likes, breadcrumbs, paginación, EXIF
+│   ├── templates.php                # Template tags: likes, breadcrumbs, paginación, EXIF, CPTs
 │   └── wp-panel.php                 # Panel de configuración en WordPress Admin
 ├── index.php                        # Plantilla principal de respaldo
 ├── page.php                         # Plantilla para páginas individuales
@@ -260,7 +261,7 @@ stories/
 
 ---
 
-## ⚙️ Panel de Administración
+## <img src="./assets/icons/readme/settings.svg" width="22" height="22" align="top" alt=""> Panel de Administración
 
 Accede desde **Stories** en el menú lateral de WordPress Admin. Las secciones disponibles son:
 
@@ -274,6 +275,6 @@ Accede desde **Stories** en el menú lateral de WordPress Admin. Las secciones d
 
 ---
 
-## 📄 Licencia
+## <img src="./assets/icons/readme/license.svg" width="22" height="22" align="top" alt=""> Licencia
 
 Este proyecto está bajo la licencia **GNU General Public License v2.0 or later** (GPLv2). Consulta el archivo [LICENSE](LICENSE) para más detalles.
