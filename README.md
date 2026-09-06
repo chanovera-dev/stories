@@ -141,6 +141,19 @@ El estilo activo se aplica como clase CSS al `<body>` (`pagination-style-*`) y a
 
 ---
 
+### 📂 Archivos Genéricos para Custom Post Types (CPTs)
+
+El tema gestiona automáticamente los archivos de cualquier CPT público del sitio sin necesidad de código específico por tipo:
+
+- **Habilitación automática de `has_archive`**: Un filtro `register_post_type_args` (prioridad 20) detecta todos los CPTs públicos y activa su página de archivo si no la tenían configurada.
+- **Corrección automática de slugs con acentos**: El mismo filtro sanitiza `has_archive` y `rewrite['slug']` usando `remove_accents()` + `sanitize_title()`, corrigiendo el bug donde ACF/SCF guarda slugs como `"detrás-del-espejo"` generando URLs que no coinciden con lo que escribe el usuario en el navegador.
+- **`pre_get_posts` genérico**: Asegura que la query principal muestre únicamente posts en estado `publish` en cualquier archivo de CPT.
+- **Sin `page-header` en archivos de CPT**: `archive.php` omite el bloque `<header class="page-header">` cuando se está en un archivo de CPT (`is_post_type_archive()`), manteniéndolo visible en categorías, etiquetas, autores y fechas.
+
+Para excluir un CPT del comportamiento genérico (porque tiene su propio template o query personalizada), añade su slug al array `$stories_cpt_exclusions` en `inc/templates.php`.
+
+---
+
 ### 🌐 Google Tag Manager & Analytics
 
 - Activación del contenedor GTM desde el panel de opciones con toggle macOS.
