@@ -812,3 +812,128 @@ if ( ! function_exists( 'stories_custom_archive_title' ) ) :
 	}
 	add_filter( 'get_the_archive_title', 'stories_custom_archive_title' );
 endif;
+
+/*
+ * =========================================================================
+ * CORRECCIÓN DE SLUGS DE ARCHIVO CON CARACTERES ESPECIALES
+ * =========================================================================
+ *
+ * ACF/SCF a veces guarda el has_archive_slug con acentos o caracteres
+ * especiales (ej: "detrás-del-espejo"), pero la URL en el navegador usa
+ * el slug ASCII sin acentos ("detras-del-espejo").
+ *
+ * Este filtro (prioridad 20, después de ACF/SCF) sanitiza automáticamente
+ * has_archive y rewrite['slug'] de cualquier CPT, eliminando acentos y
+ * caracteres no ASCII para que las URLs siempre funcionen correctamente.
+ */
+add_filter( 'register_post_type_args', function ( $args, $post_type ) {
+
+	// Sanitiza un slug: elimina acentos y caracteres no ASCII.
+	$sanitize_slug = function ( $slug ) {
+		// remove_accents() convierte á→a, é→e, ñ→n, ü→u, etc.
+		$slug = remove_accents( $slug );
+		// sanitize_title() elimina cualquier carácter no permitido en URLs.
+		return sanitize_title( $slug );
+	};
+
+	// Corregir has_archive si es un string con posibles acentos.
+	if ( ! empty( $args['has_archive'] ) && is_string( $args['has_archive'] ) ) {
+		$args['has_archive'] = $sanitize_slug( $args['has_archive'] );
+	}
+
+	// Corregir rewrite['slug'] si existe.
+	if ( ! empty( $args['rewrite'] ) && is_array( $args['rewrite'] ) && ! empty( $args['rewrite']['slug'] ) ) {
+		$args['rewrite']['slug'] = $sanitize_slug( $args['rewrite']['slug'] );
+	}
+
+	return $args;
+
+}, 20, 2 ); // Prioridad 20: se ejecuta después de ACF/SCF (prioridad 10).
+
+
+/*
+ * =========================================================================
+ * ARCHIVOS GENÉRICOS PARA CUSTOM POST TYPES (CPTs)
+ * =========================================================================
+ *
+ * Este bloque reemplaza la necesidad de escribir un filtro y una función
+ * pre_get_posts individual por cada CPT. Se aplica automáticamente a
+ * todos los CPTs públicos que no sean nativos de WordPress ni estén en
+ * la lista de exclusión manual ($stories_cpt_exclusions).
+ *
+ * Para excluir un CPT del comportamiento genérico (por ejemplo, porque
+ * tiene su propio template con filtros avanzados), añade su slug al
+ * array $stories_cpt_exclusions justo debajo.
+ */
+
+// ── Lista de CPTs con manejo especial que NO deben ser gestionados aquí ──
+$stories_cpt_exclusions = array(
+	'property', // Tiene template y query propios con filtros avanzados.
+);
+
+/**
+ * Habilita has_archive automáticamente para cualquier CPT público que:
+ *   1. No sea nativo de WordPress (_builtin).
+ *   2. No esté en la lista $stories_cpt_exclusions.
+ *   3. No tenga ya un has_archive configurado.
+ *
+ * Al registrarse fuera de 'init', este filtro ya está activo cuando los
+ * plugins llamen a register_post_type() en su propio hook 'init'.
+ */
+add_filter( 'register_post_type_args', function ( $args, $post_type ) use ( $stories_cpt_exclusions ) {
+
+	// Ignorar CPTs en la lista de exclusión manual.
+	if ( in_array( $post_type, $stories_cpt_exclusions, true ) ) {
+		return $args;
+	}
+
+	// Ignorar si ya tiene un archivo habilitado.
+	if ( ! empty( $args['has_archive'] ) ) {
+		return $args;
+	}
+
+	// Solo actuar en CPTs marcados como públicos.
+	if ( empty( $args['public'] ) ) {
+		return $args;
+	}
+
+	// Habilitar el archivo usando el mismo slug del CPT.
+	$args['has_archive'] = $post_type;
+
+	// Asegurarse de que el slug de rewrite coincida.
+	if ( empty( $args['rewrite'] ) ) {
+		$args['rewrite'] = array( 'slug' => $post_type );
+	} elseif ( is_array( $args['rewrite'] ) && empty( $args['rewrite']['slug'] ) ) {
+		$args['rewrite']['slug'] = $post_type;
+	}
+
+	return $args;
+
+}, 10, 2 );
+
+
+/**
+ * pre_get_posts genérico para archivos de CPTs.
+ *
+ * Asegura que la query principal muestra solo posts publicados del CPT
+ * correcto. Los CPTs en $stories_cpt_exclusions quedan excluidos porque
+ * tienen su propio hook pre_get_posts.
+ */
+add_action( 'pre_get_posts', function ( $query ) use ( $stories_cpt_exclusions ) {
+
+	if ( is_admin() || ! $query->is_main_query() || ! is_post_type_archive() ) {
+		return;
+	}
+
+	$queried_post_type = $query->get( 'post_type' );
+
+	// Saltar CPTs con manejo especial.
+	if ( in_array( $queried_post_type, $stories_cpt_exclusions, true ) ) {
+		return;
+	}
+
+	// Garantizar que solo se muestran posts publicados.
+	$query->set( 'post_status', 'publish' );
+
+} );
+
