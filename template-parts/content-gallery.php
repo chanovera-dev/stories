@@ -9,6 +9,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// Incluir helper si no existe
+if ( ! function_exists( 'stories_extract_gallery_images' ) ) {
+	require_once get_template_directory() . '/templates/helpers/extract-gallery-images.php';
+}
+
 $post_id             = get_the_ID();
 $gallery_images      = stories_get_gallery_images( $post_id, 'medium' );
 $gallery_images_full = stories_get_gallery_images( $post_id, 'full' );

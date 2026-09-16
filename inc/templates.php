@@ -174,6 +174,8 @@ endif;
 if ( ! function_exists( 'stories_get_gallery_images' ) ) :
 	/**
 	 * Retrieves an array of image URLs attached or embedded in a gallery post format.
+	 * If no explicit gallery block or shortcode is found, it extracts and collects
+	 * all images found in the post (Gutenberg blocks, attachments, etc.) and converts them into a gallery.
 	 *
 	 * @param int    $post_id Post ID.
 	 * @param string $size    Image size to retrieve. Defaults to 'medium'.
@@ -184,15 +186,22 @@ if ( ! function_exists( 'stories_get_gallery_images' ) ) :
 			$post_id = get_the_ID();
 		}
 
+		// Ensure helper is loaded
+		if ( ! function_exists( 'stories_extract_gallery_images' ) ) {
+			$helper = get_template_directory() . '/templates/helpers/extract-gallery-images.php';
+			if ( file_exists( $helper ) ) {
+				require_once $helper;
+			}
+		}
+
 		$images = array();
 
-		// 1. Check for gallery block or shortcode using get_post_gallery to get attachment IDs.
-		$gallery = get_post_gallery( $post_id, false );
-		if ( ! empty( $gallery ) && is_array( $gallery ) ) {
-			if ( ! empty( $gallery['ids'] ) ) {
-				$attachment_ids = is_array( $gallery['ids'] ) ? $gallery['ids'] : explode( ',', $gallery['ids'] );
-				foreach ( $attachment_ids as $attachment_id ) {
-					$attachment_id = absint( trim( $attachment_id ) );
+		// 1. Extract image IDs using the robust helper (handles core/gallery, standalone core/image blocks, innerBlocks, etc.)
+		if ( function_exists( 'stories_extract_gallery_images' ) ) {
+			$image_ids = stories_extract_gallery_images( $post_id );
+			if ( ! empty( $image_ids ) ) {
+				foreach ( $image_ids as $attachment_id ) {
+					$attachment_id = absint( $attachment_id );
 					if ( $attachment_id ) {
 						$src = wp_get_attachment_image_url( $attachment_id, $size );
 						if ( $src ) {
@@ -200,33 +209,20 @@ if ( ! function_exists( 'stories_get_gallery_images' ) ) :
 						}
 					}
 				}
-			} elseif ( ! empty( $gallery['src'] ) && is_array( $gallery['src'] ) ) {
-				foreach ( $gallery['src'] as $img_url ) {
-					$attachment_id = attachment_url_to_postid( $img_url );
-					if ( $attachment_id ) {
-						$src = wp_get_attachment_image_url( $attachment_id, $size );
-						$images[] = $src ? $src : $img_url;
-					} else {
-						$images[] = $img_url;
-					}
-				}
 			}
 		}
 
-		// 2. Check for attached media images if gallery list is empty.
+		// 2. Fallback: check for raw external images in content that didn't resolve to attachment IDs
 		if ( empty( $images ) ) {
-			$attachments = get_attached_media( 'image', $post_id );
-			if ( ! empty( $attachments ) ) {
-				foreach ( $attachments as $attachment ) {
-					$src = wp_get_attachment_image_url( $attachment->ID, $size );
-					if ( $src ) {
-						$images[] = $src;
-					}
+			$content = get_post_field( 'post_content', $post_id );
+			if ( ! empty( $content ) && preg_match_all( '/<img[^>]+src=[\'"]([^\'"]+)[\'"]/', $content, $matches ) ) {
+				foreach ( $matches[1] as $img_src ) {
+					$images[] = $img_src;
 				}
 			}
 		}
 
-		// 3. Fallback to featured image if present.
+		// 3. Fallback to featured image if still empty
 		if ( empty( $images ) && has_post_thumbnail( $post_id ) ) {
 			$featured_url = get_the_post_thumbnail_url( $post_id, $size );
 			if ( $featured_url ) {
@@ -234,7 +230,7 @@ if ( ! function_exists( 'stories_get_gallery_images' ) ) :
 			}
 		}
 
-		return array_values( array_unique( $images ) );
+		return array_values( array_unique( array_filter( $images ) ) );
 	}
 endif;
 
