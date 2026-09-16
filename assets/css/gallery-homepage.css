@@ -1,0 +1,668 @@
+/* ==========================================================================
+   GALLERY HOMEPAGE FILTERS & JUSTIFIED GRID LAYOUT
+   ========================================================================== */
+
+:root {
+    --row-height: 250px;
+    --toggle-shadow-inset: inset 0 0 4px rgba(101, 87, 49, 0.3);
+    --toggle-shadow: 0 0 4px rgba(101, 87, 49, 0.3);
+    --wp--preset--shadow--post-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --wp--preset--shadow--post-shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+@media (min-width: 768px) {
+    :root {
+        --row-height: 320px;
+    }
+}
+
+/* ==========================================================================
+   BREADCRUMBS & TOP FILTER CONTROLS
+   ========================================================================== */
+
+.site-main {
+    & .block.breadcrumbs--wrapper {
+        position: relative;
+
+        &::before {
+            position: absolute;
+            content: '';
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--bright-line);
+        }
+
+        &::after {
+            position: absolute;
+            content: '';
+            bottom: 1px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--border-light);
+        }
+
+        & .content {
+            padding: .849rem 0;
+            line-height: 1;
+
+            &:has(.breadcrumbs.for-gallery) {
+                padding: 0;
+            }
+
+            & .breadcrumbs {
+                display: inline-flex;
+                align-items: center;
+                flex-wrap: wrap;
+                width: 100%;
+                font-size: var(--wp--preset--font-size--small, 0.875rem);
+
+                &.for-gallery {
+                    display: grid;
+                    grid-template-columns: 1fr auto;
+                    align-items: center;
+
+                    & .categories-filter-wrapper {
+                        height: 46px;
+                        display: flex;
+                        align-items: center;
+                        position: relative;
+
+                        & .cat-filters-list {
+                            position: absolute;
+                            top: 0;
+                            left: -.5rem;
+                            width: 100%;
+                            gap: .188rem;
+                            flex-wrap: nowrap;
+                            overflow-x: auto;
+                            scrollbar-gutter: stable;
+                            padding: .5rem;
+                            padding-right: 1.5rem;
+                            scrollbar-width: none;
+                            cursor: grab;
+                            -webkit-mask-image: linear-gradient(to right, black 0%, black 0%, black calc(100% - 2.5rem), transparent 100%);
+                            mask-image: linear-gradient(to right, black 0%, black 0%, black calc(100% - 2.5rem), transparent 100%);
+                            -webkit-mask-size: 100% 100%;
+                            mask-size: 100% 100%;
+                            display: flex;
+                            list-style: none;
+                            margin: 0;
+
+                            &:active {
+                                cursor: grabbing;
+                            }
+
+                            &.is-dragging {
+                                cursor: grabbing;
+                                user-select: none;
+                            }
+
+                            &::-webkit-scrollbar {
+                                display: none;
+                                height: .375rem;
+                                background: transparent;
+                            }
+
+                            &::-webkit-scrollbar-thumb {
+                                background-color: transparent;
+                                transition: background-color .3s ease;
+                            }
+
+                            &[data-scroll-state="start"] {
+                                -webkit-mask-image: linear-gradient(to right, black 0%, black 0%, black calc(100% - 2.5rem), transparent 100%) !important;
+                                mask-image: linear-gradient(to right, black 0%, black 0%, black calc(100% - 2.5rem), transparent 100%) !important;
+                            }
+
+                            &[data-scroll-state="middle"] {
+                                -webkit-mask-image: linear-gradient(to right, transparent 0%, black 2.5rem, black calc(100% - 2.5rem), transparent 100%) !important;
+                                mask-image: linear-gradient(to right, transparent 0%, black 2.5rem, black calc(100% - 2.5rem), transparent 100%) !important;
+                            }
+
+                            &[data-scroll-state="end"] {
+                                -webkit-mask-image: linear-gradient(to right, transparent 0%, black 2.5rem, black 100%, black 100%) !important;
+                                mask-image: linear-gradient(to right, transparent 0%, black 2.5rem, black 100%, black 100%) !important;
+                            }
+
+                            &[data-scroll-state="none"] {
+                                -webkit-mask-image: none !important;
+                                mask-image: none !important;
+                                animation: none !important;
+
+                                &::-webkit-scrollbar {
+                                    display: none !important;
+                                }
+                            }
+
+                            & .cat-filter-btn {
+                                appearance: none;
+                                background: transparent;
+                                border: 1px solid transparent;
+                                text-wrap: nowrap;
+                                padding: 0 1rem;
+                                height: 30px;
+                                font-weight: 500;
+                                cursor: pointer;
+                                transition: all 0.2s ease;
+                                font-family: var(--wp--preset--font-family--manrope, sans-serif);
+                                font-size: calc(var(--wp--preset--font-size--small, 0.875rem) - .125rem);
+                                color: var(--wp--preset--color--contrast, #1e293b);
+                                transition: background-color .3s ease, border-color .3s ease;
+                                position: relative;
+                                border-radius: var(--minibadge-border-radius);
+
+                                .is-chromium & {
+                                    corner-shape: squircle;
+                                }
+
+                                & .button_overlay {
+                                    position: absolute;
+                                    bottom: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: .5rem;
+                                    opacity: 0;
+                                    transition: opacity .3s ease;
+                                    border-radius: 4px;
+                                    box-shadow: rgba(0, 0, 0, .15) 0 -2px 0 inset;
+                                }
+
+                                &::after {
+                                    content: '';
+                                    position: absolute;
+                                    bottom: 0;
+                                    left: 50%;
+                                    transform: translate(-50%, 0);
+                                    width: 4px;
+                                    height: 4px;
+                                    background-color: var(--wp--preset--color--primary, #f59e0b);
+                                    opacity: 0;
+                                    transition: opacity .3s ease;
+                                    border-radius: 50%;
+                                }
+
+                                &:hover {
+                                    &::after {
+                                        opacity: 1;
+                                    }
+                                }
+
+                                &.active {
+                                    background-color: var(--color-primary);
+                                    box-shadow: var(--shadow-card);
+                                    transition: all .3s ease;
+                                    background-image: linear-gradient(-60deg, transparent, transparent 40%, #ffffff44 40%, #ffffff44 60%, transparent 60%, transparent 100%);
+                                    background-size: 200% 100%;
+                                    background-position-x: 150%;
+                                    background-repeat: no-repeat;
+
+                                    & .button_overlay {
+                                        opacity: 1;
+                                    }
+
+                                    &:hover {
+                                        cursor: pointer;
+                                        background-position-x: -150%;
+                                        transition: all 1s;
+                                        filter: brightness(1.025);
+
+                                        &::after {
+                                            opacity: 0;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    & .nsfw-filter-wrapper {
+                        padding-left: 1rem;
+                        transform: translateY(2px);
+                    }
+                }
+            }
+        }
+    }
+
+    & .block {
+        &.posts--body {
+            & .content {
+                padding: 2rem 0;
+
+                & .pagination-wrapper {
+                    & #load-more-btn {
+                        background-color: var(--color-primary-accent);
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* --- Category Buttons List Fallback --- */
+.cat-filters-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* --- NSFW Toggle Switch --- */
+.nsfw-toggle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.nsfw-toggle-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 26px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #cbae63;
+    box-shadow: var(--toggle-shadow-inset);
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    box-shadow: var(--toggle-shadow);
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: var(--color-primary);
+    box-shadow: var(--toggle-shadow-inset);
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px var(--color-primary, #f59e0b);
+    box-shadow: var(--toggle-shadow-inset);
+}
+
+input:checked+.slider:before {
+    transform: translateX(22px);
+}
+
+/* ==========================================================================
+   JUSTIFIED GRID LAYOUT (FLICKR STYLE)
+   ========================================================================== */
+
+#ajax-posts-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    position: relative;
+    overflow: visible;
+    /* Allow floating year labels outside */
+}
+
+/* Prevent last row from excessively expanding */
+#ajax-posts-container::after {
+    content: '';
+    flex-grow: 999999999;
+}
+
+/* ==========================================================================
+   JUSTIFIED GRID POST ITEM & STORIES CARD DESIGN
+   ========================================================================== */
+
+.ajax-item-wrapper {
+    position: relative;
+    max-width: 100%;
+    /* Allow proportional height calculation based on aspect-ratio and justified flex-grow */
+    height: auto;
+    overflow: hidden;
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--shadow-card);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.3s ease;
+    contain: layout paint;
+
+    .is-chromium & {
+        corner-shape: squircle;
+    }
+}
+
+/* Fallback spacer for browsers that do not compute flex item height from aspect-ratio */
+.ajax-item-wrapper::before {
+    content: '';
+    display: block;
+    padding-bottom: calc((1 / var(--ratio, 1)) * 100%);
+}
+
+@supports (aspect-ratio: 1) {
+    .ajax-item-wrapper::before {
+        display: none;
+    }
+}
+
+.ajax-item-wrapper.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.ajax-item-wrapper:hover {
+    box-shadow: var(--shadow-card-hover);
+}
+
+/* Stories Story Card inside Justified Grid Item */
+.ajax-item-wrapper .story-card {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: unset !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: none;
+    background: transparent;
+    border-radius: inherit;
+}
+
+/* Media Containers (Image, Slideshow, Standard) Filling Justified Item */
+.ajax-item-wrapper .stories-image-container,
+.ajax-item-wrapper .stories-slideshow,
+.ajax-item-wrapper .stories-standard-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    margin: 0;
+    overflow: hidden;
+    border-radius: var(--card-border-radius);
+
+    .is-chromium & {
+        corner-shape: squircle;
+    }
+}
+
+.ajax-item-wrapper .post-thumbnail,
+.ajax-item-wrapper .featured-image-focus,
+.ajax-item-wrapper .post-thumbnail-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.ajax-item-wrapper .post-thumbnail img,
+.ajax-item-wrapper .featured-image-focus img,
+.ajax-item-wrapper .post-thumbnail-bg img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+/* Stories Slideshow inside Justified Grid */
+.ajax-item-wrapper .stories-slideshow .slides-wrapper {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    max-height: none;
+    margin: 0;
+}
+
+.ajax-item-wrapper .stories-slideshow .slide-item {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.ajax-item-wrapper .stories-slideshow .slide-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.ajax-item-wrapper:hover .stories-slideshow .slide-item.is-active img {
+    transform: scale(1.03);
+}
+
+/* Floating Glassmorphism Post Top Actions */
+.ajax-item-wrapper .post-top-actions {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    left: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.ajax-item-wrapper .toggle-info-container,
+.ajax-item-wrapper .like-btn-container,
+.ajax-item-wrapper .slideshow-control-container,
+.ajax-item-wrapper .slideshow-counter-container {
+    opacity: 0;
+    transition: opacity 0.25s ease, background 0.25s ease, transform 0.2s ease;
+}
+
+.ajax-item-wrapper:hover .toggle-info-container,
+.ajax-item-wrapper:hover .like-btn-container,
+.ajax-item-wrapper:hover .slideshow-control-container,
+.ajax-item-wrapper:hover .slideshow-counter-container {
+    opacity: 1;
+}
+
+/* Retain action visibility if info overlay is open, item is liked, or has likes count */
+.ajax-item-wrapper .toggle-info-container.is-active,
+.ajax-item-wrapper .like-btn-container.is-liked,
+.ajax-item-wrapper .like-btn-container:has(.like-count:not(:empty)) {
+    opacity: 1;
+}
+
+/* Unified Info Overlay */
+.ajax-item-wrapper :is(.gallery-info-overlay, .video-info-overlay, .image-info-overlay, .standard-info-overlay, .quote-info-overlay, .aside-info-overlay, .audio-info-overlay) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 25;
+}
+
+/* Slideshow Bottom Navigation Controls */
+.ajax-item-wrapper .slideshow-bottom-bar {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(100% - 1rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.ajax-item-wrapper .slideshow-bottom-bar>* {
+    pointer-events: auto;
+}
+
+/* Standard Card Bottom Bar */
+.ajax-item-wrapper .standard-bottom-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    z-index: 10;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
+    pointer-events: auto;
+}
+
+.ajax-item-wrapper .standard-bottom-bar .entry-title {
+    margin: 0;
+    font-size: var(--wp--preset--font-size--small, 0.875rem);
+    font-weight: 600;
+}
+
+.ajax-item-wrapper .standard-bottom-bar .entry-title a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+
+/* --- Loader & Spinner --- */
+.ajax-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 3rem;
+    grid-column: 1 / -1;
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border-left-color: var(--wp--preset--color--primary, #f59e0b);
+    animation: spin 1s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.no-results {
+    width: 100%;
+    text-align: center;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+/* --- Floating Year Labels --- */
+.year-float-label {
+    position: absolute;
+    right: -70px;
+    font-size: var(--wp--preset--font-size--medium, 1.25rem);
+    color: var(--wp--preset--color--contrast, #1e293b);
+    letter-spacing: -1px;
+    pointer-events: none;
+    z-index: 50;
+    transition: opacity 0.3s ease, top 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    font-family: var(--wp--preset--font-family--outfit, var(--wp--preset--font-family--manrope, sans-serif));
+}
+
+@media (max-width: 1550px) {
+    .year-float-label {
+        right: 15px;
+        background: var(--wp--preset--color--base-alpha-50, rgba(255, 255, 255, 0.7));
+        backdrop-filter: blur(10px);
+        padding: 4px 8px;
+        border-radius: 6px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+}
+
+@media (max-width: 768px) {
+    .year-float-label {
+        font-size: var(--wp--preset--font-size--medium, 1.25rem);
+        right: 1rem;
+        padding: 2px 6px;
+    }
+}
+
+@keyframes jump {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Category Filters Scroll Mask Animation (Scroll-driven) */
+@keyframes cat-filters-mask-fade {
+    0% {
+        -webkit-mask-image: linear-gradient(to right, black 0%, black 0%, black calc(100% - 2.5rem), transparent 100%);
+        mask-image: linear-gradient(to right, black 0%, black 0%, black calc(100% - 2.5rem), transparent 100%);
+    }
+
+    5%,
+    95% {
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 2.5rem, black calc(100% - 2.5rem), transparent 100%);
+        mask-image: linear-gradient(to right, transparent 0%, black 2.5rem, black calc(100% - 2.5rem), transparent 100%);
+    }
+
+    100% {
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 2.5rem, black 100%, black 100%);
+        mask-image: linear-gradient(to right, transparent 0%, black 2.5rem, black 100%, black 100%);
+    }
+}
+
+@supports (animation-timeline: scroll()) {
+    .cat-filters-list {
+        animation: cat-filters-mask-fade linear both;
+        animation-timeline: scroll(self inline);
+    }
+}

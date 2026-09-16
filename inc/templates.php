@@ -239,6 +239,57 @@ if ( ! function_exists( 'stories_breadcrumbs' ) ) :
 	 * Renders breadcrumb navigation for theme templates.
 	 */
 	function stories_breadcrumbs() {
+		// 1. Special Case: Gallery Homepage Template (Categories filter & NSFW toggle)
+		if ( is_page_template( 'templates/gallery-homepage.php' ) ) {
+			$categories = get_categories(
+				array(
+					'orderby'    => 'name',
+					'order'      => 'ASC',
+					'hide_empty' => true,
+				)
+			);
+			?>
+			<section class="block breadcrumbs--wrapper">
+				<div class="content">
+					<div class="breadcrumbs for-gallery">
+						<!-- 1. Category Filter -->
+						<div class="categories-filter-wrapper">
+							<ul class="cat-filters-list">
+								<li>
+									<button type="button" class="cat-filter-btn active" data-cat-id="0">
+										<?php esc_html_e( 'Todos', 'stories' ); ?>
+										<div class="button_overlay"></div>
+									</button>
+								</li>
+								<?php foreach ( $categories as $cat ) : ?>
+									<li>
+										<button type="button" class="cat-filter-btn" data-cat-id="<?php echo esc_attr( $cat->term_id ); ?>">
+											<?php echo esc_html( $cat->name ); ?>
+											<div class="button_overlay"></div>
+										</button>
+									</li>
+								<?php endforeach; ?>
+							</ul>
+						</div>
+						<!-- 2. NSFW Toggle -->
+						<div class="nsfw-filter-wrapper">
+							<div class="nsfw-toggle-wrapper">
+								<label class="toggle-switch">
+									<input type="checkbox" id="nsfw-toggle-input">
+									<span class="slider"></span>
+								</label>
+								<label for="nsfw-toggle-input" class="nsfw-toggle-label">
+									<?php esc_html_e( 'NSFW', 'stories' ); ?>
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<?php
+			return;
+		}
+
 		global $wp_query;
 
 		$separator = '<span class="stories-breadcrumbs-separator" aria-hidden="true">' . stories_get_svg( 'chevron-right', array( 'size' => 16 ) ) . '</span>';
@@ -479,7 +530,7 @@ if ( ! function_exists( 'stories_render_like_button' ) ) :
 		$likes_count = stories_get_likes_count( $post_id );
 		$has_liked   = stories_user_has_liked( $post_id );
 
-		$is_active = $has_liked;
+		$is_active = ( $has_liked || $likes_count > 0 );
 		$class     = 'button__like' . ( $is_active ? ' liked' : '' );
 		$icon_key  = $is_active ? 'heart-fill' : 'heart';
 		$icon      = stories_get_svg( $icon_key, array( 'size' => 16 ) );
@@ -932,4 +983,72 @@ add_action( 'pre_get_posts', function ( $query ) use ( $stories_cpt_exclusions )
 	$query->set( 'post_status', 'publish' );
 
 } );
+
+
+/*
+ * =========================================================================
+ * GALLERY HOMEPAGE BREADCRUMBS & FILTERS BAR
+ * =========================================================================
+ */
+
+if ( ! function_exists( 'gallery_homepage_breadcrumbs' ) ) :
+	/**
+	 * Renders the top category filter buttons and NSFW toggle for the gallery homepage.
+	 * Kept for backwards compatibility; now integrated into stories_breadcrumbs().
+	 */
+	function gallery_homepage_breadcrumbs() {
+		stories_breadcrumbs();
+	}
+endif;
+
+if ( ! function_exists( 'stories_gallery_homepage_breadcrumbs' ) ) :
+	/**
+	 * Alias for gallery_homepage_breadcrumbs.
+	 */
+	function stories_gallery_homepage_breadcrumbs() {
+		gallery_homepage_breadcrumbs();
+	}
+endif;
+
+/*
+ * =========================================================================
+ * AVANTE THEME COMPATIBILITY ALIASES FOR LIKES
+ * =========================================================================
+ */
+
+if ( ! function_exists( 'avante_get_likes_count' ) ) :
+	/**
+	 * Compatibility alias for retrieving likes count.
+	 *
+	 * @param int $post_id Post ID.
+	 * @return int Total likes count.
+	 */
+	function avante_get_likes_count( $post_id ) {
+		return stories_get_likes_count( $post_id );
+	}
+endif;
+
+if ( ! function_exists( 'avante_user_has_liked' ) ) :
+	/**
+	 * Compatibility alias for checking if user has liked post.
+	 *
+	 * @param int $post_id Post ID.
+	 * @return bool True if liked.
+	 */
+	function avante_user_has_liked( $post_id ) {
+		return stories_user_has_liked( $post_id );
+	}
+endif;
+
+if ( ! function_exists( 'avante_render_like_button' ) ) :
+	/**
+	 * Compatibility alias for rendering like button.
+	 *
+	 * @param int $post_id Post ID.
+	 * @return string HTML button markup.
+	 */
+	function avante_render_like_button( $post_id = 0 ) {
+		return stories_render_like_button( $post_id );
+	}
+endif;
 

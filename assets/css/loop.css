@@ -835,7 +835,6 @@
         height: 100%;
         min-height: 0;
         overflow: hidden;
-        background-color: var(--bg-dark, #1a202c);
         isolation: isolate;
 
         & .post-top-actions {
@@ -1259,6 +1258,7 @@
             }
 
             &:has(.button__like.liked),
+            &:has(.like-count:not(:empty)),
             &.is-liked {
                 opacity: 1;
             }

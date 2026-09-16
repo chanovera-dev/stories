@@ -115,7 +115,8 @@ function stories_ajax_like_post() {
 		$action = 'liked';
 	}
 
-	$icon_key = 'liked' === $action ? 'heart-fill' : 'heart';
+	$is_active = ( 'liked' === $action || $likes > 0 );
+	$icon_key  = $is_active ? 'heart-fill' : 'heart';
 
 	wp_send_json_success(
 		array(
@@ -230,7 +231,101 @@ function stories_ajax_load_more_timeline() {
 add_action( 'wp_ajax_stories_load_more_timeline', 'stories_ajax_load_more_timeline' );
 add_action( 'wp_ajax_nopriv_stories_load_more_timeline', 'stories_ajax_load_more_timeline' );
 
+/**
+ * AJAX Handler for filtering posts in gallery homepage.
+ */
+function stories_filter_posts_handler() {
+	// 1. Verify nonce security (flexible for visitors to avoid page-cache issues)
+	$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
+	$nonce_valid = wp_verify_nonce( $nonce, 'avante_home_nonce' ) ||
+	               wp_verify_nonce( $nonce, 'stories_ajax_nonce' ) ||
+	               wp_verify_nonce( $nonce, 'stories_home_nonce' );
 
+	if ( ! $nonce_valid && is_user_logged_in() ) {
+		wp_send_json_error( array( 'message' => esc_html__( 'Sesión expirada. Recarga la página.', 'stories' ) ) );
+		die();
+	}
 
+	// 2. Sanitize and retrieve parameters
+	$cats = isset( $_POST['categories'] ) ? (array) $_POST['categories'] : array();
+	$cats = array_map( 'intval', $cats );
+	$cats = array_filter( $cats ); // Remove 0s or empty entries
 
+	$show_nsfw = isset( $_POST['nsfw'] ) && 'true' === $_POST['nsfw'];
+	$paged     = isset( $_POST['paged'] ) ? max( 1, intval( $_POST['paged'] ) ) : 1;
 
+	// 3. Configure query arguments
+	$args = array(
+		'post_status'         => 'publish',
+		'paged'               => $paged,
+		'posts_per_page'      => 24,
+		'orderby'             => 'date',
+		'order'               => 'DESC',
+		'ignore_sticky_posts' => 1,
+	);
+
+	// Post types: support NSFW CPT if present and requested
+	$post_types = array( 'post' );
+	if ( $show_nsfw && post_type_exists( 'nsfw' ) ) {
+		$post_types[] = 'nsfw';
+	}
+	$args['post_type'] = $post_types;
+
+	// Multiple categories logic
+	if ( ! empty( $cats ) ) {
+		$args['category__in'] = $cats;
+	}
+
+	// Post formats: ONLY Image and Gallery
+	$args['tax_query'] = array(
+		array(
+			'taxonomy' => 'post_format',
+			'field'    => 'slug',
+			'terms'    => array( 'post-format-image', 'post-format-gallery' ),
+			'operator' => 'IN',
+		),
+	);
+
+	// 4. Run query
+	$query = new WP_Query( $args );
+
+	// 5. Generate HTML
+	if ( $query->have_posts() ) {
+		ob_start();
+		while ( $query->have_posts() ) {
+			$query->the_post();
+
+			$loop_design = function_exists( 'stories_get_loop_design' ) ? stories_get_loop_design() : 'default';
+			if ( empty( $loop_design ) ) {
+				$loop_design = 'default';
+			}
+
+			if ( 'default' !== $loop_design && locate_template( "template-parts/{$loop_design}/content-ajax.php" ) ) {
+				get_template_part( "template-parts/{$loop_design}/content", 'ajax' );
+			} elseif ( locate_template( 'template-parts/content-ajax.php' ) ) {
+				get_template_part( 'template-parts/content', 'ajax' );
+			} elseif ( locate_template( 'template-parts/loop00/content-ajax.php' ) ) {
+				get_template_part( 'template-parts/loop00/content', 'ajax' );
+			}
+		}
+		$html = ob_get_clean();
+
+		$max_pages = $query->max_num_pages;
+
+		wp_send_json_success(
+			array(
+				'html'      => $html,
+				'max_pages' => $max_pages,
+			)
+		);
+	} else {
+		wp_send_json_error( array( 'message' => esc_html__( 'No se encontraron contenidos.', 'stories' ) ) );
+	}
+
+	wp_reset_postdata();
+	die();
+}
+add_action( 'wp_ajax_avante_filter_posts', 'stories_filter_posts_handler' );
+add_action( 'wp_ajax_nopriv_avante_filter_posts', 'stories_filter_posts_handler' );
+add_action( 'wp_ajax_stories_filter_posts_gallery', 'stories_filter_posts_handler' );
+add_action( 'wp_ajax_nopriv_stories_filter_posts_gallery', 'stories_filter_posts_handler' );

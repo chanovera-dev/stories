@@ -1433,7 +1433,6 @@
     flex: 1;
     margin: 0;
     overflow: hidden;
-    background-color: var(--bg-dark);
 }
 
 .stories-image-container .post-thumbnail,
@@ -2104,7 +2103,8 @@ blockquote.wp-block-quote {
     right: auto;
 }
 
-.like-btn-container.is-liked {
+.like-btn-container.is-liked,
+.like-btn-container:has(.like-count:not(:empty)) {
     opacity: 1;
     background: color-mix(in srgb, #f43f5e, transparent 80%);
 }

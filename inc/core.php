@@ -153,20 +153,26 @@ function stories_get_assets() {
 
 	return array(
 		'css' => array(
-			'main'         => "$assets_path/css/main.css",
-			'custom-forms' => "$assets_path/css/custom-forms.css",
-			'loop'         => "$assets_path/css/loop.css",
-			'single'       => "$assets_path/css/single.css",
-			'pagination'   => "$assets_path/css/pagination.css",
-			'posts'        => "$assets_path/css/posts.css",
-			'comments'     => "$assets_path/css/comments.css",
-			'related'      => "$assets_path/css/related.css",
-			'rounded'      => "$assets_path/css/rounded.css",
+			'main'             => "$assets_path/css/main.css",
+			'custom-forms'     => "$assets_path/css/custom-forms.css",
+			'loop'             => "$assets_path/css/loop.css",
+			'single'           => "$assets_path/css/single.css",
+			'pagination'       => "$assets_path/css/pagination.css",
+			'posts'            => "$assets_path/css/posts.css",
+			'comments'         => "$assets_path/css/comments.css",
+			'related'          => "$assets_path/css/related.css",
+			'rounded'          => "$assets_path/css/rounded.css",
+			'gallery-homepage' => "$assets_path/css/gallery-homepage.css",
 		),
 		'js'  => array(
-			'main'    => "$assets_path/js/main.js",
-			'related' => "$assets_path/js/related.js",
-			'ajax'    => "$assets_path/js/ajax.js",
+			'main'             => "$assets_path/js/main.js",
+			'related'          => "$assets_path/js/related.js",
+			'ajax'             => "$assets_path/js/ajax.js",
+			'gallery-homepage' => "$assets_path/js/gallery-homepage.js",
+			'loop-gallery'     => "$assets_path/js/loop-gallery.js",
+			'animate-in'       => "$assets_path/js/animate-in.js",
+			'three'            => 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',
+			'gsap'             => 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js',
 		),
 	);
 }
@@ -222,6 +228,42 @@ function stories_enqueue_scripts() {
 
 	if ( $enable_rounded ) {
 		stories_enqueue_style( 'stories-rounded', $a['css']['rounded'], array( 'stories-main' ) );
+	}
+
+	// Enqueue assets specifically for Gallery Homepage Template.
+	if ( is_page_template( 'templates/gallery-homepage.php' ) ) {
+		$loop_design = function_exists( 'stories_get_loop_design' ) ? stories_get_loop_design() : 'default';
+		if ( 'default' !== $loop_design && file_exists( STORIES_DIR . "/assets/css/{$loop_design}.css" ) ) {
+			stories_enqueue_style( "stories-loop-{$loop_design}", "/assets/css/{$loop_design}.css", array( 'stories-main' ) );
+		} elseif ( file_exists( STORIES_DIR . '/assets/css/posts.css' ) ) {
+			stories_enqueue_style( 'stories-posts', $a['css']['posts'], array( 'stories-main' ) );
+		} elseif ( file_exists( STORIES_DIR . '/assets/css/loop.css' ) ) {
+			stories_enqueue_style( 'stories-loop', $a['css']['loop'], array( 'stories-main' ) );
+		}
+
+		stories_enqueue_style( 'stories-gallery-homepage-styles', $a['css']['gallery-homepage'], array( 'stories-main' ) );
+		stories_enqueue_script( 'three', $a['js']['three'], array(), true );
+		stories_enqueue_script( 'gsap', $a['js']['gsap'], array(), true );
+		stories_enqueue_script( 'stories-loop-gallery', $a['js']['loop-gallery'], array( 'three', 'gsap' ), true );
+		stories_enqueue_script( 'stories-animate-in', $a['js']['animate-in'], array(), true );
+		stories_enqueue_script( 'stories-gallery-homepage-script', $a['js']['gallery-homepage'], array( 'stories-animate-in', 'stories-loop-gallery' ), true );
+
+		wp_localize_script(
+			'stories-gallery-homepage-script',
+			'avante_ajax',
+			array(
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'nonce'    => wp_create_nonce( 'avante_home_nonce' ),
+			)
+		);
+		wp_localize_script(
+			'stories-gallery-homepage-script',
+			'stories_ajax',
+			array(
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'nonce'    => wp_create_nonce( 'stories_ajax_nonce' ),
+			)
+		);
 	}
 
 	// Enqueue theme main JavaScript (Vanilla JS).
