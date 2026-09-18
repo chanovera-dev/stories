@@ -1241,7 +1241,6 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                max-height: 78vh;
                 width: 100%;
                 overflow: hidden;
 
@@ -2054,6 +2053,7 @@ section.block.posts--body.container--related-posts.post-navigation-block {
         }
     }
 }
+
 /* =============================================================================
                             K E Y F R A M E S
    ============================================================================= */
@@ -2255,4 +2255,3 @@ section.block.posts--body.container--related-posts.post-navigation-block {
         mask-image: linear-gradient(to bottom, transparent 0%, black 1.5rem, black 100%), linear-gradient(black, black);
     }
 }
-
