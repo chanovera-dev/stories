@@ -247,6 +247,16 @@ function stories_get_translations( $lang ) {
 				'Archivos'                                                                                                                                                                                              => 'Archives',
 				'Quitar me gusta a "%s"'                                                                                                                                                                                => 'Unlike "%s"',
 				'Dar me gusta a "%s"'                                                                                                                                                                                   => 'Like "%s"',
+				'Barra lateral'                                                                                                                                                                                         => 'Sidebar',
+				'No hay contenido para mostrar.'                                                                                                                                                                        => 'No content to show.',
+				'Cargar más'                                                                                                                                                                                            => 'Load more',
+				'Leer historia'                                                                                                                                                                                         => 'Read story',
+				'Escrito por'                                                                                                                                                                                           => 'Written by',
+				'Todos'                                                                                                                                                                                                 => 'All',
+				'Continuar leyendo<span class="screen-reader-text"> "%s"</span>'                                                                                                                                        => 'Continue reading<span class="screen-reader-text"> "%s"</span>',
+				'Explora todas las historias y publicaciones etiquetadas en %s.'                                                                                                                                        => 'Explore all stories and posts tagged in %s.',
+				'Historias y artículos escritos por %s.'                                                                                                                                                                => 'Stories and articles written by %s.',
+				'Resultados de búsqueda para: %s.'                                                                                                                                                                      => 'Search results for: %s.',
 
 				// Post Format Archive Titles (with context)
 				'post format archive title:::Notas'                                                                                                                                                                     => 'Notes',
@@ -266,6 +276,10 @@ function stories_get_translations( $lang ) {
 				'Fotografía y texto por'                                                                                                                                                                                => 'Photography and text by',
 				'Ver vídeo'                                                                                                                                                                                             => 'Watch video',
 				'Ver galería en pantalla completa'                                                                                                                                                                      => 'View gallery in fullscreen',
+				'Ver imagen en pantalla completa'                                                                                                                                                                       => 'View image in fullscreen',
+				'Ver en pantalla completa'                                                                                                                                                                              => 'View in fullscreen',
+				'Ver imagen en lightbox'                                                                                                                                                                                => 'View image in lightbox',
+				'Ver galería en lightbox'                                                                                                                                                                               => 'View gallery in lightbox',
 				'Pantalla completa'                                                                                                                                                                                     => 'Fullscreen',
 				'Pantalla Completa'                                                                                                                                                                                     => 'Fullscreen',
 				'Total de imágenes'                                                                                                                                                                                     => 'Total images',
@@ -275,9 +289,25 @@ function stories_get_translations( $lang ) {
 				'Autor'                                                                                                                                                                                                 => 'Author',
 				'Resolución'                                                                                                                                                                                            => 'Resolution',
 				'Tamaño de archivo'                                                                                                                                                                                     => 'File size',
+				'Cámara'                                                                                                                                                                                                => 'Camera',
+				'Distancia focal'                                                                                                                                                                                       => 'Focal length',
+				'Apertura'                                                                                                                                                                                              => 'Aperture',
+				'Velocidad de obturación'                                                                                                                                                                               => 'Shutter speed',
+				'Sensibilidad ISO'                                                                                                                                                                                      => 'ISO sensitivity',
 				'Ir a comentarios'                                                                                                                                                                                      => 'Go to comments',
 				'0 comentarios'                                                                                                                                                                                         => '0 comments',
 				'1 comentario'                                                                                                                                                                                          => '1 comment',
+				'% comentarios'                                                                                                                                                                                         => '% comments',
+				'Información de la entrada'                                                                                                                                                                             => 'Post info',
+				'Contenido de la entrada'                                                                                                                                                                               => 'Post content',
+				'Progreso del vídeo'                                                                                                                                                                                    => 'Video playback progress',
+				'Progreso del audio'                                                                                                                                                                                    => 'Audio playback progress',
+				'Ver imagen completa'                                                                                                                                                                                   => 'View full image',
+				'Saltar al contenido'                                                                                                                                                                                   => 'Skip to content',
+				'Encabezado principal'                                                                                                                                                                                  => 'Main header',
+				'¡Vaya! No se pudo encontrar esa página.'                                                                                                                                                               => 'Oops! That page can’t be found.',
+				'Parece que no se encontró nada aquí. ¿Tal vez una búsqueda pueda ayudar?'                                                                                                                              => 'It looks like nothing was found at this location. Maybe try a search?',
+
 				// Menus & Navigation Items
 				'Otras páginas'                                                                                                                                                                                         => 'Other pages',
 				'Menú principal'                                                                                                                                                                                        => 'Main menu',
@@ -297,44 +327,114 @@ function stories_get_translations( $lang ) {
 				'Sin categoría'                                                                                                                                                                                         => 'Uncategorized',
 			),
 			'es' => array(
-				// Menus & Navigation Items
-				'Privacy Policy'                                                                                                                                                                                        => 'Política de privacidad',
-				'Terms and Conditions'                                                                                                                                                                                  => 'Términos y condiciones',
-				'Contact'                                                                                                                                                                                               => 'Contacto',
-				'About me'                                                                                                                                                                                              => 'Sobre mí',
-				'About us'                                                                                                                                                                                              => 'Sobre nosotros',
-				'Other pages'                                                                                                                                                                                           => 'Otras páginas',
-				'Main menu'                                                                                                                                                                                             => 'Menú principal',
+				// 404 Page (including single quote and curly apostrophe variations)
+				'Oops! That page can&rsquo;t be found.'                                                                                                                                 => '¡Vaya! No se pudo encontrar esa página.',
+				"Oops! That page can't be found."                                                                                                                                       => '¡Vaya! No se pudo encontrar esa página.',
+				'Oops! That page can’t be found.'                                                                                                                                       => '¡Vaya! No se pudo encontrar esa página.',
+				'It looks like nothing was found at this location. Maybe try a search?'                                                                                                 => 'Parece que no se encontró nada aquí. ¿Tal vez una búsqueda pueda ayudar?',
+				'Page not found (404)'                                                                                                                                                  => 'Página no encontrada (404)',
 
-				// General UI
-				'Toggle Post Info'                                                                                                                                                                                      => 'Información de la entrada',
-				'Toggle Post Content'                                                                                                                                                                                   => 'Contenido de la entrada',
-				'Play / Pause'                                                                                                                                                                                          => 'Reproducir / Pausar',
-				'Mute / Unmute'                                                                                                                                                                                         => 'Silenciar / Activar sonido',
-				'Fullscreen'                                                                                                                                                                                            => 'Pantalla completa',
-				'Video playback progress'                                                                                                                                                                               => 'Progreso del vídeo',
-				'Audio playback progress'                                                                                                                                                                               => 'Progreso del audio',
-				'View full image'                                                                                                                                                                                       => 'Ver imagen completa',
-				'Pages:'                                                                                                                                                                                                => 'Páginas:',
-				'Skip to content'                                                                                                                                                                                       => 'Saltar al contenido',
-				'Oops! That page can&rsquo;t be found.'                                                                                                                                                                 => '¡Vaya! No se pudo encontrar esa página.',
-				'It looks like nothing was found at this location. Maybe try a search?'                                                                                                                                 => 'Parece que no se encontró nada aquí. ¿Tal vez una búsqueda pueda ayudar?',
-				'Main header'                                                                                                                                                                                           => 'Encabezado principal',
-				'Select language'                                                                                                                                                                                       => 'Seleccionar idioma',
-				'Open search'                                                                                                                                                                                           => 'Abrir búsqueda',
-				'Close mobile search'                                                                                                                                                                                   => 'Cerrar búsqueda',
-				'Activate the search'                                                                                                                                                                                   => 'Activar la búsqueda',
-				'Open mobile menu'                                                                                                                                                                                      => 'Abrir menú móvil',
+				// Navigation, Header & Breadcrumbs
+				'Home'                                                                                                                                                                  => 'Inicio',
+				'Main header'                                                                                                                                                           => 'Encabezado principal',
+				'Skip to content'                                                                                                                                                       => 'Saltar al contenido',
+				'Breadcrumb'                                                                                                                                                            => 'Breadcrumb',
+				'Latest content'                                                                                                                                                        => 'Contenido más reciente',
+				'Previous'                                                                                                                                                              => 'Anterior',
+				'Next'                                                                                                                                                                  => 'Siguiente',
+				'Open search'                                                                                                                                                           => 'Abrir búsqueda',
+				'Close mobile search'                                                                                                                                                   => 'Cerrar búsqueda',
+				'Activate the search'                                                                                                                                                   => 'Activar la búsqueda',
+				'Open mobile menu'                                                                                                                                                      => 'Abrir menú móvil',
+				'Select language'                                                                                                                                                       => 'Seleccionar idioma',
+
+				// Menus & Navigation Items
+				'Privacy Policy'                                                                                                                                                        => 'Política de privacidad',
+				'Terms and Conditions'                                                                                                                                                  => 'Términos y condiciones',
+				'Contact'                                                                                                                                                               => 'Contacto',
+				'About me'                                                                                                                                                              => 'Sobre mí',
+				'About us'                                                                                                                                                              => 'Sobre nosotros',
+				'Other pages'                                                                                                                                                           => 'Otras páginas',
+				'Main menu'                                                                                                                                                             => 'Menú principal',
+				'Legal Notice'                                                                                                                                                          => 'Aviso legal',
+				'Cookie Policy'                                                                                                                                                         => 'Política de cookies',
+				'Links of interest'                                                                                                                                                     => 'Enlaces de interés',
+				'Useful links'                                                                                                                                                          => 'Enlaces útiles',
+				'Social networks'                                                                                                                                                       => 'Redes sociales',
+				'Blog'                                                                                                                                                                  => 'Blog',
+				'Uncategorized'                                                                                                                                                         => 'Sin categoría',
+				'Prologue'                                                                                                                                                              => 'Prólogo',
+				'Behind the mirror'                                                                                                                                                     => 'Detrás del espejo',
+
+				// General UI & Controls
+				'Toggle Post Info'                                                                                                                                                      => 'Información de la entrada',
+				'Toggle Post Content'                                                                                                                                                   => 'Contenido de la entrada',
+				'Play/Pause'                                                                                                                                                            => 'Reproducir / Pausar',
+				'Play / Pause'                                                                                                                                                          => 'Reproducir / Pausar',
+				'Mute/Unmute'                                                                                                                                                           => 'Silenciar / Activar sonido',
+				'Mute / Unmute'                                                                                                                                                         => 'Silenciar / Activar sonido',
+				'Fullscreen'                                                                                                                                                            => 'Pantalla completa',
+				'Video playback progress'                                                                                                                                               => 'Progreso del vídeo',
+				'Audio playback progress'                                                                                                                                               => 'Progreso del audio',
+				'View full image'                                                                                                                                                       => 'Ver imagen completa',
+				'Previous Image'                                                                                                                                                        => 'Imagen anterior',
+				'Next Image'                                                                                                                                                            => 'Siguiente imagen',
+				'Pages:'                                                                                                                                                                => 'Páginas:',
+				'Page %1$d de %2$d'                                                                                                                                                     => 'Página %1$d de %2$d',
+				'Page %d'                                                                                                                                                               => 'Página %d',
+				'Page'                                                                                                                                                                  => 'Página',
+
+				// Posts & Single Meta
+				'Continue reading<span class="screen-reader-text"> "%s"</span>'                                                                                                         => 'Continuar leyendo<span class="screen-reader-text"> "%s"</span>',
+				'Written by'                                                                                                                                                            => 'Escrito por',
+				'Note by'                                                                                                                                                               => 'Nota por',
+				'Photo gallery and text by'                                                                                                                                             => 'Galería fotográfica y texto por',
+				'Audio and text by'                                                                                                                                                     => 'Audio y texto por',
+				'Photography and text by'                                                                                                                                              => 'Fotografía y texto por',
+				'Watch video'                                                                                                                                                           => 'Ver vídeo',
+				'View gallery in fullscreen'                                                                                                                                            => 'Ver galería en pantalla completa',
+				'Total images'                                                                                                                                                          => 'Total de imágenes',
+				'%d Photographs'                                                                                                                                                        => '%d Fotografías',
+				'Publication date'                                                                                                                                                      => 'Fecha de publicación',
+				'Date'                                                                                                                                                                  => 'Fecha',
+				'Author'                                                                                                                                                                => 'Autor',
+				'Resolution'                                                                                                                                                            => 'Resolución',
+				'File size'                                                                                                                                                             => 'Tamaño de archivo',
+				'Go to comments'                                                                                                                                                        => 'Ir a comentarios',
+				'0 comments'                                                                                                                                                            => '0 comentarios',
+				'1 comment'                                                                                                                                                             => '1 comentario',
+				'% comments'                                                                                                                                                            => '% comentarios',
+				'Unlike "%s"'                                                                                                                                                           => 'Quitar me gusta a "%s"',
+				'Like "%s"'                                                                                                                                                             => 'Dar me gusta a "%s"',
+				'Categories:'                                                                                                                                                           => 'Categorías:',
+				'Tags:'                                                                                                                                                                 => 'Etiquetas:',
+				'Category: %s'                                                                                                                                                          => 'Categoría: %s',
+				'Tag: %s'                                                                                                                                                               => 'Etiqueta: %s',
+				'Author: %s'                                                                                                                                                            => 'Autor: %s',
+				'Archives: %s'                                                                                                                                                          => 'Archivos: %s',
+				'Archives'                                                                                                                                                              => 'Archivos',
+				'Sidebar'                                                                                                                                                               => 'Barra lateral',
 
 				// Search form
-				'Search'                                                                                                                                                                                                => 'Buscar',
-				'Search:'                                                                                                                                                                                               => 'Buscar:',
-				'Search for:'                                                                                                                                                                                           => 'Buscar:',
-				'Search &hellip;'                                                                                                                                                                                       => 'Buscar &hellip;',
-				'Search...'                                                                                                                                                                                             => 'Buscar...',
-				'submit button:::Search'                                                                                                                                                                                => 'Buscar',
-				'label:::Search for:'                                                                                                                                                                                   => 'Buscar:',
-				'placeholder:::Search &hellip;'                                                                                                                                                                         => 'Buscar &hellip;',
+				'Search'                                                                                                                                                                => 'Buscar',
+				'Search:'                                                                                                                                                               => 'Buscar:',
+				'Search for:'                                                                                                                                                           => 'Buscar:',
+				'Search &hellip;'                                                                                                                                                       => 'Buscar &hellip;',
+				'Search...'                                                                                                                                                             => 'Buscar...',
+				'submit button:::Search'                                                                                                                                                => 'Buscar',
+				'label:::Search for:'                                                                                                                                                   => 'Buscar:',
+				'placeholder:::Search &hellip;'                                                                                                                                         => 'Buscar &hellip;',
+				'Search results for: %s'                                                                                                                                                => 'Resultados de búsqueda para: %s',
+				'No results found'                                                                                                                                                      => 'No se encontraron resultados',
+				'Sorry, but nothing matched your search terms. Please try again with different keywords.'                                                                               => 'Lo sentimos, no hubo resultados que coincidan con tu búsqueda. Por favor, intenta de nuevo con otras palabras clave.',
+				'It seems we can’t find what you’re looking for. Perhaps searching can help.'                                                                                           => 'Parece que no podemos encontrar lo que estás buscando. Tal vez una búsqueda pueda ayudarte.',
+				"It seems we can't find what you're looking for. Perhaps searching can help."                                                                                           => 'Parece que no podemos encontrar lo que estás buscando. Tal vez una búsqueda pueda ayudarte.',
+				'Ready to publish your first story? <a href="%1$s">Get started here</a>.'                                                                                               => '¿Listo para publicar tu primera historia? <a href="%1$s">Comienza aquí</a>.',
+
+				// Footer
+				'About '                                                                                                                                                                => 'Sobre ',
+				'All Rights Reserved'                                                                                                                                                   => 'Todos los Derechos Reservados',
+				'Designed and developed by %s'                                                                                                                                          => 'Diseñado y desarrollado por %s',
 			),
 		);
 	}
@@ -343,7 +443,7 @@ function stories_get_translations( $lang ) {
 }
 
 /**
- * Filter gettext calls for the 'stories' and 'default' domains to supply translations.
+ * Filter gettext calls for the 'stories', 'thecrisisacademy', and 'default' domains to supply translations.
  *
  * @param string $translation Translated text.
  * @param string $text Text to translate.
@@ -351,11 +451,7 @@ function stories_get_translations( $lang ) {
  * @return string Translated text.
  */
 function stories_filter_gettext( $translation, $text, $domain ) {
-	if ( ! stories_is_multilingual_enabled() ) {
-		return $translation;
-	}
-
-	if ( 'stories' !== $domain && 'default' !== $domain ) {
+	if ( 'stories' !== $domain && 'default' !== $domain && 'thecrisisacademy' !== $domain ) {
 		return $translation;
 	}
 
@@ -371,7 +467,7 @@ function stories_filter_gettext( $translation, $text, $domain ) {
 add_filter( 'gettext', 'stories_filter_gettext', 20, 3 );
 
 /**
- * Filter gettext_with_context calls for the 'stories' and 'default' domains.
+ * Filter gettext_with_context calls for the 'stories', 'thecrisisacademy', and 'default' domains.
  *
  * @param string $translation Translated text.
  * @param string $text Text to translate.
@@ -380,11 +476,7 @@ add_filter( 'gettext', 'stories_filter_gettext', 20, 3 );
  * @return string Translated text.
  */
 function stories_filter_gettext_with_context( $translation, $text, $context, $domain ) {
-	if ( ! stories_is_multilingual_enabled() ) {
-		return $translation;
-	}
-
-	if ( 'stories' !== $domain && 'default' !== $domain ) {
+	if ( 'stories' !== $domain && 'default' !== $domain && 'thecrisisacademy' !== $domain ) {
 		return $translation;
 	}
 
@@ -411,7 +503,7 @@ add_filter( 'gettext_with_context', 'stories_filter_gettext_with_context', 20, 4
  * @return string Filtered search form HTML.
  */
 function stories_filter_search_form( $form ) {
-	if ( ! stories_is_multilingual_enabled() || empty( $form ) || ! is_string( $form ) ) {
+	if ( empty( $form ) || ! is_string( $form ) ) {
 		return $form;
 	}
 
@@ -460,7 +552,7 @@ add_filter( 'render_block_core/search', 'stories_filter_search_form', 20, 1 );
  * @return string Translated text.
  */
 function stories_filter_ngettext( $translation, $single, $plural, $number, $domain ) {
-	if ( ! stories_is_multilingual_enabled() || 'stories' !== $domain ) {
+	if ( 'stories' !== $domain && 'thecrisisacademy' !== $domain ) {
 		return $translation;
 	}
 
@@ -485,10 +577,6 @@ add_filter( 'ngettext', 'stories_filter_ngettext', 20, 5 );
  * @return string Filtered title.
  */
 function stories_translate_menu_item_title( $title, $item, $args, $depth ) {
-	if ( ! stories_is_multilingual_enabled() ) {
-		return $title;
-	}
-
 	$current_lang = stories_get_current_language();
 	$dictionary   = stories_get_translations( $current_lang );
 
@@ -507,10 +595,6 @@ add_filter( 'nav_menu_item_title', 'stories_translate_menu_item_title', 20, 4 );
  * @return array Filtered menu item objects.
  */
 function stories_translate_nav_menu_objects( $items ) {
-	if ( ! stories_is_multilingual_enabled() ) {
-		return $items;
-	}
-
 	$current_lang = stories_get_current_language();
 	$dictionary   = stories_get_translations( $current_lang );
 
@@ -520,8 +604,8 @@ function stories_translate_nav_menu_objects( $items ) {
 				$item->title = $dictionary[ $item->title ];
 			}
 
-			// If item links to a post/page and it has a linked counterpart, switch URL
-			if ( ! empty( $item->object_id ) && in_array( $item->type, array( 'post_type', 'post_type_archive' ), true ) ) {
+			// If multilingual is enabled, switch URL to linked counterpart
+			if ( stories_is_multilingual_enabled() && ! empty( $item->object_id ) && in_array( $item->type, array( 'post_type', 'post_type_archive' ), true ) ) {
 				$linked_id = intval( get_post_meta( $item->object_id, '_stories_translation_of', true ) );
 				if ( $linked_id > 0 && get_post_status( $linked_id ) ) {
 					$orig_post_lang = get_post_meta( $item->object_id, '_stories_post_lang', true );
@@ -549,10 +633,6 @@ add_filter( 'wp_nav_menu_objects', 'stories_translate_nav_menu_objects', 20, 1 )
  * @return WP_Term|false Filtered menu object.
  */
 function stories_translate_menu_object( $menu_obj, $menu ) {
-	if ( ! stories_is_multilingual_enabled() ) {
-		return $menu_obj;
-	}
-
 	if ( ! is_object( $menu_obj ) || empty( $menu_obj->name ) ) {
 		return $menu_obj;
 	}
@@ -612,10 +692,6 @@ add_filter( 'wp_nav_menu_args', 'stories_filter_nav_menu_args', 20, 1 );
  * @return string Translated title.
  */
 function stories_translate_footer_title( $title ) {
-	if ( ! stories_is_multilingual_enabled() ) {
-		return $title;
-	}
-
 	$current_lang = stories_get_current_language();
 	$dictionary   = stories_get_translations( $current_lang );
 
@@ -644,10 +720,6 @@ function stories_translate_footer_title( $title ) {
  * @return string Translated bio string.
  */
 function stories_translate_footer_bio( $bio ) {
-	if ( ! stories_is_multilingual_enabled() ) {
-		return $bio;
-	}
-
 	$current_lang = stories_get_current_language();
 	$dictionary   = stories_get_translations( $current_lang );
 
