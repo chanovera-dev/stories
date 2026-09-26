@@ -71,6 +71,21 @@ function stories_admin_options_scripts( $hook ) {
 
 			toggleCustomColors();
 
+			// Font select live specimen update
+			$(document).on("change", ".stories-font-select", function() {
+				var select = $(this);
+				var targetId = select.data("preview");
+				var selectedOpt = select.find("option:selected");
+				var fontFamily = selectedOpt.data("font-family") || select.val();
+				var fontName = selectedOpt.text().trim();
+				var previewBox = $("#" + targetId);
+
+				if (previewBox.length) {
+					previewBox.css("font-family", fontFamily);
+					previewBox.find(".specimen-name").text(fontName);
+				}
+			});
+
 			// Media uploader for footer logo & images
 			$(document).on("click", ".stories-media-upload-btn", function(e) {
 				e.preventDefault();
@@ -386,7 +401,59 @@ function stories_settings_init() {
 	);
 
 	/* -------------------------------------------------------------------------
-	 * Section 5: Pie de Página (Footer)
+	 * Section 5: Tipografía y Fuentes
+	 * ------------------------------------------------------------------------- */
+	add_settings_section(
+		'stories_typography_section',
+		__( 'Tipografía y Fuentes', 'stories' ),
+		'stories_render_typography_section_description',
+		'stories_options'
+	);
+
+	add_settings_field(
+		'font_headings',
+		__( 'Fuente de Títulos', 'stories' ),
+		'stories_render_font_select_field',
+		'stories_options',
+		'stories_typography_section',
+		array(
+			'id'          => 'font_headings',
+			'default'     => 'manrope',
+			'type'        => 'heading',
+			'description' => __( 'Selecciona la tipografía para todos los títulos y encabezados (H1-H6, títulos de tarjetas, entradas y cabecera). Escaneada desde assets/fonts.', 'stories' ),
+		)
+	);
+
+	add_settings_field(
+		'font_body',
+		__( 'Fuente de Texto General', 'stories' ),
+		'stories_render_font_select_field',
+		'stories_options',
+		'stories_typography_section',
+		array(
+			'id'          => 'font_body',
+			'default'     => 'manrope',
+			'type'        => 'body',
+			'description' => __( 'Selecciona la tipografía para el cuerpo del texto, párrafos, botones y navegación. Escaneada desde assets/fonts.', 'stories' ),
+		)
+	);
+
+	add_settings_field(
+		'font_monospace',
+		__( 'Fuente Monoespaciada (Código)', 'stories' ),
+		'stories_render_font_select_field',
+		'stories_options',
+		'stories_typography_section',
+		array(
+			'id'          => 'font_monospace',
+			'default'     => 'fira-code',
+			'type'        => 'mono',
+			'description' => __( 'Selecciona la tipografía para bloques de código, preformateado y elementos monoespaciados.', 'stories' ),
+		)
+	);
+
+	/* -------------------------------------------------------------------------
+	 * Section 6: Pie de Página (Footer)
 	 * ------------------------------------------------------------------------- */
 	add_settings_section(
 		'stories_footer_section',
@@ -490,6 +557,32 @@ function stories_sanitize_theme_options( $input ) {
 	} else {
 		$sanitized['pagination_style'] = 'default';
 	}
+
+	// Typography options
+	$available_fonts = function_exists( 'stories_get_font_choices' ) ? array_keys( stories_get_font_choices() ) : array( 'manrope', 'bricolage-grotesque', 'fira-code' );
+
+	if ( isset( $input['font_headings'] ) && in_array( $input['font_headings'], $available_fonts, true ) ) {
+		$sanitized['font_headings'] = $input['font_headings'];
+	} else {
+		$sanitized['font_headings'] = 'manrope';
+	}
+
+	if ( isset( $input['font_body'] ) && in_array( $input['font_body'], $available_fonts, true ) ) {
+		$sanitized['font_body'] = $input['font_body'];
+	} else {
+		$sanitized['font_body'] = 'manrope';
+	}
+
+	if ( isset( $input['font_monospace'] ) && in_array( $input['font_monospace'], $available_fonts, true ) ) {
+		$sanitized['font_monospace'] = $input['font_monospace'];
+	} else {
+		$sanitized['font_monospace'] = 'fira-code';
+	}
+
+	// Synchronize with standalone options for broad compatibility
+	update_option( 'stories_font_headings', $sanitized['font_headings'] );
+	update_option( 'stories_font_body', $sanitized['font_body'] );
+	update_option( 'stories_font_monospace', $sanitized['font_monospace'] );
 
 	// Footer fields
 	if ( isset( $input['footer_title'] ) ) {
@@ -809,6 +902,73 @@ function stories_render_media_field( $args ) {
 			<p class="description"><?php echo esc_html( $args['description'] ); ?></p>
 		<?php endif; ?>
 	</div>
+	<?php
+}
+
+/**
+ * Render field for font family selection with live typography preview specimen.
+ *
+ * @param array $args Field arguments.
+ */
+function stories_render_font_select_field( $args ) {
+	$options       = get_option( 'stories_theme_options', array() );
+	$id            = $args['id'];
+	$default       = isset( $args['default'] ) ? $args['default'] : 'manrope';
+	$type          = isset( $args['type'] ) ? $args['type'] : 'body';
+	$current_value = isset( $options[ $id ] ) ? $options[ $id ] : $default;
+	$fonts         = function_exists( 'stories_get_registered_fonts' ) ? stories_get_registered_fonts() : array();
+	$preview_id    = 'preview_' . esc_attr( $id );
+
+	$current_font_family = function_exists( 'stories_get_font_family_css' ) ? stories_get_font_family_css( $current_value ) : 'inherit';
+	$current_font_name   = isset( $fonts[ $current_value ]['name'] ) ? $fonts[ $current_value ]['name'] : ucfirst( $current_value );
+	?>
+	<div class="stories-font-field-wrapper">
+		<select name="stories_theme_options[<?php echo esc_attr( $id ); ?>]" id="stories_<?php echo esc_attr( $id ); ?>" class="stories-select-field stories-font-select" data-preview="<?php echo esc_attr( $preview_id ); ?>" data-type="<?php echo esc_attr( $type ); ?>">
+			<?php foreach ( $fonts as $slug => $data ) : 
+				$font_name   = is_array( $data ) && isset( $data['name'] ) ? $data['name'] : (string) $data;
+				$font_family = function_exists( 'stories_get_font_family_css' ) ? stories_get_font_family_css( $slug ) : $slug;
+				?>
+				<option value="<?php echo esc_attr( $slug ); ?>" data-font-family="<?php echo esc_attr( $font_family ); ?>" <?php selected( $current_value, $slug ); ?>>
+					<?php echo esc_html( $font_name ); ?>
+				</option>
+			<?php endforeach; ?>
+		</select>
+
+		<div class="stories-font-specimen-card stories-font-specimen-<?php echo esc_attr( $type ); ?>" id="<?php echo esc_attr( $preview_id ); ?>" style="font-family: <?php echo esc_attr( $current_font_family ); ?>;">
+			<div class="specimen-header">
+				<span class="specimen-badge"><?php echo esc_html( 'heading' === $type ? __( 'Muestra de Título', 'stories' ) : ( 'mono' === $type ? __( 'Muestra de Código', 'stories' ) : __( 'Muestra de Texto', 'stories' ) ) ); ?></span>
+				<span class="specimen-name"><?php echo esc_html( $current_font_name ); ?></span>
+			</div>
+			<?php if ( 'heading' === $type ) : ?>
+				<div class="specimen-content-heading">
+					<?php esc_html_e( 'El veloz murciélago hindú comía feliz cardillo y kiwi (1234567890)', 'stories' ); ?>
+				</div>
+			<?php elseif ( 'mono' === $type ) : ?>
+				<div class="specimen-content-mono">
+					<code>&lt;!-- Code &amp; Monospace Font Sample --&gt; const stories = new Theme({ typography: "<?php echo esc_html( $current_font_name ); ?>" });</code>
+				</div>
+			<?php else : ?>
+				<div class="specimen-content-body">
+					<?php esc_html_e( 'Relatos y Cartas es un espacio creativo y editorial donde las historias cobran vida a través de las palabras. La tipografía seleccionada da voz y personalidad a cada artículo, reflexión y relato que compartimos con el mundo.', 'stories' ); ?>
+				</div>
+			<?php endif; ?>
+		</div>
+
+		<?php if ( ! empty( $args['description'] ) ) : ?>
+			<p class="description"><?php echo esc_html( $args['description'] ); ?></p>
+		<?php endif; ?>
+	</div>
+	<?php
+}
+
+/**
+ * Render description for typography section in theme options.
+ */
+function stories_render_typography_section_description() {
+	?>
+	<p class="description" style="max-width: 800px; font-size: 13.5px; line-height: 1.5; color: #475569;">
+		<?php esc_html_e( 'Personaliza las fuentes tipográficas del sitio. Las opciones disponibles se cargan automáticamente desde la carpeta assets/fonts/ y la configuración del tema. Al seleccionar una fuente verás una muestra interactiva en tiempo real.', 'stories' ); ?>
+	</p>
 	<?php
 }
 

@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return array Associative array of color schemes.
  */
 function stories_get_color_schemes() {
-	return array(
+	$schemes = array(
 		'evergreen' => array(
 			'label'       => __( 'Evergreen / Esmeralda (Por defecto)', 'stories' ),
 			'description' => __( 'Tonos botánicos frescos, verdes naturales y contrastes oscuros profundos.', 'stories' ),
@@ -232,6 +232,15 @@ function stories_get_color_schemes() {
 			'vars'        => array(),
 		),
 	);
+
+	/**
+	 * Filters the available color schemes in the Stories theme.
+	 *
+	 * Allows child themes and plugins to register, modify, or remove color schemes.
+	 *
+	 * @param array $schemes Associative array of color scheme definitions.
+	 */
+	return apply_filters( 'stories_color_schemes', $schemes );
 }
 
 /**
@@ -242,9 +251,11 @@ function stories_get_color_schemes() {
 function stories_get_active_color_scheme() {
 	$options = get_option( 'stories_theme_options', array() );
 	if ( ! empty( $options['color_scheme'] ) ) {
-		return sanitize_key( $options['color_scheme'] );
+		$scheme = sanitize_key( $options['color_scheme'] );
+	} else {
+		$scheme = apply_filters( 'stories_default_color_scheme', 'evergreen' );
 	}
-	return 'evergreen';
+	return apply_filters( 'stories_active_color_scheme', $scheme );
 }
 
 /**

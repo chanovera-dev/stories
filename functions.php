@@ -26,6 +26,7 @@ $stories_includes = array(
 	'/inc/custom-blocks.php', // Custom Gutenberg blocks registration and category setup.
 	'/inc/icons.php',         // SVG icon helper functions.
 	'/inc/colors.php',        // Color schemes engine and dynamic palette styles.
+	'/inc/typography.php',    // Typography engine, font discovery, and dynamic typography styles.
 	'/inc/templates.php',     // Custom template tags and helper functions.
 	'/inc/wp-panel.php',      // WordPress admin theme settings panel.
 	'/inc/ajax.php',          // AJAX handlers and script localization.
