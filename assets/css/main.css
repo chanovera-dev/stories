@@ -40,6 +40,7 @@
     --footer-background: #092327;
     --accent-background-1: #539067;
     --accent-background-2: #89c39d;
+    --button-primary-background: #89c39d;
     --shadow-color: #404554;
 
     /* Colors - Post Format Badges & Accents */
@@ -1210,9 +1211,6 @@ section.block.block-breadcrumbs .content {
     padding: 1rem 0;
 }
 
-
-
-
 /* ==========================================================================
    Main Footer Styles & Social Icons
    ========================================================================== */
@@ -1228,9 +1226,9 @@ section.block.block-breadcrumbs .content {
     margin-top: auto;
     /* Layered ambient glow gradients */
     background-image:
-        radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--color-primary), transparent 85%) 0%, transparent 65%),
-        radial-gradient(circle at 10% 90%, color-mix(in srgb, var(--color-primary-accent), transparent 93%) 0%, transparent 50%),
-        radial-gradient(circle at 90% 80%, color-mix(in srgb, var(--color-primary), transparent 94%) 0%, transparent 50%);
+        radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--accent-background-2), transparent 85%) 0%, transparent 65%),
+        radial-gradient(circle at 10% 90%, color-mix(in srgb, var(--accent-background-2), transparent 93%) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, color-mix(in srgb, var(--accent-background-1), transparent 94%) 0%, transparent 50%);
     background-size: 100% 100%, 100% 100%, 100% 100%;
     background-position: 0 0, 0 0, 0 0;
 }
