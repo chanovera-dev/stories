@@ -85,6 +85,7 @@ function setupWebGLSlider(wrapper, images, firstIndex = 0) {
         return (s > i) ? new THREE.Vector2(1, i / s) : new THREE.Vector2(s / i, 1);
     };
 
+    let mat;
     const loader = new THREE.TextureLoader();
     loader.crossOrigin = "anonymous";
     const sliderImages = images.map((img, idx) => {
@@ -96,7 +97,7 @@ function setupWebGLSlider(wrapper, images, firstIndex = 0) {
             texture.needsUpdate = true;
         } else {
             texture = loader.load(src, (tex) => {
-                if (idx === firstIndex) {
+                if (idx === firstIndex && mat) {
                     mat.uniforms.currentRatio.value = getRatio(tex);
                     mat.uniforms.nextRatio.value = getRatio(tex);
                 }
@@ -110,7 +111,7 @@ function setupWebGLSlider(wrapper, images, firstIndex = 0) {
         return texture;
     });
 
-    const mat = new THREE.ShaderMaterial({
+    mat = new THREE.ShaderMaterial({
         uniforms: {
             dispFactor: { type: "f", value: 0.0 },
             currentImage: { type: "t", value: sliderImages[firstIndex] },
@@ -501,16 +502,242 @@ function initGallery(wrapper) {
 }
 
 /**
+ * Initialize WebGL displacement morphing on .container.app / .slideshow--wrapper slideshows
+ */
+function initAppSlideshow(target) {
+    if (!target) return;
+    const container = target.classList.contains("app") ? target : (target.closest(".container.app") || target);
+    if (initializedGalleries.has(container)) return;
+    if (container.dataset.webglInitialized === "true") return;
+
+    const wrapper = container.querySelector(".slideshow--wrapper") || container;
+    const slideshow = container.querySelector(".slideshow");
+    if (!wrapper || !slideshow) return;
+
+    const slideItems = Array.from(slideshow.children).filter(el => !el.classList.contains("webgl-canvas-container"));
+    if (slideItems.length <= 1) return;
+
+    const images = slideItems.map(item => item.querySelector("img")).filter(Boolean);
+    if (images.length <= 1) return;
+
+    // Remove any stale pre-rendered canvas containers
+    wrapper.querySelectorAll(".webgl-canvas-container").forEach(el => el.remove());
+
+    const prevBtn = container.querySelector(".slideshow-prev") || container.parentElement.querySelector(".slideshow-prev");
+    const nextBtn = container.querySelector(".slideshow-next") || container.parentElement.querySelector(".slideshow-next");
+    const bulletsWrapper = container.querySelector(".slideshow-bullets") || container.parentElement.querySelector(".slideshow-bullets");
+
+    let currentSlide = 0;
+    const totalSlides = images.length;
+    let isAnimating = false;
+
+    // Synchronize or generate bullets
+    if (bulletsWrapper) {
+        let bullets = Array.from(bulletsWrapper.querySelectorAll(".bullet"));
+        if (bullets.length !== totalSlides) {
+            bulletsWrapper.innerHTML = "";
+            images.forEach((_, i) => {
+                const b = document.createElement("div");
+                b.className = "bullet" + (i === 0 ? " active" : "");
+                b.dataset.index = i;
+                bulletsWrapper.appendChild(b);
+            });
+        }
+    }
+
+    function updateBullets(index) {
+        if (!bulletsWrapper) return;
+        const bullets = bulletsWrapper.querySelectorAll(".bullet");
+        bullets.forEach((b, i) => {
+            b.classList.toggle("active", i === index);
+        });
+    }
+
+    function setActiveSlide(index) {
+        slideItems.forEach((item, idx) => {
+            item.classList.toggle("active", idx === index);
+            item.classList.toggle("is-active", idx === index);
+        });
+        updateBullets(index);
+    }
+    setActiveSlide(0);
+
+    // If wrapper dimensions are 0 (e.g. before initial layout), wait for size
+    if (wrapper.offsetWidth === 0 || wrapper.offsetHeight === 0) {
+        if (window.ResizeObserver) {
+            const roInit = new ResizeObserver((entries, observer) => {
+                if (wrapper.offsetWidth > 0 && wrapper.offsetHeight > 0) {
+                    observer.disconnect();
+                    initAppSlideshow(container);
+                }
+            });
+            roInit.observe(wrapper);
+        }
+        return;
+    }
+
+    let webglSlider = null;
+    if (window.THREE) {
+        webglSlider = setupWebGLSlider(wrapper, images, 0);
+    }
+
+    if (webglSlider) {
+        initializedGalleries.add(container);
+        container.dataset.webglInitialized = "true";
+
+        // Visually hide static HTML slide items so only WebGL canvas is visible
+        slideshow.style.opacity = "0";
+        slideshow.style.pointerEvents = "none";
+
+        if (window.ResizeObserver) {
+            const ro = new ResizeObserver(() => {
+                if (wrapper.offsetWidth > 0 && wrapper.offsetHeight > 0) {
+                    webglSlider.resize();
+                }
+            });
+            ro.observe(wrapper);
+        }
+        window.addEventListener("resize", () => webglSlider.resize());
+    } else {
+        // Fallback: CSS transitions when WebGL is unavailable
+        slideshow.style.opacity = "1";
+        slideshow.style.pointerEvents = "auto";
+    }
+
+    function goToSlide(targetIndex) {
+        if (isAnimating) return;
+        let index = targetIndex;
+        if (index < 0) index = totalSlides - 1;
+        if (index >= totalSlides) index = 0;
+        if (index === currentSlide) return;
+
+        isAnimating = true;
+        updateBullets(index);
+
+        if (webglSlider) {
+            webglSlider.transitionTo(index, () => {
+                currentSlide = index;
+                setActiveSlide(index);
+                isAnimating = false;
+            });
+        } else {
+            setActiveSlide(index);
+            currentSlide = index;
+            isAnimating = false;
+        }
+    }
+
+    // Autoplay handling with IntersectionObserver
+    let autoplayTimer = null;
+    function startAutoplay() {
+        stopAutoplay();
+        autoplayTimer = setInterval(() => {
+            const block = container.closest(".block");
+            if (block && !block.classList.contains("in-view") && !block.classList.contains("active-block")) {
+                return;
+            }
+            goToSlide(currentSlide + 1);
+        }, 6000);
+    }
+
+    function stopAutoplay() {
+        if (autoplayTimer) {
+            clearInterval(autoplayTimer);
+            autoplayTimer = null;
+        }
+    }
+
+    function resetAutoplay() {
+        stopAutoplay();
+        startAutoplay();
+    }
+
+    if (window.IntersectionObserver) {
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    startAutoplay();
+                } else {
+                    stopAutoplay();
+                }
+            });
+        }, { threshold: 0.15 });
+        io.observe(container);
+    } else {
+        startAutoplay();
+    }
+
+    container.addEventListener("mouseenter", stopAutoplay);
+    container.addEventListener("mouseleave", startAutoplay);
+
+    if (prevBtn) {
+        prevBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            resetAutoplay();
+            goToSlide(currentSlide - 1);
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            resetAutoplay();
+            goToSlide(currentSlide + 1);
+        });
+    }
+
+    if (bulletsWrapper) {
+        bulletsWrapper.addEventListener("click", (e) => {
+            const targetBullet = e.target.closest(".bullet");
+            if (targetBullet && targetBullet.dataset.index !== undefined) {
+                e.preventDefault();
+                resetAutoplay();
+                goToSlide(parseInt(targetBullet.dataset.index, 10));
+            }
+        });
+    }
+
+    // Touch swipe gesture support
+    let startX = 0;
+    let startY = 0;
+    const threshold = 35;
+    const restraint = 75;
+
+    wrapper.addEventListener("touchstart", (e) => {
+        if (e.target.closest(".slideshow-bullets-wrapper")) return;
+        startX = e.changedTouches[0].clientX;
+        startY = e.changedTouches[0].clientY;
+    }, { passive: true });
+
+    wrapper.addEventListener("touchend", (e) => {
+        if (e.target.closest(".slideshow-bullets-wrapper")) return;
+        const distX = e.changedTouches[0].clientX - startX;
+        const distY = e.changedTouches[0].clientY - startY;
+
+        if (Math.abs(distX) >= threshold && Math.abs(distX) > Math.abs(distY) && Math.abs(distY) <= restraint) {
+            resetAutoplay();
+            if (distX < 0) {
+                goToSlide(currentSlide + 1);
+            } else {
+                goToSlide(currentSlide - 1);
+            }
+        }
+    }, { passive: true });
+}
+
+/**
  * Global initialization for all galleries (both native Stories and legacy)
  */
 function initAllGalleries(root) {
     const scope = root || document;
     scope.querySelectorAll(".stories-slideshow").forEach(initStoriesSlideshow);
     scope.querySelectorAll(".gallery-wrapper").forEach(initGallery);
+    scope.querySelectorAll(".container.app, .slideshow--wrapper").forEach(initAppSlideshow);
 }
 
 // Expose globally
 window.storiesInitLoopGalleries = initAllGalleries;
+window.storiesInitAppSlideshow = initAppSlideshow;
 
 // Auto-run on DOM ready
 if (document.readyState === "loading") {

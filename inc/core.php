@@ -154,7 +154,6 @@ function stories_get_assets() {
 	return array(
 		'css' => array(
 			'main'             => "$assets_path/css/main.css",
-			'custom-forms'     => "$assets_path/css/custom-forms.css",
 			'loop'             => "$assets_path/css/loop.css",
 			'single'           => "$assets_path/css/single.css",
 			'pagination'       => "$assets_path/css/pagination.css",
@@ -188,7 +187,6 @@ function stories_enqueue_scripts() {
 
 	// Enqueue theme assets CSS.
 	stories_enqueue_style( 'stories-main', $a['css']['main'] );
-	stories_enqueue_style( 'stories-custom-forms', $a['css']['custom-forms'], array( 'stories-main' ) );
 
 	// Enqueue loop grid CSS on post lists and singular views (for Timeline and Related Posts cards).
 	if ( is_home() || is_archive() || is_search() || is_front_page() || is_singular() ) {
