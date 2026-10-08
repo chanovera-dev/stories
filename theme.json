@@ -181,7 +181,8 @@
 								"file:./assets/fonts/manrope/Manrope-VariableFont_wght.woff2"
 							],
 							"fontWeight": "200 800",
-							"fontStyle": "large",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
 							"fontFamily": "Manrope"
 						}
 					]
@@ -196,7 +197,8 @@
 								"file:./assets/fonts/bricolage-grotesque/BricolageGrotesque[opsz,wdth,wght].woff2"
 							],
 							"fontWeight": "200 800",
-							"fontStyle": "large",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
 							"fontFamily": "\"Bricolage Grotesque\""
 						}
 					]
@@ -211,7 +213,8 @@
 								"file:./assets/fonts/fira-code/FiraCode-VariableFont_wght.woff2"
 							],
 							"fontWeight": "300 700",
-							"fontStyle": "large",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
 							"fontFamily": "\"Fira Code\""
 						}
 					]

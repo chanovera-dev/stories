@@ -224,7 +224,7 @@ function stories_get_font_family_css( $slug ) {
 	// Standard fallbacks based on slug.
 	switch ( $slug ) {
 		case 'manrope':
-			return 'Manrope, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+			return 'Manrope, "Manrope-Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
 		case 'bricolage-grotesque':
 			return '"Bricolage Grotesque", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
 		case 'fira-code':
@@ -243,6 +243,16 @@ function stories_get_font_family_css( $slug ) {
 function stories_generate_font_faces_css() {
 	$fonts = stories_get_registered_fonts();
 	$css   = '';
+
+	// Font metric override for zero Cumulative Layout Shift (CLS) on swap
+	$css .= "@font-face {\n";
+	$css .= "\tfont-family: 'Manrope-Fallback';\n";
+	$css .= "\tsrc: local('Arial');\n";
+	$css .= "\tascent-override: 104.5%;\n";
+	$css .= "\tdescent-override: 27.5%;\n";
+	$css .= "\tline-gap-override: 0%;\n";
+	$css .= "\tsize-adjust: 99.5%;\n";
+	$css .= "}\n";
 
 	// Hardcoded reliable mappings for bundled theme fonts.
 	$bundled_fonts = array(
@@ -393,6 +403,18 @@ function stories_enqueue_typography_styles() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'stories_enqueue_typography_styles', 21 );
+
+/**
+ * Preload primary critical font (Manrope) in <head> for fast FCP/LCP and seamless swap.
+ */
+function stories_preload_critical_fonts() {
+	$font_path = STORIES_DIR . '/assets/fonts/manrope/Manrope-VariableFont_wght.woff2';
+	if ( file_exists( $font_path ) ) {
+		$font_url = STORIES_URI . '/assets/fonts/manrope/Manrope-VariableFont_wght.woff2';
+		echo '<link rel="preload" href="' . esc_url( $font_url ) . '" as="font" type="font/woff2" crossorigin>' . "\n";
+	}
+}
+add_action( 'wp_head', 'stories_preload_critical_fonts', 1 );
 
 /**
  * Enqueue @font-face styles on admin options page for live previews.
